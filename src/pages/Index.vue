@@ -1,11 +1,6 @@
-<script setup lang="ts">
-import { Test } from "../lib";
-
-const onMouse = (mouse: { x: number; y: number }) =>
-  alert(`Got x ${mouse.x} y ${mouse.y}`);
-</script>
-
 <template>
-  <router-view></router-view>
-  <Test @mouse="onMouse" />
+  <h1>Index page</h1>
+  Go to
+  <RouterLink to="/test">test page</RouterLink>
+  to learn more.
 </template>

@@ -1,5 +1,11 @@
+<script setup lang="ts">
+import routes from "virtual:generated-pages";
+</script>
 <template>
-  <router-view></router-view>
+  <RouterLink to="/">Index</RouterLink>
+  &nbsp;
+  <RouterLink to="/test">Test</RouterLink>
+  <router-view />
 </template>
 
 <style>
