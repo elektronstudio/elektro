@@ -1,14 +1,15 @@
 import { defineConfig } from "vite";
-import path from "path";
-import vue from "@vitejs/plugin-vue";
+import Vue from "@vitejs/plugin-vue";
+import Pages from "vite-plugin-pages";
 
 export default defineConfig({
   plugins: [
-    vue({
+    Vue({
       script: {
         refTransform: true,
         propsDestructureTransform: true,
       },
     }),
+    Pages(),
   ],
 });

@@ -1,12 +1,5 @@
-<script setup lang="ts">
-import Test from "./components/Test.vue";
-
-const onMouse = (mouse: { x: number; y: number }) =>
-  alert(`Got x ${mouse.x} y ${mouse.y}`);
-</script>
-
 <template>
-  <Test @mouse="onMouse" />
+  <router-view></router-view>
 </template>
 
 <style>
