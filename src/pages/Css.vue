@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ButtonTailwind } from "../lib";
+import { EButton } from "../lib";
 </script>
 
 <template>
   <h1>ButtonTailwind</h1>
-  <ButtonTailwind>Hello world</ButtonTailwind>
+  <EButton>Hello world</EButton>
 </template>
