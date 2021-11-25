@@ -16,7 +16,7 @@
   "typings": "./dist/lib.d.ts",
   "scripts": {
     "dev": "vite -c vite.config.app.ts",
-    "build": "vite build -c vite.config.app.ts && vite build -c vite.config.lib.ts && vue-tsc --declaration --emitDeclarationOnly",
+    "build": "vite build -c vite.config.app.ts && vite build -c vite.config.lib.ts --emptyOutDir=false && vue-tsc --declaration --emitDeclarationOnly",
     "serve": "vite preview"
   },
   "dependencies": {
