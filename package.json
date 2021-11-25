@@ -1,9 +1,21 @@
 {
   "name": "elektronstudio",
   "version": "0.0.1",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/elektronstudio.umd.js",
+  "module": "./dist/elektronstudio.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/elektronstudio.es.js",
+      "require": "./dist/elektronstudio.umd.js"
+    }
+  },
+  "type": "module",
   "scripts": {
     "dev": "vite -c vite.config.app.ts",
-    "build": "vite build -c vite.config.app.ts && vite build -c vite.config.lib.ts",
+    "build": "vue-tsc --noEmit && vite build -c vite.config.app.ts && vite build -c vite.config.lib.ts",
     "serve": "vite preview"
   },
   "dependencies": {
@@ -13,8 +25,6 @@
   "devDependencies": {
     "@types/node": "^16.11.10",
     "@vitejs/plugin-vue": "^1.9.2",
-    "typescript": "^4.4.3",
-    "vite": "^2.6.0",
     "vue-tsc": "^0.3.0"
   }
 }
