@@ -1,25 +1,29 @@
 <script setup lang="ts">
-const buttonSizes = {
-  sm: "text-sm px-3 py-2",
-  md: "text-md px-4 py-3",
-  lg: "text-lg px-4 py-4",
+const classes = {
+  sm: "text-sm px-2 py-1",
+  md: "text-md px-3 py-2",
+  lg: "text-lg px-4 py-3",
 };
 
-type ButtonSize = keyof typeof buttonSizes;
+type Size = keyof typeof classes;
+type El = "button" | "a";
 
-const { size = "md" } = defineProps<{ size?: ButtonSize }>();
+const { size = "md", el = "button" } = defineProps<{ size?: Size; el?: El }>();
 </script>
+
 <template>
-  <button
+  <component
+    :is="el"
     class="
       border-2 border-gray-500
       bg-none
-      hover:bg-gray-50
+      hover:bg-gray-100
       text-gray-500
       font-bold
+      cursor-pointer
     "
-    :class="buttonSizes[size]"
+    :class="classes[size]"
   >
     <slot />
-  </button>
+  </component>
 </template>
