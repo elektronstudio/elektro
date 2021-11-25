@@ -1,6 +1,8 @@
 <template>
   <RouterLink to="/">Index</RouterLink>
   &nbsp;
+  <RouterLink to="/css">CSS approaches</RouterLink>
+  &nbsp;
   <RouterLink to="/test">Test</RouterLink>
   <router-view />
 </template>
