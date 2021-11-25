@@ -15,16 +15,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite -c vite.config.app.ts",
-    "build": "vue-tsc --noEmit && vite build -c vite.config.app.ts && vite build -c vite.config.lib.ts",
+    "build": "vite build -c vite.config.app.ts && vite build -c vite.config.lib.ts && vue-tsc --declaration --emitDeclarationOnly",
     "serve": "vite preview"
   },
   "dependencies": {
     "@vueuse/core": "^7.1.1",
-    "vue": "^3.2.16"
+    "vue": "^3.2.22"
   },
   "devDependencies": {
     "@types/node": "^16.11.10",
-    "@vitejs/plugin-vue": "^1.9.2",
-    "vue-tsc": "^0.3.0"
+    "@vitejs/plugin-vue": "^1.10.0",
+    "vue-tsc": "^0.29.6"
   }
 }
