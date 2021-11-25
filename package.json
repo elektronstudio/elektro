@@ -17,7 +17,8 @@
   "scripts": {
     "dev": "vite -c vite.config.app.ts",
     "build": "vite build -c vite.config.app.ts && vite build -c vite.config.lib.ts --emptyOutDir=false && vue-tsc --declaration --emitDeclarationOnly",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "check": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@vueuse/core": "^7.1.1",

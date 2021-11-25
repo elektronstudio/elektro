@@ -1,6 +1,3 @@
-<script setup lang="ts">
-import routes from "virtual:generated-pages";
-</script>
 <template>
   <RouterLink to="/">Index</RouterLink>
   &nbsp;
