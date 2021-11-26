@@ -1,6 +1,8 @@
+<script setup lang="ts">
+import { ETitle } from "../lib";
+</script>
+
 <template>
-  <h1>Index page</h1>
-  Go to
-  <RouterLink to="/test">test page</RouterLink>
-  to learn more.
+  <ETitle size="lg">Index page</ETitle>
+  See our approach to CSS and Vue3 APIs in general
 </template>

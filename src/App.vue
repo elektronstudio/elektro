@@ -1,7 +1,10 @@
 <template>
-  <RouterLink to="/">Index</RouterLink>
+  <RouterLink to="/" active-class="font-bold">Index</RouterLink>
   &nbsp;
-  <RouterLink to="/test">Test</RouterLink>
+  <RouterLink to="/css" active-class="font-bold">CSS approaches</RouterLink>
+  &nbsp;
+  <RouterLink to="/test" active-class="font-bold">Test</RouterLink>
+  <p class="h-8" />
   <router-view />
 </template>
 

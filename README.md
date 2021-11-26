@@ -15,6 +15,14 @@ npm run dev
 npm run build
 ```
 
+## CSS
+
+Preview Tailwind styles
+
+```
+npx tailwind-config-viewer -o -c tailwind.config.cjs
+```
+
 ## Github conventions
 
 - Regular PR-driven workflow.
