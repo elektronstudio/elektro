@@ -4,7 +4,6 @@ const getVars = [
   ["spacing", "p"],
   ["fontSize", "text", (a) => a[0]],
   ["fontSize", "text", (a) => `${a[0]}/${a[1].lineHeight}`],
-  ["fontWeight", "font"],
 ];
 
 const toVars = (key, name, acc = (a) => a) =>
