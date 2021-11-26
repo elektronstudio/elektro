@@ -3,7 +3,7 @@ import { ETitle, EButton, ETitleTw, EButtonTw } from "../lib";
 </script>
 
 <template>
-  <pre class="pt-8 pb-4">ETitle</pre>
+  <pre class="pt-8 pb-4">ETitle (CSS vars)</pre>
 
   <ETitle size="lg">Title lg</ETitle>
   <ETitle size="md">Title md</ETitle>
@@ -11,7 +11,7 @@ import { ETitle, EButton, ETitleTw, EButtonTw } from "../lib";
     Title sm with color override
   </ETitle>
 
-  <pre class="pt-8 pb-4">EButton</pre>
+  <pre class="pt-8 pb-4">EButton (CSS vars)</pre>
 
   <div class="grid sm:flex gap-4 items-start">
     <EButton size="lg">Button lg</EButton>

@@ -27,9 +27,9 @@ const { size = "md", el } = defineProps<Props>();
   font-size: var(--text-sm);
 }
 .ETitle.md {
-  font-size: var(--text-md);
+  font-size: var(--text-xl);
 }
 .ETitle.lg {
-  font-size: var(--text-lg);
+  font-size: var(--text-3xl);
 }
 </style>

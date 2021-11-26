@@ -15,9 +15,9 @@ const { size = "md", el = "button" } = defineProps<Props>();
 
 <style scoped>
 .EButton {
-  border: 1px solid red;
   background: none;
   color: var(--gray-500);
+  border: 2px solid var(--gray-500);
   font-weight: bold;
   cursor: pointer;
 }
@@ -33,7 +33,7 @@ const { size = "md", el = "button" } = defineProps<Props>();
   padding: var(--p-3) var(--p-2);
 }
 .EButton.lg {
-  font-size: var(--text-lg);
+  font-size: 1.125rem/1.75rem;
   padding: var(--p-4) var(--p-3);
 }
 </style>
