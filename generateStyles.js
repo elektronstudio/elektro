@@ -14,7 +14,10 @@ const source = { ...config.theme, ...colors };
 
 const toVars = (key, name, acc = (a) => a) =>
   Object.entries(source[key])
-    .map(([varKey, varValue]) => `  --${name}-${varKey}: ${acc(varValue)};`)
+    .map(
+      ([varKey, varValue]) =>
+        `  --${name}-${varKey.replace(".", "\\.")}: ${acc(varValue)};`
+    )
     .join("\n");
 
 const vars = getVars.map((v) => toVars(...v)).join("\n");
