@@ -1,29 +1,40 @@
 <script setup lang="ts">
-const classes = {
-  sm: "text-sm px-2 py-1",
-  md: "text-md px-3 py-2",
-  lg: "text-lg px-4 py-3",
+type Props = {
+  size?: "sm" | "md" | "lg";
+  el?: "button" | "a";
 };
 
-type Size = keyof typeof classes;
-type El = "button" | "a";
-
-const { size = "md", el = "button" } = defineProps<{ size?: Size; el?: El }>();
+const { size = "md", el = "button" } = defineProps<Props>();
 </script>
 
 <template>
-  <component
-    :is="el"
-    class="
-      border-2 border-gray-500
-      bg-none
-      hover:bg-gray-100
-      text-gray-500
-      font-bold
-      cursor-pointer
-    "
-    :class="classes[size]"
-  >
+  <component :is="el" :class="size">
     <slot />
   </component>
 </template>
+
+<style scoped>
+.ButtonClassic {
+  border: var(--border-2);
+  border-color: var(--gray-500);
+  background: none;
+  color: var(--gray-500);
+  font-weight: bold;
+  cursor: pointer;
+}
+.ButtonClassic:hover {
+  background: var(--gray-100);
+}
+.ButtonClassic.sm {
+  font-size: var(--text-sm);
+  padding: var(--p-2) var(--p-1);
+}
+.ButtonClassic.md {
+  font-size: var(--text-md);
+  padding: var(--p-3) var(--p-2);
+}
+.ButtonClassic.lg {
+  font-size: var(--text-lg);
+  padding: var(--p-4) var(--p-3);
+}
+</style>

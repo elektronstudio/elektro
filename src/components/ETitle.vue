@@ -1,21 +1,35 @@
 <script setup lang="ts">
-const classes = {
-  sm: { class: "text-sm", el: "h3" },
-  md: { class: "text-xl", el: "h2" },
-  lg: { class: "text-3xl", el: "h1" },
+const sizes = {
+  sm: "h3",
+  md: "h2",
+  lg: "h1",
 };
 
-type Size = keyof typeof classes;
-type El = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+type Props = {
+  size?: keyof typeof sizes;
+  el?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+};
 
-const { size = "md", el } = defineProps<{ size?: Size; el?: El }>();
+const { size = "md", el } = defineProps<Props>();
 </script>
+
 <template>
-  <component
-    :is="el || classes[size].el"
-    class="font-bold"
-    :class="classes[size].class"
-  >
+  <component :is="el || sizes[size]" class="ETitle" :class="size">
     <slot />
   </component>
 </template>
+
+<style scoped>
+.ETitle {
+  font-weight: bold;
+}
+.ETitle.sm {
+  font-size: var(--text-sm);
+}
+.ETitle.md {
+  font-size: var(--text-md);
+}
+.ETitle.lg {
+  font-size: var(--text-lg);
+}
+</style>
