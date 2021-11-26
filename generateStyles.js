@@ -1,10 +1,15 @@
 import config from "tailwindcss/defaultConfig.js";
 
-const getVars = [["spacing", "p"]];
+const getVars = [
+  ["spacing", "p"],
+  ["fontSize", "text", (a) => a[0]],
+  ["fontSize", "text", (a) => `${a[0]}/${a[1].lineHeight}`],
+  ["fontWeight", "font"],
+];
 
-const toVars = (key, name) =>
+const toVars = (key, name, acc = (a) => a) =>
   Object.entries(config.theme[key])
-    .map(([varKey, varValue]) => `  --${name}-${varKey}: ${varValue};`)
+    .map(([varKey, varValue]) => `  --${name}-${varKey}: ${acc(varValue)};`)
     .join("\n");
 
 const vars = getVars.map((v) => toVars(...v)).join("\n");
