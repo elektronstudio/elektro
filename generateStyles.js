@@ -1,8 +1,10 @@
+import { writeFile } from "fs/promises";
 import config from "tailwindcss/defaultConfig.js";
 import colors from "tailwindcss/colors.js";
 
 const getVars = [
   ["spacing", "p"],
+  ["spacing", "gap"],
   ["fontSize", "text", (a) => a[0]],
   ["fontSize", "text", (a) => a[0]],
   ["fontSize", "line-height", (a) => a[1].lineHeight],
@@ -12,7 +14,7 @@ const getVars = [
 
 const source = { ...config.theme, ...colors };
 
-const toVars = (key, name, acc = (a) => a) =>
+const toCssVars = (key, name, acc = (a) => a) =>
   Object.entries(source[key])
     .map(
       ([varKey, varValue]) =>
@@ -20,15 +22,24 @@ const toVars = (key, name, acc = (a) => a) =>
     )
     .join("\n");
 
-const vars = getVars.map((v) => toVars(...v)).join("\n");
+const cssVars = getVars.map((v) => toCssVars(...v)).join("\n");
 
-const output = `
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+const cssOutput = `
 :root {
-${vars}
+${cssVars}
 }`;
 
-console.log(output);
+const toJsonVars = (key, name, acc = (a) => a) => {
+  return [
+    name,
+    Object.entries(source[key]).map(
+      ([varKey, varValue]) =>
+        `--${name}-${varKey.replace(".", "\\.")}: ${acc(varValue)};`
+    ),
+  ];
+};
+
+const jsonVars = getVars.map((v) => toJsonVars(...v));
+
+await writeFile("./src/vars.css", cssOutput);
+await writeFile("./src/vars.json", JSON.stringify(jsonVars, null, 2));
