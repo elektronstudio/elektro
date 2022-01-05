@@ -1,6 +1,14 @@
 {
   "name": "elektro",
   "version": "0.0.1",
+  "engines": {
+    "node": "^14.13.1 || >=16.0.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elektronstudio/elektro.git"
+  },
   "files": [
     "dist"
   ],
