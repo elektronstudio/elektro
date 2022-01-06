@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCssVar } from "@vueuse/core";
 import { ETitle } from "../lib";
+import vars from "../vars.json";
 
 const fg = useCssVar("--fg");
 const bg = useCssVar("--bg");
@@ -15,4 +16,6 @@ const accent = useCssVar("--accent");
   <input type="color" v-model="bg" />
   <pre>--accent:</pre>
   <input type="color" v-model="accent" />
+  <ETitle size="lg">Other vars</ETitle>
+  <pre>{{ vars }}</pre>
 </template>

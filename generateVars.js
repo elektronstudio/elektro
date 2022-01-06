@@ -19,7 +19,7 @@ const getVars = [
   ["borderWidth", "border"],
   ["borderRadius", "rounded"],
   ["opacity", "opacity"],
-  ["gray", "gray"],
+  //["gray", "gray"],
 ];
 
 const source = { ...config.theme, ...colors };

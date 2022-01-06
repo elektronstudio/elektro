@@ -22,7 +22,7 @@ const { size = "md", el = "button" } = defineProps<Props>();
   cursor: pointer;
 }
 .EButton:hover {
-  filter: brightness(80%);
+  filter: brightness(0.8);
 }
 .EButton.sm {
   font-size: var(--text-sm);
