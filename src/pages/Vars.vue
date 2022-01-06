@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useCssVar } from "@vueuse/core";
 import { ETitle } from "../lib";
-import vars from "../vars.json";
+import vars from "../styles/vars.json";
 
 const fg = useCssVar("--fg");
 const bg = useCssVar("--bg");

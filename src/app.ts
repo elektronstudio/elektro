@@ -3,9 +3,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import routes from "virtual:generated-pages";
 import App from "./App.vue";
 
-import "./vars.css";
-import "./reset.css";
-import "./styles.css";
+import "./styles/vars.css";
+import "./styles/reset.css";
+import "./styles/fonts.css";
+import "./styles/styles.css";
 
 const router = createRouter({
   history: createWebHistory(),
