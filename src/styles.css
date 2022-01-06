@@ -11,7 +11,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   box-sizing: border-box;
-  padding: var(--p-4);
+  padding: var(--p-6);
   background: var(--bg);
   color: var(--fg);
 }

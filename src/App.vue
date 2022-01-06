@@ -8,5 +8,3 @@
   <RouterLink to="/reactivity">Reactivity test</RouterLink>
   <router-view />
 </template>
-
-<style></style>

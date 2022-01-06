@@ -17,5 +17,8 @@ const accent = useCssVar("--accent");
   <pre>--accent:</pre>
   <input type="color" v-model="accent" />
   <ETitle size="lg">Other vars</ETitle>
-  <pre>{{ vars }}</pre>
+  <template v-for="(group, groupKey) in vars">
+    <ETitle>{{ groupKey }}</ETitle>
+    <pre v-for="(v, key) in group">{{ key }}: {{ v }}</pre>
+  </template>
 </template>

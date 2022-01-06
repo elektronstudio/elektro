@@ -1,5 +1,5 @@
 {
-  "cssvar.files": ["./src/styles.css"],
+  "cssvar.files": ["./src/vars.css", "./src/styles.css"],
   "cssvar.disableSort": true,
   "cssvar.extensions": ["css", "html", "jsx", "tsx", "vue"]
 }

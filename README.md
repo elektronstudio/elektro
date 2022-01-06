@@ -1,6 +1,14 @@
 ## About
 
-elektron.art core library
+https://elektron.art core UI library
+
+## Demo
+
+https://elektron-elektro.netlify.app/
+
+## NPM
+
+https://www.npmjs.com/package/elektro
 
 ## Install
 
@@ -17,14 +25,15 @@ npm run build
 
 ## CSS
 
-Preview Tailwind styles
+Generate CSS vars and reset CSS from Tailwind
 
 ```
-npx tailwind-config-viewer -o -c tailwind.config.cjs
+node generateVars.js
 ```
 
 ## Github conventions
 
+- Use Prettier on save
 - Regular PR-driven workflow.
 - Use "Squash and merge" for PR merging
 - For experiments create draft PRs
