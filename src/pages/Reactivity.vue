@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted } from "vue";
+import { computed, ref, watch, onMounted, Ref } from "vue";
 import { useMouse } from "@vueuse/core";
 import ETitle from "../components/ETitle.vue";
 
@@ -43,13 +43,13 @@ const onClick = () => emit("mouse", { x: x.value, y: y.value });
 // Refer a DOM element
 const z = <Ref<HTMLCanvasElement | null>>ref(null);
 
-// You will need to make sure it is available defore accessing it
+// You will need to make sure canvas is available defore accessing it
 
 onMounted(() => {
   const ctx = z.value?.getContext("2d");
   if (ctx) {
     ctx.moveTo(0, 0);
-    ctx.lineTo(200, 100);
+    ctx.lineTo(100, 100);
     ctx.stroke();
   }
 });
@@ -68,5 +68,5 @@ computed e: {{ e }}
   <p />
   <button @click="onClick">Emit x: {{ x }} y: {{ x }}</button>
   <p />
-  <canvas ref="z" />
+  <canvas ref="z" width="100" height="100" />
 </template>

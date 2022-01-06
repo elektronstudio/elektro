@@ -5,10 +5,7 @@ import Vue from "@vitejs/plugin-vue";
 export default defineConfig({
   plugins: [
     Vue({
-      script: {
-        refTransform: true,
-        propsDestructureTransform: true,
-      },
+      reactivityTransform: true,
     }),
   ],
   build: {
