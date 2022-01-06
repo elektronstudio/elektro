@@ -53,9 +53,9 @@ const toJsonVars = (key, name, acc = (a) => a) => {
 
 const jsonVars = Object.fromEntries(getVars.map((v) => toJsonVars(...v)));
 
-await writeFile("./src/vars.css", cssOutput);
-await writeFile("./src/vars.json", JSON.stringify(jsonVars, null, 2));
+await writeFile("./src/styles/vars.css", cssOutput);
+await writeFile("./src/styles/vars.json", JSON.stringify(jsonVars, null, 2));
 await copyFile(
   "./node_modules/tailwindcss/src/css/preflight.css",
-  "./src/reset.css"
+  "./src/styles/reset.css"
 );

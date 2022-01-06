@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Azeret+Mono&family=Cousine&display=swap");
+@font-face {
+  font-family: "font-title";
+  src: url("/fonts/font-title.woff") format("woff"),
+    url("/fonts/font-title.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "font-body";
+  src: url("font-body-55rg.woff2") format("woff2"),
+    url("font-body-55rg.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
