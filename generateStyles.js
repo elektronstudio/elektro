@@ -1,4 +1,4 @@
-import { writeFile } from "fs/promises";
+import { writeFile, copyFile } from "fs/promises";
 
 // https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/defaultConfig.stub.js
 import config from "tailwindcss/defaultConfig.js";
@@ -55,3 +55,7 @@ const jsonVars = Object.fromEntries(getVars.map((v) => toJsonVars(...v)));
 
 await writeFile("./src/vars.css", cssOutput);
 await writeFile("./src/vars.json", JSON.stringify(jsonVars, null, 2));
+await copyFile(
+  "./node_modules/tailwindcss/src/css/preflight.css",
+  "./src/reset.css"
+);
