@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import { computed, ref, watch, reactive, onMounted, Ref } from "vue";
-import { useMouse, whenever } from "@vueuse/core";
-
-// All the values below are passed to the template
+import { computed, ref, watch, onMounted, Ref } from "vue";
+import { useMouse } from "@vueuse/core";
+import ETitle from "../components/ETitle.vue";
 
 // Constant
 const a = 10;
-
-// Basic props
-// const props defineProps<{ b?: number }>();
-// Access the value as props.b
 
 // Destructured props with a default value
 const { b = 10 } = defineProps<{ b?: number }>();
@@ -30,7 +25,7 @@ const d = ref({ something: 0 });
 const e = computed(() => `"c must be ${c.value} I guess"`);
 
 // Imported hook, returns x and y as separate refs
-const { x, y } = useMouse({ touch: false });
+const { x, y } = useMouse();
 
 // Watching a single ref
 watch(c, () => console.log(c.value), { immediate: true });
@@ -42,25 +37,27 @@ watch(c, () => console.log(c.value), { immediate: true });
 const emit =
   defineEmits<(e: "mouse", payload: { x: number; y: number }) => number>();
 
-// Callback function
+// Click event handler
 const onClick = () => emit("mouse", { x: x.value, y: y.value });
 
 // Refer a DOM element
 const z = <Ref<HTMLCanvasElement | null>>ref(null);
 
-// You will need to make sure it is available defore accessing it
+// You will need to make sure canvas is available defore accessing it
 
 onMounted(() => {
   const ctx = z.value?.getContext("2d");
   if (ctx) {
     ctx.moveTo(0, 0);
-    ctx.lineTo(200, 100);
+    ctx.lineTo(100, 100);
+    ctx.strokeStyle = "red";
     ctx.stroke();
   }
 });
 </script>
 
 <template>
+  <ETitle size="lg">Reactivity test</ETitle>
   <pre>
 constant a: {{ a }}
 prop b: {{ b }}
@@ -68,9 +65,9 @@ ref c: {{ c }} // No .value needed!
 ref d: {{ d }}
 computed e: {{ e }}
   </pre>
-  <input type="range" v-model="c" />
+  <input type="range" v-model.number="c" />
   <p />
   <button @click="onClick">Emit x: {{ x }} y: {{ x }}</button>
   <p />
-  <canvas ref="z" />
+  <canvas ref="z" width="100" height="100" />
 </template>

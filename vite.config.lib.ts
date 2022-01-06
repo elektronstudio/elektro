@@ -5,16 +5,13 @@ import Vue from "@vitejs/plugin-vue";
 export default defineConfig({
   plugins: [
     Vue({
-      script: {
-        refTransform: true,
-        propsDestructureTransform: true,
-      },
+      reactivityTransform: true,
     }),
   ],
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/lib.ts"),
-      name: "elektronstudio",
+      name: "elektro",
     },
     rollupOptions: {
       external: ["vue"],

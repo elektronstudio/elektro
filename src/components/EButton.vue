@@ -16,24 +16,24 @@ const { size = "md", el = "button" } = defineProps<Props>();
 <style scoped>
 .EButton {
   background: none;
-  color: var(--gray-500);
-  border: 2px solid var(--gray-500);
+  color: var(--fg);
+  border: 2px solid var(--fg);
   font-weight: bold;
   cursor: pointer;
 }
 .EButton:hover {
-  background: var(--gray-100);
+  filter: brightness(0.8);
 }
 .EButton.sm {
   font-size: var(--text-sm);
-  padding: var(--p-2) var(--p-1);
+  padding: var(--p-2) var(--p-4);
 }
 .EButton.md {
   font-size: var(--text-md);
-  padding: var(--p-3) var(--p-2);
+  padding: var(--p-3) var(--p-5);
 }
 .EButton.lg {
-  font-size: 1.125rem/1.75rem;
-  padding: var(--p-4) var(--p-3);
+  font-size: var(--text-lg);
+  padding: var(--p-4) var(--p-6);
 }
 </style>
