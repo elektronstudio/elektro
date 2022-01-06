@@ -14,7 +14,7 @@ export default defineConfig({
       name: "elektro",
     },
     rollupOptions: {
-      external: ["vue"],
+      external: ["vue", "virtual:generated-pages"],
       output: {
         globals: {
           vue: "Vue",
