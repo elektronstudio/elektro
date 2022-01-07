@@ -35,7 +35,7 @@ const menuItems = [
 </script>
 
 <template>
-  <nav class="MainNavigation">
+  <nav class="ENav">
     <ENavButton v-for="item in menuItems" :key="item.name" :to="item.path">
       {{ item.name }}
     </ENavButton>
@@ -43,15 +43,10 @@ const menuItems = [
 </template>
 
 <style scoped>
-.MainNavigation {
-  display: flex;
+.ENav {
+  display: grid;
   height: var(--h-12);
   --menu-items-count: v-bind(menuItems.length);
-}
-.MainNavigation > *:first-child {
-  width: calc(100% / var(--menu-items-count));
-}
-.MainNavigation > *:not(:first-child) {
-  width: calc(100% / var(--menu-items-count) + var(--border-DEFAULT));
+  grid-template-columns: repeat(var(--menu-items-count), 1fr);
 }
 </style>
