@@ -1,42 +1,19 @@
 <script setup lang="ts">
 import { ENavButton } from "../lib";
 
-// See peaks tulema propsina. Siis saab sama komponendiga ka jaluse teha näiteks.
-const menuItems = [
-  {
-    name: "eˉlektron",
-    path: "/",
-  },
-  {
-    name: "Lavastused",
-    path: "/lavastused",
-  },
-  {
-    name: "Projektid",
-    path: "/projektid",
-  },
-  {
-    name: "Kava",
-    path: "/kava",
-  },
-  {
-    name: "Meist",
-    path: "/meist",
-  },
-  {
-    name: "ENG",
-    path: "/en",
-  },
-  {
-    name: "LIVE",
-    path: "/live",
-  },
-];
+type Props = {
+  navItems?: {
+    name: string;
+    path: string;
+  }[];
+};
+
+defineProps<Props>();
 </script>
 
-<template>
+<template v-if="navItems">
   <nav class="ENav">
-    <ENavButton v-for="item in menuItems" :key="item.name" :to="item.path">
+    <ENavButton v-for="item in navItems" :key="item.name" :to="item.path">
       {{ item.name }}
     </ENavButton>
   </nav>
@@ -46,7 +23,7 @@ const menuItems = [
 .ENav {
   display: grid;
   height: var(--h-12);
-  --menu-items-count: v-bind(menuItems.length);
+  --menu-items-count: v-bind(navItems ? navItems.length: 0);
   grid-template-columns: repeat(var(--menu-items-count), 1fr);
 }
 </style>
