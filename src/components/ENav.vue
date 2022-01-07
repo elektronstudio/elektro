@@ -2,7 +2,7 @@
 import { ENavButton } from "../lib";
 
 type Props = {
-  navItems?: {
+  navItems: {
     name: string;
     path: string;
   }[];
@@ -11,7 +11,7 @@ type Props = {
 defineProps<Props>();
 </script>
 
-<template v-if="navItems">
+<template>
   <nav class="ENav">
     <ENavButton v-for="item in navItems" :key="item.name" :to="item.path">
       {{ item.name }}
