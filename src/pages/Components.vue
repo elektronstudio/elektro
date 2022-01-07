@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ETitle, EButton, ENavigation, ENavButton } from "../lib";
+import { ETitle, EButton, ENav, ENavButton } from "../lib";
 </script>
 
 <template>
@@ -22,8 +22,8 @@ import { ETitle, EButton, ENavigation, ENavButton } from "../lib";
   </div>
 
   <br />
-  <pre>ENavigation</pre>
-  <ENavigation />
+  <pre>ENav</pre>
+  <ENav />
 
   <br />
   <pre>ENavButton</pre>

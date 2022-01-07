@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ETitle, ENavigation } from "../lib";
+import { ETitle, ENav } from "../lib";
 </script>
 
 <template>
-  <ENavigation />
+  <ENav />
   <ETitle size="lg">Index page</ETitle>
 </template>
