@@ -21,31 +21,26 @@ import { ETitle, EButton, ENavigation, ENavButton, EContent } from "../lib";
     <h5>Heading 5</h5>
     <h6>Heading 6</h6>
     <p>
-      Aenean eu <i>leo quam.</i> Pellentesque <b>ornare sem</b> lacinia quam
-      venenatis vestibulum. <em>Morbi leo risus</em>, porta ac consectetur ac,
-      vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit.
-      Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi
-      leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper
-      nulla non metus auctor fringilla. Aenean eu leo quam. Pellentesque ornare
-      sem lacinia quam venenatis vestibulum. Vestibulum id ligula porta felis
-      euismod semper. Curabitur blandit tempus porttitor. Fusce dapibus, tellus
-      ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa
-      justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
+      <a href="https://elektron.art" target="_blank">eˉlektron</a> on
+      transdistsiplinaarne etendustkunsti platvorm, mis liidab kaasaegse kunsti,
+      teaduse ja tehnoloogia otsingulisi tegevusi.<br />Ootamatud kunstivormid,
+      lavastused, tekstid, taskuhääling, eksperimendid.
     </p>
     <p>
-      Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
-      Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce
-      dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-      fermentum massa justo sit amet risus. Nulla vitae elit libero, a pharetra
-      augue. Donec ullamcorper nulla non metus auctor fringilla. Nullam quis
-      risus eget urna mollis ornare vel eu leo. Nullam quis risus eget urna
-      mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis
-      parturient montes, nascetur ridiculus mus. Maecenas faucibus mollis
-      interdum. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-      condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur
-      blandit tempus porttitor. Praesent commodo cursus magna, vel scelerisque
-      nisl consectetur et.
+      <b>e‾lektron</b> on moodustatud MIMprojecti ja Kanuti Gildi SAALi
+      koostöös. Rahaline toetaja on Eesti kultuuriministeerium.
     </p>
+    <p>
+      <i>eˉlektron</i> is a halfway virtual, halfway physical platform that
+      connects exploratory activities of performing arts and science.<br />Unexpected
+      art forms, performances, texts, podcast, experiments.
+    </p>
+    <p>
+      e‾lektron is realised in cooperation with MIMproject and Kanuti Gildi
+      SAAL. Financial supporter is Estonian Ministry of Culture.
+    </p>
+    <p>Kes on eˉlektron? / Who is eˉlektron?</p>
+
     <ul>
       <li>Unordered list item</li>
       <li>Unordered list item</li>
