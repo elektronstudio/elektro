@@ -40,7 +40,6 @@ import { ETitle, EButton, ENavigation, ENavButton, EContent } from "../lib";
       SAAL. Financial supporter is Estonian Ministry of Culture.
     </p>
     <p>Kes on eˉlektron? / Who is eˉlektron?</p>
-
     <ul>
       <li>Unordered list item</li>
       <li>Unordered list item</li>
@@ -55,6 +54,13 @@ import { ETitle, EButton, ENavigation, ENavButton, EContent } from "../lib";
       <li>Ordered list item</li>
       <li>Ordered list item</li>
     </ol>
+    <blockquote>
+      Marshall Stay is a multi-disciplinary performance-maker from Australia.
+      Shortly after graduating from the Western Australian Academy of Performing
+      Arts in 2018, he co-created and directed a number of award-nominated
+      theatre pieces, as well as continuing his practice as a freelance
+      photographer and videographer within the artistic community.
+    </blockquote>
   </EContent>
 
   <br />

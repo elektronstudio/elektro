@@ -32,6 +32,15 @@ const { el = "article" } = defineProps<Props>();
   /* TODO: how to deal with lighter variants for colors, opacity not ideal. Works with dark and light tones tho. */
   opacity: var(--opacity-60);
 }
+.EContent :deep(blockquote) {
+  font-size: var(--text-3xl);
+  font-family: font-title-medium, sans-serif;
+  line-height: var(--line-height-xs);
+  background-image: url("/images/bg-texture-xs.gif");
+  background-repeat: repeat;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .EContent :deep(h1),
 .EContent :deep(h2),
 .EContent :deep(h3) {

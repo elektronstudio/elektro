@@ -38,6 +38,7 @@
   --h-11: 2.75rem;
   --h-12: 3rem;
   --h-px: 1px;
+  --line-height-xs: 1.1;
   --line-height-sm: 1.375;
 }
 * {
