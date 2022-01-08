@@ -23,6 +23,15 @@ const { el = "article" } = defineProps<Props>();
   font-size: var(--text-base);
   line-height: var(--line-height-sm);
 }
+.EContent :deep(a) {
+  border-bottom: 1px solid;
+  border-image: url("/images/bg-texture-xs.gif") 1;
+}
+.EContent :deep(a):hover {
+  border-bottom: none;
+  /* TODO: how to deal with lighter variants for colors, opacity not ideal. Works with dark and light tones tho. */
+  opacity: var(--opacity-60);
+}
 .EContent :deep(h1),
 .EContent :deep(h2),
 .EContent :deep(h3) {
