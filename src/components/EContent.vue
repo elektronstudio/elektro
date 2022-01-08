@@ -21,9 +21,7 @@ const { el = "article" } = defineProps<Props>();
 }
 .EContent :deep(p) {
   font-size: var(--text-base);
-  /* No TW equivalent value. How to deal with this issue? */
-  /* Use closest value or add custom values? */
-  line-height: 1.375;
+  line-height: var(--line-height-sm);
 }
 .EContent :deep(h1),
 .EContent :deep(h2),
