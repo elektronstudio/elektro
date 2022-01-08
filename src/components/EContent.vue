@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // TODO: find proper ElementType typing
 type Props = {
-  el?: string;
+  el?: "article" | "section" | string;
 };
 
 const { el = "article" } = defineProps<Props>();
