@@ -39,7 +39,7 @@ import { ETitle, EButton, ENavigation, ENavButton, EContent } from "../lib";
       e‾lektron is realised in cooperation with MIMproject and Kanuti Gildi
       SAAL. Financial supporter is Estonian Ministry of Culture.
     </p>
-    <p>Kes on eˉlektron? / Who is eˉlektron?</p>
+    <p><small>Kes on eˉlektron? / Who is eˉlektron?</small></p>
     <ul>
       <li>Unordered list item</li>
       <li>Unordered list item</li>

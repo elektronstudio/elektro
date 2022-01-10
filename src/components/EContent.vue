@@ -40,6 +40,9 @@ const { el = "article" } = defineProps<Props>();
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.EContent :deep(small) {
+  font-size: var(--text-xs);
+}
 .EContent :deep(h1),
 .EContent :deep(h2),
 .EContent :deep(h3) {
