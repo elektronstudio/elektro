@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// TODO: find proper ElementType typing
 type Props = {
   el?: "article" | "section" | string;
 };
