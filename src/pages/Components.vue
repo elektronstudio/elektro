@@ -1,5 +1,15 @@
 <script setup lang="ts">
-import { ETitle, EButton, ENavigation, ENavButton, EContent } from "../lib";
+import { ETitle, EButton, ENav, ENavButton, EContent } from "../lib";
+const navItems = [
+  {
+    name: "eˉlektron",
+    path: "/",
+  },
+  {
+    name: "Lavastused",
+    path: "/lavastused",
+  },
+];
 </script>
 
 <template>
@@ -72,8 +82,8 @@ import { ETitle, EButton, ENavigation, ENavButton, EContent } from "../lib";
   </div>
 
   <br />
-  <pre>ENavigation</pre>
-  <ENavigation />
+  <pre>ENav</pre>
+  <ENav :navItems="navItems" />
 
   <br />
   <pre>ENavButton</pre>
