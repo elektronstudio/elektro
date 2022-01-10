@@ -38,6 +38,7 @@ const { el = "article" } = defineProps<Props>();
   background-image: url("/images/bg-texture-xs.gif");
   background-repeat: repeat;
   background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .EContent :deep(small) {
