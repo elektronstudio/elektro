@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { ETitle, EButton, ENav, ENavButton, EContent } from "../lib";
+import {
+  ETitle,
+  EButton,
+  ENav,
+  ENavButton,
+  EContent,
+  EScheduleEvent,
+} from "../lib";
 const navItems = [
   {
     name: "eˉlektron",
@@ -8,6 +15,31 @@ const navItems = [
   {
     name: "Lavastused",
     path: "/lavastused",
+  },
+];
+
+const scheduleEvents = [
+  {
+    title: "Hundid",
+    description:
+      "<p>Lavastus “Hundid” on jätk Liis Varese ja Taavet Janseni koostööle “Kõik loeb/ The Reader”, mille soe vastuvõtt on julgustanud neid digitaalse formaadiga edasi töötama.</p>",
+    events: [
+      {
+        startTime: "2022-06-01T19:00:00.000Z",
+        endTime: "2022-06-01T19:00:00.000Z",
+        ticketUrl: "https://www.eventbrite.com/e/hundid-tickets-53907988984",
+      },
+      {
+        startTime: "2022-07-01T19:00:00.000Z",
+        endTime: "2022-07-01T19:00:00.000Z",
+        ticketUrl: "https://www.eventbrite.com/e/hundid-tickets-53907988984",
+      },
+      {
+        startTime: "2022-09-01T19:00:00.000Z",
+        endTime: "2022-09-01T19:00:00.000Z",
+        ticketUrl: "https://www.eventbrite.com/e/hundid-tickets-53907988984",
+      },
+    ],
   },
 ];
 </script>
@@ -90,4 +122,13 @@ const navItems = [
   <br />
   <pre>ENavButton</pre>
   <ENavButton>About us</ENavButton>
+
+  <br />
+  <pre>EScheduleEvent</pre>
+  <EScheduleEvent
+    v-for="event in scheduleEvents"
+    :title="event.title"
+    :description="event.description"
+    :events="event.events"
+  />
 </template>
