@@ -1,13 +1,15 @@
 <script setup lang="ts">
 type Props = {
   el?: "article" | "section" | string;
+  content?: string;
 };
 
-const { el = "article" } = defineProps<Props>();
+const { el = "article", content } = defineProps<Props>();
 </script>
 
 <template>
-  <component :is="el" class="EContent">
+  <component v-if="content" :is="el" class="EContent" v-html="content" />
+  <component v-else>
     <slot />
   </component>
 </template>
