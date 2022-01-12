@@ -5,6 +5,7 @@ import {
   ENav,
   ENavButton,
   EContent,
+  EProjectCard,
   EScheduleEvent,
 } from "../lib";
 const navItems = [
@@ -15,6 +16,21 @@ const navItems = [
   {
     name: "Lavastused",
     path: "/lavastused",
+  },
+];
+
+const projects = [
+  {
+    title: "Hundid",
+    author: "Taavet Jansen",
+    thumbnail:
+      "https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A",
+    events: [
+      {
+        startTime: "2022-06-01T19:00:00.000Z",
+        endTime: "2022-06-01T19:00:00.000Z",
+      },
+    ],
   },
 ];
 
@@ -122,6 +138,16 @@ const scheduleEvents = [
   <br />
   <pre>ENavButton</pre>
   <ENavButton>About us</ENavButton>
+
+  <br />
+  <pre>EProjectCard</pre>
+  <EProjectCard
+    v-for="project in projects"
+    :title="project.title"
+    :author="project.author"
+    :thumbnail="project.thumbnail"
+    :events="project.events"
+  />
 
   <br />
   <pre>EScheduleEvent</pre>
