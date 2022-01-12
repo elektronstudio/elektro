@@ -100,7 +100,9 @@ const projects = [
   <div style="display: flex; align-items: flex-start; gap: var(--gap-4)">
     <EButton size="lg">Button lg</EButton>
     <EButton size="md">Button md as a element</EButton>
-    <EButton size="sm" el="a">Button sm as a element</EButton>
+    <EButton size="sm" color="accent">Button sm accent colored</EButton>
+    <EButton size="xs" color="accent">Button xs accent colored</EButton>
+    <EButton size="xs" color="gray">Button xs gray colored</EButton>
   </div>
 
   <br />

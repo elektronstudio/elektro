@@ -1,14 +1,15 @@
 <script setup lang="ts">
 type Props = {
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
   el?: "button" | "a";
+  color?: "accent" | "gray";
 };
 
 const { size = "md", el = "button" } = defineProps<Props>();
 </script>
 
 <template>
-  <component :is="el" class="EButton" :class="size">
+  <component :is="el" class="EButton" :class="`${size} ${color}`">
     <slot />
   </component>
 </template>
@@ -18,22 +19,39 @@ const { size = "md", el = "button" } = defineProps<Props>();
   background: none;
   color: var(--fg);
   border: 2px solid var(--fg);
-  font-weight: bold;
   cursor: pointer;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  border-radius: var(--rounded-DEFAULT);
+  line-height: var(--line-height-5xl);
 }
 .EButton:hover {
   filter: brightness(0.8);
 }
+.EButton.xs {
+  font-size: var(--text-xs);
+  padding: var(--p-1);
+}
 .EButton.sm {
   font-size: var(--text-sm);
-  padding: var(--p-2) var(--p-4);
+  padding: var(--p-2);
 }
 .EButton.md {
   font-size: var(--text-md);
-  padding: var(--p-3) var(--p-5);
+  padding: var(--p-2);
 }
 .EButton.lg {
   font-size: var(--text-lg);
-  padding: var(--p-4) var(--p-6);
+  padding: var(--p-2) var(--p-3);
+}
+.EButton.accent {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+.EButton.gray {
+  background-color: var(--gray-300);
+  border-color: var(--gray-300);
+  color: var(--bg);
 }
 </style>
