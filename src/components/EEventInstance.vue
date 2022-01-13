@@ -16,7 +16,13 @@ const { startTime, ticketUrl } = defineProps<EventInstance>();
   <div className="EEventInstance">
     <time :datetime="startTime">{{ startTime }}</time>
     <EButton size="xs" el="a" color="transparent">+ Lisa kalendrisse</EButton>
-    <EButton el="a" size="xs" color="accent" :href="ticketUrl">
+    <EButton
+      el="a"
+      size="xs"
+      color="accent"
+      target="_blank2 "
+      :href="ticketUrl"
+    >
       → OSTA PILET
     </EButton>
   </div>
