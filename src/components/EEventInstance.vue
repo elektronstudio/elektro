@@ -1,47 +1,59 @@
 <script setup lang="ts">
 import EButton from "./EButton.vue";
-
 // import { EventInstance } from "../types";
+
 /* TODO: Why does imported type not work here? */
-type EventInstance = {
+// type Props = EventInstance & {
+//   layout?: "vertical" | "horizontal";
+// };
+type Props = {
   startTime: string;
   endTime: string;
   ticketUrl?: string;
+  layout?: "vertical" | "horizontal";
 };
 
-const { startTime, ticketUrl } = defineProps<EventInstance>();
+const { startTime, ticketUrl, layout = "horizontal" } = defineProps<Props>();
 </script>
 
 <template>
-  <div className="EEventInstance">
+  <div class="EEventInstance" :class="layout">
     <time :datetime="startTime">{{ startTime }}</time>
-    <EButton size="xs" el="a" color="transparent">+ Lisa kalendrisse</EButton>
-    <EButton
-      el="a"
-      size="xs"
-      color="accent"
-      target="_blank2 "
-      :href="ticketUrl"
-    >
-      → OSTA PILET
-    </EButton>
+    <section>
+      <EButton size="xs" el="a" color="transparent">+ Lisa kalendrisse</EButton>
+      <EButton
+        el="a"
+        size="xs"
+        color="accent"
+        target="_blank2 "
+        :href="ticketUrl"
+      >
+        → OSTA PILET
+      </EButton>
+    </section>
   </div>
 </template>
 
 <style scoped>
 .EEventInstance {
   display: flex;
-  justify-content: space-between;
   padding: var(--p-3) 0;
+}
+.EEventInstance.horizontal {
+  justify-content: space-between;
+}
+.EEventInstance.vertical {
+  flex-direction: column;
+  gap: var(--gap-3);
+}
+.EEventInstance.vertical section > *:first-child {
+  order: 2;
+}
+.EEventInstance section {
+  display: flex;
+  gap: var(--gap-3);
 }
 .EEventInstance:not(:last-child) {
   border-bottom: 1px solid var(--gray-300);
-}
-.EEventInstance > article,
-.EEventInstance > *:last-child {
-  margin-left: var(--p-3);
-}
-.EEventInstance time {
-  margin-right: auto;
 }
 </style>

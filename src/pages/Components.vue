@@ -162,8 +162,10 @@ const scheduleEvents = [
   <br />
   <pre>EEventInstance</pre>
   <EEventInstance
-    :startTime="scheduleEvents[0].events[0].startTime"
-    :endTime="scheduleEvents[0].events[0].endTime"
-    :ticketUrl="scheduleEvents[0].events[0].ticketUrl"
+    v-for="eventInstance in scheduleEvents[0].events"
+    :startTime="eventInstance.startTime"
+    :endTime="eventInstance.endTime"
+    :ticketUrl="eventInstance.ticketUrl"
+    layout="vertical"
   />
 </template>
