@@ -25,7 +25,7 @@ const { startTime, ticketUrl, layout = "horizontal" } = defineProps<Props>();
         el="a"
         size="xs"
         color="accent"
-        target="_blank2 "
+        target="_blank"
         :href="ticketUrl"
       >
         → OSTA PILET
