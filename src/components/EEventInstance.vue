@@ -16,6 +16,7 @@ const { startTime, ticketUrl, layout = "horizontal" } = defineProps<Props>();
     <time :datetime="startTime">{{ startTime }}</time>
     <section>
       <EButton size="xs" el="a" color="transparent">+ Lisa kalendrisse</EButton>
+      <!-- TODO: Add system or component for arrows -->
       <EButton
         el="a"
         size="xs"
