@@ -8,7 +8,7 @@ import {
   EProjectCard,
   EScheduleEvent,
   EEventInstance,
-  EBoxWrapper,
+  EBox,
 } from "../lib";
 const navItems = [
   {
@@ -172,8 +172,8 @@ const scheduleEvents = [
     />
 
     <br />
-    <pre>EBoxWrapper</pre>
-    <EBoxWrapper>
+    <pre>EBox</pre>
+    <EBox>
       <ETitle el="h3" size="md">Etendused</ETitle>
       <EEventInstance
         v-for="eventInstance in scheduleEvents[0].events"
@@ -182,13 +182,13 @@ const scheduleEvents = [
         :ticketUrl="eventInstance.ticketUrl"
         layout="vertical"
       />
-    </EBoxWrapper>
-    <EBoxWrapper color="accent">
+    </EBox>
+    <EBox color="accent">
       <ETitle el="h3" size="md">Box wrapper accent colored</ETitle>
-    </EBoxWrapper>
-    <EBoxWrapper color="gray" ratio="1 / 1">
+    </EBox>
+    <EBox color="gray" ratio="1 / 1">
       <ETitle el="h3" size="md">Box wrapper gray colored</ETitle>
-    </EBoxWrapper>
+    </EBox>
   </div>
 </template>
 

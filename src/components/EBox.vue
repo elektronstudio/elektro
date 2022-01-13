@@ -18,24 +18,24 @@ const { el = "div", color, ratio = "auto" } = defineProps<Props>();
 </script>
 
 <template>
-  <component :is="el" :class="color" class="EBoxWrapper">
+  <component :is="el" :class="color" class="EBox">
     <slot />
   </component>
 </template>
 
 <style scoped>
-.EBoxWrapper {
+.EBox {
   padding: var(--p-4);
   border: 1px solid var(--gray-300);
   border-radius: var(--rounded-3xl);
   aspect-ratio: v-bind(ratio);
 }
-.EBoxWrapper.accent {
+.EBox.accent {
   background-color: var(--accent);
   border-color: var(--accent);
   color: var(--bg);
 }
-.EBoxWrapper.gray {
+.EBox.gray {
   background-color: var(--gray-300);
   border-color: var(--gray-300);
   color: var(--bg);
