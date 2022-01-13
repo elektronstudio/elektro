@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import EContent from "./EContent.vue";
 import EEventInstance from "./EEventInstance.vue";
-import { EventInstance } from "../types";
 
 type Props = {
   title: string;
   description?: string;
-  events?: EventInstance[];
+  events?: {
+    startTime: string;
+    endTime: string;
+    ticketUrl?: string;
+  }[];
 };
 
 const { title, description, events } = defineProps<Props>();

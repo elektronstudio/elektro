@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import EButton from "./EButton.vue";
-// import { EventInstance } from "../types";
 
-/* TODO: Why does imported type not work here? */
-// type Props = EventInstance & {
-//   layout?: "vertical" | "horizontal";
-// };
 type Props = {
   startTime: string;
   endTime: string;
