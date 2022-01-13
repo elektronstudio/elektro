@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import { EventInstance } from "../types";
+
 type Props = {
   title: string;
   author?: string;
   thumbnail?: string;
-  events?: {
-    startTime: string;
-    endTime: string;
-  }[];
+  events?: EventInstance[];
 };
 
 defineProps<Props>();

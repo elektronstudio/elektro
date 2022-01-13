@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import EButton from "./EButton.vue";
 import EContent from "./EContent.vue";
+import EEventInstance from "./EEventInstance.vue";
+import { EventInstance } from "../types";
 
 type Props = {
   title: string;
   description?: string;
-  events?: {
-    startTime: string;
-    endTime: string;
-  }[];
+  events?: EventInstance[];
 };
 
 const { title, description, events } = defineProps<Props>();
@@ -19,13 +17,12 @@ const { title, description, events } = defineProps<Props>();
     <EContent v-if="description" :content="description" />
     <div v-if="events">
       <!-- Should we make this a separate component? -->
-      <div v-for="event in events" className="instance">
-        <time :datetime="event.startTime">{{ event.startTime }}</time>
-        <EButton size="xs" el="a" color="transparent"
-          >+ Lisa kalendrisse</EButton
-        >
-        <EButton el="a" size="xs" color="accent">→ OSTA PILET</EButton>
-      </div>
+      <EEventInstance
+        v-for="event in events"
+        :start-time="event.startTime"
+        :end-time="event.endTime"
+        :ticket-url="event.ticketUrl"
+      />
     </div>
   </article>
 </template>
@@ -46,20 +43,5 @@ const { title, description, events } = defineProps<Props>();
 
 .EscheduleEvent h3 {
   font-size: var(--text-3xl);
-}
-.instance {
-  display: flex;
-  justify-content: space-between;
-  padding: var(--p-3) 0;
-}
-.instance:not(:last-child) {
-  border-bottom: 1px solid var(--gray-300);
-}
-.instance > article,
-.instance > *:last-child {
-  margin-left: var(--p-3);
-}
-.instance time {
-  margin-right: auto;
 }
 </style>
