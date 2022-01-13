@@ -9,7 +9,7 @@ const { el = "article", content } = defineProps<Props>();
 
 <template>
   <component v-if="content" :is="el" class="EContent" v-html="content" />
-  <component v-else>
+  <component v-else :is="el" class="EContent">
     <slot />
   </component>
 </template>

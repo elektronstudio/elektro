@@ -8,6 +8,7 @@ import {
   EProjectCard,
   EScheduleEvent,
   EEventInstance,
+  EBoxWrapper,
 } from "../lib";
 const navItems = [
   {
@@ -168,4 +169,16 @@ const scheduleEvents = [
     :ticketUrl="eventInstance.ticketUrl"
     layout="vertical"
   />
+
+  <br />
+  <pre>EBoxWrapper</pre>
+  <EBoxWrapper>
+    <EEventInstance
+      v-for="eventInstance in scheduleEvents[0].events"
+      :startTime="eventInstance.startTime"
+      :endTime="eventInstance.endTime"
+      :ticketUrl="eventInstance.ticketUrl"
+      layout="vertical"
+    />
+  </EBoxWrapper>
 </template>
