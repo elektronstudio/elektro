@@ -7,6 +7,7 @@ import {
   EContent,
   EProjectCard,
   EScheduleEvent,
+  EEventInstance,
 } from "../lib";
 const navItems = [
   {
@@ -156,5 +157,13 @@ const scheduleEvents = [
     :title="event.title"
     :description="event.description"
     :events="event.events"
+  />
+
+  <br />
+  <pre>EEventInstance</pre>
+  <EEventInstance
+    :startTime="scheduleEvents[0].events[0].startTime"
+    :endTime="scheduleEvents[0].events[0].endTime"
+    :ticketUrl="scheduleEvents[0].events[0].ticketUrl"
   />
 </template>
