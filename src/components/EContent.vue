@@ -1,13 +1,15 @@
 <script setup lang="ts">
 type Props = {
   el?: "article" | "section" | string;
+  content?: string;
 };
 
-const { el = "article" } = defineProps<Props>();
+const { el = "article", content } = defineProps<Props>();
 </script>
 
 <template>
-  <component :is="el" class="EContent">
+  <component v-if="content" :is="el" class="EContent" v-html="content" />
+  <component v-else>
     <slot />
   </component>
 </template>
@@ -28,7 +30,7 @@ const { el = "article" } = defineProps<Props>();
 }
 .EContent :deep(a):hover {
   border-bottom: none;
-  /* TODO: how to deal with lighter variants for colors, opacity not ideal. Works with dark and light tones tho. */
+  /* @TODO: how to deal with lighter variants for colors, opacity not ideal. Works with dark and light tones tho. */
   opacity: var(--opacity-60);
 }
 .EContent :deep(blockquote) {

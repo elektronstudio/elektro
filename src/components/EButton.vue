@@ -2,7 +2,7 @@
 type Props = {
   size?: "xs" | "sm" | "md" | "lg";
   el?: "button" | "a";
-  color?: "accent" | "gray";
+  color?: "accent" | "gray" | "transparent";
 };
 
 const { size = "md", el = "button" } = defineProps<Props>();
@@ -53,5 +53,10 @@ const { size = "md", el = "button" } = defineProps<Props>();
   background-color: var(--gray-300);
   border-color: var(--gray-300);
   color: var(--bg);
+}
+.EButton.transparent {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--gray-300);
 }
 </style>

@@ -6,6 +6,7 @@ type Props = {
   events?: {
     startTime: string;
     endTime: string;
+    ticketUrl?: string;
   }[];
 };
 
@@ -20,7 +21,7 @@ defineProps<Props>();
     </header>
     <footer v-if="events">
       <p>Järgmine etendus:</p>
-      <!-- TODO: Format time -->
+      <!-- @TODO: Format time -->
       <time :datetime="events[0].startTime">{{ events[0].startTime }}</time>
     </footer>
   </article>
@@ -36,9 +37,9 @@ defineProps<Props>();
   border-radius: var(--rounded-xl);
   overflow: hidden;
   background-color: white;
-  /* TODO: remove this when project layout component ready */
+  /* @TODO: remove this when project layout component ready */
   max-width: 400px;
-  /* TODO: add small (or no hover device) screen variaton */
+  /* @TODO: add small (or no hover device) screen variaton */
 }
 .EProjectCard:hover header,
 .EProjectCard:hover footer {
@@ -47,7 +48,7 @@ defineProps<Props>();
 .EProjectCard:hover .thumbnail {
   mix-blend-mode: difference;
 }
-/* TODO: naming convetion for component internal classes */
+/* @TODO: naming convetion for component internal classes */
 .thumbnail {
   position: absolute;
   width: 100%;
@@ -80,7 +81,7 @@ defineProps<Props>();
 .EProjectCard header h3 {
   font-size: var(--text-3xl);
   line-height: var(--line-height-5xl);
-  /* TODO: Replace with tw margin variable */
+  /* @TODO: Replace with tw margin variable */
   margin-bottom: var(--p-2);
 }
 .EProjectCard footer {
