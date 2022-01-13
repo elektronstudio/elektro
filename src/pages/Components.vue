@@ -124,6 +124,24 @@ const scheduleEvents = [
         freelance photographer and videographer within the artistic community.
       </blockquote>
     </EContent>
+    <EContent size="sm">
+      <p>
+        Content size small.
+        <a href="https://elektron.art" target="_blank">eˉlektron</a> on
+        transdistsiplinaarne etendustkunsti platvorm, mis liidab kaasaegse
+        kunsti, teaduse ja tehnoloogia otsingulisi tegevusi.<br />Ootamatud
+        kunstivormid, lavastused, tekstid, taskuhääling, eksperimendid.
+      </p>
+    </EContent>
+    <EContent size="lg">
+      <p>
+        Content size large.
+        <a href="https://elektron.art" target="_blank">eˉlektron</a> on
+        transdistsiplinaarne etendustkunsti platvorm, mis liidab kaasaegse
+        kunsti, teaduse ja tehnoloogia otsingulisi tegevusi.<br />Ootamatud
+        kunstivormid, lavastused, tekstid, taskuhääling, eksperimendid.
+      </p>
+    </EContent>
 
     <br />
     <pre>EButton</pre>
