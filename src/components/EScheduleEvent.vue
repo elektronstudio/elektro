@@ -34,7 +34,7 @@ const { title, description, events } = defineProps<Props>();
 .EscheduleEvent {
   display: flex;
   flex-direction: column;
-  /* TODO: Remove this */
+  /* @TODO: Remove this */
   max-width: 800px;
 }
 .EscheduleEvent h3,
