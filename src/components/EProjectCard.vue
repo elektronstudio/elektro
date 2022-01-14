@@ -37,8 +37,6 @@ defineProps<Props>();
   border-radius: var(--rounded-xl);
   overflow: hidden;
   background-color: white;
-  /* @TODO: remove this when project layout component ready */
-  max-width: 400px;
   /* @TODO: add small (or no hover device) screen variaton */
 }
 .EProjectCard:hover header,
