@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import ETitle from "../components/ETitle.vue";
-import EProjectCard from "../components/EProjectCard.vue";
 import ArtNav from "../components/ArtNav.vue";
 import EScheduleEvent from "../components/EScheduleEvent.vue";
 
