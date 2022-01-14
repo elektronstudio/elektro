@@ -30,6 +30,7 @@ const { el = "div", color, ratio = "auto" } = defineProps<Props>();
   border: 1px solid var(--gray-300);
   border-radius: var(--rounded-3xl);
   aspect-ratio: v-bind(ratio);
+  color: var(--gray-300);
 }
 .EBox.accent {
   background-color: var(--accent);
