@@ -11,6 +11,7 @@ type Props = {
     | "1 / 2"
     | "2 / 1"
     | "auto";
+  // @TODO: Rethink how to pass colors to components
   color?: "accent" | "gray";
 };
 
