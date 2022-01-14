@@ -60,13 +60,14 @@ const { card } = defineProps<Props>();
   grid-template-columns: 1fr 1fr;
   grid-gap: var(--gap-5);
 }
-
+/* @TODO: Add breakpoints system */
 @media only screen and (min-width: 600px) {
   .EBox.column-4-4,
   .EBox.column-2-4 {
     grid-column: span 4;
   }
 }
+/* @TODO: Add breakpoints system */
 @media only screen and (min-width: 1240px) {
   .EBox.column-2-4 {
     grid-column: span 6;

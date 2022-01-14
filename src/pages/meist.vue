@@ -210,6 +210,7 @@ const data = {
 </template>
 
 <style>
+/* @TODO: Figure out page class naming conventions */
 .Page.About {
   padding: var(--p-5);
 }
@@ -228,6 +229,7 @@ const data = {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+/* @TODO: Add breakpoints system */
 @media only screen and (min-width: 1240px) {
   .Page.About > section {
     grid-template-columns: repeat(8, 1fr);

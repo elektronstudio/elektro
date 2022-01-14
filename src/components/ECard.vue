@@ -46,6 +46,7 @@ defineProps<Props>();
   top: 0;
   left: 0;
   object-fit: cover;
+  /* @TODO: Add transitions vars */
   transition: opacity 0.2s ease-in-out;
 }
 
@@ -55,6 +56,7 @@ defineProps<Props>();
   opacity: var(--opacity-0);
   color: black;
   z-index: 1;
+  /* @TODO: Add transitions vars */
   transition: opacity 0.2s ease-in-out;
 }
 
