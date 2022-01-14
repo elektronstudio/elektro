@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import ETitle from "../components/ETitle.vue";
 import EProjectCard from "../components/EProjectCard.vue";
+import ArtNav from "../components/ArtNav.vue";
+
 const projects = {
   active: [
     {
@@ -82,6 +84,7 @@ const projects = {
 </script>
 
 <template>
+  <ArtNav />
   <main class="Page Projects">
     <section>
       <ETitle el="h2" size="lg">Aktiivsed</ETitle>
