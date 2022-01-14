@@ -205,7 +205,7 @@ const data = {
 }
 .Page.About > section {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--gap-5);
   margin-bottom: var(--gap-12);
 }
@@ -213,6 +213,14 @@ const data = {
   grid-column: 1 / -1;
 }
 /* @TODO: Add breakpoints system */
+@media only screen and (min-width: 600px) {
+  .Page.About > section {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 @media only screen and (min-width: 1240px) {
+  .Page.About > section {
+    grid-template-columns: repeat(8, 1fr);
+  }
 }
 </style>

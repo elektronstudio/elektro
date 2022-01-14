@@ -36,11 +36,13 @@ const { card } = defineProps<Props>();
 </template>
 
 <style scoped>
+.EBox {
+  grid-column: span 2;
+}
 .EBox.column-1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  grid-column: span 2;
 }
 .EBox.column-1-3 {
   display: grid;
@@ -52,12 +54,25 @@ const { card } = defineProps<Props>();
   display: grid;
   grid-template-columns: 2fr 4fr;
   grid-gap: var(--gap-5);
-  grid-column: span 6;
 }
 .EBox.column-4-4 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: var(--gap-5);
-  grid-column: span 8;
+}
+
+@media only screen and (min-width: 600px) {
+  .EBox.column-4-4,
+  .EBox.column-2-4 {
+    grid-column: span 4;
+  }
+}
+@media only screen and (min-width: 1240px) {
+  .EBox.column-2-4 {
+    grid-column: span 6;
+  }
+  .EBox.column-4-4 {
+    grid-column: span 8;
+  }
 }
 </style>
