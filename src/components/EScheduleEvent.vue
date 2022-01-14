@@ -15,7 +15,7 @@ type Props = {
 const { title, description, events } = defineProps<Props>();
 </script>
 <template>
-  <article class="EscheduleEvent">
+  <section class="EscheduleEvent">
     <h3>{{ title }}</h3>
     <EContent v-if="description" :content="description" />
     <div v-if="events">
@@ -27,15 +27,13 @@ const { title, description, events } = defineProps<Props>();
         :ticket-url="event.ticketUrl"
       />
     </div>
-  </article>
+  </section>
 </template>
 
 <style scoped>
 .EscheduleEvent {
   display: flex;
   flex-direction: column;
-  /* @TODO: Remove this */
-  max-width: 800px;
 }
 .EscheduleEvent h3,
 .EscheduleEvent article {

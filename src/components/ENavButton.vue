@@ -8,7 +8,7 @@
 .ENavButton {
   display: inline-flex;
   padding: var(--p-1);
-  border: var(--border-DEFAULT) solid;
+  border: var(--border-DEFAULT) solid var(--gray-500);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   text-transform: uppercase;

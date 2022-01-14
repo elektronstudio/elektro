@@ -5,12 +5,12 @@ import {
   ENav,
   ENavButton,
   EContent,
-  EProjectCard,
   EScheduleEvent,
   EEventInstance,
   EBox,
   ELivePreview,
 } from "../lib";
+import ECard from "../components/ECard.vue";
 const navItems = [
   {
     name: "eˉlektron",
@@ -162,14 +162,17 @@ const scheduleEvents = [
     <ENavButton>About us</ENavButton>
 
     <br />
-    <pre>EProjectCard</pre>
-    <EProjectCard
-      v-for="project in projects"
-      :title="project.title"
-      :author="project.author"
-      :thumbnail="project.thumbnail"
-      :events="project.events"
-    />
+    <pre>ECard</pre>
+    <ECard
+      thumbnail="https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A"
+    >
+      <template #header>
+        <ETitle el="h3" size="lg">Header</ETitle>
+      </template>
+      <template #footer>
+        <ETitle el="h5" size="sm">Footer</ETitle>
+      </template>
+    </ECard>
 
     <br />
     <pre>EScheduleEvent</pre>

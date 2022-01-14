@@ -24,8 +24,7 @@ const { el = "article", size = "md", content } = defineProps<Props>();
 <style scoped>
 .EContent > :deep(*:not(:last-child)) {
   /* Is this the correct TW variable? */
-  /* Also? */
-  margin-bottom: var(--gap-3);
+  margin-bottom: var(--gap-6);
 }
 .EContent :deep(p) {
   font-size: var(--text-base);
@@ -64,8 +63,13 @@ const { el = "article", size = "md", content } = defineProps<Props>();
 .EContent :deep(h1),
 .EContent :deep(h2),
 .EContent :deep(h3) {
-  margin-top: var(--gap-2);
+  line-height: var(--line-height-5xl);
   font-size: var(--text-3xl);
+}
+.EContent :deep(h1):not(:first-child),
+.EContent :deep(h2):not(:first-child),
+.EContent :deep(h3):not(:first-child) {
+  margin-top: var(--gap-2);
 }
 .EContent :deep(h4),
 .EContent :deep(h5),
