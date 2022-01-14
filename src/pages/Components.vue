@@ -9,6 +9,7 @@ import {
   EScheduleEvent,
   EEventInstance,
   EBox,
+  ELivePreview,
 } from "../lib";
 const navItems = [
   {
@@ -189,6 +190,15 @@ const scheduleEvents = [
     <EBox color="gray" ratio="1 / 1">
       <ETitle el="h3" size="md">Box wrapper gray colored</ETitle>
     </EBox>
+
+    <br />
+    <pre>ELivePreview</pre>
+    <ELivePreview
+      title="Hundid"
+      thumbnail="https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A"
+      ticketUrl="https://www.eventbrite.com/e/hundid-tickets-53907988984"
+      startTime="00:12:44"
+    />
   </div>
 </template>
 
