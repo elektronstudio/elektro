@@ -1,15 +1,22 @@
 <script setup lang="ts">
 type Props = {
   el?: "article" | "section" | string;
+  size?: "sm" | "md" | "lg";
   content?: string;
 };
 
-const { el = "article", content } = defineProps<Props>();
+const { el = "article", size = "md", content } = defineProps<Props>();
 </script>
 
 <template>
-  <component v-if="content" :is="el" class="EContent" v-html="content" />
-  <component v-else :is="el" class="EContent">
+  <component
+    v-if="content"
+    :is="el"
+    :class="size"
+    class="EContent"
+    v-html="content"
+  />
+  <component v-else :is="el" :class="size" class="EContent">
     <slot />
   </component>
 </template>
@@ -23,6 +30,14 @@ const { el = "article", content } = defineProps<Props>();
 .EContent :deep(p) {
   font-size: var(--text-base);
   line-height: var(--line-height-sm);
+}
+.EContent.sm :deep(p) {
+  font-size: var(--text-xs);
+}
+.EContent.lg :deep(p) {
+  font-size: var(--text-3xl);
+  font-family: font-title-medium, sans-serif;
+  line-height: var(--line-height-xs);
 }
 .EContent :deep(a) {
   border-bottom: 1px solid;
