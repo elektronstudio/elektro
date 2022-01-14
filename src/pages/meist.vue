@@ -2,6 +2,7 @@
 import ArtNav from "../components/ArtNav.vue";
 import ETitle from "../components/ETitle.vue";
 import EAboutPageCard from "../components/EAboutPageCard.vue";
+import ETeamCard from "../components/ETeamCard.vue";
 
 type Data = {
   blocks: {
@@ -195,6 +196,15 @@ const data = {
     <section v-for="block in data.blocks">
       <ETitle el="h2" size="lg">{{ block.title }}</ETitle>
       <EAboutPageCard v-for="card in block.items" :card="card" />
+    </section>
+    <section>
+      <ETitle el="h2" size="lg">Team</ETitle>
+      <ETeamCard
+        v-for="card in data.people"
+        :name="card.name"
+        :thumbnail="card.thumbnail"
+        :content="card.content"
+      />
     </section>
   </main>
 </template>
