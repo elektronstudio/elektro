@@ -7,6 +7,7 @@ export { default as EContent } from "./components/EContent.vue";
 export { default as EProjectCard } from "./components/EProjectCard.vue";
 export { default as EScheduleEvent } from "./components/EScheduleEvent.vue";
 export { default as EEventInstance } from "./components/EEventInstance.vue";
+export { default as EBox } from "./components/EBox.vue";
 
 import "./styles/vars.css";
 import "./styles/reset.css";
