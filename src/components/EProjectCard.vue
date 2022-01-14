@@ -45,6 +45,8 @@ defineProps<Props>();
 }
 .EProjectCard:hover .thumbnail {
   mix-blend-mode: difference;
+  filter: blur(10px);
+  opacity: var(--opacity-60);
 }
 /* @TODO: naming convetion for component internal classes */
 .thumbnail {
