@@ -59,6 +59,7 @@ const { el = "article", size = "md", content } = defineProps<Props>();
 }
 .EContent :deep(small) {
   font-size: var(--text-xs);
+  line-height: var(--line-height-xs);
 }
 .EContent :deep(h1),
 .EContent :deep(h2),
