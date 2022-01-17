@@ -10,6 +10,7 @@ export { default as EEventInstance } from "./components/EEventInstance.vue";
 export { default as EBox } from "./components/EBox.vue";
 export { default as ELivePreview } from "./components/ELivePreview.vue";
 export { default as EDetailsList } from "./components/EDetailsList.vue";
+export { default as EPressItems } from "./components/EPressItems.vue";
 
 import "./styles/vars.css";
 import "./styles/reset.css";
