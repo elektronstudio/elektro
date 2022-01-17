@@ -1,7 +1,7 @@
 <!-- @TODO: better component naming -->
 <script setup lang="ts">
 type Props = {
-  el?: "div" | "article" | "section" | string;
+  el?: "div" | "article" | "section" | "aside" | string;
   ratio?:
     | "16 / 9"
     | "4 / 3"
