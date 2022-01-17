@@ -5,7 +5,6 @@ type Props = {
   items: {
     title: string;
     link: string;
-    // @TODO: Naming description?
     description: string;
   }[];
 };
