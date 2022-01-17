@@ -1,6 +1,6 @@
 <!-- @TODO: temporary component, remove this -->
 <script setup lang="ts">
-import { ETitle, ENav } from "../lib";
+import { ENav } from "../lib";
 
 const navItems = [
   {
