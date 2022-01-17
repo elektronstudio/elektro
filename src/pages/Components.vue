@@ -9,6 +9,7 @@ import {
   EEventInstance,
   EBox,
   ELivePreview,
+  EDetailsList,
 } from "../lib";
 import ECard from "../components/ECard.vue";
 const navItems = [
@@ -59,6 +60,59 @@ const scheduleEvents = [
         ticketUrl: "https://www.eventbrite.com/e/hundid-tickets-53907988984",
       },
     ],
+  },
+];
+
+const productionDetails = [
+  {
+    detail: "Etenduse pikkus",
+    value: "~50min",
+  },
+  {
+    detail: "Lavastaja",
+    value: "Taavet Jansen",
+  },
+  {
+    detail: "Koreograaf",
+    value: "Liis Vares",
+  },
+  {
+    detail: "Dramaturg",
+    value: "Tõnis Parksepp",
+  },
+  {
+    detail: "Videokunstnik",
+    value: "Alis Mäesalu",
+  },
+  {
+    detail: "Valguskunstnik",
+    value: "Fredi Karu",
+  },
+  {
+    detail: "Heli",
+    value: "Liisa Hirch, Hendrik Kaljujärv",
+  },
+  {
+    detail: "Näitlejad",
+    value: "Marion Tammet ja Anne Türnpu",
+  },
+  {
+    detail: "Stilist",
+    value: "Alissa Šnaider",
+  },
+  {
+    detail: "Tänud",
+    value:
+      "Ahti Lill, Kätlin Sumberg, EKA doktorikool, TÜ Viljandi Kultuuriakadeemia, Peeter Jalakas, Raivo Kelomees, Jürgen Volmer, Anni Parksepp",
+  },
+
+  {
+    detail: "Produtsent",
+    value: "eˉlektron",
+  },
+  {
+    detail: "Toetajad",
+    value: "Eesti Kultuurkapital",
   },
 ];
 </script>
@@ -220,6 +274,10 @@ const scheduleEvents = [
       ticketUrl="https://www.eventbrite.com/e/hundid-tickets-53907988984"
       startTime="00:12:44"
     />
+
+    <br />
+    <pre>EDetailsList</pre>
+    <EDetailsList :details="productionDetails" />
   </div>
 </template>
 
