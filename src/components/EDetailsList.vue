@@ -18,7 +18,7 @@ const { details } = defineProps<Props>();
   </ul>
 </template>
 
-<style>
+<style scoped>
 .EDetailsList {
   color: var(--gray-300);
   font-size: var(--text-xs);
