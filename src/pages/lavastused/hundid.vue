@@ -135,7 +135,7 @@ const {
       </EBox>
       <EBox class="SideContent" el="aside">
         <template v-if="eventInstances">
-          <ETitle el="h3">Etendused</ETitle>
+          <ETitle el="h3" size="lg">Etendused</ETitle>
           <EEventInstance
             v-for="event in eventInstances"
             layout="vertical"
@@ -145,7 +145,7 @@ const {
           />
         </template>
         <template v-if="press">
-          <ETitle el="h3">Press</ETitle>
+          <ETitle el="h3" size="lg">Press</ETitle>
           <EPressItems :items="press" />
         </template>
       </EBox>
@@ -181,6 +181,7 @@ const {
 
 .Page.SingleProduction header h4 {
   grid-area: subtitle;
+  align-self: end;
 }
 
 .Page.SingleProduction header .Description {
@@ -196,6 +197,12 @@ const {
 .SideContent {
   grid-area: side;
   align-self: start;
+}
+.SideContent h3 {
+  margin-bottom: var(--p-6);
+}
+.SideContent h3:not(:first-child) {
+  margin-top: var(--p-8);
 }
 
 /* @TODO: Add breakpoints system */
