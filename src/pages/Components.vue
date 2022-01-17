@@ -10,6 +10,7 @@ import {
   EBox,
   ELivePreview,
   EDetailsList,
+  EPressItems,
 } from "../lib";
 import ECard from "../components/ECard.vue";
 const navItems = [
@@ -113,6 +114,19 @@ const productionDetails = [
   {
     detail: "Toetajad",
     value: "Eesti Kultuurkapital",
+  },
+];
+
+const pressItems = [
+  {
+    title: "Kuidas ma festivalil käisin",
+    link: "https://neti.ee",
+    description: "Urmas Lüüs – Sirp 17.04.2020",
+  },
+  {
+    title: "Tähendusloome tagurpidikäik",
+    link: "https://neti.ee",
+    description: "Kiwa – Sirp 17.04.2020",
   },
 ];
 </script>
@@ -278,6 +292,10 @@ const productionDetails = [
     <br />
     <pre>EDetailsList</pre>
     <EDetailsList :details="productionDetails" />
+
+    <br />
+    <pre>EPressItems</pre>
+    <EPressItems :items="pressItems" />
   </div>
 </template>
 
