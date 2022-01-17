@@ -191,7 +191,7 @@ const {
 .MainContent {
   grid-area: main;
   display: grid;
-  grid-template-columns: 2fr 3fr;
+  grid-template-columns: 1fr;
   grid-gap: var(--gap-5);
 }
 .SideContent {
@@ -218,7 +218,10 @@ const {
   }
 
   .Page.SingleProduction main {
-    grid-template-areas: "main main side side";
+    grid-template-areas: "main main main main" "side side side side";
+  }
+  .MainContent {
+    grid-template-columns: 2fr 3fr;
   }
 }
 @media only screen and (min-width: 1240px) {
