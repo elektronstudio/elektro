@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ETitle from "../components/ETitle.vue";
-import EProjectCard from "../components/EProjectCard.vue";
+import EProductionCard from "../components/EProductionCard.vue";
 import ArtNav from "../components/ArtNav.vue";
 
 const projects = {
@@ -88,7 +88,7 @@ const projects = {
   <main class="Page Projects">
     <section>
       <ETitle el="h2" size="lg">Aktiivsed</ETitle>
-      <EProjectCard
+      <EProductionCard
         v-for="project in projects.active"
         :title="project.title"
         :author="project.author"
@@ -98,7 +98,7 @@ const projects = {
     </section>
     <section>
       <ETitle el="h2" size="lg">Arhiiv</ETitle>
-      <EProjectCard
+      <EProductionCard
         v-for="project in projects.archived"
         :title="project.title"
         :author="project.author"
