@@ -326,7 +326,8 @@ const pressItems = [
 
     <br />
     <pre>ERange</pre>
-    <ERange label="Points (between 0 and 10):" :min="0" :max="100" showOutput />
+    <ELabel forInput="range" label="Range slider (0 to 100)" />
+    <ERange :min="0" :max="100" showOutput />
   </div>
 </template>
 

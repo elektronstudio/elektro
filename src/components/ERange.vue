@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import ELabel from "./ELabel.vue";
 import EInput from "./EInput.vue";
 
 type Props = {
-  label?: string;
   value?: number;
   min?: number;
   max?: number;
@@ -14,7 +12,6 @@ type Props = {
 };
 
 const {
-  label,
   value = 0,
   min = 0,
   max = 10,
@@ -29,7 +26,6 @@ const backgroundSize = computed(
 </script>
 <template>
   <div class="ERange">
-    <!-- <ELabel :label="label" /> -->
     <span v-if="showMinMax && !showOutput" class="min">{{ min }}</span>
     <input
       type="range"
@@ -87,7 +83,6 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: none;
   border: none;
   outline: none;
-  transition: background 0.3s ease-in-out;
 }
 
 input[type="range"]::-moz-range-thumb {
