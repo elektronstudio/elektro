@@ -2,22 +2,34 @@
 type Props = {
   label?: string;
   disabled?: boolean;
+  forInput?: string;
   layout?: "horizontal" | "vertical";
 };
 
-const { label, layout = "vertical", disabled = false } = defineProps<Props>();
+const {
+  label,
+  forInput,
+  layout = "vertical",
+  disabled = false,
+} = defineProps<Props>();
 </script>
 
 <template>
   <label
     v-if="layout === 'vertical'"
     class="ELabel"
+    :for="forInput"
     :class="[layout, disabled ? 'disabled' : '']"
   >
     <span>{{ label }}</span>
     <slot />
   </label>
-  <label v-else class="ELabel" :class="[layout, disabled ? 'disabled' : '']">
+  <label
+    v-else
+    class="ELabel"
+    :for="forInput"
+    :class="[layout, disabled ? 'disabled' : '']"
+  >
     <slot />
     <span>{{ label }}</span>
   </label>
