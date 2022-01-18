@@ -1,20 +1,23 @@
 <script setup lang="ts">
 type Props = {
   placeholder?: string;
-  value?: string;
+  modelValue?: string | number;
   name?: string;
+  type?: "number" | "text";
 };
 
-const { placeholder, value } = defineProps<Props>();
+const { placeholder, modelValue, name, type } = defineProps<Props>();
 </script>
 
 <template>
   <!-- @TODO: Should we add preventDefault? or we do not use keyboard shortcuts in production -->
   <input
     className="EInput"
+    :value="modelValue"
     :placeholder="placeholder"
-    :value="value"
     :name="name"
+    :type="type"
+    @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
   />
 </template>
 

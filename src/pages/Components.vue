@@ -15,6 +15,7 @@ import {
   ELabel,
   ECheckbox,
   ERadio,
+  ERange,
 } from "../lib";
 import ECard from "../components/ECard.vue";
 const navItems = [
@@ -303,10 +304,10 @@ const pressItems = [
 
     <br />
     <pre>EInput</pre>
-    <EInput placeholder="Placeholder value" value="Default input value" />
+    <EInput placeholder="Placeholder value" />
     <EInput placeholder="Disabled input" :disabled="true" />
     <ELabel label="Label for input">
-      <EInput placeholder="Placeholder value" value="Default input value" />
+      <EInput placeholder="Placeholder value" />
     </ELabel>
     <ELabel label="Disabled label for input" :disabled="true">
       <EInput placeholder="Disabled input" :disabled="true" />
@@ -322,6 +323,10 @@ const pressItems = [
     <ERadio label="Radio yes" name="radioButtons" value="yes" />
     <ERadio label="Radio no" name="radioButtons" value="no" />
     <ERadio label="Radio disabled" name="radioButtons" :disabled="true" />
+
+    <br />
+    <pre>ERange</pre>
+    <ERange label="Points (between 0 and 10):" :min="0" :max="100" showOutput />
   </div>
 </template>
 
