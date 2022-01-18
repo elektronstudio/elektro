@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import ELabel from "./ELabel.vue";
 type Props = {
-  value?: boolean;
+  modelValue?: boolean;
   disabled?: boolean;
   label?: string;
 };
 
-const { value } = defineProps<Props>();
+const { modelValue } = defineProps<Props>();
 </script>
 
 <template>
@@ -17,9 +17,20 @@ const { value } = defineProps<Props>();
     layout="horizontal"
     :disabled="disabled"
   >
-    <input type="checkbox" :checked="value" :disabled="disabled" />
+    <input
+      type="checkbox"
+      :checked="modelValue"
+      :disabled="disabled"
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
+    />
   </ELabel>
-  <input v-else type="checkbox" :checked="value" :disabled="disabled" />
+  <input
+    v-else
+    type="checkbox"
+    :checked="modelValue"
+    :disabled="disabled"
+    @input="$emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
+  />
 </template>
 
 <style scoped>

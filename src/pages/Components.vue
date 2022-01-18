@@ -18,6 +18,7 @@ import {
   ERange,
 } from "../lib";
 import ECard from "../components/ECard.vue";
+import { ref } from "vue";
 const navItems = [
   {
     name: "eˉlektron",
@@ -134,6 +135,8 @@ const pressItems = [
     description: "Kiwa – Sirp 17.04.2020",
   },
 ];
+
+const checkboxValue = ref(true);
 </script>
 
 <template>
@@ -315,8 +318,8 @@ const pressItems = [
 
     <br />
     <pre>ECheckbox</pre>
-    <ECheckbox label="Checkbox" :value="false" />
-    <ECheckbox label="Checkbox disabled" :value="false" :disabled="true" />
+    <ECheckbox label="Checkbox" v-model="checkboxValue" />
+    <ECheckbox label="Checkbox disabled" :disabled="true" />
 
     <br />
     <pre>ERadio</pre>
