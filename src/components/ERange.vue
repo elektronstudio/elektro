@@ -3,7 +3,7 @@ import { computed } from "vue";
 import EInput from "./EInput.vue";
 
 type Props = {
-  value?: number;
+  modelValue?: number;
   min?: number;
   max?: number;
   step?: number;
@@ -12,7 +12,7 @@ type Props = {
 };
 
 const {
-  value = 0,
+  modelValue = 0,
   min = 0,
   max = 10,
   step = 1,
@@ -21,7 +21,7 @@ const {
 } = defineProps<Props>();
 
 const backgroundSize = computed(
-  () => ((value - min) * 100) / (max - min) + "% 100%",
+  () => ((modelValue - min) * 100) / (max - min) + "% 100%",
 );
 </script>
 <template>
@@ -34,13 +34,13 @@ const backgroundSize = computed(
       :min="min"
       :max="max"
       :step="step"
-      v-model="value"
+      v-model="modelValue"
       :style="{ backgroundSize }"
     />
     <span v-if="showMinMax && !showOutput" class="max">{{ max }}</span>
     <EInput
       v-if="showOutput && !showMinMax"
-      v-model="value"
+      v-model="modelValue"
       type="number"
       :min="min"
       :max="max"
