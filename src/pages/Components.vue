@@ -14,6 +14,7 @@ import {
   EInput,
   ELabel,
   ECheckbox,
+  ERadio,
 } from "../lib";
 import ECard from "../components/ECard.vue";
 const navItems = [
@@ -314,8 +315,13 @@ const pressItems = [
     <br />
     <pre>ECheckbox</pre>
     <ECheckbox label="Checkbox" :value="false" />
-    <br />
     <ECheckbox label="Checkbox disabled" :value="false" :disabled="true" />
+
+    <br />
+    <pre>ERadio</pre>
+    <ERadio label="Radio yes" name="radioButtons" value="yes" />
+    <ERadio label="Radio no" name="radioButtons" value="no" />
+    <ERadio label="Radio disabled" name="radioButtons" :disabled="true" />
   </div>
 </template>
 

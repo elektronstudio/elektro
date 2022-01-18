@@ -14,6 +14,7 @@ export { default as EPressItems } from "./components/EPressItems.vue";
 export { default as EInput } from "./components/EInput.vue";
 export { default as ELabel } from "./components/ELabel.vue";
 export { default as ECheckbox } from "./components/ECheckbox.vue";
+export { default as ERadio } from "./components/ERadio.vue";
 
 import "./styles/vars.css";
 import "./styles/reset.css";
