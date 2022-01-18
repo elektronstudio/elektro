@@ -1,10 +1,5 @@
 
 :root {
-  --screen-sm: 640px;
-  --screen-md: 768px;
-  --screen-lg: 1024px;
-  --screen-xl: 1280px;
-  --screen-2xl: 1536px;
   --p-0: 0px;
   --p-1: 0.25rem;
   --p-2: 0.5rem;

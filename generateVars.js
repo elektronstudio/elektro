@@ -7,7 +7,6 @@ import config from "tailwindcss/defaultConfig.js";
 import colors from "tailwindcss/colors.js";
 
 const getVars = [
-  ["screens", "screen"],
   ["spacing", "p"],
   ["spacing", "m"],
   ["spacing", "gap"],
