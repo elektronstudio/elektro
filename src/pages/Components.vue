@@ -137,6 +137,8 @@ const pressItems = [
 ];
 
 const checkboxValue = ref(true);
+const radioValue = ref("yes");
+const rangeValue = ref(25);
 </script>
 
 <template>
@@ -323,14 +325,25 @@ const checkboxValue = ref(true);
 
     <br />
     <pre>ERadio</pre>
-    <ERadio label="Radio yes" name="radioButtons" value="yes" />
-    <ERadio label="Radio no" name="radioButtons" value="no" />
+    <ERadio
+      label="Radio yes"
+      name="radioButtons"
+      value="yes"
+      v-model="radioValue"
+    />
+    <ERadio
+      label="Radio no"
+      name="radioButtons"
+      value="no"
+      v-model="radioValue"
+    />
     <ERadio label="Radio disabled" name="radioButtons" :disabled="true" />
+    <p>Radio value: {{ radioValue }}</p>
 
     <br />
     <pre>ERange</pre>
     <ELabel forInput="range" label="Range slider (0 to 100)" />
-    <ERange :min="0" :max="100" showOutput />
+    <ERange :min="0" :max="100" v-model="rangeValue" showOutput />
   </div>
 </template>
 

@@ -1,13 +1,24 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import ELabel from "./ELabel.vue";
 type Props = {
   value?: string;
+  modelValue?: string;
   name?: string;
   label?: string;
   disabled?: boolean;
 };
 
-const { value, name, label, disabled = false } = defineProps<Props>();
+const { modelValue, name, label, disabled = false } = defineProps<Props>();
+
+// const model = computed({
+//   get() {
+//     return modelValue
+//   },
+//   set(value) {
+//     $emit('update:modelValue', value)
+//   }
+// })
 </script>
 
 <template>
@@ -18,9 +29,23 @@ const { value, name, label, disabled = false } = defineProps<Props>();
     layout="horizontal"
     :disabled="disabled"
   >
-    <input type="radio" :name="name" :value="value" :disabled="disabled" />
+    <!-- @TODO: modelValue does not work like this -->
+    <input
+      type="radio"
+      :name="name"
+      :disabled="disabled"
+      :value="value"
+      v-model="modelValue"
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+    />
   </ELabel>
-  <input v-else type="radio" :name="name" :value="value" :disabled="disabled" />
+  <input
+    v-else
+    type="radio"
+    :name="name"
+    :value="modelValue"
+    :disabled="disabled"
+  />
 </template>
 
 <style scoped>
