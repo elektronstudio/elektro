@@ -1,18 +1,23 @@
 <script setup lang="ts">
 type Props = {
   label?: string;
+  disabled?: boolean;
   layout?: "horizontal" | "vertical";
 };
 
-const { label, layout = "vertical" } = defineProps<Props>();
+const { label, layout = "vertical", disabled = false } = defineProps<Props>();
 </script>
 
 <template>
-  <label v-if="layout === 'vertical'" class="ELabel" :class="layout">
+  <label
+    v-if="layout === 'vertical'"
+    class="ELabel"
+    :class="[layout, disabled ? 'disabled' : '']"
+  >
     <span>{{ label }}</span>
     <slot />
   </label>
-  <label v-else class="ELabel" :class="layout">
+  <label v-else class="ELabel" :class="[layout, disabled ? 'disabled' : '']">
     <slot />
     <span>{{ label }}</span>
   </label>
@@ -32,5 +37,9 @@ const { label, layout = "vertical" } = defineProps<Props>();
 }
 .ELabel.horizontal span {
   margin-left: var(--p-1);
+}
+.ELabel.disabled span {
+  color: var(--gray-500);
+  cursor: not-allowed;
 }
 </style>
