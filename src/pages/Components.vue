@@ -303,11 +303,12 @@ const pressItems = [
     <br />
     <pre>EInput</pre>
     <EInput placeholder="Placeholder value" value="Default input value" />
-
-    <br />
-    <pre>ELabel with EInput</pre>
+    <EInput placeholder="Disabled input" :disabled="true" />
     <ELabel label="Label for input">
       <EInput placeholder="Placeholder value" value="Default input value" />
+    </ELabel>
+    <ELabel label="Disabled label for input" :disabled="true">
+      <EInput placeholder="Disabled input" :disabled="true" />
     </ELabel>
 
     <br />
