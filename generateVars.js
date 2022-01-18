@@ -8,6 +8,7 @@ import colors from "tailwindcss/colors.js";
 
 const getVars = [
   ["spacing", "p"],
+  ["spacing", "m"],
   ["spacing", "gap"],
   ["fontSize", "text", (a) => a[0]],
   ["fontSize", "text", (a) => a[0]],
@@ -28,7 +29,7 @@ const toCssVars = (key, name, acc = (a) => a) =>
   Object.entries(source[key])
     .map(
       ([varKey, varValue]) =>
-        `  --${name}-${varKey.replace(".", "\\.")}: ${acc(varValue)};`
+        `  --${name}-${varKey.replace(".", "\\.")}: ${acc(varValue)};`,
     )
     .join("\n");
 
@@ -46,7 +47,7 @@ const toJsonVars = (key, name, acc = (a) => a) => {
       Object.entries(source[key]).map(([varKey, varValue]) => [
         `--${name}-${varKey.replace(".", "\\.")}`,
         acc(varValue),
-      ])
+      ]),
     ),
   ];
 };
@@ -57,5 +58,5 @@ await writeFile("./src/styles/vars.css", cssOutput);
 await writeFile("./src/styles/vars.json", JSON.stringify(jsonVars, null, 2));
 await copyFile(
   "./node_modules/tailwindcss/src/css/preflight.css",
-  "./src/styles/reset.css"
+  "./src/styles/reset.css",
 );

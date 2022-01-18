@@ -35,7 +35,7 @@ const { items } = defineProps<Props>();
 
 .EPressItems a {
   padding-top: var(--p-3);
-  margin-bottom: var(--p-3);
+  margin-bottom: var(--m-3);
   border-top: 1px solid var(--gray-500);
 }
 .EPressItems a:hover > * {

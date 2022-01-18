@@ -38,8 +38,8 @@ const { title, description, events } = defineProps<Props>();
 .EscheduleEvent h3,
 .EscheduleEvent article {
   color: var(--gray-300);
-  max-width: 60ch;
-  margin-bottom: var(--p-3);
+  max-width: 60ch; /* TODO convert to var(--w-prose) */
+  margin-bottom: var(--m-3);
 }
 
 .EscheduleEvent h3 {

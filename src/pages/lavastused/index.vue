@@ -118,7 +118,7 @@ const projects = {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: var(--gap-5);
-  margin-bottom: var(--p-10);
+  margin-bottom: var(--m-10);
 }
 /* @TODO: Add breakpoints system */
 @media only screen and (min-width: 600px) {

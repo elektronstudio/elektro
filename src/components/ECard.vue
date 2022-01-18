@@ -62,6 +62,6 @@ defineProps<Props>();
 
 .ECard header {
   flex-direction: column;
-  margin-bottom: var(--p-4);
+  margin-bottom: var(--m-4);
 }
 </style>

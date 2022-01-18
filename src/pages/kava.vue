@@ -91,7 +91,7 @@ const scheduleEvents = [
   padding: var(--p-5);
 }
 .Page.Projects > section {
-  margin-bottom: var(--gap-12);
+  margin-bottom: var(--m-12);
 }
 /* @TODO: Add breakpoints system */
 @media only screen and (min-width: 1240px) {
@@ -100,7 +100,7 @@ const scheduleEvents = [
   }
   .Page.Projects > section {
     grid-column: 4 / -1;
-    margin-bottom: var(--gap-24);
+    margin-bottom: var(--m-24);
   }
 }
 </style>
