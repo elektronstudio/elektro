@@ -29,10 +29,14 @@ const { items } = defineProps<Props>();
   flex-direction: column;
 }
 
+.EPressItems h4 {
+  color: var(--fg);
+}
+
 .EPressItems a {
-  border-top: 1px solid var(--gray-300);
   padding-top: var(--p-3);
   margin-bottom: var(--p-3);
+  border-top: 1px solid var(--gray-500);
 }
 .EPressItems a:hover > * {
   color: var(--gray-300);

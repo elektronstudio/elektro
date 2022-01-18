@@ -30,7 +30,7 @@ const { details } = defineProps<Props>();
 }
 .EDetailsList li span:first-child {
   display: inline-block;
-  min-width: 20ch;
-  width: 20ch;
+  min-width: 16ch;
+  width: 16ch;
 }
 </style>

@@ -209,7 +209,7 @@ const data = {
   </main>
 </template>
 
-<style>
+<style scoped>
 /* @TODO: Figure out page class naming conventions */
 .Page.About {
   padding: var(--p-5);

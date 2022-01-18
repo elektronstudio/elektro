@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import ETitle from "../components/ETitle.vue";
-import EProductionCard from "../components/EProductionCard.vue";
-import ArtNav from "../components/ArtNav.vue";
+import ETitle from "../../components/ETitle.vue";
+import EProductionCard from "../../components/EProductionCard.vue";
+import ArtNav from "../../components/ArtNav.vue";
 
 const projects = {
   active: [
@@ -109,7 +109,7 @@ const projects = {
   </main>
 </template>
 
-<style>
+<style scoped>
 .Page.Projects {
   display: grid;
   padding: var(--p-5);

@@ -35,6 +35,7 @@ const { startTime, ticketUrl, layout = "horizontal" } = defineProps<Props>();
 .EEventInstance {
   display: flex;
   padding: var(--p-3) 0;
+  border-top: 1px solid var(--gray-500);
 }
 .EEventInstance.horizontal {
   justify-content: space-between;
@@ -50,7 +51,7 @@ const { startTime, ticketUrl, layout = "horizontal" } = defineProps<Props>();
   display: flex;
   gap: var(--gap-3);
 }
-.EEventInstance:not(:last-child) {
-  border-bottom: 1px solid var(--gray-300);
+.EEventInstance time {
+  color: var(--fg);
 }
 </style>

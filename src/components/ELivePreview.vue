@@ -36,7 +36,7 @@ const countDown = startTime;
   </div>
 </template>
 
-<style>
+<style scoped>
 .ELivePreview {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -84,7 +84,7 @@ const scheduleEvents = [
   </main>
 </template>
 
-<style>
+<style scoped>
 .Page.Projects {
   display: grid;
   grid-template-columns: 1fr;
