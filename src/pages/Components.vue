@@ -13,6 +13,7 @@ import {
   EPressItems,
   EInput,
   ELabel,
+  ECheckbox,
 } from "../lib";
 import ECard from "../components/ECard.vue";
 const navItems = [
@@ -308,6 +309,12 @@ const pressItems = [
     <ELabel label="Label for input">
       <EInput placeholder="Placeholder value" value="Default input value" />
     </ELabel>
+
+    <br />
+    <pre>ECheckbox</pre>
+    <ECheckbox label="Checkbox" :value="false" />
+    <br />
+    <ECheckbox label="Checkbox disabled" :value="false" :disabled="true" />
   </div>
 </template>
 
