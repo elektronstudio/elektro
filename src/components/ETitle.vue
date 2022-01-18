@@ -26,7 +26,7 @@ const { size = "md", el } = defineProps<Props>();
   line-height: var(--line-height-5xl);
 }
 .ETitle.xs {
-  font-family: font-body-55rg, sans-serif;
+  font-family: font-body-55, sans-serif;
   font-size: var(--text-base);
   font-weight: normal;
   line-height: var(--line-height-sm);
