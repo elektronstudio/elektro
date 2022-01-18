@@ -10,7 +10,13 @@ const { value } = defineProps<Props>();
 </script>
 
 <template>
-  <ELabel v-if="label" class="ECheckbox" :label="label" layout="horizontal">
+  <ELabel
+    v-if="label"
+    class="ECheckbox"
+    :label="label"
+    layout="horizontal"
+    :disabled="disabled"
+  >
     <input type="checkbox" :checked="value" :disabled="disabled" />
   </ELabel>
   <input v-else type="checkbox" :checked="value" :disabled="disabled" />
@@ -46,7 +52,7 @@ input:hover {
   color: var(--gray-200);
 }
 input:disabled {
-  color: var(--gray-300);
+  color: var(--gray-500);
   cursor: not-allowed;
 }
 </style>
