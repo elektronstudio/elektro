@@ -11,6 +11,7 @@ import {
   ELivePreview,
   EDetailsList,
   EPressItems,
+  EInput,
 } from "../lib";
 import ECard from "../components/ECard.vue";
 const navItems = [
@@ -296,6 +297,10 @@ const pressItems = [
     <br />
     <pre>EPressItems</pre>
     <EPressItems :items="pressItems" />
+
+    <br />
+    <pre>EInput</pre>
+    <EInput placeholder="Placeholder value" value="Default input value" />
   </div>
 </template>
 

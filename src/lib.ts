@@ -11,6 +11,8 @@ export { default as EBox } from "./components/EBox.vue";
 export { default as ELivePreview } from "./components/ELivePreview.vue";
 export { default as EDetailsList } from "./components/EDetailsList.vue";
 export { default as EPressItems } from "./components/EPressItems.vue";
+export { default as EInput } from "./components/EInput.vue";
+export { default as ELabel } from "./components/ELabel.vue";
 
 import "./styles/vars.css";
 import "./styles/reset.css";
