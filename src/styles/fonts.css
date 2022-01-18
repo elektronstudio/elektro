@@ -8,9 +8,9 @@
   font-display: swap;
 }
 @font-face {
-  font-family: "font-body-55rg";
-  src: url("/fonts/font-body-55rg.woff2") format("woff2"),
-    url("/fonts/font-body-55rg.woff") format("woff");
+  font-family: "font-body-55";
+  src: url("/fonts/font-body-55.woff2") format("woff2"),
+    url("/fonts/font-body-55.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
