@@ -38,8 +38,7 @@ defineProps<Props>();
   text-transform: uppercase;
 }
 .ECard header h3 {
-  /* @TODO: Replace with tw margin variable */
-  margin-bottom: var(--p-2);
+  margin-bottom: var(--m-2);
 }
 .ECard footer {
   justify-content: space-between;

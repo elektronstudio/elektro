@@ -218,7 +218,7 @@ const data = {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--gap-5);
-  margin-bottom: var(--gap-12);
+  margin-bottom: var(--m-12);
 }
 .Page.About > section h2 {
   grid-column: 1 / -1;

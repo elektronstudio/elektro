@@ -199,10 +199,10 @@ const {
   align-self: start;
 }
 .SideContent h3 {
-  margin-bottom: var(--p-6);
+  margin-bottom: var(--m-6);
 }
 .SideContent h3:not(:first-child) {
-  margin-top: var(--p-8);
+  margin-top: var(--m-8);
 }
 
 /* @TODO: Add breakpoints system */
