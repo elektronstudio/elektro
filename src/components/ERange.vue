@@ -20,6 +20,17 @@ const {
   showOutput,
 } = defineProps<Props>();
 
+const emit = defineEmits<{
+  (e: "update:modelValue", value: number): void; // add correct value type when you know it
+}>();
+
+const inputValue = computed({
+  get: () => modelValue,
+  set: (value) => {
+    emit("update:modelValue", value);
+  },
+});
+
 const backgroundSize = computed(
   () => ((modelValue - min) * 100) / (max - min) + "% 100%",
 );
@@ -34,7 +45,7 @@ const backgroundSize = computed(
       :min="min"
       :max="max"
       :step="step"
-      v-model="modelValue"
+      v-model="inputValue"
       :style="{ backgroundSize }"
     />
     <span v-if="showMinMax && !showOutput" class="max">{{ max }}</span>
