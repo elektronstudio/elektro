@@ -140,6 +140,7 @@ const inputValue = ref("I'm an input");
 const checkboxValue = ref(true);
 const radioValue = ref("yes");
 const rangeValue = ref(25);
+const rangeValue2 = ref(25);
 </script>
 
 <template>
@@ -345,6 +346,7 @@ const rangeValue = ref(25);
     <pre>ERange</pre>
     <ELabel forInput="range" label="Range slider (0 to 100)" />
     <ERange :min="0" :max="100" v-model="rangeValue" showOutput />
+    <ERange :min="0" :max="200" :step="20" v-model="rangeValue2" showMinMax />
   </div>
 </template>
 
