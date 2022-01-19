@@ -12,7 +12,7 @@ type Props = {
 const { modelValue = "", name, label, disabled = false } = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: any): void; // add correct value type when you know it
+  (e: "update:modelValue", value: string): void; // add correct value type when you know it
 }>();
 
 const inputValue = computed({
