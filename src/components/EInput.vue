@@ -1,4 +1,5 @@
-<script setup lang="ts">
+<script setup lang="ts">import { computed } from 'vue';
+
 type Props = {
   placeholder?: string;
   modelValue?: string | number;
@@ -6,18 +7,28 @@ type Props = {
   type?: "number" | "text";
 };
 
-const { placeholder, modelValue, name, type } = defineProps<Props>();
+const { modelValue = "", placeholder, name, type } = defineProps<Props>();
+
+const emit = defineEmits<{
+  (e: "update:modelValue", value: string | number): void; // add correct value type when you know it
+}>();
+
+const inputValue = computed({
+  get: () => modelValue,
+  set: (value) => {
+    emit("update:modelValue", value);
+  },
+});
 </script>
 
 <template>
   <!-- @TODO: Should we add preventDefault? or we do not use keyboard shortcuts in production -->
   <input
     className="EInput"
-    :value="modelValue"
+    :value="inputValue"
     :placeholder="placeholder"
     :name="name"
     :type="type"
-    @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
   />
 </template>
 

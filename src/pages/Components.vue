@@ -136,6 +136,7 @@ const pressItems = [
   },
 ];
 
+const inputValue = ref("I'm an input");
 const checkboxValue = ref(true);
 const radioValue = ref("yes");
 const rangeValue = ref(25);
@@ -309,7 +310,7 @@ const rangeValue = ref(25);
 
     <br />
     <pre>EInput</pre>
-    <EInput placeholder="Placeholder value" />
+    <EInput placeholder="Placeholder value" v-model="inputValue" />
     <EInput placeholder="Disabled input" :disabled="true" />
     <ELabel label="Label for input">
       <EInput placeholder="Placeholder value" />
