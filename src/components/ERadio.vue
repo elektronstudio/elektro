@@ -9,16 +9,18 @@ type Props = {
   disabled?: boolean;
 };
 
-const { modelValue, name, label, disabled = false } = defineProps<Props>();
+const { modelValue = "", name, label, disabled = false } = defineProps<Props>();
 
-// const model = computed({
-//   get() {
-//     return modelValue
-//   },
-//   set(value) {
-//     $emit('update:modelValue', value)
-//   }
-// })
+const emit = defineEmits<{
+  (e: "update:modelValue", value: any): void; // add correct value type when you know it
+}>();
+
+const inputValue = computed({
+  get: () => modelValue,
+  set: (value) => {
+    emit("update:modelValue", value);
+  },
+});
 </script>
 
 <template>
@@ -35,15 +37,14 @@ const { modelValue, name, label, disabled = false } = defineProps<Props>();
       :name="name"
       :disabled="disabled"
       :value="value"
-      v-model="modelValue"
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+      v-model="inputValue"
     />
   </ELabel>
   <input
     v-else
     type="radio"
     :name="name"
-    :value="modelValue"
+    :value="inputValue"
     :disabled="disabled"
   />
 </template>
