@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import ELabel from "./ELabel.vue";
 type Props = {
   modelValue?: boolean;
@@ -6,7 +7,18 @@ type Props = {
   label?: string;
 };
 
-const { modelValue } = defineProps<Props>();
+const { modelValue = false } = defineProps<Props>();
+
+const emit = defineEmits<{
+  (e: "update:modelValue", value: boolean): void; // add correct value type when you know it
+}>();
+
+const inputValue = computed({
+  get: () => modelValue,
+  set: (value) => {
+    emit("update:modelValue", value);
+  },
+});
 </script>
 
 <template>
@@ -17,20 +29,9 @@ const { modelValue } = defineProps<Props>();
     layout="horizontal"
     :disabled="disabled"
   >
-    <input
-      type="checkbox"
-      :checked="modelValue"
-      :disabled="disabled"
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
-    />
+    <input type="checkbox" :checked="inputValue" :disabled="disabled" />
   </ELabel>
-  <input
-    v-else
-    type="checkbox"
-    :checked="modelValue"
-    :disabled="disabled"
-    @input="$emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
-  />
+  <input v-else type="checkbox" :checked="inputValue" :disabled="disabled" />
 </template>
 
 <style scoped>
