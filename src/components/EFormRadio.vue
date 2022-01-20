@@ -26,7 +26,7 @@ const inputValue = computed({
 <template>
   <ELabel
     v-if="label"
-    class="ERadio"
+    class="EFormRadio"
     :label="label"
     layout="horizontal"
     :disabled="disabled"
@@ -50,7 +50,7 @@ const inputValue = computed({
 </template>
 
 <style scoped>
-.ERadio.ELabel {
+.EFormRadio.ELabel {
   display: flex;
   align-items: center;
 }

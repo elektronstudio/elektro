@@ -14,7 +14,7 @@ import {
   EInput,
   ELabel,
   EFormCheckbox,
-  ERadio,
+  EFormRadio,
   ERange,
   EFormText,
   EFormNumber,
@@ -348,20 +348,20 @@ const rangeValue2 = ref(25);
     <EFormCheckbox label="Checkbox disabled" :disabled="true" />
 
     <br />
-    <pre>ERadio</pre>
-    <ERadio
+    <pre>EFormRadio</pre>
+    <EFormRadio
       label="Radio yes"
       name="radioButtons"
       value="yes"
       v-model="radioValue"
     />
-    <ERadio
+    <EFormRadio
       label="Radio no"
       name="radioButtons"
       value="no"
       v-model="radioValue"
     />
-    <ERadio label="Radio disabled" name="radioButtons" :disabled="true" />
+    <EFormRadio label="Radio disabled" name="radioButtons" :disabled="true" />
     <p>Radio value: {{ radioValue }}</p>
 
     <br />
