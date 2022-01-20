@@ -7,10 +7,10 @@ type Props = {
   placeholder?: string;
   label?: string;
   modelValue?: string | number;
-  name?: string;
+  fieldId?: string;
 };
 
-const { modelValue = "", placeholder, label, name } = defineProps<Props>();
+const { modelValue = "", placeholder, label, fieldId } = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: string | number): void; // add correct value type when you know it
@@ -29,7 +29,7 @@ const inputValue = computed({
     <EInput
       :placeholder="placeholder"
       v-model="inputValue"
-      :name="name"
+      :fieldId="fieldId"
       type="text"
     />
   </ELabel>
@@ -37,7 +37,7 @@ const inputValue = computed({
     v-else
     :placeholder="placeholder"
     v-model="inputValue"
-    :name="name"
+    :fieldId="fieldId"
     type="text"
   />
 </template>

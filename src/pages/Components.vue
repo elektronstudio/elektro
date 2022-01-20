@@ -348,23 +348,6 @@ const rangeValue2 = ref(25);
     <EFormCheckbox label="Checkbox disabled" :disabled="true" />
 
     <br />
-    <pre>EFormRadio</pre>
-    <EFormRadio
-      label="Radio yes"
-      name="radioButtons"
-      value="yes"
-      v-model="radioValue"
-    />
-    <EFormRadio
-      label="Radio no"
-      name="radioButtons"
-      value="no"
-      v-model="radioValue"
-    />
-    <EFormRadio label="Radio disabled" name="radioButtons" :disabled="true" />
-    <p>Radio value: {{ radioValue }}</p>
-
-    <br />
     <pre>ERange</pre>
     <ELabel forInput="range" label="Range slider (0 to 100)" />
     <ERange :min="0" :max="100" v-model="rangeValue" showOutput />

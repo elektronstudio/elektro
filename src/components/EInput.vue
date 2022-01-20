@@ -6,11 +6,11 @@ type ModelValue = string | number;
 type Props = {
   placeholder?: string;
   modelValue?: ModelValue;
-  name?: string;
+  fieldId?: string;
   type?: "number" | "text";
 };
 
-const { modelValue = "", placeholder, name, type } = defineProps<Props>();
+const { modelValue = "", placeholder, fieldId, type } = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: ModelValue): void;
@@ -30,7 +30,7 @@ const inputValue = computed({
     className="EInput"
     v-model="inputValue"
     :placeholder="placeholder"
-    :name="name"
+    :fieldId="fieldId"
     :type="type"
   />
 </template>
