@@ -1,14 +1,26 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import ELabel from "./ELabel.vue";
+import randomString from "../utils/randomString";
+
 type Props = {
   modelValue?: string;
+  name: string;
   options: string[];
-  fieldId?: string;
   disabled?: boolean;
 };
 
-const { modelValue = "", fieldId, disabled = false } = defineProps<Props>();
+const {
+  modelValue = "",
+  name,
+  options,
+  disabled = false,
+} = defineProps<Props>();
+
+const fieldIds = [] as string[];
+for (let i = 0; i < options.length; i++) {
+  fieldIds.push(randomString());
+}
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: string): void; // add correct value type when you know it
@@ -23,25 +35,23 @@ const inputValue = computed({
 </script>
 
 <template>
-  <ELabel
-    v-for="option in options"
-    class="EFormRadio"
-    :label="option"
-    layout="horizontal"
-    :disabled="disabled"
-  >
+  <div class="EFormRadio" v-for="(option, index) in options">
     <input
       type="radio"
-      :name="fieldId"
+      :name="name"
       :disabled="disabled"
       :value="option"
+      :id="fieldIds[index]"
       v-model="inputValue"
     />
-  </ELabel>
+    <ELabel layout="horizontal" :disabled="disabled" :fieldId="fieldIds[index]">
+      {{ option }}
+    </ELabel>
+  </div>
 </template>
 
 <style scoped>
-.EFormRadio.ELabel {
+.EFormRadio {
   display: flex;
   align-items: center;
 }

@@ -1,42 +1,25 @@
 <script setup lang="ts">
 type Props = {
-  label?: string;
-  disabled?: boolean;
-  forInput?: string;
+  fieldId?: string;
   layout?: "horizontal" | "vertical";
+  disabled?: boolean;
 };
 
-const {
-  label,
-  forInput,
-  layout = "vertical",
-  disabled = false,
-} = defineProps<Props>();
+const { fieldId, layout = "vertical", disabled = false } = defineProps<Props>();
 </script>
 
 <template>
   <label
-    v-if="layout === 'vertical'"
     class="ELabel"
-    :for="forInput"
-    :class="[layout, disabled ? 'disabled' : '']"
-  >
-    <span>{{ label }}</span>
-    <slot />
-  </label>
-  <label
-    v-else
-    class="ELabel"
-    :for="forInput"
+    :for="fieldId"
     :class="[layout, disabled ? 'disabled' : '']"
   >
     <slot />
-    <span>{{ label }}</span>
   </label>
 </template>
 
 <style scoped>
-.ELabel span {
+.ELabel {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   text-transform: uppercase;
@@ -44,13 +27,13 @@ const {
   line-height: 1;
   display: inline-block;
 }
-.ELabel.vertical span {
+.ELabel.vertical {
   margin-bottom: var(--p-1);
 }
-.ELabel.horizontal span {
+.ELabel.horizontal {
   margin-left: var(--p-1);
 }
-.ELabel.disabled span {
+.ELabel.disabled {
   color: var(--gray-500);
   cursor: not-allowed;
 }

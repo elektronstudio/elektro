@@ -1,19 +1,25 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import EInput from "./EInput.vue";
-import ELabel from "./ELabel.vue";
 
 type Props = {
   placeholder?: string;
   label?: string;
-  modelValue?: string | number;
-  fieldId?: string;
+  modelValue?: number;
+  name?: string;
+  disabled?: boolean;
 };
 
-const { modelValue = "", placeholder, label, fieldId } = defineProps<Props>();
+const {
+  modelValue = 0,
+  placeholder,
+  label,
+  name,
+  disabled,
+} = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: string | number): void; // add correct value type when you know it
+  (e: "update:modelValue", value: number): void; // add correct value type when you know it
 }>();
 
 const inputValue = computed({
@@ -25,19 +31,12 @@ const inputValue = computed({
 </script>
 
 <template>
-  <ELabel v-if="label" :label="label">
-    <EInput
-      :placeholder="placeholder"
-      v-model="inputValue"
-      :fieldId="fieldId"
-      type="number"
-    />
-  </ELabel>
   <EInput
-    v-else
-    :placeholder="placeholder"
     v-model="inputValue"
-    :fieldId="fieldId"
+    :name="name"
+    :label="label"
+    :placeholder="placeholder"
+    :disabled="disabled"
     type="number"
   />
 </template>

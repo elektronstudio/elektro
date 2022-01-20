@@ -317,12 +317,12 @@ const rangeValue2 = ref(25);
     <EInput placeholder="Placeholder value" v-model="inputValue" />
     <EInput placeholder="Placeholder value 2" v-model="inputValue" />
     <EInput placeholder="Disabled input" :disabled="true" />
-    <ELabel label="Label for input">
-      <EInput placeholder="Placeholder value" />
-    </ELabel>
-    <ELabel label="Disabled label for input" :disabled="true">
-      <EInput placeholder="Disabled input" :disabled="true" />
-    </ELabel>
+    <EInput label="Label for input" placeholder="Placeholder value" />
+    <EInput
+      label="Disabled label for input"
+      placeholder="Disabled input"
+      :disabled="true"
+    />
 
     <br />
     <pre>EFormText</pre>
@@ -351,12 +351,12 @@ const rangeValue2 = ref(25);
     <pre>EFormRadio</pre>
     <EFormRadio
       :options="['yes', 'no', 'maybe']"
-      fieldId="radioButtons"
+      name="radioButtons"
       v-model="radioValue"
     />
     <EFormRadio
       :options="['yes', 'no', 'maybe']"
-      fieldId="moreRadioButtons"
+      name="moreRadioButtons"
       :disabled="true"
     />
     <p>Radio value: {{ radioValue }}</p>
@@ -364,6 +364,13 @@ const rangeValue2 = ref(25);
     <br />
     <pre>EFormRange</pre>
     <ELabel forInput="range" label="Range slider (0 to 100)" />
+    <EFormRange
+      :min="0"
+      :max="100"
+      v-model="rangeValue"
+      label="Range slider"
+      showOutput
+    />
     <EFormRange :min="0" :max="100" v-model="rangeValue" showOutput />
     <EFormRange
       :min="0"

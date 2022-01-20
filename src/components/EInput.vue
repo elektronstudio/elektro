@@ -1,16 +1,29 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import ELabel from "./ELabel.vue";
+import randomString from "../utils/randomString";
 
 type ModelValue = string | number;
 
 type Props = {
-  placeholder?: string;
   modelValue?: ModelValue;
-  fieldId?: string;
+  name?: string;
+  placeholder?: string;
+  label?: string;
+  disabled?: boolean;
   type?: "number" | "text";
 };
 
-const { modelValue = "", placeholder, fieldId, type } = defineProps<Props>();
+const {
+  modelValue = "",
+  name,
+  placeholder,
+  label,
+  disabled,
+  type,
+} = defineProps<Props>();
+
+const fieldId = randomString();
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: ModelValue): void;
@@ -26,12 +39,17 @@ const inputValue = computed({
 
 <template>
   <!-- @TODO: Should we add preventDef  ault? or we do not use keyboard shortcuts in production -->
+  <ELabel v-if="label" :fieldId="fieldId" :disabled="disabled">
+    {{ label }}
+  </ELabel>
   <input
     className="EInput"
     v-model="inputValue"
     :placeholder="placeholder"
-    :name="fieldId"
+    :name="name"
+    :id="fieldId"
     :type="type"
+    :disabled="disabled"
   />
 </template>
 

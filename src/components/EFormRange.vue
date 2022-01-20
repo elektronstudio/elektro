@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import randomString from "../utils/randomString";
 import EInput from "./EInput.vue";
+import ELabel from "./ELabel.vue";
 
 type Props = {
   modelValue?: number;
+  label?: string;
+  name?: string;
   min?: number;
   max?: number;
   step?: number;
@@ -13,12 +17,16 @@ type Props = {
 
 const {
   modelValue = 0,
+  label,
+  name,
   min = 0,
   max = 10,
   step = 1,
   showMinMax,
   showOutput,
 } = defineProps<Props>();
+
+const fieldId = randomString();
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: number): void; // add correct value type when you know it
@@ -36,25 +44,26 @@ const backgroundSize = computed(
 );
 </script>
 <template>
+  <ELabel v-if="label" :fieldId="fieldId">{{ label }}</ELabel>
   <div class="EFormRange">
     <span v-if="showMinMax && !showOutput" class="min">{{ min }}</span>
     <input
-      type="range"
-      id="points"
-      name="points"
+      v-model="inputValue"
+      :name="name"
       :min="min"
       :max="max"
       :step="step"
-      v-model="inputValue"
+      :id="fieldId"
       :style="{ backgroundSize }"
+      type="range"
     />
     <span v-if="showMinMax && !showOutput" class="max">{{ max }}</span>
     <EInput
       v-if="showOutput && !showMinMax"
       v-model="modelValue"
-      type="number"
       :min="min"
       :max="max"
+      type="number"
     />
   </div>
 </template>
@@ -151,7 +160,7 @@ input[type="range"]::-ms-track {
   border: none;
   background: transparent;
 }
-.EFormRange .EInput {
+.EFormRange :deep(.EInput) {
   margin-left: var(--m-4);
   max-width: 4rem;
 }
