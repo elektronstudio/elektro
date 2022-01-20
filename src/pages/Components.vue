@@ -15,7 +15,7 @@ import {
   ELabel,
   EFormCheckbox,
   EFormRadio,
-  ERange,
+  EFormRange,
   EFormText,
   EFormNumber,
 } from "../lib";
@@ -362,10 +362,16 @@ const rangeValue2 = ref(25);
     <p>Radio value: {{ radioValue }}</p>
 
     <br />
-    <pre>ERange</pre>
+    <pre>EFormRange</pre>
     <ELabel forInput="range" label="Range slider (0 to 100)" />
-    <ERange :min="0" :max="100" v-model="rangeValue" showOutput />
-    <ERange :min="0" :max="200" :step="20" v-model="rangeValue2" showMinMax />
+    <EFormRange :min="0" :max="100" v-model="rangeValue" showOutput />
+    <EFormRange
+      :min="0"
+      :max="200"
+      :step="20"
+      v-model="rangeValue2"
+      showMinMax
+    />
   </div>
 </template>
 

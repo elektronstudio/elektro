@@ -36,7 +36,7 @@ const backgroundSize = computed(
 );
 </script>
 <template>
-  <div class="ERange">
+  <div class="EFormRange">
     <span v-if="showMinMax && !showOutput" class="min">{{ min }}</span>
     <input
       type="range"
@@ -60,17 +60,17 @@ const backgroundSize = computed(
 </template>
 
 <style scoped>
-.ERange {
+.EFormRange {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   width: 100%;
   display: flex;
   align-items: center;
 }
-.ERange .min {
+.EFormRange .min {
   margin-right: var(--m-2);
 }
-.ERange .max {
+.EFormRange .max {
   margin-left: var(--m-2);
 }
 
@@ -151,7 +151,7 @@ input[type="range"]::-ms-track {
   border: none;
   background: transparent;
 }
-.ERange .EInput {
+.EFormRange .EInput {
   margin-left: var(--m-4);
   max-width: 4rem;
 }
