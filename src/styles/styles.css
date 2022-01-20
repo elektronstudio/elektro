@@ -80,7 +80,6 @@ body:after {
 }
 
 ::selection {
-  /* background: var(--accent); */
   color: var(--accent);
-  text-shadow: none;
+  text-shadow: 2px 1px 5px var(--accent);
 }
