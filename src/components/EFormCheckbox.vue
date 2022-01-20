@@ -24,7 +24,7 @@ const inputValue = computed({
 <template>
   <ELabel
     v-if="label"
-    class="ECheckbox"
+    class="EFormCheckbox"
     :label="label"
     layout="horizontal"
     :disabled="disabled"
@@ -35,7 +35,7 @@ const inputValue = computed({
 </template>
 
 <style scoped>
-.ECheckbox.ELabel {
+.EFormCheckbox.ELabel {
   display: flex;
   align-items: center;
 }

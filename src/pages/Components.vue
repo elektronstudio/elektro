@@ -13,7 +13,7 @@ import {
   EPressItems,
   EInput,
   ELabel,
-  ECheckbox,
+  EFormCheckbox,
   ERadio,
   ERange,
   EFormText,
@@ -343,9 +343,9 @@ const rangeValue2 = ref(25);
     />
 
     <br />
-    <pre>ECheckbox</pre>
-    <ECheckbox label="Checkbox" v-model="checkboxValue" />
-    <ECheckbox label="Checkbox disabled" :disabled="true" />
+    <pre>EFormCheckbox</pre>
+    <EFormCheckbox label="Checkbox" v-model="checkboxValue" />
+    <EFormCheckbox label="Checkbox disabled" :disabled="true" />
 
     <br />
     <pre>ERadio</pre>

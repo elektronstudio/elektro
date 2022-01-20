@@ -13,7 +13,7 @@ export { default as EDetailsList } from "./components/EDetailsList.vue";
 export { default as EPressItems } from "./components/EPressItems.vue";
 export { default as EInput } from "./components/EInput.vue";
 export { default as ELabel } from "./components/ELabel.vue";
-export { default as ECheckbox } from "./components/ECheckbox.vue";
+export { default as EFormCheckbox } from "./components/EFormCheckbox.vue";
 export { default as ERadio } from "./components/ERadio.vue";
 export { default as ERange } from "./components/ERange.vue";
 export { default as EFormText } from "./components/EFormText.vue";
