@@ -2,14 +2,13 @@
 import { computed } from "vue";
 import ELabel from "./ELabel.vue";
 type Props = {
-  value?: string;
   modelValue?: string;
-  name?: string;
-  label?: string;
+  options: string[];
+  fieldId?: string;
   disabled?: boolean;
 };
 
-const { modelValue = "", name, label, disabled = false } = defineProps<Props>();
+const { modelValue = "", fieldId, disabled = false } = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: string): void; // add correct value type when you know it
@@ -25,28 +24,20 @@ const inputValue = computed({
 
 <template>
   <ELabel
-    v-if="label"
+    v-for="option in options"
     class="EFormRadio"
-    :label="label"
+    :label="option"
     layout="horizontal"
     :disabled="disabled"
   >
-    <!-- @TODO: modelValue does not work like this -->
     <input
       type="radio"
-      :name="name"
+      :fieldId="fieldId"
       :disabled="disabled"
-      :value="value"
+      :value="option"
       v-model="inputValue"
     />
   </ELabel>
-  <input
-    v-else
-    type="radio"
-    :name="name"
-    :value="inputValue"
-    :disabled="disabled"
-  />
 </template>
 
 <style scoped>
@@ -54,7 +45,7 @@ const inputValue = computed({
   display: flex;
   align-items: center;
 }
-input {
+.EFormRadio input {
   appearance: none;
   background-color: var(--form-background);
   font-family: var(--font-mono);
@@ -67,19 +58,19 @@ input {
   place-items: center;
   border-radius: var(--rounded-full);
 }
-input:checked::before {
+.EFormRadio input:checked::before {
   content: "";
   width: 0.3rem;
   height: 0.3rem;
   background-color: var(--bg);
 }
-input:focus {
+.EFormRadio input:focus {
   outline: 1px solid var(--gray-300);
 }
-input:hover {
+.EFormRadio input:hover {
   color: var(--gray-200);
 }
-input:disabled {
+.EFormRadio input:disabled {
   color: var(--gray-500);
   cursor: not-allowed;
 }
