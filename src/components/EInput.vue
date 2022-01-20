@@ -30,7 +30,7 @@ const inputValue = computed({
     className="EInput"
     v-model="inputValue"
     :placeholder="placeholder"
-    :fieldId="fieldId"
+    :name="fieldId"
     :type="type"
   />
 </template>

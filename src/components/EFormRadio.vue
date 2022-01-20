@@ -32,7 +32,7 @@ const inputValue = computed({
   >
     <input
       type="radio"
-      :fieldId="fieldId"
+      :name="fieldId"
       :disabled="disabled"
       :value="option"
       v-model="inputValue"
