@@ -78,3 +78,9 @@ body:after {
   border: 1px solid var(--gray-500);
   pointer-events: none;
 }
+
+::selection {
+  /* background: var(--accent); */
+  color: var(--accent);
+  text-shadow: none;
+}

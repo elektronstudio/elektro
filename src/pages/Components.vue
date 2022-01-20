@@ -16,6 +16,8 @@ import {
   ECheckbox,
   ERadio,
   ERange,
+  EFormText,
+  EFormNumber,
 } from "../lib";
 import ECard from "../components/ECard.vue";
 import { ref } from "vue";
@@ -137,6 +139,7 @@ const pressItems = [
 ];
 
 const inputValue = ref("I'm an input");
+const numberInputValue = ref(5);
 const checkboxValue = ref(true);
 const radioValue = ref("yes");
 const rangeValue = ref(25);
@@ -312,6 +315,7 @@ const rangeValue2 = ref(25);
     <br />
     <pre>EInput</pre>
     <EInput placeholder="Placeholder value" v-model="inputValue" />
+    <EInput placeholder="Placeholder value 2" v-model="inputValue" />
     <EInput placeholder="Disabled input" :disabled="true" />
     <ELabel label="Label for input">
       <EInput placeholder="Placeholder value" />
@@ -319,6 +323,24 @@ const rangeValue2 = ref(25);
     <ELabel label="Disabled label for input" :disabled="true">
       <EInput placeholder="Disabled input" :disabled="true" />
     </ELabel>
+
+    <br />
+    <pre>EFormText</pre>
+    <EFormText placeholder="EFormText" v-model="inputValue" />
+    <EFormText
+      label="With label"
+      placeholder="EFormText"
+      v-model="inputValue"
+    />
+
+    <br />
+    <pre>EFormNumber</pre>
+    <EFormNumber placeholder="EFormNumber" v-model="numberInputValue" />
+    <EFormNumber
+      label="With label"
+      placeholder="EFormNumber"
+      v-model="numberInputValue"
+    />
 
     <br />
     <pre>ECheckbox</pre>

@@ -1,8 +1,11 @@
-<script setup lang="ts">import { computed } from 'vue';
+<script setup lang="ts">
+import { computed } from "vue";
+
+type ModelValue = string | number;
 
 type Props = {
   placeholder?: string;
-  modelValue?: string | number;
+  modelValue?: ModelValue;
   name?: string;
   type?: "number" | "text";
 };
@@ -10,7 +13,7 @@ type Props = {
 const { modelValue = "", placeholder, name, type } = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: string | number): void; // add correct value type when you know it
+  (e: "update:modelValue", value: ModelValue): void;
 }>();
 
 const inputValue = computed({
@@ -22,10 +25,10 @@ const inputValue = computed({
 </script>
 
 <template>
-  <!-- @TODO: Should we add preventDefault? or we do not use keyboard shortcuts in production -->
+  <!-- @TODO: Should we add preventDef  ault? or we do not use keyboard shortcuts in production -->
   <input
     className="EInput"
-    :value="inputValue"
+    v-model="inputValue"
     :placeholder="placeholder"
     :name="name"
     :type="type"

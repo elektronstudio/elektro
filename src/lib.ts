@@ -16,6 +16,8 @@ export { default as ELabel } from "./components/ELabel.vue";
 export { default as ECheckbox } from "./components/ECheckbox.vue";
 export { default as ERadio } from "./components/ERadio.vue";
 export { default as ERange } from "./components/ERange.vue";
+export { default as EFormText } from "./components/EFormText.vue";
+export { default as EFormNumber } from "./components/EFormNumber.vue";
 
 import "./styles/vars.css";
 import "./styles/reset.css";
