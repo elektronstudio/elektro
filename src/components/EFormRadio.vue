@@ -17,10 +17,9 @@ const {
   disabled = false,
 } = defineProps<Props>();
 
-const fieldIds = [] as string[];
-for (let i = 0; i < options.length; i++) {
-  fieldIds.push(randomString());
-}
+const fieldIds = Array.from({ length: options.length }).map((_) =>
+  randomString(),
+);
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: string): void;
