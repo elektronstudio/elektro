@@ -11,7 +11,7 @@ type Props = {
   placeholder?: string;
   label?: string;
   disabled?: boolean;
-  type?: "number" | "text";
+  type?: "number" | "text" | "email";
 };
 
 const {

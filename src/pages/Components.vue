@@ -18,6 +18,7 @@ import {
   EFormRange,
   EFormText,
   EFormNumber,
+  EFormEmail,
 } from "../lib";
 import ECard from "../components/ECard.vue";
 import { ref } from "vue";
@@ -144,6 +145,7 @@ const checkboxValue = ref(true);
 const radioValue = ref("yes");
 const rangeValue = ref(25);
 const rangeValue2 = ref(25);
+const emailValue = ref("mail@hot.ee");
 </script>
 
 <template>
@@ -341,6 +343,9 @@ const rangeValue2 = ref(25);
       placeholder="EFormNumber"
       v-model="numberInputValue"
     />
+
+    <pre>EFormEmail</pre>
+    <EFormEmail placeholder="EFormEmail" v-model="emailValue" />
 
     <br />
     <pre>EFormCheckbox</pre>

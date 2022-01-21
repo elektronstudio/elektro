@@ -18,6 +18,7 @@ export { default as EFormRadio } from "./components/EFormRadio.vue";
 export { default as EFormRange } from "./components/EFormRange.vue";
 export { default as EFormText } from "./components/EFormText.vue";
 export { default as EFormNumber } from "./components/EFormNumber.vue";
+export { default as EFormEmail } from "./components/EFormEmail.vue";
 
 import "./styles/vars.css";
 import "./styles/reset.css";
