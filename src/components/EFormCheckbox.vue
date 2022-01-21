@@ -10,7 +10,7 @@ type Props = {
 const { modelValue = false } = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: boolean): void; // add correct value type when you know it
+  (e: "update:modelValue", value: boolean): void;
 }>();
 
 const inputValue = computed({

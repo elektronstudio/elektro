@@ -1,4 +1,3 @@
-<!-- @TODO: Refactor into a more DRY abstraction -->
 <script setup lang="ts">
 import { computed } from "vue";
 import EInput from "./EInput.vue";
@@ -20,7 +19,7 @@ const {
 } = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: string | number): void; // add correct value type when you know it
+  (e: "update:modelValue", value: string | number): void;
 }>();
 
 const inputValue = computed({

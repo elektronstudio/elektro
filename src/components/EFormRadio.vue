@@ -23,7 +23,7 @@ for (let i = 0; i < options.length; i++) {
 }
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: string): void; // add correct value type when you know it
+  (e: "update:modelValue", value: string): void;
 }>();
 
 const inputValue = computed({

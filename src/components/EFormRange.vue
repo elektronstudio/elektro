@@ -29,7 +29,7 @@ const {
 const fieldId = randomString();
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: number): void; // add correct value type when you know it
+  (e: "update:modelValue", value: number): void;
 }>();
 
 const inputValue = computed({
