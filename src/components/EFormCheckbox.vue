@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import randomString from "../utils/randomString";
 import ELabel from "./ELabel.vue";
 type Props = {
   modelValue?: boolean;
@@ -8,6 +9,8 @@ type Props = {
 };
 
 const { modelValue = false } = defineProps<Props>();
+
+const fieldId = randomString();
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: boolean): void;
@@ -22,20 +25,26 @@ const inputValue = computed({
 </script>
 
 <template>
-  <ELabel
-    v-if="label"
-    class="EFormCheckbox"
-    :label="label"
-    layout="horizontal"
-    :disabled="disabled"
-  >
-    <input type="checkbox" :checked="inputValue" :disabled="disabled" />
-  </ELabel>
-  <input v-else type="checkbox" :checked="inputValue" :disabled="disabled" />
+  <div class="EFormCheckbox">
+    <input
+      type="checkbox"
+      :checked="inputValue"
+      :disabled="disabled"
+      :id="fieldId"
+    />
+    <ELabel
+      v-if="label"
+      :fieldId="fieldId"
+      :disabled="disabled"
+      layout="horizontal"
+    >
+      {{ label }}
+    </ELabel>
+  </div>
 </template>
 
 <style scoped>
-.EFormCheckbox.ELabel {
+.EFormCheckbox {
   display: flex;
   align-items: center;
 }
