@@ -22,13 +22,12 @@ const { size = "md", el } = defineProps<Props>();
 
 <style scoped>
 .ETitle {
-  font-weight: bold;
+  font-weight: normal;
   line-height: var(--line-height-5xl);
 }
 .ETitle.xs {
   font-family: font-body-55, sans-serif;
   font-size: var(--text-base);
-  font-weight: normal;
   line-height: var(--line-height-sm);
 }
 .ETitle.sm {

@@ -34,7 +34,7 @@ const { el = "article", size = "md", content } = defineProps<Props>();
 }
 .EContent.lg :deep(p) {
   font-size: var(--text-3xl);
-  font-family: font-title-medium, sans-serif;
+  font-family: font-title-regular, sans-serif;
   line-height: var(--line-height-xs);
 }
 .EContent :deep(a) {
@@ -48,7 +48,7 @@ const { el = "article", size = "md", content } = defineProps<Props>();
 }
 .EContent :deep(blockquote) {
   font-size: var(--text-3xl);
-  font-family: font-title-medium, sans-serif;
+  font-family: font-title-regular, sans-serif;
   line-height: var(--line-height-xs);
   background-image: url("/images/bg-texture-xs.gif");
   background-repeat: repeat;
