@@ -52,7 +52,7 @@ const countDown = startTime;
   padding: var(--p-3);
 }
 .ELivePreview aside header {
-  font-family: font-title-medium, sans-serif;
+  font-family: font-title-regular, sans-serif;
   font-size: var(--text-3xl);
 }
 .ELivePreview aside header p span {
