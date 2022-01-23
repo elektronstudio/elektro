@@ -1,6 +1,6 @@
 {
   "name": "elektro",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "engines": {
     "node": "^14.13.1 || >=16.0.0"
   },
@@ -12,12 +12,12 @@
   "files": [
     "dist"
   ],
-  "module": "./dist/elektronstudio.mjs",
-  "main": "./dist/elektronstudio.cjs",
+  "module": "./dist/elektro.mjs",
+  "main": "./dist/elektro.cjs",
   "exports": {
     ".": {
-      "import": "./dist/elektronstudio.mjs",
-      "require": "./dist/elektronstudio.cjs"
+      "import": "./dist/elektro.mjs",
+      "require": "./dist/elektro.cjs"
     },
     "./style.css": {
       "import": "./dist/style.css",
