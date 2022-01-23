@@ -18,7 +18,7 @@ export default defineConfig({
       },
     },
     rollupOptions: {
-      external: ["vue", "virtual:generated-pages"],
+      external: ["vue"],
       output: {
         globals: {
           vue: "Vue",
