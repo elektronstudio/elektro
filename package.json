@@ -12,19 +12,18 @@
   "files": [
     "dist"
   ],
-  "module": "./dist/elektronstudio.es.js",
-  "main": "./dist/elektronstudio.cjs.js",
+  "module": "./dist/elektronstudio.mjs",
+  "main": "./dist/elektronstudio.cjs",
   "exports": {
     ".": {
-      "import": "./dist/elektronstudio.es.js",
-      "require": "./dist/elektronstudio.cjs.js"
+      "import": "./dist/elektronstudio.mjs",
+      "require": "./dist/elektronstudio.cjs"
     },
     "./style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"
     }
   },
-  "type": "module",
   "typings": "./dist/lib.d.ts",
   "scripts": {
     "dev": "vite -c vite.config.app.ts",
