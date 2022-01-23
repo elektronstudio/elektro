@@ -12,6 +12,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/lib.ts"),
       name: "elektro",
+      formats: ["es", "cjs"],
     },
     rollupOptions: {
       external: ["vue", "virtual:generated-pages"],

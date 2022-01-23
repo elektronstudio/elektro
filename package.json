@@ -12,12 +12,16 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/elektronstudio.umd.js",
   "module": "./dist/elektronstudio.es.js",
+  "main": "./dist/elektronstudio.cjs.js",
   "exports": {
     ".": {
       "import": "./dist/elektronstudio.es.js",
-      "require": "./dist/elektronstudio.umd.js"
+      "require": "./dist/elektronstudio.cjs.js"
+    },
+    "./style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
     }
   },
   "type": "module",
