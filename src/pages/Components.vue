@@ -6,6 +6,10 @@ import {
   ENav,
   ENavButton,
   EContent,
+  ECard,
+  EProductionCard,
+  EAboutPageCard,
+  ETeamCard,
   EScheduleEvent,
   EEventInstance,
   EBox,
@@ -22,7 +26,6 @@ import {
   EFormNumber,
   EFormEmail,
 } from "../lib";
-import ECard from "../components/ECard.vue";
 import { ref } from "vue";
 const navItems = [
   {
@@ -35,7 +38,7 @@ const navItems = [
   },
 ];
 
-const projects = [
+const productions = [
   {
     title: "Hundid",
     author: "Taavet Jansen",
@@ -268,6 +271,32 @@ const emailValue = ref("mail@hot.ee");
         <ETitle el="h5" size="sm">Footer</ETitle>
       </template>
     </ECard>
+
+    <br />
+    <pre>EProductionCard</pre>
+    <EProductionCard
+      :title="productions[0].title"
+      :author="productions[0].author"
+      :thumbnail="productions[0].thumbnail"
+      :events="productions[0].events"
+    />
+
+    <br />
+    <pre>EAboutPageCard</pre>
+    <EAboutPageCard
+      layout="column-1"
+      color="accent"
+      title="About us block"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur."
+    />
+
+    <br />
+    <pre>ETeamCard</pre>
+    <ETeamCard
+      name="Jaanus Metsis"
+      thumbnail="https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur."
+    />
 
     <br />
     <pre>EScheduleEvent</pre>

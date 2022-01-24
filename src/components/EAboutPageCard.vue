@@ -4,33 +4,31 @@ import ETitle from "../components/ETitle.vue";
 import EContent from "../components/EContent.vue";
 
 type Props = {
-  card: {
-    layout: "column-1" | "column-1-3" | "column-2-4" | "column-4-4";
-    color?: "accent" | "gray";
+  layout: "column-1" | "column-1-3" | "column-2-4" | "column-4-4";
+  title?: string;
+  color?: "accent" | "gray";
+  content?: string;
+  columns?: {
     title?: string;
     content?: string;
-    columns: {
-      title?: string;
-      content?: string;
-    }[];
-  };
+  }[];
 };
 
-const { card } = defineProps<Props>();
+const { layout, color, title, content, columns } = defineProps<Props>();
 </script>
 <template>
   <EBox
-    :class="card.layout"
-    :ratio="card.layout === 'column-1' ? '1 / 1' : 'auto'"
-    :color="card.color"
+    :class="layout"
+    :ratio="layout === 'column-1' ? '1 / 1' : 'auto'"
+    :color="color"
   >
-    <div v-if="card.columns" v-for="column in card.columns">
+    <div v-if="columns" v-for="column in columns">
       <ETitle v-if="column.title" el="h3" size="lg">{{ column.title }}</ETitle>
       <EContent v-if="column.content" :content="column.content" />
     </div>
     <template v-else>
-      <ETitle v-if="card.title" el="h3" size="lg">{{ card.title }}</ETitle>
-      <EContent v-if="card.content" :content="card.content" />
+      <ETitle v-if="title" el="h3" size="lg">{{ title }}</ETitle>
+      <EContent v-if="content" :content="content" />
     </template>
   </EBox>
 </template>

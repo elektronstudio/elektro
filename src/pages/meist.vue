@@ -195,7 +195,14 @@ const data = {
   <main class="Page About">
     <section v-for="block in data.blocks">
       <ETitle el="h2" size="lg">{{ block.title }}</ETitle>
-      <EAboutPageCard v-for="card in block.items" :card="card" />
+      <EAboutPageCard
+        v-for="card in block.items"
+        :layout="card.layout"
+        :title="card.title"
+        :color="card.color"
+        :content="card.content"
+        :columns="card.columns"
+      />
     </section>
     <section>
       <ETitle el="h2" size="lg">Team</ETitle>
