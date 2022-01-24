@@ -11,8 +11,17 @@ import {
   ELivePreview,
   EDetailsList,
   EPressItems,
+  EInput,
+  ELabel,
+  EFormCheckbox,
+  EFormRadio,
+  EFormRange,
+  EFormText,
+  EFormNumber,
+  EFormEmail,
 } from "../lib";
 import ECard from "../components/ECard.vue";
+import { ref } from "vue";
 const navItems = [
   {
     name: "eˉlektron",
@@ -129,6 +138,14 @@ const pressItems = [
     description: "Kiwa – Sirp 17.04.2020",
   },
 ];
+
+const inputValue = ref("I'm an input");
+const numberInputValue = ref(5);
+const checkboxValue = ref(true);
+const radioValue = ref("yes");
+const rangeValue = ref(25);
+const rangeValue2 = ref(25);
+const emailValue = ref("mail@hot.ee");
 </script>
 
 <template>
@@ -296,6 +313,77 @@ const pressItems = [
     <br />
     <pre>EPressItems</pre>
     <EPressItems :items="pressItems" />
+
+    <br />
+    <pre>EInput</pre>
+    <EInput placeholder="Placeholder value" v-model="inputValue" />
+    <EInput placeholder="Placeholder value 2" v-model="inputValue" />
+    <EInput placeholder="Disabled input" :disabled="true" />
+    <EInput label="Label for input" placeholder="Placeholder value" />
+    <EInput
+      label="Disabled label for input"
+      placeholder="Disabled input"
+      :disabled="true"
+    />
+
+    <br />
+    <pre>EFormText</pre>
+    <EFormText placeholder="EFormText" v-model="inputValue" />
+    <EFormText
+      label="With label"
+      placeholder="EFormText"
+      v-model="inputValue"
+    />
+
+    <br />
+    <pre>EFormNumber</pre>
+    <EFormNumber placeholder="EFormNumber" v-model="numberInputValue" />
+    <EFormNumber
+      label="With label"
+      placeholder="EFormNumber"
+      v-model="numberInputValue"
+    />
+
+    <pre>EFormEmail</pre>
+    <EFormEmail placeholder="EFormEmail" v-model="emailValue" />
+
+    <br />
+    <pre>EFormCheckbox</pre>
+    <EFormCheckbox label="Checkbox" v-model="checkboxValue" />
+    <EFormCheckbox label="Checkbox disabled" :disabled="true" />
+
+    <br />
+    <pre>EFormRadio</pre>
+    <EFormRadio
+      :options="['yes', 'no', 'maybe']"
+      name="radioButtons"
+      v-model="radioValue"
+    />
+    <EFormRadio
+      :options="['yes', 'no', 'maybe']"
+      name="moreRadioButtons"
+      :disabled="true"
+    />
+    <p>Radio value: {{ radioValue }}</p>
+
+    <br />
+    <pre>EFormRange</pre>
+    <ELabel forInput="range" label="Range slider (0 to 100)" />
+    <EFormRange
+      :min="0"
+      :max="100"
+      v-model="rangeValue"
+      label="Range slider"
+      showOutput
+    />
+    <EFormRange :min="0" :max="100" v-model="rangeValue" showOutput />
+    <EFormRange
+      :min="0"
+      :max="200"
+      :step="20"
+      v-model="rangeValue2"
+      showMinMax
+    />
   </div>
 </template>
 
