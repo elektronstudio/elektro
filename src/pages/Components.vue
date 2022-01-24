@@ -157,7 +157,7 @@ const emailValue = ref("mail@hot.ee");
     <ETitle size="lg">Title lg</ETitle>
     <ETitle size="md">Title md</ETitle>
     <ETitle size="sm">Title sm</ETitle>
-
+    <ETitle size="sm" title="Title containing<br>markup" />
     <br />
     <pre>EContent</pre>
     <EContent>

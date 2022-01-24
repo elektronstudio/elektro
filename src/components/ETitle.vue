@@ -9,13 +9,21 @@ const sizes = {
 type Props = {
   size?: keyof typeof sizes;
   el?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  title?: string;
 };
 
-const { size = "md", el } = defineProps<Props>();
+const { size = "md", el, title } = defineProps<Props>();
 </script>
 
 <template>
-  <component :is="el || sizes[size]" class="ETitle" :class="size">
+  <component
+    v-if="title"
+    :is="el || sizes[size]"
+    class="ETitle"
+    :class="size"
+    v-html="title"
+  />
+  <component v-else :is="el || sizes[size]" class="ETitle" :class="size">
     <slot />
   </component>
 </template>
