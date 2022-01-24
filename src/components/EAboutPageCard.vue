@@ -10,7 +10,7 @@ type Props = {
     color?: "accent" | "gray";
     title?: string;
     content?: string;
-    columns: {
+    columns?: {
       title?: string;
       content?: string;
     }[];
