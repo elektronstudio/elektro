@@ -140,7 +140,7 @@ const pressItems = [
     <ETitle size="lg">Title lg</ETitle>
     <ETitle size="md">Title md</ETitle>
     <ETitle size="sm">Title sm</ETitle>
-    <ETitle size="sm" title="Title contaning<br>markup" />
+    <ETitle size="sm" title="Title containing<br>markup" />
     <br />
     <pre>EContent</pre>
     <EContent>
