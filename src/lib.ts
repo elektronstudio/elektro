@@ -17,6 +17,7 @@ export { default as EFormCheckbox } from "./components/EFormCheckbox.vue";
 export { default as EFormRadio } from "./components/EFormRadio.vue";
 export { default as EFormRange } from "./components/EFormRange.vue";
 export { default as EFormText } from "./components/EFormText.vue";
+export { default as EFormTextArea } from "./components/EFormTextArea.vue";
 export { default as EFormNumber } from "./components/EFormNumber.vue";
 export { default as EFormEmail } from "./components/EFormEmail.vue";
 
