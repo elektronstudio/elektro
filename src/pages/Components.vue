@@ -2,6 +2,7 @@
 import {
   ETitle,
   EButton,
+  ELogo,
   ENav,
   ENavButton,
   EContent,
@@ -237,6 +238,14 @@ const emailValue = ref("mail@hot.ee");
       <EButton size="xs" color="accent">Button xs accent colored</EButton>
       <EButton size="xs" color="gray">Button xs gray colored</EButton>
     </div>
+
+    <br />
+    <pre>ELogo small</pre>
+    <ELogo size="sm" />
+    <pre>ELogo medium</pre>
+    <ELogo size="md" />
+    <pre>ELogo large</pre>
+    <ELogo size="lg" />
 
     <br />
     <pre>ENav</pre>
