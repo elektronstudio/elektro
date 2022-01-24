@@ -284,13 +284,10 @@ const emailValue = ref("mail@hot.ee");
     <br />
     <pre>EAboutPageCard</pre>
     <EAboutPageCard
-      :card="{
-        layout: 'column-1',
-        color: 'accent',
-        title: 'About us block',
-        content:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur.',
-      }"
+      layout="column-1"
+      color="accent"
+      title="About us block"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur."
     />
 
     <br />
