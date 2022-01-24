@@ -18,6 +18,7 @@ import {
   EFormRadio,
   EFormRange,
   EFormText,
+  EFormTextArea,
   EFormNumber,
   EFormEmail,
 } from "../lib";
@@ -343,6 +344,10 @@ const emailValue = ref("mail@hot.ee");
       placeholder="EFormText"
       v-model="inputValue"
     />
+
+    <br />
+    <pre>EFormTextArea</pre>
+    <EFormTextArea placeholder="EFormTextArea" v-model="inputValue" />
 
     <br />
     <pre>EFormNumber</pre>
