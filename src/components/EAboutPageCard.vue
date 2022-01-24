@@ -3,6 +3,7 @@ import EBox from "./EBox.vue";
 import ETitle from "../components/ETitle.vue";
 import EContent from "../components/EContent.vue";
 
+// @TODO: Should we refactor props to a flat object?
 type Props = {
   card: {
     layout: "column-1" | "column-1-3" | "column-2-4" | "column-4-4";
