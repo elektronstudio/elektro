@@ -1,18 +1,24 @@
 <script setup lang="ts">
-import { ENavButton } from "../lib";
+import ELogo from "./ELogo.vue";
 
 type Props = {
   navItems: {
     name: string;
     path: string;
   }[];
+  showLogo?: boolean;
 };
 
-defineProps<Props>();
+const { navItems, showLogo } = defineProps<Props>();
+const menuItemsLength =
+  navItems && showLogo ? navItems.length + 1 : navItems ? navItems.length : 0;
 </script>
 
 <template>
   <nav class="ENav">
+    <RouterLink to="/">
+      <ELogo el="span" />
+    </RouterLink>
     <RouterLink v-for="item in navItems" :key="item.name" :to="item.path">
       {{ item.name }}
     </RouterLink>
@@ -22,8 +28,8 @@ defineProps<Props>();
 <style scoped>
 .ENav {
   display: grid;
-  height: var(--h-12);
-  --menu-items-count: v-bind(navItems ? navItems.length: 0);
+  height: var(--h-9);
+  --menu-items-count: v-bind(menuItemsLength);
   grid-template-columns: repeat(var(--menu-items-count), 1fr);
 }
 .ENav > :deep(*) {

@@ -4,10 +4,6 @@ import { ENav } from "../lib";
 
 const navItems = [
   {
-    name: "eˉlektron",
-    path: "/",
-  },
-  {
     name: "Lavastused",
     path: "/lavastused",
   },
@@ -35,5 +31,5 @@ const navItems = [
 </script>
 
 <template>
-  <ENav :navItems="navItems" />
+  <ENav :navItems="navItems" showLogo />
 </template>
