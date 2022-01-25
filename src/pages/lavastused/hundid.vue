@@ -139,8 +139,8 @@ const {
           <EEventInstance
             v-for="event in eventInstances"
             layout="vertical"
-            :start-time="event.start_at"
-            :end-time="event.end_at"
+            :start-at="event.start_at"
+            :end-at="event.end_at"
             :ticket-url="event.ticketUrl"
           />
         </template>
