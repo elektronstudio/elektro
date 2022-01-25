@@ -1,18 +1,12 @@
 <script setup lang="ts">
 import EContent from "./EContent.vue";
-import EEventInstance from "./EEventInstance.vue";
 
 type Props = {
   title: string;
   description?: string;
-  events?: {
-    start_at: string;
-    end_at: string;
-    ticketUrl?: string;
-  }[];
 };
 
-const { title, description, events } = defineProps<Props>();
+const { title, description } = defineProps<Props>();
 </script>
 <template>
   <section class="EscheduleEvent">

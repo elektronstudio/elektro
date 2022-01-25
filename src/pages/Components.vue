@@ -305,14 +305,22 @@ const emailValue = ref("mail@hot.ee");
       :title="event.title"
       :description="event.description"
       :events="event.events"
-    />
+    >
+      <EEventInstance
+        v-if="event.events"
+        v-for="item in event.events"
+        :start-at="item.start_at"
+        :end-at="item.end_at"
+        :ticket-url="item.ticketUrl"
+      />
+    </EScheduleEvent>
 
     <br />
     <pre>EEventInstance</pre>
     <EEventInstance
       v-for="eventInstance in scheduleEvents[0].events"
-      :start_at="eventInstance.start_at"
-      :end_at="eventInstance.end_at"
+      :start-at="eventInstance.start_at"
+      :end-at="eventInstance.end_at"
       :ticketUrl="eventInstance.ticketUrl"
       layout="vertical"
     />
@@ -323,8 +331,8 @@ const emailValue = ref("mail@hot.ee");
       <ETitle el="h3" size="md">Etendused</ETitle>
       <EEventInstance
         v-for="eventInstance in scheduleEvents[0].events"
-        :start_at="eventInstance.start_at"
-        :end_at="eventInstance.end_at"
+        :start-at="eventInstance.start_at"
+        :end-at="eventInstance.end_at"
         :ticketUrl="eventInstance.ticketUrl"
         layout="vertical"
       />

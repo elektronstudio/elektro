@@ -85,8 +85,8 @@ const scheduleEvents = [
       <EEventInstance
         v-if="event.events"
         v-for="item in event.events"
-        :start-time="item.start_at"
-        :end-time="item.end_at"
+        :start-at="item.start_at"
+        :end-at="item.end_at"
         :ticket-url="item.ticketUrl"
       />
     </EScheduleEvent>
