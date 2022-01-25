@@ -278,7 +278,10 @@ const emailValue = ref("mail@hot.ee");
       :title="productions[0].title"
       :author="productions[0].author"
       :thumbnail="productions[0].thumbnail"
-      :events="productions[0].events"
+      :next-event="{
+        startAt: productions[0].events[0].start_at,
+        endAt: productions[0].events[0].end_at,
+      }"
     />
 
     <br />
