@@ -6,8 +6,8 @@ type Props = {
   title: string;
   description?: string;
   events?: {
-    startTime: string;
-    endTime: string;
+    start_at: string;
+    end_at: string;
     ticketUrl?: string;
   }[];
 };

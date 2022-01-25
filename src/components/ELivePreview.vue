@@ -4,13 +4,13 @@ type Props = {
   title: string;
   thumbnail?: string;
   ticketUrl?: string;
-  startTime: string;
+  start_at: string;
 };
 
-const { title, startTime, ticketUrl } = defineProps<Props>();
+const { title, start_at, ticketUrl } = defineProps<Props>();
 
 // @TODO: use countdown hook
-const countDown = startTime;
+const countDown = start_at;
 </script>
 <template>
   <div class="ELivePreview">

@@ -7,8 +7,8 @@ type Props = {
   author?: string;
   thumbnail?: string;
   events?: {
-    startTime: string;
-    endTime: string;
+    start_at: string;
+    end_at: string;
     ticketUrl?: string;
   }[];
 };
@@ -24,8 +24,8 @@ defineProps<Props>();
     <template #footer>
       <p v-if="events">Järgmine etendus:</p>
       <!-- @TODO: Format time -->
-      <time v-if="events" :datetime="events[0].startTime">{{
-        events[0].startTime
+      <time v-if="events" :datetime="events[0].start_at">{{
+        events[0].start_at
       }}</time>
     </template>
   </ECard>

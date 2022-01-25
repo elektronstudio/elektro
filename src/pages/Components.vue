@@ -46,8 +46,8 @@ const productions = [
       "https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A",
     events: [
       {
-        startTime: "2022-06-01T19:00:00.000Z",
-        endTime: "2022-06-01T19:00:00.000Z",
+        start_at: "2022-06-01T19:00:00.000Z",
+        end_at: "2022-06-01T19:00:00.000Z",
       },
     ],
   },
@@ -60,18 +60,18 @@ const scheduleEvents = [
       "<p>Lavastus “Hundid” on jätk Liis Varese ja Taavet Janseni koostööle “Kõik loeb/ The Reader”, mille soe vastuvõtt on julgustanud neid digitaalse formaadiga edasi töötama.</p>",
     events: [
       {
-        startTime: "2022-06-01T19:00:00.000Z",
-        endTime: "2022-06-01T19:00:00.000Z",
+        start_at: "2022-06-01T19:00:00.000Z",
+        end_at: "2022-06-01T19:00:00.000Z",
         ticketUrl: "https://www.eventbrite.com/e/hundid-tickets-53907988984",
       },
       {
-        startTime: "2022-07-01T19:00:00.000Z",
-        endTime: "2022-07-01T19:00:00.000Z",
+        start_at: "2022-07-01T19:00:00.000Z",
+        end_at: "2022-07-01T19:00:00.000Z",
         ticketUrl: "https://www.eventbrite.com/e/hundid-tickets-53907988984",
       },
       {
-        startTime: "2022-09-01T19:00:00.000Z",
-        endTime: "2022-09-01T19:00:00.000Z",
+        start_at: "2022-09-01T19:00:00.000Z",
+        end_at: "2022-09-01T19:00:00.000Z",
         ticketUrl: "https://www.eventbrite.com/e/hundid-tickets-53907988984",
       },
     ],
@@ -311,8 +311,8 @@ const emailValue = ref("mail@hot.ee");
     <pre>EEventInstance</pre>
     <EEventInstance
       v-for="eventInstance in scheduleEvents[0].events"
-      :startTime="eventInstance.startTime"
-      :endTime="eventInstance.endTime"
+      :start_at="eventInstance.start_at"
+      :end_at="eventInstance.end_at"
       :ticketUrl="eventInstance.ticketUrl"
       layout="vertical"
     />
@@ -323,8 +323,8 @@ const emailValue = ref("mail@hot.ee");
       <ETitle el="h3" size="md">Etendused</ETitle>
       <EEventInstance
         v-for="eventInstance in scheduleEvents[0].events"
-        :startTime="eventInstance.startTime"
-        :endTime="eventInstance.endTime"
+        :start_at="eventInstance.start_at"
+        :end_at="eventInstance.end_at"
         :ticketUrl="eventInstance.ticketUrl"
         layout="vertical"
       />
@@ -342,7 +342,7 @@ const emailValue = ref("mail@hot.ee");
       title="Hundid"
       thumbnail="https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A"
       ticketUrl="https://www.eventbrite.com/e/hundid-tickets-53907988984"
-      startTime="00:12:44"
+      start_at="00:12:44"
     />
 
     <br />
