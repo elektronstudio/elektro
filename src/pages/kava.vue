@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ArtNav from "../components/ArtNav.vue";
 import EScheduleEvent from "../components/EScheduleEvent.vue";
+import EEventInstance from "../components/EEventInstance.vue";
 
 const scheduleEvents = [
   {
@@ -80,7 +81,15 @@ const scheduleEvents = [
       :title="event.title"
       :description="event.description"
       :events="event.events"
-    />
+    >
+      <EEventInstance
+        v-if="event.events"
+        v-for="item in event.events"
+        :start-time="item.startTime"
+        :end-time="item.endTime"
+        :ticket-url="item.ticketUrl"
+      />
+    </EScheduleEvent>
   </main>
 </template>
 

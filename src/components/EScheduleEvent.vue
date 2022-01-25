@@ -18,15 +18,7 @@ const { title, description, events } = defineProps<Props>();
   <section class="EscheduleEvent">
     <h3>{{ title }}</h3>
     <EContent v-if="description" :content="description" />
-    <div v-if="events">
-      <!-- Should we make this a separate component? -->
-      <EEventInstance
-        v-for="event in events"
-        :start-time="event.startTime"
-        :end-time="event.endTime"
-        :ticket-url="event.ticketUrl"
-      />
-    </div>
+    <slot />
   </section>
 </template>
 
