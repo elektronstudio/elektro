@@ -1,37 +1,58 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 
 type Props = {
   title: string;
+  moduleId: string;
   tilesWidth?: number;
   tilesHeight?: number;
-  initialX?: number;
-  initialY?: number;
+  initialSnappedX?: number;
+  initialSnappedY?: number;
 };
 
-const { title, tilesWidth, tilesHeight, initialX, initialY } =
-  defineProps<Props>();
+const {
+  title,
+  moduleId,
+  tilesWidth,
+  tilesHeight,
+  initialSnappedX = 0,
+  initialSnappedY = 0,
+} = defineProps<Props>();
 
 const draggableRef = ref<HTMLElement | null>(null);
 const { width: windowWidth } = useWindow();
-
-const calculateSnappedPosition = (pos: any) => {
-  const tileDivider = 20;
-  const tileSize = windowWidth.value / tileDivider;
-  const nextTileStep = Math.round(pos.value / tileSize);
-
-  return nextTileStep >= 0 ? tileSize * nextTileStep : 0;
-};
+const tileDivider = 20;
+const tileSize = windowWidth.value / tileDivider;
 
 const { x, y, style, isDragging } = useDraggable(draggableRef, {
-  initialValue: { x: 0, y: 0 },
+  // initialValue: { x: 0, y: 0 },
   preventDefault: true,
   onEnd: () => {
-    x.value = calculateSnappedPosition(x);
-    y.value = calculateSnappedPosition(y);
+    x.value = snappedX.value >= 0 ? tileSize * snappedX.value : 0;
+    y.value = snappedY.value >= 0 ? tileSize * snappedY.value : 0;
+    localStorage.setItem(
+      moduleId,
+      JSON.stringify({ x: snappedX.value, y: snappedY.value }),
+    );
   },
+});
+
+const snappedX = computed(() => Math.round(x.value / tileSize));
+const snappedY = computed(() => Math.round(y.value / tileSize));
+
+onMounted(() => {
+  if (localStorage.getItem(moduleId)) {
+    const { x: storedX, y: storedY } = JSON.parse(
+      localStorage.getItem(moduleId)!,
+    );
+    x.value = tileSize * storedX;
+    y.value = tileSize * storedY;
+  } else {
+    x.value = tileSize * initialSnappedX;
+    y.value = tileSize * initialSnappedY;
+  }
 });
 </script>
 
