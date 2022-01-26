@@ -2,10 +2,11 @@
 import { ref, computed, onMounted } from "vue";
 import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
+import EDraggableBar from "./EDraggableBar.vue";
 
 type Props = {
   title: string;
-  moduleId: string;
+  electronId: string;
   tilesWidth?: number;
   tilesHeight?: number;
   initialSnappedX?: number;
@@ -14,12 +15,16 @@ type Props = {
 
 const {
   title,
-  moduleId,
+  electronId,
   tilesWidth = 1,
   tilesHeight = 1,
   initialSnappedX = 0,
   initialSnappedY = 0,
 } = defineProps<Props>();
+
+const emit = defineEmits<{
+  (e: "minimise-electron", value: string): void;
+}>();
 
 const draggableRef = ref<HTMLElement | null>(null);
 const { width: windowWidth } = useWindow();
@@ -38,7 +43,7 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
         : 0;
     y.value = snappedY.value >= 0 ? tileSize * snappedY.value : 0;
     localStorage.setItem(
-      moduleId,
+      electronId,
       JSON.stringify({ x: snappedX.value, y: snappedY.value }),
     );
   },
@@ -48,9 +53,9 @@ const snappedX = computed(() => Math.round(x.value / tileSize));
 const snappedY = computed(() => Math.round(y.value / tileSize));
 
 onMounted(() => {
-  if (localStorage.getItem(moduleId)) {
+  if (localStorage.getItem(electronId)) {
     const { x: storedX, y: storedY } = JSON.parse(
-      localStorage.getItem(moduleId)!,
+      localStorage.getItem(electronId)!,
     );
     x.value = tileSize * storedX;
     y.value = tileSize * storedY;
@@ -62,16 +67,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    class="EDraggable"
-    ref="draggableRef"
-    :style="style"
-    style="touch-action: none"
-  >
-    <nav>
-      <h6>{{ title }}</h6>
-      <button>X</button>
-    </nav>
+  <div class="EDraggable" :style="style" style="touch-action: none">
+    <div ref="draggableRef">
+      <EDraggableBar :title="title">
+        <button @click="emit('minimise-electron', electronId)">X</button>
+      </EDraggableBar>
+    </div>
     <div>{{ Math.round(x) }}, {{ Math.round(y) }}</div>
   </div>
 </template>
@@ -88,21 +89,5 @@ onMounted(() => {
   position: fixed;
   width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
   height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
-}
-.EDraggable nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--bg);
-  height: 1.2rem;
-}
-.EDraggable nav h6 {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  text-transform: uppercase;
-}
-.EDraggable nav:hover {
-  background-color: var(--gray-600);
 }
 </style>
