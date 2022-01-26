@@ -15,8 +15,8 @@ type Props = {
 const {
   title,
   moduleId,
-  tilesWidth,
-  tilesHeight,
+  tilesWidth = 1,
+  tilesHeight = 1,
   initialSnappedX = 0,
   initialSnappedY = 0,
 } = defineProps<Props>();
@@ -30,7 +30,12 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
   // initialValue: { x: 0, y: 0 },
   preventDefault: true,
   onEnd: () => {
-    x.value = snappedX.value >= 0 ? tileSize * snappedX.value : 0;
+    x.value =
+      snappedX.value + tilesWidth >= 20
+        ? (20 - tilesWidth) * tileSize
+        : snappedX.value >= 0
+        ? tileSize * snappedX.value
+        : 0;
     y.value = snappedY.value >= 0 ? tileSize * snappedY.value : 0;
     localStorage.setItem(
       moduleId,
