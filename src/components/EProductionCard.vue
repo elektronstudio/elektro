@@ -6,14 +6,14 @@ type Props = {
   title: string;
   author?: string;
   thumbnail?: string;
-  events?: {
-    startTime: string;
-    endTime: string;
+  nextEvent?: {
+    startAt: string;
+    endAt: string;
     ticketUrl?: string;
-  }[];
+  };
 };
 
-defineProps<Props>();
+const { title, author, thumbnail, nextEvent } = defineProps<Props>();
 </script>
 <template>
   <ECard :thumbnail="thumbnail">
@@ -22,10 +22,10 @@ defineProps<Props>();
       <h6 v-if="author">{{ author }}</h6>
     </template>
     <template #footer>
-      <p v-if="events">Järgmine etendus:</p>
+      <p v-if="nextEvent">Järgmine etendus:</p>
       <!-- @TODO: Format time -->
-      <time v-if="events" :datetime="events[0].startTime">{{
-        events[0].startTime
+      <time v-if="nextEvent" :datetime="nextEvent.startAt">{{
+        nextEvent.startAt
       }}</time>
     </template>
   </ECard>

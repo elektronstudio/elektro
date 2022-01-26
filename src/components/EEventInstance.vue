@@ -3,18 +3,23 @@
 import EButton from "./EButton.vue";
 
 type Props = {
-  startTime: string;
-  endTime: string;
+  startAt: string;
+  endAt: string;
   ticketUrl?: string;
   layout?: "vertical" | "horizontal";
 };
 
-const { startTime, ticketUrl, layout = "horizontal" } = defineProps<Props>();
+const {
+  startAt,
+  endAt,
+  ticketUrl,
+  layout = "horizontal",
+} = defineProps<Props>();
 </script>
 
 <template>
   <div class="EEventInstance" :class="layout">
-    <time :datetime="startTime">{{ startTime }}</time>
+    <time :datetime="startAt">{{ startAt }}</time>
     <section>
       <EButton size="xs" el="a" color="transparent">+ Lisa kalendrisse</EButton>
       <!-- @TODO: Add system or component for arrows -->

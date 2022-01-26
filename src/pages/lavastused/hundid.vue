@@ -69,18 +69,18 @@ const data = {
   ],
   eventInstances: [
     {
-      startTime: "2022-06-01T19:00:00.000Z",
-      endTime: "2022-06-01T19:00:00.000Z",
+      start_at: "2022-06-01T19:00:00.000Z",
+      end_at: "2022-06-01T19:00:00.000Z",
       ticketUrl: "https://www.eventbrite.com/e/hundid-tickets-53907988984",
     },
     {
-      startTime: "2022-07-01T19:00:00.000Z",
-      endTime: "2022-07-01T19:00:00.000Z",
+      start_at: "2022-07-01T19:00:00.000Z",
+      end_at: "2022-07-01T19:00:00.000Z",
       ticketUrl: "https://www.eventbrite.com/e/hundid-tickets-53907988984",
     },
     {
-      startTime: "2022-09-01T19:00:00.000Z",
-      endTime: "2022-09-01T19:00:00.000Z",
+      start_at: "2022-09-01T19:00:00.000Z",
+      end_at: "2022-09-01T19:00:00.000Z",
       ticketUrl: "https://www.eventbrite.com/e/hundid-tickets-53907988984",
     },
   ],
@@ -139,8 +139,8 @@ const {
           <EEventInstance
             v-for="event in eventInstances"
             layout="vertical"
-            :start-time="event.startTime"
-            :end-time="event.endTime"
+            :start-at="event.start_at"
+            :end-at="event.end_at"
             :ticket-url="event.ticketUrl"
           />
         </template>
