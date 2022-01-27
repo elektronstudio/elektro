@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import EContent from "./EContent.vue";
+import ETitle from "./ETitle.vue";
 
 type Props = {
   title: string;
@@ -10,7 +11,7 @@ const { title, description } = defineProps<Props>();
 </script>
 <template>
   <section class="EscheduleEvent">
-    <h3>{{ title }}</h3>
+    <ETitle size="lg" :title="title" />
     <EContent v-if="description" :content="description" />
     <slot />
   </section>
@@ -21,7 +22,7 @@ const { title, description } = defineProps<Props>();
   display: flex;
   flex-direction: column;
 }
-.EscheduleEvent h3,
+.EscheduleEvent .ETitle,
 .EscheduleEvent article {
   color: var(--gray-300);
   max-width: 60ch; /* TODO convert to var(--w-prose) */
