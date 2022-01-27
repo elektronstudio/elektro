@@ -76,7 +76,9 @@ onMounted(() => {
         <button @click="emit('minimise-electron', electronId)">X</button>
       </EDraggableBar>
     </div>
-    <div>{{ Math.round(x) }}, {{ Math.round(y) }}</div>
+    <article>
+      <slot />
+    </article>
   </div>
 </template>
 
@@ -88,10 +90,7 @@ onMounted(() => {
   background-color: var(--bg);
 }
 
-.GhostFrame {
-  border: 1px solid var(--accent);
-  position: fixed;
-  width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
-  height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
+.EDraggable article {
+  padding: var(--p-2);
 }
 </style>
