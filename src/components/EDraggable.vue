@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableBar from "./EDraggableBar.vue";
@@ -32,7 +32,7 @@ const { width: windowWidth } = useWindow();
 const tileDivider = 20;
 const tileSize = windowWidth.value / tileDivider;
 
-const { x, y, style, isDragging } = useDraggable(draggableRef, {
+const { x, y, isDragging } = useDraggable(draggableRef, {
   preventDefault: true,
   onEnd: () => {
     x.value =
@@ -57,6 +57,20 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
 
 const snappedX = computed(() => Math.round(x.value / tileSize));
 const snappedY = computed(() => Math.round(y.value / tileSize));
+
+const style = computed(() => {
+  if (isDragging.value) {
+    return {
+      top: `${y.value}px`,
+      left: `${x.value}px`,
+    };
+  } else {
+    return {
+      top: `calc(${snappedY.value} * var(--breadboard-tile-size))`,
+      left: `calc(${snappedX.value} * var(--breadboard-tile-size))`,
+    };
+  }
+});
 
 const minimiseElectron = () => {
   emit("update-electrons", { ...props, isMinimised: true });
@@ -94,6 +108,7 @@ onMounted(() => {
   width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
   height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
   background-color: var(--bg);
+  touch-action: none;
 }
 .EDraggable.isDragging {
   z-index: 100;
