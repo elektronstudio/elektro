@@ -3,11 +3,12 @@ import EDraggableBar from "./EDraggableBar.vue";
 
 type Electron = {
   title: string;
-  id: string;
+  electronId: string;
   initialSnappedX: number;
   initialSnappedY: number;
   tilesWidth: number;
   tilesHeight: number;
+  isMinimised: boolean;
 };
 
 type Props = {
@@ -17,7 +18,7 @@ type Props = {
 const { electrons } = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: "unminimise-electron", value: string): void;
+  (e: "update-electrons", electron: Electron): void;
 }>();
 </script>
 
@@ -26,7 +27,7 @@ const emit = defineEmits<{
     <EDraggableBar
       v-for="electron in electrons"
       :title="electron.title"
-      @click="emit('unminimise-electron', electron.id)"
+      @click="emit('update-electrons', { ...electron, isMinimised: false })"
     />
   </nav>
 </template>

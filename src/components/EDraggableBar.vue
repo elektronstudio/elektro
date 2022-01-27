@@ -21,6 +21,8 @@ const { title } = defineProps<Props>();
   background-color: var(--bg);
   height: var(--h-6);
   padding: var(--p-2);
+  padding-right: var(--p-6);
+  position: relative;
 }
 .EDraggableBar h6 {
   margin: 0;
@@ -31,6 +33,7 @@ const { title } = defineProps<Props>();
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
 .EDraggableBar:hover {
   background-color: var(--gray-600);
 }

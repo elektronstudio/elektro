@@ -1,116 +1,147 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { shallowRef, watch, onMounted, computed } from "vue";
 import EBreadBoard from "../components/EBreadBoard.vue";
 import EDraggable from "../components/EDraggable.vue";
 import EElectronsBar from "../components/EElectronsBar.vue";
 
 type Electron = {
   title: string;
-  id: string;
+  electronId: string;
   initialSnappedX: number;
   initialSnappedY: number;
   tilesWidth: number;
   tilesHeight: number;
+  isMinimised: boolean;
 };
 
 const electrons = [
   {
     title: "Electron 1",
-    id: "draggable-electron-1",
-    initialSnappedX: 4,
-    initialSnappedY: 2,
+    electronId: "draggable-electron-1",
+    initialSnappedX: 1,
+    initialSnappedY: 1,
     tilesWidth: 4,
     tilesHeight: 4,
+    isMinimised: false,
   },
   {
     title: "Electron 2",
-    id: "draggable-electron-2",
-    initialSnappedX: 8,
-    initialSnappedY: 6,
+    electronId: "draggable-electron-2",
+    initialSnappedX: 6,
+    initialSnappedY: 1,
     tilesWidth: 6,
     tilesHeight: 2,
+    isMinimised: false,
   },
   {
     title: "Extra long title, with long text",
-    id: "draggable-electron-3",
-    initialSnappedX: 2,
-    initialSnappedY: 3,
+    electronId: "draggable-electron-3",
+    initialSnappedX: 1,
+    initialSnappedY: 6,
     tilesWidth: 2,
     tilesHeight: 2,
+    isMinimised: false,
   },
   {
-    title: "More modules",
-    id: "draggable-electron-4",
-    initialSnappedX: 2,
-    initialSnappedY: 3,
+    title: "Electron 4",
+    electronId: "draggable-electron-4",
+    initialSnappedX: 5,
+    initialSnappedY: 5,
     tilesWidth: 2,
     tilesHeight: 2,
+    isMinimised: false,
   },
   {
-    title: "More modules",
-    id: "draggable-electron-5",
-    initialSnappedX: 2,
-    initialSnappedY: 3,
+    title: "Electron 5",
+    electronId: "draggable-electron-5",
+    initialSnappedX: 8,
+    initialSnappedY: 5,
     tilesWidth: 2,
     tilesHeight: 2,
+    isMinimised: true,
   },
   {
-    title: "More modules",
-    id: "draggable-electron-6",
-    initialSnappedX: 2,
-    initialSnappedY: 3,
+    title: "Electron 6",
+    electronId: "draggable-electron-6",
+    initialSnappedX: 11,
+    initialSnappedY: 4,
     tilesWidth: 2,
     tilesHeight: 2,
+    isMinimised: true,
   },
   {
-    title: "More modules",
-    id: "draggable-electron-7",
-    initialSnappedX: 2,
-    initialSnappedY: 3,
+    title: "Electron 7",
+    electronId: "draggable-electron-7",
+    initialSnappedX: 4,
+    initialSnappedY: 10,
     tilesWidth: 2,
     tilesHeight: 2,
+    isMinimised: true,
   },
   {
-    title: "More modules",
-    id: "draggable-electron-8",
-    initialSnappedX: 2,
-    initialSnappedY: 3,
+    title: "Electron 8",
+    electronId: "draggable-electron-8",
+    initialSnappedX: 7,
+    initialSnappedY: 10,
     tilesWidth: 2,
     tilesHeight: 2,
+    isMinimised: true,
   },
 ] as Electron[];
 
-const minimisedElectrons = ref([] as Electron[]);
+const electronsState = shallowRef<Electron[]>([]);
 
-const addMinimizedElectron = (electronId: string) => {
-  const electron = electrons.find((m) => m.id === electronId);
-  if (electron && !minimisedElectrons.value.some((m) => m.id === electron.id)) {
-    minimisedElectrons.value.push(electron);
-  } else if (electron) {
-    minimisedElectrons.value = minimisedElectrons.value.filter(
-      (electron) => electron.id !== electronId,
-    );
+const updateElectronState = (electron: Electron) => {
+  if (!electron) {
+    return;
   }
+
+  electronsState.value = electronsState.value.filter(
+    (m) => m.electronId !== electron.electronId,
+  );
+  electronsState.value.push(electron);
 };
+
+const activeElectrons = computed(() => {
+  return electronsState.value.filter((m) => !m.isMinimised);
+});
+const minimisedElectrons = computed(() =>
+  electronsState.value.filter((m) => m.isMinimised),
+);
+
+watch(electronsState, () => {
+  if (electronsState.value.length > 0) {
+    localStorage.setItem("windowsState", JSON.stringify(electronsState.value));
+  }
+});
+
+onMounted(() => {
+  if (localStorage.getItem("windowsState")) {
+    const localState = JSON.parse(localStorage.getItem("windowsState")!);
+    electronsState.value = localState;
+  } else {
+    electronsState.value = electrons;
+  }
+});
 </script>
 
 <template>
   <EBreadBoard>
-    <template v-for="electron in electrons">
+    <template v-for="electron in activeElectrons" :key="electron.electronId">
       <EDraggable
-        v-if="!minimisedElectrons.some((m) => m.id === electron.id)"
         :title="electron.title"
-        :electron-id="electron.id"
+        :electron-id="electron.electronId"
         :tiles-width="electron.tilesWidth"
         :tiles-height="electron.tilesHeight"
         :initial-snapped-x="electron.initialSnappedX"
         :initial-snapped-y="electron.initialSnappedY"
-        @minimise-electron="addMinimizedElectron"
+        :is-minimised="electron.isMinimised"
+        @update-electrons="updateElectronState"
       />
     </template>
     <EElectronsBar
       :electrons="minimisedElectrons"
-      @unminimise-electron="addMinimizedElectron"
+      @update-electrons="updateElectronState"
     />
   </EBreadBoard>
 </template>

@@ -4,26 +4,27 @@ import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableBar from "./EDraggableBar.vue";
 
-type Props = {
+type Electron = {
   title: string;
   electronId: string;
-  tilesWidth?: number;
-  tilesHeight?: number;
-  initialSnappedX?: number;
-  initialSnappedY?: number;
+  initialSnappedX: number;
+  initialSnappedY: number;
+  tilesWidth: number;
+  tilesHeight: number;
+  isMinimised: boolean;
 };
 
+const props = defineProps<Electron>();
 const {
   title,
-  electronId,
   tilesWidth = 1,
   tilesHeight = 1,
   initialSnappedX = 0,
   initialSnappedY = 0,
-} = defineProps<Props>();
+} = props;
 
 const emit = defineEmits<{
-  (e: "minimise-electron", value: string): void;
+  (e: "update-electrons", value: Electron): void;
 }>();
 
 const draggableRef = ref<HTMLElement | null>(null);
@@ -32,7 +33,6 @@ const tileDivider = 20;
 const tileSize = windowWidth.value / tileDivider;
 
 const { x, y, style, isDragging } = useDraggable(draggableRef, {
-  // initialValue: { x: 0, y: 0 },
   preventDefault: true,
   onEnd: () => {
     x.value =
@@ -42,39 +42,45 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
         ? tileSize * snappedX.value
         : 0;
     y.value = snappedY.value >= 0 ? tileSize * snappedY.value : 0;
-    localStorage.setItem(
-      electronId,
-      JSON.stringify({ x: snappedX.value, y: snappedY.value }),
-    );
+    if (
+      initialSnappedX !== snappedX.value ||
+      initialSnappedY !== snappedY.value
+    ) {
+      emit("update-electrons", {
+        ...props,
+        initialSnappedX: snappedX.value,
+        initialSnappedY: snappedY.value,
+      });
+    }
   },
 });
 
 const snappedX = computed(() => Math.round(x.value / tileSize));
 const snappedY = computed(() => Math.round(y.value / tileSize));
 
+const minimiseElectron = () => {
+  emit("update-electrons", { ...props, isMinimised: true });
+};
+
 onMounted(() => {
-  if (localStorage.getItem(electronId)) {
-    const { x: storedX, y: storedY } = JSON.parse(
-      localStorage.getItem(electronId)!,
-    );
-    x.value = tileSize * storedX;
-    y.value = tileSize * storedY;
-  } else {
-    x.value = tileSize * initialSnappedX;
-    y.value = tileSize * initialSnappedY;
-  }
+  x.value = tileSize * initialSnappedX;
+  y.value = tileSize * initialSnappedY;
 });
 </script>
 
 <template>
-  <div class="EDraggable" :style="style" style="touch-action: none">
+  <div
+    class="EDraggable"
+    :style="style"
+    style="touch-action: none"
+    :class="{ isDragging: isDragging }"
+  >
+    <button @click.stop="minimiseElectron">ⅹ</button>
     <div ref="draggableRef">
       <EDraggableBar
         :title="title"
         :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
-      >
-        <button @click="emit('minimise-electron', electronId)">X</button>
-      </EDraggableBar>
+      />
     </div>
     <article>
       <slot />
@@ -89,8 +95,23 @@ onMounted(() => {
   height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
   background-color: var(--bg);
 }
+.EDraggable.isDragging {
+  z-index: 100;
+}
 
 .EDraggable article {
   padding: var(--p-2);
+}
+
+.EDraggable button {
+  z-index: 2;
+  height: var(--h-6);
+  width: var(--w-6);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.EDraggable button:hover {
+  background-color: var(--gray-300);
 }
 </style>
