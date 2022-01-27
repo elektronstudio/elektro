@@ -36,11 +36,15 @@ const emit = defineEmits<{
   display: flex;
   position: fixed;
   bottom: 0;
-  left: var(--breadboard-tile-size);
+  width: 100%;
+  padding-left: var(--breadboard-tile-size);
+  overflow-x: auto;
 }
 
 .EElectronsBar > * {
-  width: 16rem;
+  flex: 1 1 16rem;
+  min-width: 4rem;
+  max-width: 16rem;
   margin-right: var(--m-3);
 }
 </style>
