@@ -35,13 +35,6 @@ const tileSize = windowWidth.value / tileDivider;
 const { x, y, isDragging } = useDraggable(draggableRef, {
   preventDefault: true,
   onEnd: () => {
-    x.value =
-      snappedX.value + tilesWidth >= 20
-        ? (20 - tilesWidth) * tileSize
-        : snappedX.value >= 0
-        ? tileSize * snappedX.value
-        : 0;
-    y.value = snappedY.value >= 0 ? tileSize * snappedY.value : 0;
     if (
       initialSnappedX !== snappedX.value ||
       initialSnappedY !== snappedY.value
