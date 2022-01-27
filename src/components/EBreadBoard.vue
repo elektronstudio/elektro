@@ -38,7 +38,7 @@
       transparent calc(var(--breadboard-tile-size) - var(--pin-size)),
       transparent calc(var(--breadboard-tile-size) + var(--pin-size))
     ),
-    repeating-linear-gradient(var(--gray-300), var(--gray-300));
+    repeating-linear-gradient(var(--gray-500), var(--gray-500));
 }
 
 .testGrid {
