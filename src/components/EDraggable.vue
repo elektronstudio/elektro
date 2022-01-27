@@ -69,7 +69,10 @@ onMounted(() => {
 <template>
   <div class="EDraggable" :style="style" style="touch-action: none">
     <div ref="draggableRef">
-      <EDraggableBar :title="title">
+      <EDraggableBar
+        :title="title"
+        :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
+      >
         <button @click="emit('minimise-electron', electronId)">X</button>
       </EDraggableBar>
     </div>
@@ -84,6 +87,7 @@ onMounted(() => {
   height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
   background-color: var(--bg);
 }
+
 .GhostFrame {
   border: 1px solid var(--accent);
   position: fixed;
