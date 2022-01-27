@@ -70,7 +70,7 @@ code {
 }
 /* @TODO: Should be used on body when using in elektron.art */
 body:after {
-  content: "";
+  /* content: ""; */
   position: fixed;
   top: 0;
   left: 0;

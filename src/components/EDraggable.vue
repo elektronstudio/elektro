@@ -102,6 +102,8 @@ onMounted(() => {
   height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
   background-color: var(--bg);
   touch-action: none;
+  background-size: 10px 10px;
+  background-repeat: repeat;
 }
 .EDraggable.isDragging {
   z-index: 100;
