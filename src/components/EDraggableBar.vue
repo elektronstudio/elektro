@@ -22,7 +22,6 @@ const { title } = defineProps<Props>();
   height: var(--h-6);
   padding: var(--p-2);
   padding-right: var(--p-6);
-  position: relative;
 }
 .EDraggableBar h6 {
   margin: 0;
