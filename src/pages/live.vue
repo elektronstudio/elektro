@@ -7,8 +7,8 @@ import EElectronsBar from "../components/EElectronsBar.vue";
 type Draggable = {
   title: string;
   electronId: string;
-  initialSnappedX: number;
-  initialSnappedY: number;
+  gridPosX: number;
+  gridPosY: number;
   tilesWidth: number;
   tilesHeight: number;
   isMinimised: boolean;
@@ -18,8 +18,8 @@ const electrons = [
   {
     title: "Electron 1",
     electronId: "draggable-electron-1",
-    initialSnappedX: 1,
-    initialSnappedY: 1,
+    gridPosX: 1,
+    gridPosY: 1,
     tilesWidth: 4,
     tilesHeight: 4,
     isMinimised: false,
@@ -27,8 +27,8 @@ const electrons = [
   {
     title: "Electron 2",
     electronId: "draggable-electron-2",
-    initialSnappedX: 6,
-    initialSnappedY: 1,
+    gridPosX: 6,
+    gridPosY: 1,
     tilesWidth: 6,
     tilesHeight: 2,
     isMinimised: false,
@@ -36,8 +36,8 @@ const electrons = [
   {
     title: "Extra long title, with long text",
     electronId: "draggable-electron-3",
-    initialSnappedX: 1,
-    initialSnappedY: 6,
+    gridPosX: 1,
+    gridPosY: 6,
     tilesWidth: 2,
     tilesHeight: 2,
     isMinimised: false,
@@ -45,8 +45,8 @@ const electrons = [
   {
     title: "Electron 4",
     electronId: "draggable-electron-4",
-    initialSnappedX: 5,
-    initialSnappedY: 5,
+    gridPosX: 5,
+    gridPosY: 5,
     tilesWidth: 2,
     tilesHeight: 2,
     isMinimised: false,
@@ -54,8 +54,8 @@ const electrons = [
   {
     title: "Electron 5",
     electronId: "draggable-electron-5",
-    initialSnappedX: 8,
-    initialSnappedY: 5,
+    gridPosX: 8,
+    gridPosY: 5,
     tilesWidth: 2,
     tilesHeight: 2,
     isMinimised: true,
@@ -63,8 +63,8 @@ const electrons = [
   {
     title: "Electron 6",
     electronId: "draggable-electron-6",
-    initialSnappedX: 11,
-    initialSnappedY: 4,
+    gridPosX: 11,
+    gridPosY: 4,
     tilesWidth: 2,
     tilesHeight: 2,
     isMinimised: true,
@@ -72,8 +72,8 @@ const electrons = [
   {
     title: "Electron 7",
     electronId: "draggable-electron-7",
-    initialSnappedX: 4,
-    initialSnappedY: 10,
+    gridPosX: 4,
+    gridPosY: 10,
     tilesWidth: 2,
     tilesHeight: 2,
     isMinimised: true,
@@ -81,8 +81,8 @@ const electrons = [
   {
     title: "Electron 8",
     electronId: "draggable-electron-8",
-    initialSnappedX: 7,
-    initialSnappedY: 10,
+    gridPosX: 7,
+    gridPosY: 10,
     tilesWidth: 2,
     tilesHeight: 2,
     isMinimised: true,
@@ -133,8 +133,8 @@ onMounted(() => {
         :electron-id="electron.electronId"
         :tiles-width="electron.tilesWidth"
         :tiles-height="electron.tilesHeight"
-        :initial-snapped-x="electron.initialSnappedX"
-        :initial-snapped-y="electron.initialSnappedY"
+        :initial-snapped-x="electron.gridPosX"
+        :initial-snapped-y="electron.gridPosY"
         :is-minimised="electron.isMinimised"
         @update-electrons="updateElectronState"
       />

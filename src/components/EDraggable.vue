@@ -7,8 +7,8 @@ import EDraggableTopBar from "./EDraggableTopBar.vue";
 type Draggable = {
   title: string;
   electronId: string;
-  initialSnappedX: number;
-  initialSnappedY: number;
+  gridPosX: number;
+  gridPosY: number;
   tilesWidth: number;
   tilesHeight: number;
   isMinimised: boolean;
@@ -20,8 +20,8 @@ const {
   electronId,
   tilesWidth = 1,
   tilesHeight = 1,
-  initialSnappedX = 0,
-  initialSnappedY = 0,
+  gridPosX = 0,
+  gridPosY = 0,
 } = props;
 
 const emit = defineEmits<{
@@ -38,14 +38,11 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
   onEnd: () => {
     calculateCoordinates();
 
-    if (
-      initialSnappedX !== snappedX.value ||
-      initialSnappedY !== snappedY.value
-    ) {
+    if (gridPosX !== snappedX.value || gridPosY !== snappedY.value) {
       emit("update-electrons", {
         ...props,
-        initialSnappedX: snappedX.value,
-        initialSnappedY: snappedY.value,
+        gridPosX: snappedX.value,
+        gridPosY: snappedY.value,
       });
     }
   },
@@ -71,8 +68,8 @@ const calculateCoordinates = function () {
 };
 
 onMounted(() => {
-  x.value = tileSize.value * initialSnappedX;
-  y.value = tileSize.value * initialSnappedY;
+  x.value = tileSize.value * gridPosX;
+  y.value = tileSize.value * gridPosY;
 
   window.addEventListener("resize", calculateCoordinates);
 });

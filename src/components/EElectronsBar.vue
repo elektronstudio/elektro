@@ -4,8 +4,8 @@ import EDraggableTopBar from "./EDraggableTopBar.vue";
 type Electron = {
   title: string;
   electronId: string;
-  initialSnappedX: number;
-  initialSnappedY: number;
+  gridPosX: number;
+  gridPosY: number;
   tilesWidth: number;
   tilesHeight: number;
   isMinimised: boolean;
