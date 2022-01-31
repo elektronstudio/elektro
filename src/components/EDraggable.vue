@@ -37,9 +37,7 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
   preventDefault: true,
   onEnd: () => {
     calculateCoordinates();
-    if (electronId === "draggable-electron-1") {
-      console.log(x.value);
-    }
+
     if (
       initialSnappedX !== snappedX.value ||
       initialSnappedY !== snappedY.value
