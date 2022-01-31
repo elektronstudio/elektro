@@ -4,7 +4,7 @@ import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableBar from "./EDraggableBar.vue";
 
-type Electron = {
+type Draggable = {
   title: string;
   electronId: string;
   initialSnappedX: number;
@@ -14,7 +14,7 @@ type Electron = {
   isMinimised: boolean;
 };
 
-const props = defineProps<Electron>();
+const props = defineProps<Draggable>();
 const {
   title,
   tilesWidth = 1,
@@ -24,7 +24,7 @@ const {
 } = props;
 
 const emit = defineEmits<{
-  (e: "update-electrons", value: Electron): void;
+  (e: "update-electrons", value: Draggable): void;
 }>();
 
 const draggableRef = ref<HTMLElement | null>(null);

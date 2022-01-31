@@ -4,7 +4,7 @@ import EBreadBoard from "../components/EBreadBoard.vue";
 import EDraggable from "../components/EDraggable.vue";
 import EElectronsBar from "../components/EElectronsBar.vue";
 
-type Electron = {
+type Draggable = {
   title: string;
   electronId: string;
   initialSnappedX: number;
@@ -87,11 +87,11 @@ const electrons = [
     tilesHeight: 2,
     isMinimised: true,
   },
-] as Electron[];
+] as Draggable[];
 
-const electronsState = shallowRef<Electron[]>([]);
+const electronsState = shallowRef<Draggable[]>([]);
 
-const updateElectronState = (electron: Electron) => {
+const updateElectronState = (electron: Draggable) => {
   if (!electron) {
     return;
   }
