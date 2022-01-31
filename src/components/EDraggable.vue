@@ -17,6 +17,7 @@ type Draggable = {
 const props = defineProps<Draggable>();
 const {
   title,
+  electronId,
   tilesWidth = 1,
   tilesHeight = 1,
   initialSnappedX = 0,
@@ -30,11 +31,15 @@ const emit = defineEmits<{
 const draggableRef = ref<HTMLElement | null>(null);
 const { width: windowWidth } = useWindow();
 const tileDivider = 20;
-const tileSize = windowWidth.value / tileDivider;
+const tileSize = ref(windowWidth.value / tileDivider);
 
-const { x, y, isDragging } = useDraggable(draggableRef, {
+const { x, y, style, isDragging } = useDraggable(draggableRef, {
   preventDefault: true,
   onEnd: () => {
+    calculateCoordinates();
+    if (electronId === "draggable-electron-1") {
+      console.log(x.value);
+    }
     if (
       initialSnappedX !== snappedX.value ||
       initialSnappedY !== snappedY.value
@@ -48,30 +53,30 @@ const { x, y, isDragging } = useDraggable(draggableRef, {
   },
 });
 
-const snappedX = computed(() => Math.round(x.value / tileSize));
-const snappedY = computed(() => Math.round(y.value / tileSize));
-
-const style = computed(() => {
-  if (isDragging.value) {
-    return {
-      top: `${y.value}px`,
-      left: `${x.value}px`,
-    };
-  } else {
-    return {
-      top: `calc(${snappedY.value} * var(--breadboard-tile-size))`,
-      left: `calc(${snappedX.value} * var(--breadboard-tile-size))`,
-    };
-  }
-});
+const snappedX = computed(() => Math.round(x.value / tileSize.value));
+const snappedY = computed(() => Math.round(y.value / tileSize.value));
 
 const minimiseElectron = () => {
   emit("update-electrons", { ...props, isMinimised: true });
 };
 
+const calculateCoordinates = function () {
+  tileSize.value = windowWidth.value / tileDivider;
+
+  x.value =
+    snappedX.value + tilesWidth >= 20
+      ? (20 - tilesWidth) * tileSize.value
+      : snappedX.value >= 0
+      ? tileSize.value * snappedX.value
+      : 0;
+  y.value = snappedY.value >= 0 ? tileSize.value * snappedY.value : 0;
+};
+
 onMounted(() => {
-  x.value = tileSize * initialSnappedX;
-  y.value = tileSize * initialSnappedY;
+  x.value = tileSize.value * initialSnappedX;
+  y.value = tileSize.value * initialSnappedY;
+
+  window.addEventListener("resize", calculateCoordinates);
 });
 </script>
 
