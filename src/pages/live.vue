@@ -133,8 +133,8 @@ onMounted(() => {
         :electron-id="electron.electronId"
         :tiles-width="electron.tilesWidth"
         :tiles-height="electron.tilesHeight"
-        :initial-snapped-x="electron.gridPosX"
-        :initial-snapped-y="electron.gridPosY"
+        :grid-pos-x="electron.gridPosX"
+        :grid-pos-y="electron.gridPosY"
         :is-minimised="electron.isMinimised"
         @update-electrons="updateElectronState"
       />
