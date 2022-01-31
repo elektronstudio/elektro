@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, watch } from "vue";
 import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
-import EDraggableBar from "./EDraggableBar.vue";
+import EDraggableTopBar from "./EDraggableTopBar.vue";
 
 type Draggable = {
   title: string;
@@ -87,7 +87,7 @@ onMounted(() => {
   >
     <button @click.stop="minimiseElectron">ⅹ</button>
     <div ref="draggableRef">
-      <EDraggableBar
+      <EDraggableTopBar
         :title="title"
         :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
       />

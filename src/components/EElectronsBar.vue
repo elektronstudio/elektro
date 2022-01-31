@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import EDraggableBar from "./EDraggableBar.vue";
+import EDraggableTopBar from "./EDraggableTopBar.vue";
 
 type Electron = {
   title: string;
@@ -24,7 +24,7 @@ const emit = defineEmits<{
 
 <template>
   <nav class="EElectronsBar">
-    <EDraggableBar
+    <EDraggableTopBar
       v-for="electron in electrons"
       :title="electron.title"
       @click="emit('update-electrons', { ...electron, isMinimised: false })"
