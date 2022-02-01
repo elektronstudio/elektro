@@ -5,13 +5,13 @@ import { useDraggable } from "@vueuse/core";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 
 type Draggable = {
-  title: string;
   draggableId: string;
-  gridPosX: number;
-  gridPosY: number;
-  tilesWidth: number;
-  tilesHeight: number;
-  isMinimised: boolean;
+  title?: string;
+  gridPosX?: number;
+  gridPosY?: number;
+  tilesWidth?: number;
+  tilesHeight?: number;
+  isMinimised?: boolean;
 };
 
 const props = defineProps<Draggable>();
@@ -36,6 +36,8 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
   preventDefault: true,
   onEnd: () => {
     calculateCoordinates();
+    // if (title === "Electron 1") {
+    // }
     if (gridPosX !== snappedX.value || gridPosY !== snappedY.value) {
       emit("update-draggables", {
         ...props,

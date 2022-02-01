@@ -5,13 +5,13 @@ import EDraggable from "../components/EDraggable.vue";
 import EDraggablesDock from "../components/EDraggablesDock.vue";
 
 type Draggable = {
-  title: string;
   draggableId: string;
-  gridPosX: number;
-  gridPosY: number;
-  tilesWidth: number;
-  tilesHeight: number;
-  isMinimised: boolean;
+  title?: string;
+  gridPosX?: number;
+  gridPosY?: number;
+  tilesWidth?: number;
+  tilesHeight?: number;
+  isMinimised?: boolean;
 };
 
 const draggablesData = [
@@ -87,6 +87,26 @@ const draggablesData = [
     tilesHeight: 2,
     isMinimised: true,
   },
+  {
+    title: "Electron new",
+    draggableId: "draggable-electron-new",
+    gridPosX: 12,
+    gridPosY: 10,
+    tilesWidth: 5,
+    tilesHeight: 5,
+  },
+  {
+    title: "Electron new",
+    draggableId: "draggable-electron-new",
+    gridPosX: 12,
+    gridPosY: 10,
+    tilesWidth: 5,
+    tilesHeight: 5,
+  },
+  {
+    title: "Electron new 2",
+    draggableId: "draggable-electron-new-2",
+  },
 ] as Draggable[];
 
 const draggablesState = ref<Draggable[]>([]);
@@ -95,7 +115,7 @@ const updateDraggablesState = (draggable: Draggable) => {
   if (!draggable) {
     return;
   }
-
+  console.log({ draggable });
   draggablesState.value = draggablesState.value.filter(
     (m) => m.draggableId !== draggable.draggableId,
   );
@@ -112,26 +132,35 @@ const minimisedDraggables = computed(() =>
 
 watch(draggablesState, () => {
   if (draggablesState.value.length > 0) {
+    console.log("change", JSON.stringify(draggablesState.value));
     localStorage.setItem("windowsState", JSON.stringify(draggablesState.value));
   }
 });
 
 onMounted(() => {
-  // @TODO: Check difference, between data and merge with localStorage data
-  if (localStorage.getItem("windowsState")) {
-    const localState = JSON.parse(localStorage.getItem("windowsState")!);
-    draggablesState.value = localState;
-  } else {
-    draggablesState.value = draggablesData;
-  }
+  const initialStates = [] as Draggable[];
+  const localData = localStorage.getItem(`windowsState`);
+  const localDataParsed = localData ? JSON.parse(localData) : undefined;
+
+  draggablesData.forEach((draggable) => {
+    const { draggableId } = draggable;
+    const localDraggable = localDataParsed?.find(
+      (m: Draggable) => m.draggableId === draggableId,
+    );
+    const mergedDraggable = localDraggable
+      ? { ...draggable, ...localDraggable }
+      : { ...draggable };
+    initialStates.push(mergedDraggable);
+  });
+  draggablesState.value = initialStates;
 });
 </script>
 
 <template>
   <EBreadBoard>
     <template
-      v-for="draggable in activeDraggables"
-      :key="draggable.draggableId"
+      v-for="(draggable, index) in activeDraggables"
+      :key="`${draggable.draggableId}-${index}`"
     >
       <EDraggable
         :title="draggable.title"

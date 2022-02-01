@@ -1,6 +1,6 @@
 <script setup lang="ts">
 type Props = {
-  title: string;
+  title?: string;
 };
 
 const { title } = defineProps<Props>();
@@ -8,8 +8,7 @@ const { title } = defineProps<Props>();
 
 <template>
   <nav class="EDraggableTitlebar">
-    <h6>{{ title }}</h6>
-    <slot />
+    <h6 v-if="title">{{ title }}</h6>
   </nav>
 </template>
 

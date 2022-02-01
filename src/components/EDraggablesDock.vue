@@ -1,24 +1,24 @@
 <script setup lang="ts">
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 
-type Electron = {
-  title: string;
+type Draggable = {
   draggableId: string;
-  gridPosX: number;
-  gridPosY: number;
-  tilesWidth: number;
-  tilesHeight: number;
-  isMinimised: boolean;
+  title?: string;
+  gridPosX?: number;
+  gridPosY?: number;
+  tilesWidth?: number;
+  tilesHeight?: number;
+  isMinimised?: boolean;
 };
 
 type Props = {
-  draggables: Electron[];
+  draggables: Draggable[];
 };
 
 const { draggables } = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: "update-draggables", draggable: Electron): void;
+  (e: "update-draggables", draggable: Draggable): void;
 }>();
 </script>
 
