@@ -12,9 +12,14 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/lib.ts"),
       name: "elektro",
-      formats: ["es", "cjs"],
+      formats: ["es", "cjs", "umd"],
       fileName: (format) => {
-        return `elektro.${format.replace("es", "mjs")}`;
+        const formats = {
+          es: "elektro.mjs",
+          cjs: "elektro.cjs",
+          umd: "elektro.js",
+        };
+        return formats[format];
       },
     },
     rollupOptions: {
