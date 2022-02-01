@@ -7,14 +7,14 @@ const { title } = defineProps<Props>();
 </script>
 
 <template>
-  <nav class="EDraggableTopBar">
+  <nav class="EDraggableTitlebar">
     <h6>{{ title }}</h6>
     <slot />
   </nav>
 </template>
 
 <style scoped>
-.EDraggableTopBar {
+.EDraggableTitlebar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,7 +23,7 @@ const { title } = defineProps<Props>();
   padding: var(--p-2);
   padding-right: var(--p-6);
 }
-.EDraggableTopBar h6 {
+.EDraggableTitlebar h6 {
   margin: 0;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
@@ -33,7 +33,7 @@ const { title } = defineProps<Props>();
   overflow: hidden;
 }
 
-.EDraggableTopBar:hover {
+.EDraggableTitlebar:hover {
   background-color: var(--gray-600);
 }
 </style>

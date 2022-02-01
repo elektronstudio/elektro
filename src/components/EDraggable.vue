@@ -2,11 +2,11 @@
 import { ref, computed, onMounted, watch } from "vue";
 import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
-import EDraggableTopBar from "./EDraggableTopBar.vue";
+import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 
 type Draggable = {
   title: string;
-  electronId: string;
+  draggableId: string;
   gridPosX: number;
   gridPosY: number;
   tilesWidth: number;
@@ -17,7 +17,6 @@ type Draggable = {
 const props = defineProps<Draggable>();
 const {
   title,
-  electronId,
   tilesWidth = 1,
   tilesHeight = 1,
   gridPosX = 0,
@@ -25,7 +24,7 @@ const {
 } = props;
 
 const emit = defineEmits<{
-  (e: "update-electrons", value: Draggable): void;
+  (e: "update-draggables", draggable: Draggable): void;
 }>();
 
 const draggableRef = ref<HTMLElement | null>(null);
@@ -37,9 +36,8 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
   preventDefault: true,
   onEnd: () => {
     calculateCoordinates();
-
     if (gridPosX !== snappedX.value || gridPosY !== snappedY.value) {
-      emit("update-electrons", {
+      emit("update-draggables", {
         ...props,
         gridPosX: snappedX.value,
         gridPosY: snappedY.value,
@@ -52,15 +50,15 @@ const snappedX = computed(() => Math.round(x.value / tileSize.value));
 const snappedY = computed(() => Math.round(y.value / tileSize.value));
 
 const minimiseElectron = () => {
-  emit("update-electrons", { ...props, isMinimised: true });
+  emit("update-draggables", { ...props, isMinimised: true });
 };
 
 const calculateCoordinates = function () {
   tileSize.value = windowWidth.value / tileDivider;
 
   x.value =
-    snappedX.value + tilesWidth >= 20
-      ? (20 - tilesWidth) * tileSize.value
+    snappedX.value + tilesWidth >= tileDivider
+      ? (tileDivider - tilesWidth) * tileSize.value
       : snappedX.value >= 0
       ? tileSize.value * snappedX.value
       : 0;
@@ -84,7 +82,7 @@ onMounted(() => {
   >
     <button @click.stop="minimiseElectron">ⅹ</button>
     <div ref="draggableRef">
-      <EDraggableTopBar
+      <EDraggableTitlebar
         :title="title"
         :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
       />

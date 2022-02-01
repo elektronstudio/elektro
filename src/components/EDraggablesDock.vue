@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import EDraggableTopBar from "./EDraggableTopBar.vue";
+import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 
 type Electron = {
   title: string;
-  electronId: string;
+  draggableId: string;
   gridPosX: number;
   gridPosY: number;
   tilesWidth: number;
@@ -12,22 +12,22 @@ type Electron = {
 };
 
 type Props = {
-  electrons: Electron[];
+  draggables: Electron[];
 };
 
-const { electrons } = defineProps<Props>();
+const { draggables } = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: "update-electrons", electron: Electron): void;
+  (e: "update-draggables", draggable: Electron): void;
 }>();
 </script>
 
 <template>
   <nav class="EElectronsBar">
-    <EDraggableTopBar
-      v-for="electron in electrons"
-      :title="electron.title"
-      @click="emit('update-electrons', { ...electron, isMinimised: false })"
+    <EDraggableTitlebar
+      v-for="draggable in draggables"
+      :title="draggable.title"
+      @click="emit('update-draggables', { ...draggable, isMinimised: false })"
     />
   </nav>
 </template>

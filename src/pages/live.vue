@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { shallowRef, watch, onMounted, computed } from "vue";
+import { shallowRef, watch, onMounted, computed, ref } from "vue";
 import EBreadBoard from "../components/EBreadBoard.vue";
 import EDraggable from "../components/EDraggable.vue";
-import EElectronsBar from "../components/EElectronsBar.vue";
+import EDraggablesDock from "../components/EDraggablesDock.vue";
 
 type Draggable = {
   title: string;
-  electronId: string;
+  draggableId: string;
   gridPosX: number;
   gridPosY: number;
   tilesWidth: number;
@@ -14,10 +14,10 @@ type Draggable = {
   isMinimised: boolean;
 };
 
-const electrons = [
+const draggablesData = [
   {
     title: "Electron 1",
-    electronId: "draggable-electron-1",
+    draggableId: "draggable-electron-1",
     gridPosX: 1,
     gridPosY: 1,
     tilesWidth: 4,
@@ -26,7 +26,7 @@ const electrons = [
   },
   {
     title: "Electron 2",
-    electronId: "draggable-electron-2",
+    draggableId: "draggable-electron-2",
     gridPosX: 6,
     gridPosY: 1,
     tilesWidth: 6,
@@ -35,7 +35,7 @@ const electrons = [
   },
   {
     title: "Extra long title, with long text",
-    electronId: "draggable-electron-3",
+    draggableId: "draggable-electron-3",
     gridPosX: 1,
     gridPosY: 6,
     tilesWidth: 2,
@@ -44,7 +44,7 @@ const electrons = [
   },
   {
     title: "Electron 4",
-    electronId: "draggable-electron-4",
+    draggableId: "draggable-electron-4",
     gridPosX: 5,
     gridPosY: 5,
     tilesWidth: 2,
@@ -53,7 +53,7 @@ const electrons = [
   },
   {
     title: "Electron 5",
-    electronId: "draggable-electron-5",
+    draggableId: "draggable-electron-5",
     gridPosX: 8,
     gridPosY: 5,
     tilesWidth: 2,
@@ -62,7 +62,7 @@ const electrons = [
   },
   {
     title: "Electron 6",
-    electronId: "draggable-electron-6",
+    draggableId: "draggable-electron-6",
     gridPosX: 11,
     gridPosY: 4,
     tilesWidth: 2,
@@ -71,7 +71,7 @@ const electrons = [
   },
   {
     title: "Electron 7",
-    electronId: "draggable-electron-7",
+    draggableId: "draggable-electron-7",
     gridPosX: 4,
     gridPosY: 10,
     tilesWidth: 2,
@@ -80,7 +80,7 @@ const electrons = [
   },
   {
     title: "Electron 8",
-    electronId: "draggable-electron-8",
+    draggableId: "draggable-electron-8",
     gridPosX: 7,
     gridPosY: 10,
     tilesWidth: 2,
@@ -89,59 +89,64 @@ const electrons = [
   },
 ] as Draggable[];
 
-const electronsState = shallowRef<Draggable[]>([]);
+const draggablesState = ref<Draggable[]>([]);
 
-const updateElectronState = (electron: Draggable) => {
-  if (!electron) {
+const updateDraggablesState = (draggable: Draggable) => {
+  if (!draggable) {
     return;
   }
 
-  electronsState.value = electronsState.value.filter(
-    (m) => m.electronId !== electron.electronId,
+  draggablesState.value = draggablesState.value.filter(
+    (m) => m.draggableId !== draggable.draggableId,
   );
-  electronsState.value.push(electron);
+  draggablesState.value.push(draggable);
 };
 
-const activeElectrons = computed(() => {
-  return electronsState.value.filter((m) => !m.isMinimised);
+const activeDraggables = computed(() => {
+  return draggablesState.value.filter((m) => !m.isMinimised);
 });
-const minimisedElectrons = computed(() =>
-  electronsState.value.filter((m) => m.isMinimised),
+
+const minimisedDraggables = computed(() =>
+  draggablesState.value.filter((m) => m.isMinimised),
 );
 
-watch(electronsState, () => {
-  if (electronsState.value.length > 0) {
-    localStorage.setItem("windowsState", JSON.stringify(electronsState.value));
+watch(draggablesState, () => {
+  if (draggablesState.value.length > 0) {
+    localStorage.setItem("windowsState", JSON.stringify(draggablesState.value));
   }
 });
 
 onMounted(() => {
+  // @TODO: Check difference, between data and merge with localStorage data
   if (localStorage.getItem("windowsState")) {
     const localState = JSON.parse(localStorage.getItem("windowsState")!);
-    electronsState.value = localState;
+    draggablesState.value = localState;
   } else {
-    electronsState.value = electrons;
+    draggablesState.value = draggablesData;
   }
 });
 </script>
 
 <template>
   <EBreadBoard>
-    <template v-for="electron in activeElectrons" :key="electron.electronId">
+    <template
+      v-for="draggable in activeDraggables"
+      :key="draggable.draggableId"
+    >
       <EDraggable
-        :title="electron.title"
-        :electron-id="electron.electronId"
-        :tiles-width="electron.tilesWidth"
-        :tiles-height="electron.tilesHeight"
-        :grid-pos-x="electron.gridPosX"
-        :grid-pos-y="electron.gridPosY"
-        :is-minimised="electron.isMinimised"
-        @update-electrons="updateElectronState"
+        :title="draggable.title"
+        :draggable-id="draggable.draggableId"
+        :tiles-width="draggable.tilesWidth"
+        :tiles-height="draggable.tilesHeight"
+        :grid-pos-x="draggable.gridPosX"
+        :grid-pos-y="draggable.gridPosY"
+        :is-minimised="draggable.isMinimised"
+        @update-draggables="updateDraggablesState"
       />
     </template>
-    <EElectronsBar
-      :electrons="minimisedElectrons"
-      @update-electrons="updateElectronState"
+    <EDraggablesDock
+      :draggables="minimisedDraggables"
+      @update-draggables="updateDraggablesState"
     />
   </EBreadBoard>
 </template>
