@@ -1,3 +1,5 @@
+import { shuffle } from "./array";
+
 export default function randomString(length = 36): string {
   return [...Array(length)]
     .map(() => (~~(Math.random() * 36)).toString(36))
@@ -9,7 +11,7 @@ export const randomId = (length = 16) => {
   return shuffle(letters).slice(0, length).join("");
 };
 
-export const safeJsonParse = (str) => {
+export const safeJsonParse = (str: any) => {
   try {
     return JSON.parse(str);
   } catch (err) {

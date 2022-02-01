@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import randomString from "../utils/randomString";
+import randomString from "../utils/string";
 import EInput from "./EInput.vue";
 import ELabel from "./ELabel.vue";
 
