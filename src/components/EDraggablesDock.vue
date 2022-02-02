@@ -23,7 +23,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <nav class="EElectronsBar">
+  <nav class="EDraggablesDock">
     <EDraggableTitlebar
       v-for="draggable in draggables"
       :title="draggable.title"
@@ -33,7 +33,7 @@ const emit = defineEmits<{
 </template>
 
 <style scoped>
-.EElectronsBar {
+.EDraggablesDock {
   display: flex;
   position: fixed;
   bottom: 0;
@@ -42,7 +42,7 @@ const emit = defineEmits<{
   overflow-x: auto;
 }
 
-.EElectronsBar > * {
+.EDraggablesDock > * {
   flex: 1 1 16rem;
   min-width: 4rem;
   max-width: 16rem;

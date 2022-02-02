@@ -5,6 +5,8 @@ import EDraggable from "../components/EDraggable.vue";
 import EDraggablesDock from "../components/EDraggablesDock.vue";
 import EChat from "../components/EChat.vue";
 
+type ContentType = "chat" | "text" | "image" | "video";
+
 type Draggable = {
   draggableId: string;
   title?: string;
@@ -13,6 +15,7 @@ type Draggable = {
   tilesWidth?: number;
   tilesHeight?: number;
   isMinimised?: boolean;
+  contentType?: ContentType;
 };
 
 const draggablesData = [
@@ -100,7 +103,28 @@ const draggablesData = [
     title: "Electron new 2",
     draggableId: "draggable-electron-new-2",
   },
+  {
+    title: "Chat",
+    draggableId: "elektron-chat",
+    contentType: "chat",
+    tilesWidth: 4,
+    tilesHeight: 6,
+  },
 ] as Draggable[];
+
+const findComponent = (contentType: ContentType) => {
+  let componentName;
+  switch (contentType) {
+    case "chat":
+      componentName = "e-chat";
+      break;
+
+    default:
+      break;
+  }
+
+  return componentName;
+};
 
 const draggablesState = ref<Draggable[]>([]);
 
@@ -162,12 +186,18 @@ onMounted(() => {
         :grid-pos-y="draggable.gridPosY"
         :is-minimised="draggable.isMinimised"
         @update-draggables="updateDraggablesState"
-      />
+      >
+        <!-- @TODO: How to make dynamic components work -->
+        <component
+          v-if="draggable.contentType"
+          :is="findComponent(draggable.contentType)"
+        />
+        <EChat v-if="draggable.contentType === 'chat'" />
+      </EDraggable>
     </template>
     <EDraggablesDock
       :draggables="minimisedDraggables"
       @update-draggables="updateDraggablesState"
     />
-    <EChat />
   </EBreadBoard>
 </template>
