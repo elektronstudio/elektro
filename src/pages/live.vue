@@ -96,14 +96,6 @@ const draggablesData = [
     tilesHeight: 5,
   },
   {
-    title: "Electron new",
-    draggableId: "draggable-electron-new",
-    gridPosX: 12,
-    gridPosY: 10,
-    tilesWidth: 5,
-    tilesHeight: 5,
-  },
-  {
     title: "Electron new 2",
     draggableId: "draggable-electron-new-2",
   },
