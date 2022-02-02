@@ -30,7 +30,7 @@ export const createMessage = (message: Object): string => {
 
 export const messages = ref<Message[]>([]);
 
-export const loadMessages = () => {
+export const initMessages = () => {
   fetch(config.messagesUrl as RequestInfo)
     .then((res) => res.json())
     .then((loadedMessages: Message[]) => {
@@ -43,9 +43,10 @@ export const loadMessages = () => {
     });
 
   ws.addEventListener("message", ({ data }) => {
-    // ws payload can also contain binary data
+    // Websocket payload can also contain binary data
+    // so we try to be on safe side
     const message = safeJsonParse(data);
-    // push() to the end of messages.value does
+    // Note that push() to the end of messages.value does
     // not always work / preserve reactivity
     messages.value = [...messages.value, message];
   });

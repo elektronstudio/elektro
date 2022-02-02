@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { onKeyStroke } from "@vueuse/core";
+import { ref, watchEffect } from "vue";
+import { useMagicKeys } from "@vueuse/core";
 import routes from "virtual:generated-pages";
-import { ref } from "vue";
 import ETitle from "./ETitle.vue";
 
 const rs = Object.values(routes)
@@ -10,8 +10,12 @@ const rs = Object.values(routes)
 
 const showDebug = ref(false);
 
-onKeyStroke("d", (e) => {
-  showDebug.value = !showDebug.value;
+const { shift, d } = useMagicKeys();
+
+watchEffect(() => {
+  if (shift.value && d.value) {
+    showDebug.value = !showDebug.value;
+  }
 });
 </script>
 <template>

@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { EBox, EButton, EFormTextArea } from "../lib";
-import { loadMessages, messages } from "../utils/message";
-import { useChat } from "../utils/chat";
+import { initMessages, useChat } from "../utils";
+// This goes to the main app instance,
+// it loads historic chat messages
+// and sets up ws event handling
+initMessages();
+
 const {
   chatMessages,
   newChatMessage,
@@ -9,7 +13,6 @@ const {
   scrollRef,
   textareaRef,
 } = useChat("test");
-loadMessages();
 </script>
 
 <template>
@@ -20,6 +23,8 @@ loadMessages();
         v-model="newChatMessage"
         ref="textareaRef"
       />
+      <br />
+      <EFormTextArea v-model="newChatMessage" ref="textareaRef" />
       <br />
       <EButton size="xs" @click="onNewChatMessage">Submit</EButton>
     </div>

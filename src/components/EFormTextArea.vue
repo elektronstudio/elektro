@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import ELabel from "./ELabel.vue";
 import randomString from "../utils/string";
 
@@ -33,6 +33,9 @@ const inputValue = computed({
     emit("update:modelValue", value);
   },
 });
+
+const textarea = ref<HTMLFormElement | null>(null);
+defineExpose(textarea);
 </script>
 
 <template>
@@ -46,6 +49,7 @@ const inputValue = computed({
     :name="name"
     :id="fieldId"
     :disabled="disabled"
+    ref="textarea"
   />
 </template>
 
