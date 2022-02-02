@@ -185,6 +185,7 @@ onMounted(() => {
         :grid-pos-x="draggable.gridPosX"
         :grid-pos-y="draggable.gridPosY"
         :is-minimised="draggable.isMinimised"
+        :content-type="draggable.contentType"
         @update-draggables="updateDraggablesState"
       >
         <!-- @TODO: How to make dynamic components work -->

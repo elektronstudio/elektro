@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 
+type ContentType = "chat" | "text" | "image" | "video";
+
 type Draggable = {
   draggableId: string;
   title?: string;
@@ -9,6 +11,7 @@ type Draggable = {
   tilesWidth?: number;
   tilesHeight?: number;
   isMinimised?: boolean;
+  contentType?: ContentType;
 };
 
 type Props = {

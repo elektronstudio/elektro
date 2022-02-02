@@ -4,6 +4,8 @@ import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 
+type ContentType = "chat" | "text" | "image" | "video";
+
 type Draggable = {
   draggableId: string;
   title?: string;
@@ -12,6 +14,7 @@ type Draggable = {
   tilesWidth?: number;
   tilesHeight?: number;
   isMinimised?: boolean;
+  contentType?: ContentType;
 };
 
 const props = defineProps<Draggable>();
