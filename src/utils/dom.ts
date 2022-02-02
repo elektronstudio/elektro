@@ -1,6 +1,6 @@
 import { onMounted, onUnmounted, ref } from "vue";
 
-export const useTextarea = (callback = () => {}) => {
+export function useTextarea(callback = () => {}) {
   // TODO: What is the template refs naming convention?
   // textarea or textareaRef or textareaEl?
   const textarea = ref<HTMLInputElement | null>(null);
@@ -37,11 +37,11 @@ export const useTextarea = (callback = () => {}) => {
   });
 
   return textarea;
-};
+}
 
 // TODO: Replace with https://vueuse.org/core/usemutationobserver ?
 
-export const useScrollToBottom = () => {
+export function useScrollToBottom() {
   const scrollRef = ref<HTMLElement | null>(null);
   let observer: MutationObserver | null = null;
   onMounted(() => {
@@ -61,4 +61,4 @@ export const useScrollToBottom = () => {
   });
 
   return scrollRef;
-};
+}

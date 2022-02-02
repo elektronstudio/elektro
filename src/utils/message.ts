@@ -14,7 +14,7 @@ export type Message = {
 
 export const ws = new ReconnectingWebsocket(config.wsUrl as UrlProvider);
 
-export const createMessage = (message: Object): string => {
+export function createMessage(message: Object): string {
   return JSON.stringify({
     id: randomString(16),
     datetime: new Date().toISOString(),
@@ -26,11 +26,11 @@ export const createMessage = (message: Object): string => {
     value: "",
     ...message,
   } as Message);
-};
+}
 
 export const messages = ref<Message[]>([]);
 
-export const initMessages = () => {
+export function initMessages() {
   fetch(config.messagesUrl as RequestInfo)
     .then((res) => res.json())
     .then((loadedMessages: Message[]) => {
@@ -50,4 +50,4 @@ export const initMessages = () => {
     // not always work / preserve reactivity
     messages.value = [...messages.value, message];
   });
-};
+}

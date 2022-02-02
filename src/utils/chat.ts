@@ -3,11 +3,11 @@ import { messages, createMessage, ws } from "./message";
 import type { MessageType } from "./message";
 import { useScrollToBottom, useTextarea } from "./dom";
 
-export const useChat = (
+export function useChat(
   channel: string,
   sentMessageType: MessageType = "CHAT",
   receiveMessageType: MessageType = "CHAT",
-) => {
+) {
   const chatMessages = computed(() => {
     return messages.value.filter(
       (m) => m.type === receiveMessageType && m.channel === channel,
@@ -22,7 +22,7 @@ export const useChat = (
         type: sentMessageType || "CHAT",
         channel: channel,
         value: newChatMessage.value,
-        //store: true, // TODO: Remove this when stable
+        //store: true, // TODO: Enable this when stable
       });
       ws.send(outgoingMessage);
       newChatMessage.value = "";
@@ -39,4 +39,4 @@ export const useChat = (
     scrollRef,
     textareaRef,
   };
-};
+}
