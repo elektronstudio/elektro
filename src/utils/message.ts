@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import ReconnectingWebsocket, { UrlProvider } from "reconnecting-websocket";
-import { randomId, safeJsonParse } from "./string";
+import { randomString, safeJsonParse } from "./string";
 import { uniqueCollection } from "./array";
 import { config } from "../../config";
 
@@ -16,7 +16,7 @@ export const ws = new ReconnectingWebsocket(config.wsUrl as UrlProvider);
 
 export const createMessage = (message: Object): string => {
   return JSON.stringify({
-    id: randomId(),
+    id: randomString(16),
     datetime: new Date().toISOString(),
     // Some clients just check for the value in the
     // message, not whenever the key exits,

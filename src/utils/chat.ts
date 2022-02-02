@@ -1,6 +1,6 @@
 import { computed, ref } from "vue";
 import { messages, createMessage, ws } from "./message";
-import type { Message, MessageType } from "./message";
+import type { MessageType } from "./message";
 import { useScrollToBottom, useTextarea } from "./dom";
 
 export const useChat = (

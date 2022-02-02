@@ -41,6 +41,7 @@ export const useTextarea = (callback = () => {}) => {
 };
 
 // TODO: Replace with https://vueuse.org/core/usemutationobserver ?
+
 export const useScrollToBottom = () => {
   const scrollRef = ref<HTMLElement | null>(null);
   let observer: MutationObserver | null = null;

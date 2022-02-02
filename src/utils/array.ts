@@ -1,4 +1,4 @@
-export const uniqueCollection = (arr: Record<string, any>, key: string) => {
+export function uniqueCollection(arr: Record<string, any>, key: string) {
   const result = [];
   const map = new Map();
   for (const item of arr.reverse()) {
@@ -8,6 +8,4 @@ export const uniqueCollection = (arr: Record<string, any>, key: string) => {
     }
   }
   return result.reverse();
-};
-
-export const shuffle = (arr: any[]) => arr.sort(() => Math.random() - 0.5);
+}
