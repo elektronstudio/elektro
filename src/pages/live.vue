@@ -3,6 +3,7 @@ import { shallowRef, watch, onMounted, computed, ref } from "vue";
 import EBreadBoard from "../components/EBreadBoard.vue";
 import EDraggable from "../components/EDraggable.vue";
 import EDraggablesDock from "../components/EDraggablesDock.vue";
+import EChat from "../components/EChat.vue";
 
 type Draggable = {
   draggableId: string;
@@ -167,5 +168,6 @@ onMounted(() => {
       :draggables="minimisedDraggables"
       @update-draggables="updateDraggablesState"
     />
+    <EChat />
   </EBreadBoard>
 </template>
