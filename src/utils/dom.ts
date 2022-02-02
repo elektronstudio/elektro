@@ -4,7 +4,6 @@ export const useTextarea = (callback = () => {}) => {
   // TODO: What is the template refs naming convention?
   // textarea or textareaRef or textareaEl?
   const textarea = ref<HTMLInputElement | null>(null);
-
   // TODO: Naming convention for event handlers: e or event?
   const onKeydown = (e: KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {

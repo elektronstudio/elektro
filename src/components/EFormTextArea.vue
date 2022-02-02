@@ -33,9 +33,6 @@ const inputValue = computed({
     emit("update:modelValue", value);
   },
 });
-
-const textarea = ref<HTMLFormElement | null>(null);
-defineExpose(textarea);
 </script>
 
 <template>

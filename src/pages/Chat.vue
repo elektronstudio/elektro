@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, watch } from "vue";
 import { EBox, EButton, EFormTextArea } from "../lib";
 import { initMessages, useChat } from "../utils";
 // This goes to the main app instance,
@@ -24,7 +25,8 @@ const {
         ref="textareaRef"
       />
       <br />
-      <EFormTextArea v-model="newChatMessage" ref="textareaRef" />
+      <!-- TODO: Make it work with ref -->
+      <EFormTextArea v-model="newChatMessage" />
       <br />
       <EButton size="xs" @click="onNewChatMessage">Submit</EButton>
     </div>
