@@ -36,8 +36,7 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
   preventDefault: true,
   onEnd: () => {
     calculateCoordinates();
-    // if (title === "Electron 1") {
-    // }
+
     if (gridPosX !== snappedX.value || gridPosY !== snappedY.value) {
       emit("update-draggables", {
         ...props,

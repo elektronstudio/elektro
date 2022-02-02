@@ -115,7 +115,6 @@ const updateDraggablesState = (draggable: Draggable) => {
   if (!draggable) {
     return;
   }
-  console.log({ draggable });
   draggablesState.value = draggablesState.value.filter(
     (m) => m.draggableId !== draggable.draggableId,
   );
@@ -132,7 +131,6 @@ const minimisedDraggables = computed(() =>
 
 watch(draggablesState, () => {
   if (draggablesState.value.length > 0) {
-    console.log("change", JSON.stringify(draggablesState.value));
     localStorage.setItem("windowsState", JSON.stringify(draggablesState.value));
   }
 });
