@@ -21,7 +21,7 @@ type Props = {
 const { draggables } = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: "update-draggables", draggable: Draggable): void;
+  (e: "unminimise-draggable", draggable: Draggable): void;
 }>();
 </script>
 
@@ -30,7 +30,7 @@ const emit = defineEmits<{
     <EDraggableTitlebar
       v-for="draggable in draggables"
       :title="draggable.title"
-      @click="emit('update-draggables', { ...draggable, isMinimised: false })"
+      @click="emit('unminimise-draggable', draggable)"
     />
   </nav>
 </template>

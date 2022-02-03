@@ -4,9 +4,9 @@ import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 
-type ContentType = "chat" | "text" | "image" | "video";
+export type ContentType = "chat" | "text" | "image" | "video";
 
-type Draggable = {
+export type Draggable = {
   draggableId: string;
   title?: string;
   gridPosX?: number;
@@ -19,6 +19,7 @@ type Draggable = {
 
 const props = defineProps<Draggable>();
 const {
+  draggableId,
   title,
   tilesWidth = 1,
   tilesHeight = 1,
@@ -27,7 +28,7 @@ const {
 } = props;
 
 const emit = defineEmits<{
-  (e: "update-draggables", draggable: Draggable): void;
+  (e: "minimise-draggable", draggable: Draggable): void;
 }>();
 
 const draggableRef = ref<HTMLElement | null>(null);
@@ -39,41 +40,44 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
   preventDefault: true,
   onEnd: () => {
     calculateCoordinates();
-
-    if (gridPosX !== snappedX.value || gridPosY !== snappedY.value) {
-      emit("update-draggables", {
-        ...props,
-        gridPosX: snappedX.value,
-        gridPosY: snappedY.value,
-      });
-    }
   },
 });
 
-const snappedX = computed(() => Math.round(x.value / tileSize.value));
-const snappedY = computed(() => Math.round(y.value / tileSize.value));
-
-const minimiseElectron = () => {
-  emit("update-draggables", { ...props, isMinimised: true });
-};
-
 const calculateCoordinates = function () {
   tileSize.value = windowWidth.value / tileDivider;
+  const snappedX = Math.round(x.value / tileSize.value);
+  const snappedY = Math.round(y.value / tileSize.value);
 
   x.value =
-    snappedX.value + tilesWidth >= tileDivider
+    snappedX + tilesWidth >= tileDivider
       ? (tileDivider - tilesWidth) * tileSize.value
-      : snappedX.value >= 0
-      ? tileSize.value * snappedX.value
+      : snappedX >= 0
+      ? tileSize.value * snappedX
       : 0;
-  y.value = snappedY.value >= 0 ? tileSize.value * snappedY.value : 0;
+  y.value = snappedY >= 0 ? tileSize.value * snappedY : 0;
+
+  localStorage.setItem(
+    `draggable_${draggableId}`,
+    JSON.stringify({ ...props, gridPosX: snappedX, gridPosY: snappedY }),
+  );
+};
+
+const handleMinimise = () => {
+  emit("minimise-draggable", { ...props });
 };
 
 onMounted(() => {
-  x.value = tileSize.value * gridPosX;
-  y.value = tileSize.value * gridPosY;
+  const localData = localStorage.getItem(`draggable_${draggableId}`);
+  if (localData) {
+    const parsedLocalData = JSON.parse(localData);
+    x.value = tileSize.value * parsedLocalData.gridPosX;
+    y.value = tileSize.value * parsedLocalData.gridPosY;
+  } else {
+    x.value = tileSize.value * gridPosX;
+    y.value = tileSize.value * gridPosY;
+  }
 
-  window.addEventListener("resize", calculateCoordinates);
+  // window.addEventListener("resize", calculateCoordinates);
 });
 </script>
 
@@ -84,7 +88,7 @@ onMounted(() => {
     style="touch-action: none"
     :class="{ isDragging: isDragging }"
   >
-    <button @click.stop="minimiseElectron">ⅹ</button>
+    <button @click.stop="emit('minimise-draggable', { ...props })">ⅹ</button>
     <div ref="draggableRef">
       <EDraggableTitlebar
         :title="title"

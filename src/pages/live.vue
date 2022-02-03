@@ -126,48 +126,53 @@ const findComponent = (contentType: ContentType) => {
   return componentName;
 };
 
-const draggablesState = ref<Draggable[]>([]);
-
-const updateDraggablesState = (draggable: Draggable) => {
+const minimiseDraggable = (draggable: Draggable) => {
   if (!draggable) {
     return;
   }
-  draggablesState.value = draggablesState.value.filter(
-    (m) => m.draggableId !== draggable.draggableId,
+  const { draggableId } = draggable;
+  minimisedDraggables.value = [...minimisedDraggables.value, draggableId];
+  localStorage.setItem(
+    `draggable_${draggableId}`,
+    JSON.stringify({ ...draggable, isMinimised: true }),
   );
-  draggablesState.value.push(draggable);
 };
 
-const activeDraggables = computed(() => {
-  return draggablesState.value.filter((m) => !m.isMinimised);
-});
-
-const minimisedDraggables = computed(() =>
-  draggablesState.value.filter((m) => m.isMinimised),
-);
-
-watch(draggablesState, () => {
-  if (draggablesState.value.length > 0) {
-    localStorage.setItem("windowsState", JSON.stringify(draggablesState.value));
+const unMinimiseDraggable = (draggable: Draggable) => {
+  if (!draggable) {
+    return;
   }
+  const { draggableId } = draggable;
+  minimisedDraggables.value = [
+    ...minimisedDraggables.value.filter((id) => id !== draggableId),
+  ];
+  localStorage.setItem(
+    `draggable_${draggableId}`,
+    JSON.stringify({ ...draggable, isMinimised: false }),
+  );
+};
+
+const minimisedDraggables = ref<string[]>([]);
+
+const activeDraggables = computed(() => {
+  return draggablesData.filter(
+    (m) => !minimisedDraggables.value.includes(m.draggableId),
+  );
 });
 
 onMounted(() => {
-  const initialStates = [] as Draggable[];
-  const localData = localStorage.getItem(`windowsState`);
-  const localDataParsed = localData ? JSON.parse(localData) : undefined;
-
   draggablesData.forEach((draggable) => {
     const { draggableId } = draggable;
-    const localDraggable = localDataParsed?.find(
-      (m: Draggable) => m.draggableId === draggableId,
-    );
-    const mergedDraggable = localDraggable
-      ? { ...draggable, ...localDraggable }
+    const localData = localStorage.getItem(`draggable_${draggableId}`);
+
+    const mergedDraggable = localData
+      ? { ...draggable, ...JSON.parse(localData!) }
       : { ...draggable };
-    initialStates.push(mergedDraggable);
+
+    if (mergedDraggable.isMinimised) {
+      minimisedDraggables.value.push(draggableId);
+    }
   });
-  draggablesState.value = initialStates;
 });
 </script>
 
@@ -175,7 +180,7 @@ onMounted(() => {
   <EBreadBoard>
     <template
       v-for="(draggable, index) in activeDraggables"
-      :key="`${draggable.draggableId}-${index}`"
+      :key="draggable.draggableId"
     >
       <EDraggable
         :title="draggable.title"
@@ -186,19 +191,23 @@ onMounted(() => {
         :grid-pos-y="draggable.gridPosY"
         :is-minimised="draggable.isMinimised"
         :content-type="draggable.contentType"
-        @update-draggables="updateDraggablesState"
+        @minimise-draggable="minimiseDraggable"
       >
         <!-- @TODO: How to make dynamic components work -->
-        <component
+        <!-- <component
           v-if="draggable.contentType"
           :is="findComponent(draggable.contentType)"
-        />
+        /> -->
         <EChat v-if="draggable.contentType === 'chat'" />
       </EDraggable>
     </template>
     <EDraggablesDock
-      :draggables="minimisedDraggables"
-      @update-draggables="updateDraggablesState"
+      :draggables="
+        draggablesData.filter((m) =>
+          minimisedDraggables.includes(m.draggableId),
+        )
+      "
+      @unminimise-draggable="unMinimiseDraggable"
     />
   </EBreadBoard>
 </template>
