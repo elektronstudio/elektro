@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import ELabel from "./ELabel.vue";
-import randomString from "../utils/randomString";
+import { randomString } from "../utils/string";
 
 type ModelValue = string | number;
 
@@ -46,6 +46,7 @@ const inputValue = computed({
     :name="name"
     :id="fieldId"
     :disabled="disabled"
+    ref="textarea"
   />
 </template>
 

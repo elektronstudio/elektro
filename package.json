@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^7.5.3",
+    "reconnecting-websocket": "^4.4.0",
     "vue": "^3.2.26"
   },
   "devDependencies": {

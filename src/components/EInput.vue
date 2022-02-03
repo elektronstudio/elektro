@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import ELabel from "./ELabel.vue";
-import randomString from "../utils/randomString";
+import { randomString } from "../utils/string";
 
 type ModelValue = string | number;
 
