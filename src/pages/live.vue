@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { shallowRef, watch, onMounted, computed, ref } from "vue";
 import EBreadBoard from "../components/EBreadBoard.vue";
 import EDraggable from "../components/EDraggable.vue";
 import EDraggablesDock from "../components/EDraggablesDock.vue";
 import EChat from "../components/EChat.vue";
+import { useDraggable } from "../utils/draggables";
 
 type ContentType = "chat" | "text" | "image" | "video";
 
@@ -117,15 +117,7 @@ const draggablesData = [
     tilesHeight: 6,
   },
 ] as Draggable[];
-const draggablesState = ref<Draggable[]>([]);
-const minimisedDraggables = computed(() =>
-  draggablesState.value.filter((m) => m.isMinimised),
-);
-watch(draggablesState, () => {
-  if (draggablesState.value.length > 0) {
-    localStorage.setItem("windowsState", JSON.stringify(draggablesState.value));
-  }
-});
+const { draggablesState, updateDraggablesState } = useDraggable(draggablesData);
 
 const findComponent = (contentType: ContentType) => {
   let componentName;
@@ -140,63 +132,11 @@ const findComponent = (contentType: ContentType) => {
 
   return componentName;
 };
-
-const updateDraggablesState = (draggable: Draggable) => {
-  if (!draggable) {
-    return;
-  }
-  const { draggableId, order } = draggable;
-  draggablesState.value = draggablesState.value.map((item) => {
-    if (item.draggableId === draggableId) {
-      return { ...draggable, order: draggablesState.value.length };
-    } else {
-      return {
-        ...item,
-        order:
-          item.order === 1
-            ? 1
-            : item.order > order
-            ? item.order - 1
-            : item.order,
-      };
-    }
-  });
-};
-
-onMounted(() => {
-  const initialStates = [] as Draggable[];
-  const localData = localStorage.getItem(`windowsState`);
-  const localDataParsed = localData ? JSON.parse(localData) : undefined;
-
-  draggablesData.forEach((draggable) => {
-    const { draggableId } = draggable;
-    const localDraggable = localDataParsed?.find(
-      (m: Draggable) => m.draggableId === draggableId,
-    );
-    const mergedDraggable = localDraggable
-      ? {
-          ...draggable,
-          gridPosX: localDraggable.gridPosX,
-          gridPosY: localDraggable.gridPosY,
-          isMinimised: localDraggable.isMinimised,
-        }
-      : { ...draggable };
-
-    if (mergedDraggable.order === undefined) {
-      mergedDraggable.order = 1;
-    }
-    initialStates.push(mergedDraggable);
-  });
-  draggablesState.value = initialStates;
-});
 </script>
 
 <template>
   <EBreadBoard>
-    <template
-      v-for="(draggable, index) in draggablesState"
-      :key="draggable.draggableId"
-    >
+    <template v-for="draggable in draggablesState" :key="draggable.draggableId">
       <EDraggable
         :title="draggable.title"
         :draggable-id="draggable.draggableId"
@@ -218,7 +158,7 @@ onMounted(() => {
       </EDraggable>
     </template>
     <EDraggablesDock
-      :draggables="minimisedDraggables"
+      :draggables="draggablesState.filter((m) => m.isMinimised)"
       @update-draggables="updateDraggablesState"
     />
   </EBreadBoard>
