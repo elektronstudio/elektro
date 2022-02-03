@@ -15,6 +15,7 @@ type Draggable = {
   tilesWidth?: number;
   tilesHeight?: number;
   isMinimised?: boolean;
+  order: number;
   contentType?: ContentType;
 };
 
@@ -27,6 +28,7 @@ const draggablesData = [
     tilesWidth: 4,
     tilesHeight: 4,
     isMinimised: false,
+    order: 8,
   },
   {
     title: "Electron 2",
@@ -36,6 +38,7 @@ const draggablesData = [
     tilesWidth: 6,
     tilesHeight: 2,
     isMinimised: false,
+    order: 4,
   },
   {
     title: "Extra long title, with long text",
@@ -45,6 +48,7 @@ const draggablesData = [
     tilesWidth: 2,
     tilesHeight: 2,
     isMinimised: false,
+    order: 5,
   },
   {
     title: "Electron 4",
@@ -54,6 +58,7 @@ const draggablesData = [
     tilesWidth: 2,
     tilesHeight: 2,
     isMinimised: false,
+    order: 1,
   },
   {
     title: "Electron 5",
@@ -90,6 +95,7 @@ const draggablesData = [
     tilesWidth: 2,
     tilesHeight: 2,
     isMinimised: true,
+    order: 3,
   },
   {
     title: "Electron new",
@@ -111,6 +117,15 @@ const draggablesData = [
     tilesHeight: 6,
   },
 ] as Draggable[];
+const draggablesState = ref<Draggable[]>([]);
+const minimisedDraggables = computed(() =>
+  draggablesState.value.filter((m) => m.isMinimised),
+);
+watch(draggablesState, () => {
+  if (draggablesState.value.length > 0) {
+    localStorage.setItem("windowsState", JSON.stringify(draggablesState.value));
+  }
+});
 
 const findComponent = (contentType: ContentType) => {
   let componentName;
@@ -126,60 +141,61 @@ const findComponent = (contentType: ContentType) => {
   return componentName;
 };
 
-const minimiseDraggable = (draggable: Draggable) => {
+const updateDraggablesState = (draggable: Draggable) => {
   if (!draggable) {
     return;
   }
-  const { draggableId } = draggable;
-  minimisedDraggables.value = [...minimisedDraggables.value, draggableId];
-  localStorage.setItem(
-    `draggable_${draggableId}`,
-    JSON.stringify({ ...draggable, isMinimised: true }),
-  );
-};
-
-const unMinimiseDraggable = (draggable: Draggable) => {
-  if (!draggable) {
-    return;
-  }
-  const { draggableId } = draggable;
-  minimisedDraggables.value = [
-    ...minimisedDraggables.value.filter((id) => id !== draggableId),
-  ];
-  localStorage.setItem(
-    `draggable_${draggableId}`,
-    JSON.stringify({ ...draggable, isMinimised: false }),
-  );
-};
-
-const minimisedDraggables = ref<string[]>([]);
-
-const activeDraggables = computed(() => {
-  return draggablesData.filter(
-    (m) => !minimisedDraggables.value.includes(m.draggableId),
-  );
-});
-
-onMounted(() => {
-  draggablesData.forEach((draggable) => {
-    const { draggableId } = draggable;
-    const localData = localStorage.getItem(`draggable_${draggableId}`);
-
-    const mergedDraggable = localData
-      ? { ...draggable, ...JSON.parse(localData!) }
-      : { ...draggable };
-
-    if (mergedDraggable.isMinimised) {
-      minimisedDraggables.value.push(draggableId);
+  console.log("trigger");
+  const { draggableId, order } = draggable;
+  draggablesState.value = draggablesState.value.map((item) => {
+    if (item.draggableId === draggableId) {
+      return { ...draggable, order: draggablesState.value.length };
+    } else {
+      return {
+        ...item,
+        order:
+          item.order === 1
+            ? 1
+            : item.order > order
+            ? item.order - 1
+            : item.order,
+      };
     }
   });
+};
+
+onMounted(() => {
+  const initialStates = [] as Draggable[];
+  const localData = localStorage.getItem(`windowsState`);
+  const localDataParsed = localData ? JSON.parse(localData) : undefined;
+
+  draggablesData.forEach((draggable) => {
+    const { draggableId } = draggable;
+    const localDraggable = localDataParsed?.find(
+      (m: Draggable) => m.draggableId === draggableId,
+    );
+    const mergedDraggable = localDraggable
+      ? {
+          ...draggable,
+          gridPosX: localDraggable.gridPosX,
+          gridPosY: localDraggable.gridPosY,
+          isMinimised: localDraggable.isMinimised,
+        }
+      : { ...draggable };
+
+    if (mergedDraggable.order === undefined) {
+      mergedDraggable.order = 1;
+    }
+    initialStates.push(mergedDraggable);
+  });
+  draggablesState.value = initialStates;
 });
 </script>
 
 <template>
   <EBreadBoard>
     <template
-      v-for="(draggable, index) in activeDraggables"
+      v-for="(draggable, index) in draggablesState"
       :key="draggable.draggableId"
     >
       <EDraggable
@@ -191,7 +207,8 @@ onMounted(() => {
         :grid-pos-y="draggable.gridPosY"
         :is-minimised="draggable.isMinimised"
         :content-type="draggable.contentType"
-        @minimise-draggable="minimiseDraggable"
+        :order="draggable.order"
+        @update-draggables="updateDraggablesState"
       >
         <!-- @TODO: How to make dynamic components work -->
         <!-- <component
@@ -202,12 +219,8 @@ onMounted(() => {
       </EDraggable>
     </template>
     <EDraggablesDock
-      :draggables="
-        draggablesData.filter((m) =>
-          minimisedDraggables.includes(m.draggableId),
-        )
-      "
-      @unminimise-draggable="unMinimiseDraggable"
+      :draggables="minimisedDraggables"
+      @update-draggables="updateDraggablesState"
     />
   </EBreadBoard>
 </template>

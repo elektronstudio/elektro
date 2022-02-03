@@ -12,6 +12,7 @@ type Draggable = {
   tilesHeight?: number;
   isMinimised?: boolean;
   contentType?: ContentType;
+  order: number;
 };
 
 type Props = {
@@ -21,7 +22,7 @@ type Props = {
 const { draggables } = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: "unminimise-draggable", draggable: Draggable): void;
+  (e: "update-draggables", draggable: Draggable): void;
 }>();
 </script>
 
@@ -30,7 +31,8 @@ const emit = defineEmits<{
     <EDraggableTitlebar
       v-for="draggable in draggables"
       :title="draggable.title"
-      @click="emit('unminimise-draggable', draggable)"
+      @click.="emit('update-draggables', { ...draggable, isMinimised: false })"
+      :style="{ order: draggable.order }"
     />
   </nav>
 </template>

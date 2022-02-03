@@ -15,32 +15,67 @@ export type Draggable = {
   tilesHeight?: number;
   isMinimised?: boolean;
   contentType?: ContentType;
+  order: number;
 };
 
 const props = defineProps<Draggable>();
-const {
-  draggableId,
-  title,
-  tilesWidth = 1,
-  tilesHeight = 1,
-  gridPosX = 0,
-  gridPosY = 0,
-} = props;
+const { draggableId, title, tilesWidth = 1, tilesHeight = 1 } = props;
 
 const emit = defineEmits<{
-  (e: "minimise-draggable", draggable: Draggable): void;
+  (e: "update-draggables", draggable: Draggable): void;
 }>();
 
 const draggableRef = ref<HTMLElement | null>(null);
 const { width: windowWidth } = useWindow();
 const tileDivider = 20;
 const tileSize = ref(windowWidth.value / tileDivider);
+// @TODO: Why don't props trigger rerender?
+const gridPosX = ref<number>(props.gridPosX ? props.gridPosX : 0);
+const gridPosY = ref<number>(props.gridPosY ? props.gridPosY : 0);
+const isMinimised = ref<boolean>(props.isMinimised ? props.isMinimised : false);
+const order = ref<number>(props.order);
 
 const { x, y, style, isDragging } = useDraggable(draggableRef, {
   preventDefault: true,
   onEnd: () => {
     calculateCoordinates();
+
+    if (
+      gridPosX.value !== snappedX.value ||
+      gridPosY.value !== snappedY.value
+    ) {
+      console.log(
+        title,
+        gridPosX.value,
+        snappedX.value,
+        gridPosY.value,
+        snappedY.value,
+      );
+      emit("update-draggables", {
+        ...props,
+        gridPosX: snappedX.value,
+        gridPosY: snappedY.value,
+      });
+    }
   },
+  onStart: () => {
+    emit("update-draggables", { ...props });
+    console.log(title, "start");
+  },
+});
+
+const snappedX = computed(() => Math.round(x.value / tileSize.value));
+const snappedY = computed(() => Math.round(y.value / tileSize.value));
+
+watch(props, (newValue, oldValue) => {
+  isMinimised.value = newValue.isMinimised ? newValue.isMinimised : false;
+  order.value = newValue.order;
+  gridPosX.value = newValue.gridPosX ? newValue.gridPosX : 0;
+  gridPosY.value = newValue.gridPosY ? newValue.gridPosY : 0;
+  // @TODO: Why does dis not work?
+  // if (newValue.isMinimised !== oldValue.isMinimised) {
+  // isMinimised.value = newValue.isMinimised;
+  // }
 });
 
 const calculateCoordinates = function () {
@@ -55,27 +90,11 @@ const calculateCoordinates = function () {
       ? tileSize.value * snappedX
       : 0;
   y.value = snappedY >= 0 ? tileSize.value * snappedY : 0;
-
-  localStorage.setItem(
-    `draggable_${draggableId}`,
-    JSON.stringify({ ...props, gridPosX: snappedX, gridPosY: snappedY }),
-  );
-};
-
-const handleMinimise = () => {
-  emit("minimise-draggable", { ...props });
 };
 
 onMounted(() => {
-  const localData = localStorage.getItem(`draggable_${draggableId}`);
-  if (localData) {
-    const parsedLocalData = JSON.parse(localData);
-    x.value = tileSize.value * parsedLocalData.gridPosX;
-    y.value = tileSize.value * parsedLocalData.gridPosY;
-  } else {
-    x.value = tileSize.value * gridPosX;
-    y.value = tileSize.value * gridPosY;
-  }
+  x.value = tileSize.value * gridPosX.value;
+  y.value = tileSize.value * gridPosY.value;
 
   // window.addEventListener("resize", calculateCoordinates);
 });
@@ -83,12 +102,17 @@ onMounted(() => {
 
 <template>
   <div
+    v-show="!isMinimised"
     class="EDraggable"
     :style="style"
     style="touch-action: none"
     :class="{ isDragging: isDragging }"
   >
-    <button @click.stop="emit('minimise-draggable', { ...props })">ⅹ</button>
+    <button
+      @click.stop="emit('update-draggables', { ...props, isMinimised: true })"
+    >
+      ⅹ
+    </button>
     <div ref="draggableRef">
       <EDraggableTitlebar
         :title="title"
@@ -108,14 +132,16 @@ onMounted(() => {
   height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
   background-color: var(--bg);
   touch-action: none;
+  display: flex;
+  flex-direction: column;
+  z-index: calc(v-bind(order) + 1);
 }
 .EDraggable.isDragging {
   z-index: 100;
 }
 
 .EDraggable article {
-  width: 100%;
-  height: 100%;
+  flex-grow: 1;
 }
 
 .EDraggable button {
