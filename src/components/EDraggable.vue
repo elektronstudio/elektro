@@ -44,13 +44,6 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
       gridPosX.value !== snappedX.value ||
       gridPosY.value !== snappedY.value
     ) {
-      console.log(
-        title,
-        gridPosX.value,
-        snappedX.value,
-        gridPosY.value,
-        snappedY.value,
-      );
       emit("update-draggables", {
         ...props,
         gridPosX: snappedX.value,
@@ -59,8 +52,7 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
     }
   },
   onStart: () => {
-    emit("update-draggables", { ...props });
-    console.log(title, "start");
+    // emit("update-draggables", { ...props });
   },
 });
 
