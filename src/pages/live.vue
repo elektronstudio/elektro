@@ -145,7 +145,6 @@ const updateDraggablesState = (draggable: Draggable) => {
   if (!draggable) {
     return;
   }
-  console.log("trigger");
   const { draggableId, order } = draggable;
   draggablesState.value = draggablesState.value.map((item) => {
     if (item.draggableId === draggableId) {
