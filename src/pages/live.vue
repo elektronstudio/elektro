@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { shallowRef, watch, onMounted, computed, ref } from "vue";
 import EBreadBoard from "../components/EBreadBoard.vue";
 import EDraggable from "../components/EDraggable.vue";
 import EDraggablesDock from "../components/EDraggablesDock.vue";
+import EChat from "../components/EChat.vue";
+import { useDraggable } from "../utils/draggables";
+
+type ContentType = "chat" | "text" | "image" | "video";
 
 type Draggable = {
   draggableId: string;
@@ -12,6 +15,8 @@ type Draggable = {
   tilesWidth?: number;
   tilesHeight?: number;
   isMinimised?: boolean;
+  order: number;
+  contentType?: ContentType;
 };
 
 const draggablesData = [
@@ -23,6 +28,7 @@ const draggablesData = [
     tilesWidth: 4,
     tilesHeight: 4,
     isMinimised: false,
+    order: 8,
   },
   {
     title: "Electron 2",
@@ -32,6 +38,7 @@ const draggablesData = [
     tilesWidth: 6,
     tilesHeight: 2,
     isMinimised: false,
+    order: 4,
   },
   {
     title: "Extra long title, with long text",
@@ -41,6 +48,7 @@ const draggablesData = [
     tilesWidth: 2,
     tilesHeight: 2,
     isMinimised: false,
+    order: 5,
   },
   {
     title: "Electron 4",
@@ -50,6 +58,7 @@ const draggablesData = [
     tilesWidth: 2,
     tilesHeight: 2,
     isMinimised: false,
+    order: 1,
   },
   {
     title: "Electron 5",
@@ -86,6 +95,7 @@ const draggablesData = [
     tilesWidth: 2,
     tilesHeight: 2,
     isMinimised: true,
+    order: 3,
   },
   {
     title: "Electron new",
@@ -99,59 +109,34 @@ const draggablesData = [
     title: "Electron new 2",
     draggableId: "draggable-electron-new-2",
   },
+  {
+    title: "Chat",
+    draggableId: "elektron-chat",
+    contentType: "chat",
+    tilesWidth: 4,
+    tilesHeight: 6,
+  },
 ] as Draggable[];
+const { draggablesState, updateDraggablesState } = useDraggable(draggablesData);
 
-const draggablesState = ref<Draggable[]>([]);
+const findComponent = (contentType: ContentType) => {
+  let componentName;
+  switch (contentType) {
+    case "chat":
+      componentName = "e-chat";
+      break;
 
-const updateDraggablesState = (draggable: Draggable) => {
-  if (!draggable) {
-    return;
+    default:
+      break;
   }
-  draggablesState.value = draggablesState.value.filter(
-    (m) => m.draggableId !== draggable.draggableId,
-  );
-  draggablesState.value.push(draggable);
+
+  return componentName;
 };
-
-const activeDraggables = computed(() => {
-  return draggablesState.value.filter((m) => !m.isMinimised);
-});
-
-const minimisedDraggables = computed(() =>
-  draggablesState.value.filter((m) => m.isMinimised),
-);
-
-watch(draggablesState, () => {
-  if (draggablesState.value.length > 0) {
-    localStorage.setItem("windowsState", JSON.stringify(draggablesState.value));
-  }
-});
-
-onMounted(() => {
-  const initialStates = [] as Draggable[];
-  const localData = localStorage.getItem(`windowsState`);
-  const localDataParsed = localData ? JSON.parse(localData) : undefined;
-
-  draggablesData.forEach((draggable) => {
-    const { draggableId } = draggable;
-    const localDraggable = localDataParsed?.find(
-      (m: Draggable) => m.draggableId === draggableId,
-    );
-    const mergedDraggable = localDraggable
-      ? { ...draggable, ...localDraggable }
-      : { ...draggable };
-    initialStates.push(mergedDraggable);
-  });
-  draggablesState.value = initialStates;
-});
 </script>
 
 <template>
   <EBreadBoard>
-    <template
-      v-for="(draggable, index) in activeDraggables"
-      :key="`${draggable.draggableId}-${index}`"
-    >
+    <template v-for="draggable in draggablesState" :key="draggable.draggableId">
       <EDraggable
         :title="draggable.title"
         :draggable-id="draggable.draggableId"
@@ -160,11 +145,20 @@ onMounted(() => {
         :grid-pos-x="draggable.gridPosX"
         :grid-pos-y="draggable.gridPosY"
         :is-minimised="draggable.isMinimised"
+        :content-type="draggable.contentType"
+        :order="draggable.order"
         @update-draggables="updateDraggablesState"
-      />
+      >
+        <!-- @TODO: How to make dynamic components work -->
+        <!-- <component
+          v-if="draggable.contentType"
+          :is="findComponent(draggable.contentType)"
+        /> -->
+        <EChat v-if="draggable.contentType === 'chat'" />
+      </EDraggable>
     </template>
     <EDraggablesDock
-      :draggables="minimisedDraggables"
+      :draggables="draggablesState.filter((m) => m.isMinimised)"
       @update-draggables="updateDraggablesState"
     />
   </EBreadBoard>

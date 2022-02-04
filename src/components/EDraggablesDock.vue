@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 
+type ContentType = "chat" | "text" | "image" | "video";
+
 type Draggable = {
   draggableId: string;
   title?: string;
@@ -9,6 +11,8 @@ type Draggable = {
   tilesWidth?: number;
   tilesHeight?: number;
   isMinimised?: boolean;
+  contentType?: ContentType;
+  order: number;
 };
 
 type Props = {
@@ -23,17 +27,18 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <nav class="EElectronsBar">
+  <nav class="EDraggablesDock">
     <EDraggableTitlebar
       v-for="draggable in draggables"
       :title="draggable.title"
-      @click="emit('update-draggables', { ...draggable, isMinimised: false })"
+      @click.="emit('update-draggables', { ...draggable, isMinimised: false })"
+      :style="{ order: draggable.order }"
     />
   </nav>
 </template>
 
 <style scoped>
-.EElectronsBar {
+.EDraggablesDock {
   display: flex;
   position: fixed;
   bottom: 0;
@@ -42,7 +47,7 @@ const emit = defineEmits<{
   overflow-x: auto;
 }
 
-.EElectronsBar > * {
+.EDraggablesDock > * {
   flex: 1 1 16rem;
   min-width: 4rem;
   max-width: 16rem;
