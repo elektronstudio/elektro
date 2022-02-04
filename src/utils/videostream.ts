@@ -1,21 +1,26 @@
-import { ref, watch, onMounted, onUnmounted, Ref, UnwrapRef } from "vue";
-
+import { ref, watch, onMounted, onUnmounted, Ref } from "vue";
 import Hls from "hls.js";
-import { DeepMaybeRef, MaybeElementRef } from "@vueuse/core";
 
-// "paused" is not really an useful for live streams
 // although the video player supports it
+// "paused" is not really an useful for live streams
 
 type VideostreamStatus = "nodata" | "loading" | "playing";
 type MaybeRef<T> = Ref<T> | T;
 
-export const useVideostream = (src: MaybeRef<string>, autoResume = false) => {
+export const useVideostream = (
+  src: MaybeRef<string>,
+  autoReconnect = false,
+) => {
   const videoSrc = ref(src);
   const videoRef = ref<HTMLVideoElement | null>(null);
   const status = ref<VideostreamStatus>("nodata");
+  // Initial resolution, we update it when we get the
+  // the video stream metadata
   const width = ref(640);
   const height = ref((640 * 9) / 16);
-  const resumeDelay = 10 * 1000;
+
+  // Automatic reconnect delay
+  const reconnectDelay = 10 * 1000;
 
   let hls: Hls;
 
@@ -38,7 +43,8 @@ export const useVideostream = (src: MaybeRef<string>, autoResume = false) => {
   const playSafariHls = () => {
     if (videoRef.value) {
       videoRef.value.src = videoSrc.value;
-      if (autoResume) {
+      // Reconnect logic
+      if (autoReconnect) {
         let prevEnd = 0;
         setInterval(() => {
           if (videoRef.value) {
@@ -51,7 +57,7 @@ export const useVideostream = (src: MaybeRef<string>, autoResume = false) => {
               prevEnd = currentEnd;
             }
           }
-        }, resumeDelay);
+        }, reconnectDelay);
       }
     }
   };
@@ -84,7 +90,9 @@ export const useVideostream = (src: MaybeRef<string>, autoResume = false) => {
           hls.startLoad();
         }
       });
-      if (autoResume) {
+
+      // Reconnect logic
+      if (autoReconnect) {
         let prevEnd = 0;
         setInterval(() => {
           if (videoRef.value) {
@@ -100,7 +108,7 @@ export const useVideostream = (src: MaybeRef<string>, autoResume = false) => {
               prevEnd = currentEnd;
             }
           }
-        }, resumeDelay);
+        }, reconnectDelay);
       }
     }
   };
