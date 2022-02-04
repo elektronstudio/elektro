@@ -1,10 +1,16 @@
-import { ref, watch, onMounted, onUnmounted } from "vue";
+import { ref, watch, onMounted, onUnmounted, Ref, UnwrapRef } from "vue";
 
 import Hls from "hls.js";
+import { DeepMaybeRef, MaybeElementRef } from "@vueuse/core";
+
+// "paused" is not really an useful for live streams
+// although the video player supports it
 
 type VideostreamStatus = "nodata" | "loading" | "playing";
+type MaybeRef<T> = Ref<T> | T;
 
-export const useVideostream = (videoSrc: string, autoResume = false) => {
+export const useVideostream = (src: MaybeRef<string>, autoResume = false) => {
+  const videoSrc = ref(src);
   const videoRef = ref<HTMLVideoElement | null>(null);
   const status = ref<VideostreamStatus>("nodata");
   const width = ref(640);
@@ -14,7 +20,7 @@ export const useVideostream = (videoSrc: string, autoResume = false) => {
   let hls: Hls;
 
   watch(
-    [videoRef, () => videoSrc],
+    [videoRef, videoSrc],
     () => {
       if (videoRef.value) {
         if (videoRef.value.canPlayType("application/vnd.apple.mpegURL")) {
@@ -31,7 +37,7 @@ export const useVideostream = (videoSrc: string, autoResume = false) => {
 
   const playSafariHls = () => {
     if (videoRef.value) {
-      videoRef.value.src = videoSrc;
+      videoRef.value.src = videoSrc.value;
       if (autoResume) {
         let prevEnd = 0;
         setInterval(() => {
@@ -39,7 +45,7 @@ export const useVideostream = (videoSrc: string, autoResume = false) => {
             if (videoRef.value.seekable.length >= 1) {
               const currentEnd = videoRef.value.seekable.end(0);
               if (prevEnd === currentEnd) {
-                videoRef.value.src = videoSrc;
+                videoRef.value.src = videoSrc.value;
                 videoRef.value.play();
               }
               prevEnd = currentEnd;
@@ -58,7 +64,7 @@ export const useVideostream = (videoSrc: string, autoResume = false) => {
         manifestLoadingMaxRetry: Infinity,
         xhrSetup: function (xhr) {
           xhr.addEventListener("error", (e) => {
-            hls.loadSource(videoSrc);
+            hls.loadSource(videoSrc.value);
             hls.startLoad();
             if (videoRef.value) {
               videoRef.value.play();
@@ -69,7 +75,7 @@ export const useVideostream = (videoSrc: string, autoResume = false) => {
 
       hls.attachMedia(videoRef.value);
       hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-        hls.loadSource(videoSrc);
+        hls.loadSource(videoSrc.value);
         hls.startLoad();
       });
       hls.on(Hls.Events.ERROR, (_, data) => {
@@ -85,7 +91,7 @@ export const useVideostream = (videoSrc: string, autoResume = false) => {
             if (videoRef.value.seekable.length >= 1) {
               const currentEnd = videoRef.value.seekable.end(0);
               if (prevEnd === currentEnd) {
-                hls.loadSource(videoSrc);
+                hls.loadSource(videoSrc.value);
                 hls.startLoad();
                 if (videoRef.value) {
                   videoRef.value.play();
