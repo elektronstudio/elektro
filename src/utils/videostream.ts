@@ -4,17 +4,17 @@ import Hls from "hls.js";
 
 type VideostreamStatus = "nodata" | "loading" | "playing";
 
-export const useVideostream = (videoSrc: string) => {
+export const useVideostream = (videoSrc: string, autoResume = false) => {
   const videoRef = ref<HTMLVideoElement | null>(null);
   const status = ref<VideostreamStatus>("nodata");
   const width = ref(640);
   const height = ref((640 * 9) / 16);
-  const retryDelay = 3000;
+  const resumeDelay = 10 * 1000;
 
   let hls: Hls;
 
   watch(
-    [videoRef, videoSrc],
+    [videoRef, () => videoSrc],
     () => {
       if (videoRef.value) {
         if (videoRef.value.canPlayType("application/vnd.apple.mpegURL")) {
@@ -32,19 +32,21 @@ export const useVideostream = (videoSrc: string) => {
   const playSafariHls = () => {
     if (videoRef.value) {
       videoRef.value.src = videoSrc;
-      let prevEnd = 0;
-      setInterval(() => {
-        if (videoRef.value) {
-          if (videoRef.value.seekable.length >= 1) {
-            const currentEnd = videoRef.value.seekable.end(0);
-            if (prevEnd === currentEnd) {
-              videoRef.value.src = videoSrc;
-              videoRef.value.play();
+      if (autoResume) {
+        let prevEnd = 0;
+        setInterval(() => {
+          if (videoRef.value) {
+            if (videoRef.value.seekable.length >= 1) {
+              const currentEnd = videoRef.value.seekable.end(0);
+              if (prevEnd === currentEnd) {
+                videoRef.value.src = videoSrc;
+                videoRef.value.play();
+              }
+              prevEnd = currentEnd;
             }
-            prevEnd = currentEnd;
           }
-        }
-      }, retryDelay);
+        }, resumeDelay);
+      }
     }
   };
 
@@ -52,7 +54,7 @@ export const useVideostream = (videoSrc: string) => {
     if (videoRef.value) {
       hls = new Hls({
         debug: false,
-        manifestLoadingRetryDelay: retryDelay,
+        manifestLoadingRetryDelay: 3000,
         manifestLoadingMaxRetry: Infinity,
         xhrSetup: function (xhr) {
           xhr.addEventListener("error", (e) => {
@@ -76,23 +78,24 @@ export const useVideostream = (videoSrc: string) => {
           hls.startLoad();
         }
       });
-
-      let prevEnd = 0;
-      setInterval(() => {
-        if (videoRef.value) {
-          if (videoRef.value.seekable.length >= 1) {
-            const currentEnd = videoRef.value.seekable.end(0);
-            if (prevEnd === currentEnd) {
-              hls.loadSource(videoSrc);
-              hls.startLoad();
-              if (videoRef.value) {
-                videoRef.value.play();
+      if (autoResume) {
+        let prevEnd = 0;
+        setInterval(() => {
+          if (videoRef.value) {
+            if (videoRef.value.seekable.length >= 1) {
+              const currentEnd = videoRef.value.seekable.end(0);
+              if (prevEnd === currentEnd) {
+                hls.loadSource(videoSrc);
+                hls.startLoad();
+                if (videoRef.value) {
+                  videoRef.value.play();
+                }
               }
+              prevEnd = currentEnd;
             }
-            prevEnd = currentEnd;
           }
-        }
-      }, 10000);
+        }, resumeDelay);
+      }
     }
   };
 
