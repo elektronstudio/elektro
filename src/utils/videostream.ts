@@ -1,8 +1,9 @@
 import { ref, watch, onMounted, onUnmounted, Ref } from "vue";
 import Hls from "hls.js";
 
-// although the video player supports it
-// "paused" is not really an useful for live streams
+// Although the video player supports "paused" status
+// it is not incldued since is not really an useful
+// for live streams
 
 type VideostreamStatus = "nodata" | "loading" | "playing";
 type MaybeRef<T> = Ref<T> | T;
@@ -40,6 +41,8 @@ export const useVideostream = (
     { immediate: true },
   );
 
+  // Safari plays HLS natively, we just add
+  // reconnect logic
   const playSafariHls = () => {
     if (videoRef.value) {
       videoRef.value.src = videoSrc.value;
@@ -62,6 +65,7 @@ export const useVideostream = (
     }
   };
 
+  // Non-Safary players need to use hls.js
   const playHls = () => {
     if (videoRef.value) {
       hls = new Hls({
@@ -129,6 +133,8 @@ export const useVideostream = (
 
       videoRef.value.addEventListener("playing", (e) => {
         status.value = "playing";
+        // Width and height are set twice since different
+        // browsers emit the width data on different events
         width.value =
           videoRef.value && videoRef.value.videoWidth > 0
             ? videoRef.value?.videoWidth
