@@ -6,7 +6,7 @@ import { timezoneShortname } from "./timezone";
 
 const now = useNow({ interval: 1000 });
 
-// TODO: add formatDatetimeRange()
+// TODO: add formatRange()
 export function formatDatetime(datetime: Date, showTime = true) {
   if (showTime) {
     // now is a reactive value but we do not expect timezone
@@ -19,7 +19,7 @@ export function formatDatetime(datetime: Date, showTime = true) {
   }
 }
 
-// TODO: add useRangeAgo()
+// TODO: add useFormattedRangeDistance()
 const useFormattedDistance = (dateTime: Date) =>
   computed(() => {
     const distance = sentenceCase(
