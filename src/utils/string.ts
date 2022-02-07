@@ -11,3 +11,7 @@ export function safeJsonParse(str: any) {
     return null;
   }
 }
+
+export function sentenceCase(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
