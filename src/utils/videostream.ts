@@ -2,10 +2,12 @@ import { ref, watch, onMounted, onUnmounted, Ref } from "vue";
 import Hls from "hls.js";
 
 // Although the video player supports "paused" status
-// it is not incldued since is not really an useful
+// it is not supported here, since is not that useful
 // for live streams
 
 type VideostreamStatus = "nodata" | "loading" | "playing";
+
+// TODO: Perpahs Vue or vueuse provides this?
 type MaybeRef<T> = Ref<T> | T;
 
 export const useVideostream = (
@@ -15,6 +17,7 @@ export const useVideostream = (
   const videoSrc = ref(src);
   const videoRef = ref<HTMLVideoElement | null>(null);
   const status = ref<VideostreamStatus>("nodata");
+
   // Initial resolution, we update it when we get the
   // the video stream metadata
   const width = ref(640);
@@ -23,6 +26,7 @@ export const useVideostream = (
   // Automatic reconnect delay
   const reconnectDelay = 10 * 1000;
 
+  // hls.js placeholder
   let hls: Hls;
 
   watch(
@@ -46,6 +50,7 @@ export const useVideostream = (
   const playSafariHls = () => {
     if (videoRef.value) {
       videoRef.value.src = videoSrc.value;
+
       // Reconnect logic
       if (autoReconnect) {
         let prevEnd = 0;
@@ -121,28 +126,14 @@ export const useVideostream = (
     if (videoRef.value) {
       videoRef.value.addEventListener("loadeddata", (e) => {
         status.value = "loading";
-        width.value =
-          videoRef.value && videoRef.value.videoWidth > 0
-            ? videoRef.value?.videoWidth
-            : -1;
-        height.value =
-          videoRef.value && videoRef.value.videoHeight > 0
-            ? videoRef.value?.videoHeight
-            : -1;
+        setVideoSize();
       });
 
       videoRef.value.addEventListener("playing", (e) => {
         status.value = "playing";
-        // Width and height are set twice since different
-        // browsers emit the width data on different events
-        width.value =
-          videoRef.value && videoRef.value.videoWidth > 0
-            ? videoRef.value?.videoWidth
-            : -1;
-        height.value =
-          videoRef.value && videoRef.value.videoHeight > 0
-            ? videoRef.value?.videoHeight
-            : -1;
+        // Different browsers emit the video size data
+        // on different events so we duplicate
+        setVideoSize();
       });
 
       videoRef.value.addEventListener("ended", (e) => {
@@ -156,6 +147,17 @@ export const useVideostream = (
       hls.destroy();
     }
   });
+
+  function setVideoSize() {
+    width.value =
+      videoRef.value && videoRef.value.videoWidth > 0
+        ? videoRef.value?.videoWidth
+        : -1;
+    height.value =
+      videoRef.value && videoRef.value.videoHeight > 0
+        ? videoRef.value?.videoHeight
+        : -1;
+  }
 
   return { videoRef, status, width, height };
 };
