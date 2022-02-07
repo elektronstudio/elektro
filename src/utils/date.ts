@@ -20,7 +20,7 @@ export function formatDatetime(datetime: Date, showTime = true) {
 }
 
 // TODO: add useRangeAgo()
-const useAgo = (dateTime: Date) =>
+const useFormattedDistance = (dateTime: Date) =>
   computed(() => {
     const distance = sentenceCase(
       formatDistanceStrict(dateTime, now.value, {
@@ -54,13 +54,13 @@ function useRangeUrgency(fromDateTime: Date, toDateTime: Date) {
 export const useRange = (fromDatetime: Date, toDatetime: Date) => {
   const formattedFromDatetime = formatDatetime(fromDatetime);
   const formattedToDatetime = formatDatetime(toDatetime);
-  const ago = useAgo(fromDatetime);
+  const formattedDistance = useFormattedDistance(fromDatetime);
   const urgency = useRangeUrgency(fromDatetime, toDatetime);
 
   return {
     formattedFromDatetime,
     formattedToDatetime,
-    ago,
+    formattedDistance,
     urgency,
   };
 };
