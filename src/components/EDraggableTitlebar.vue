@@ -31,7 +31,6 @@ const { title } = defineProps<Props>();
   text-overflow: ellipsis;
   overflow: hidden;
   width: 100%;
-  /* display: inline-block; */
 }
 
 .EDraggableTitlebar:hover {
