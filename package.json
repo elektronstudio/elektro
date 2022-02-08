@@ -1,6 +1,6 @@
 {
   "name": "elektro",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "engines": {
     "node": "^14.13.1 || >=16.0.0"
   },
