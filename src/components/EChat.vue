@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import { EBox, EButton, EFormTextArea } from "../lib";
+import { EButton } from "../lib";
 import { initMessages, useChat } from "../utils";
 // This goes to the main app instance,
 // it loads historic chat messages
@@ -84,7 +83,6 @@ const {
   /* height: 2rem; */
   display: flex;
   align-items: flex-end;
-  /* border-bottom: 1px solid var(--fg); */
 }
 
 .chatTextarea {
