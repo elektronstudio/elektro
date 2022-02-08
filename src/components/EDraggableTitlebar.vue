@@ -7,9 +7,9 @@ const { title } = defineProps<Props>();
 </script>
 
 <template>
-  <nav class="EDraggableTitlebar">
+  <div class="EDraggableTitlebar">
     <h6 v-if="title">{{ title }}</h6>
-  </nav>
+  </div>
 </template>
 
 <style scoped>
@@ -19,7 +19,7 @@ const { title } = defineProps<Props>();
   align-items: center;
   background-color: var(--bg);
   height: var(--h-6);
-  padding: var(--p-2);
+  padding-left: var(--p-2);
   padding-right: var(--p-6);
 }
 .EDraggableTitlebar h6 {
@@ -30,6 +30,8 @@ const { title } = defineProps<Props>();
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  width: 100%;
+  /* display: inline-block; */
 }
 
 .EDraggableTitlebar:hover {

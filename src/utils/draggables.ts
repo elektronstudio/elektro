@@ -16,6 +16,7 @@ export type Draggable = {
 
 export function useDraggable(draggablesData: Draggable[]) {
   const draggablesState = ref<Draggable[]>([]);
+  const minimisedDraggables = ref<Draggable[]>([]);
 
   const updateDraggablesState = (draggable: Draggable) => {
     if (!draggable) {
@@ -37,6 +38,13 @@ export function useDraggable(draggablesData: Draggable[]) {
         };
       }
     });
+    if (draggable.isMinimised) {
+      minimisedDraggables.value = [...minimisedDraggables.value, draggable];
+    } else {
+      minimisedDraggables.value = minimisedDraggables.value.filter(
+        (item) => item.draggableId !== draggableId,
+      );
+    }
   };
 
   watch(draggablesState, () => {
@@ -72,8 +80,10 @@ export function useDraggable(draggablesData: Draggable[]) {
       }
       initialStates.push(mergedDraggable);
     });
+    const minimised = initialStates.filter((item) => item.isMinimised);
+    minimisedDraggables.value = minimised;
     draggablesState.value = initialStates;
   });
 
-  return { draggablesState, updateDraggablesState };
+  return { draggablesState, minimisedDraggables, updateDraggablesState };
 }

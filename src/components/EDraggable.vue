@@ -34,6 +34,7 @@ const gridPosX = ref<number>(props.gridPosX ? props.gridPosX : 0);
 const gridPosY = ref<number>(props.gridPosY ? props.gridPosY : 0);
 const isMinimised = ref<boolean>(props.isMinimised ? props.isMinimised : false);
 const order = ref<number>(props.order);
+const finalAnimation = ref<DOMRect | undefined>();
 
 const { x, y, style, isDragging } = useDraggable(draggableRef, {
   preventDefault: true,
@@ -50,9 +51,6 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
         gridPosY: snappedY.value,
       });
     }
-  },
-  onStart: () => {
-    // emit("update-draggables", { ...props });
   },
 });
 
@@ -90,34 +88,63 @@ onMounted(() => {
 
   // window.addEventListener("resize", calculateCoordinates);
 });
+
+function findCoordinates(el: Element, done: () => void) {
+  const $draggableDocked = document.querySelector(
+    `.EDraggablesDock .EDraggableTitlebar[data-id="${draggableId}"]`,
+  );
+  const draggableDockedRect = $draggableDocked?.getBoundingClientRect();
+  finalAnimation.value = draggableDockedRect;
+
+  el.addEventListener("animationend", () => {
+    done();
+  });
+}
 </script>
 
 <template>
-  <div
-    v-show="!isMinimised"
-    class="EDraggable"
-    :style="style"
-    style="touch-action: none"
-    :class="{ isDragging: isDragging }"
-  >
-    <button
-      @click.stop="emit('update-draggables', { ...props, isMinimised: true })"
+  <Transition @enter="findCoordinates" @leave="findCoordinates">
+    <div
+      class="EDraggable"
+      :style="style"
+      style="touch-action: none"
+      :class="{ isDragging: isDragging }"
+      v-show="!isMinimised"
     >
-      ⅹ
-    </button>
-    <div ref="draggableRef">
-      <EDraggableTitlebar
-        :title="title"
-        :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
-      />
+      <button
+        @click.stop="emit('update-draggables', { ...props, isMinimised: true })"
+      >
+        ⅹ
+      </button>
+      <div ref="draggableRef">
+        <EDraggableTitlebar
+          :title="title"
+          :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
+        />
+      </div>
+      <article>
+        <slot />
+      </article>
     </div>
-    <article>
-      <slot />
-    </article>
-  </div>
+  </Transition>
 </template>
 
 <style scoped>
+@keyframes windowAnimation {
+  from {
+    top: v-bind("`${y}px`");
+    left: v-bind("`${x}px`");
+    width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
+    height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
+  }
+  to {
+    top: v-bind("`${finalAnimation?.y}px`");
+    left: v-bind("`${finalAnimation?.x}px`");
+    width: 0;
+    height: var(--h-6);
+    opacity: 0;
+  }
+}
 .EDraggable {
   position: fixed;
   width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
@@ -131,7 +158,17 @@ onMounted(() => {
 .EDraggable.isDragging {
   z-index: 100;
 }
+.EDraggable.v-enter-active {
+  animation: windowAnimation 0.5s ease-in-out reverse;
+}
 
+.EDraggable.v-leave-active {
+  animation: windowAnimation 0.5s ease-in-out forwards;
+}
+.EDraggable.v-enter-active *,
+.EDraggable.v-leave-active * {
+  display: none;
+}
 .EDraggable article {
   flex-grow: 1;
   height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size) - var(--h-6));

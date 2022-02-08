@@ -51,16 +51,6 @@ const draggablesData = [
     order: 5,
   },
   {
-    title: "Electron 4",
-    draggableId: "draggable-electron-4",
-    gridPosX: 5,
-    gridPosY: 5,
-    tilesWidth: 2,
-    tilesHeight: 2,
-    isMinimised: false,
-    order: 1,
-  },
-  {
     title: "Electron 5",
     draggableId: "draggable-electron-5",
     gridPosX: 8,
@@ -68,34 +58,6 @@ const draggablesData = [
     tilesWidth: 2,
     tilesHeight: 2,
     isMinimised: true,
-  },
-  {
-    title: "Electron 6",
-    draggableId: "draggable-electron-6",
-    gridPosX: 11,
-    gridPosY: 4,
-    tilesWidth: 2,
-    tilesHeight: 2,
-    isMinimised: true,
-  },
-  {
-    title: "Electron 7",
-    draggableId: "draggable-electron-7",
-    gridPosX: 4,
-    gridPosY: 10,
-    tilesWidth: 2,
-    tilesHeight: 2,
-    isMinimised: true,
-  },
-  {
-    title: "Electron 8",
-    draggableId: "draggable-electron-8",
-    gridPosX: 7,
-    gridPosY: 10,
-    tilesWidth: 2,
-    tilesHeight: 2,
-    isMinimised: true,
-    order: 3,
   },
   {
     title: "Electron new",
@@ -117,7 +79,8 @@ const draggablesData = [
     tilesHeight: 6,
   },
 ] as Draggable[];
-const { draggablesState, updateDraggablesState } = useDraggable(draggablesData);
+const { draggablesState, minimisedDraggables, updateDraggablesState } =
+  useDraggable(draggablesData);
 
 const findComponent = (contentType: ContentType) => {
   let componentName;
@@ -158,7 +121,7 @@ const findComponent = (contentType: ContentType) => {
       </EDraggable>
     </template>
     <EDraggablesDock
-      :draggables="draggablesState.filter((m) => m.isMinimised)"
+      :draggables="minimisedDraggables"
       @update-draggables="updateDraggablesState"
     />
   </EBreadBoard>
