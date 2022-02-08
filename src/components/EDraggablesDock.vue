@@ -27,30 +27,40 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <nav class="EDraggablesDock">
+  <TransitionGroup class="EDraggablesDock" name="dock" tag="nav">
     <EDraggableTitlebar
       v-for="draggable in draggables"
       :title="draggable.title"
       @click.="emit('update-draggables', { ...draggable, isMinimised: false })"
-      :style="{ order: draggable.order }"
+      :data-id="draggable.draggableId"
+      :key="draggable.draggableId"
     />
-  </nav>
+  </TransitionGroup>
 </template>
 
 <style scoped>
 .EDraggablesDock {
-  display: flex;
   position: fixed;
   bottom: 0;
   width: 100%;
+  display: flex;
+  justify-content: flex-start;
   padding-left: var(--breadboard-tile-size);
   overflow-x: auto;
 }
 
 .EDraggablesDock > * {
-  flex: 1 1 16rem;
-  min-width: 4rem;
-  max-width: 16rem;
+  display: inline-block;
   margin-right: var(--m-3);
+  width: 10rem;
+}
+
+.dock-enter-active,
+.dock-leave-active {
+  transition: width 0.2s ease-in-out;
+}
+.dock-enter-from,
+.dock-leave-to {
+  width: 0;
 }
 </style>
