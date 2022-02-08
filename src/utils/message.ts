@@ -1,6 +1,5 @@
 import { ref } from "vue";
 import ReconnectingWebsocket, { UrlProvider } from "reconnecting-websocket";
-import WS from "ws";
 import { randomString, safeJsonParse } from "./string";
 import { uniqueCollection } from "./array";
 import { config } from "./config";
@@ -12,10 +11,6 @@ export type Message = {
   type: MessageType;
   [key: string]: any;
 };
-
-export const ws = new ReconnectingWebsocket(config.wsUrl as UrlProvider, [], {
-  WebSocket: typeof WebSocket === "undefined" ? WS : WebSocket,
-});
 
 export function createMessage(message: Object): string {
   return JSON.stringify({
@@ -31,9 +26,10 @@ export function createMessage(message: Object): string {
   } as Message);
 }
 
-export const messages = ref<Message[]>([]);
+export function useMessage() {
+  const ws = new ReconnectingWebsocket(config.wsUrl as UrlProvider);
+  const messages = ref<Message[]>([]);
 
-export function initMessages() {
   fetch(config.messagesUrl as RequestInfo)
     .then((res) => res.json())
     .then((loadedMessages: Message[]) => {
@@ -53,4 +49,5 @@ export function initMessages() {
     // not always work / preserve reactivity
     messages.value = [...messages.value, message];
   });
+  return { ws, messages, createMessage };
 }

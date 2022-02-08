@@ -1,5 +1,5 @@
 import { computed, ref } from "vue";
-import { messages, createMessage, ws } from "./message";
+import { useMessage } from "./message";
 import type { MessageType } from "./message";
 import { useScrollToBottom, useTextarea } from "./dom";
 
@@ -8,6 +8,7 @@ export function useChat(
   sentMessageType: MessageType = "CHAT",
   receiveMessageType: MessageType = "CHAT",
 ) {
+  const { ws, messages, createMessage } = useMessage();
   const chatMessages = computed(() => {
     return messages.value.filter(
       (m) => m.type === receiveMessageType && m.channel === channel,
