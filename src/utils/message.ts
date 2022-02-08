@@ -2,7 +2,7 @@ import { ref } from "vue";
 import ReconnectingWebsocket, { UrlProvider } from "reconnecting-websocket";
 import { randomString, safeJsonParse } from "./string";
 import { uniqueCollection } from "./array";
-import { config } from "../../config";
+import { config } from "./config";
 
 export type MessageType = "CHAT" | string;
 
