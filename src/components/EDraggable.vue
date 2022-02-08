@@ -90,6 +90,7 @@ onMounted(() => {
 });
 
 function findCoordinates(el: Element, done: () => void) {
+  // @TODO: Find a better solution for this
   const $draggableDocked = document.querySelector(
     `.EDraggablesDock .EDraggableTitlebar[data-id="${draggableId}"]`,
   );
