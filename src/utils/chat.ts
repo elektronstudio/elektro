@@ -22,7 +22,7 @@ export function useChat(
         type: sentMessageType || "CHAT",
         channel: channel,
         value: newChatMessage.value,
-        //store: true, // TODO: Enable this when stable
+        store: true,
       });
       ws.send(outgoingMessage);
       newChatMessage.value = "";
