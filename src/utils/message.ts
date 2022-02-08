@@ -1,5 +1,6 @@
 import { ref } from "vue";
 import ReconnectingWebsocket, { UrlProvider } from "reconnecting-websocket";
+import WS from "ws";
 import { randomString, safeJsonParse } from "./string";
 import { uniqueCollection } from "./array";
 import { config } from "./config";
@@ -12,7 +13,9 @@ export type Message = {
   [key: string]: any;
 };
 
-export const ws = new ReconnectingWebsocket(config.wsUrl as UrlProvider);
+export const ws = new ReconnectingWebsocket(config.wsUrl as UrlProvider, [], {
+  WebSocket: typeof WebSocket === "undefined" ? WS : WebSocket,
+});
 
 export function createMessage(message: Object): string {
   return JSON.stringify({
