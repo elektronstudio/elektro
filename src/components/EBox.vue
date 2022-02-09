@@ -38,6 +38,11 @@ const { el = "div", color, ratio = "auto", layout } = defineProps<Props>();
   border-color: var(--accent);
   color: var(--bg);
 }
+.EBox.accent :deep(*)::selection {
+  color: var(--bg);
+  text-shadow: 2px 1px 5px var(--bg);
+}
+
 .EBox.gray {
   background-color: var(--gray-300);
   border-color: var(--gray-300);
