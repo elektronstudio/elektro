@@ -35,5 +35,13 @@ const navItems = [
 
 <template>
   <ENav :navItems="navItems" />
-  <ETitle size="lg">Index page</ETitle>
+  <div class="Index">
+    <ETitle size="lg">Index page</ETitle>
+  </div>
 </template>
+
+<style>
+.Index {
+  padding: var(--p-5);
+}
+</style>

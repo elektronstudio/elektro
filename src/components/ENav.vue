@@ -29,7 +29,7 @@ const menuItemsLength =
 .ENav {
   display: grid;
   height: var(--h-9);
-  --menu-items-count: v-bind(menuItemsLength);
+  --menu-items-count: v-bind(menuItemsLength + 1);
   grid-template-columns: repeat(var(--menu-items-count), 1fr);
 }
 .ENav > :deep(*) {
