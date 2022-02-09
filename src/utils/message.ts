@@ -2,7 +2,7 @@ import { ref } from "vue";
 import ReconnectingWebsocket, { UrlProvider } from "reconnecting-websocket";
 import { randomString, safeJsonParse } from "./string";
 import { uniqueCollection } from "./array";
-import { config } from "../../config";
+import { config } from "./config";
 
 export type MessageType = "CHAT" | string;
 
@@ -12,9 +12,7 @@ export type Message = {
   [key: string]: any;
 };
 
-export const ws = new ReconnectingWebsocket(config.wsUrl as UrlProvider);
-
-export function createMessage(message: Object): string {
+export function formatMessage(message: Object): string {
   return JSON.stringify({
     id: randomString(16),
     datetime: new Date().toISOString(),
@@ -28,9 +26,10 @@ export function createMessage(message: Object): string {
   } as Message);
 }
 
-export const messages = ref<Message[]>([]);
+export function useMessage() {
+  const ws = new ReconnectingWebsocket(config.wsUrl as UrlProvider);
+  const messages = ref<Message[]>([]);
 
-export function initMessages() {
   fetch(config.messagesUrl as RequestInfo)
     .then((res) => res.json())
     .then((loadedMessages: Message[]) => {
@@ -50,4 +49,8 @@ export function initMessages() {
     // not always work / preserve reactivity
     messages.value = [...messages.value, message];
   });
+
+  const sendMessage = (message: Message) => ws.send(formatMessage(message));
+
+  return { ws, messages, sendMessage };
 }

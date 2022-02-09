@@ -1,5 +1,5 @@
 import { computed, ref } from "vue";
-import { messages, createMessage, ws } from "./message";
+import { useMessage } from "./message";
 import type { MessageType } from "./message";
 import { useScrollToBottom, useTextarea } from "./dom";
 
@@ -8,6 +8,7 @@ export function useChat(
   sentMessageType: MessageType = "CHAT",
   receiveMessageType: MessageType = "CHAT",
 ) {
+  const { messages, sendMessage } = useMessage();
   const chatMessages = computed(() => {
     return messages.value.filter(
       (m) => m.type === receiveMessageType && m.channel === channel,
@@ -18,13 +19,12 @@ export function useChat(
 
   const onNewChatMessage = () => {
     if (newChatMessage.value) {
-      const outgoingMessage = createMessage({
+      sendMessage({
         type: sentMessageType || "CHAT",
         channel: channel,
         value: newChatMessage.value,
         store: true,
       });
-      ws.send(outgoingMessage);
       newChatMessage.value = "";
     }
   };

@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { EButton } from "../lib";
-import { initMessages, useChat } from "../utils";
-// This goes to the main app instance,
-// it loads historic chat messages
-// and sets up ws event handling
-initMessages();
+import { useChat } from "../utils";
 
 const {
   chatMessages,
