@@ -12,7 +12,7 @@ export type Message = {
   [key: string]: any;
 };
 
-export function createMessage(message: Object): string {
+export function formatMessage(message: Object): string {
   return JSON.stringify({
     id: randomString(16),
     datetime: new Date().toISOString(),
@@ -49,5 +49,8 @@ export function useMessage() {
     // not always work / preserve reactivity
     messages.value = [...messages.value, message];
   });
-  return { ws, messages, createMessage };
+
+  const sendMessage = (message: Message) => ws.send(formatMessage(message));
+
+  return { ws, messages, sendMessage };
 }
