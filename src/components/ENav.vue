@@ -16,7 +16,7 @@ const menuItemsLength =
 
 <template>
   <nav class="ENav">
-    <RouterLink to="/">
+    <RouterLink v-if="showLogo" to="/">
       <ELogo el="span" />
     </RouterLink>
     <RouterLink v-for="item in navItems" :key="item.name" :to="item.path">

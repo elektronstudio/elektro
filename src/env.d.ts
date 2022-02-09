@@ -5,3 +5,12 @@ declare module "virtual:generated-pages" {
   //@ts-ignore
   export default routes;
 }
+
+interface ImportMetaEnv {
+  readonly VITE_WS_URL: string;
+  readonly VITE_MESSAGES_URL: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}

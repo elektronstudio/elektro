@@ -30,15 +30,16 @@ watchEffect(() => {
 <style scoped>
 .Debug {
   position: fixed;
-  top: 0;
   right: 0;
   bottom: 0;
   width: 20vw;
   padding: var(--gap-4);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.85);
   overflow: auto;
   overscroll-behavior-y: contain;
   white-space: pre-wrap;
   font-size: var(--text-xs);
+  border: 1px solid var(--gray-500);
+  line-height: var(--line-height-lg);
 }
 </style>
