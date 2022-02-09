@@ -18,8 +18,8 @@ const { title, author, thumbnail, nextEvent } = defineProps<Props>();
 <template>
   <ECard :thumbnail="thumbnail">
     <template #header>
-      <ETitle el="h3" size="lg">{{ title }}</ETitle>
-      <h6 v-if="author">{{ author }}</h6>
+      <ETitle el="h3" size="lg" v-html="title" />
+      <h6 v-if="author" v-html="author" />
     </template>
     <template #footer>
       <p v-if="nextEvent">Järgmine etendus:</p>

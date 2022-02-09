@@ -31,5 +31,5 @@ const navItems = [
 </script>
 
 <template>
-  <ENav :navItems="navItems" showLogo />
+  <ENav :nav-items="navItems" :show-logo="true" />
 </template>
