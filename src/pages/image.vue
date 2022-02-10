@@ -52,7 +52,7 @@ const image = {
 <template>
   <div class="image">
     <ETitle>Images</ETitle>
-    <EImage :images="Object.values(image)" />
+    <EImage :sizes="Object.values(image)" />
   </div>
 </template>
 

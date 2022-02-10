@@ -3,16 +3,16 @@ import { computed, ref } from "vue";
 import { useElementSize } from "@vueuse/core";
 import { nearest } from "../utils/array";
 
-const { images, alt = "" } = defineProps<Props>();
+const { sizes, alt = "" } = defineProps<Props>();
 
-type Image = {
+type Size = {
   url: string;
   width: number;
   height: number;
 };
 
 type Props = {
-  images: Image[];
+  sizes: Size[];
   alt?: string;
 };
 
@@ -21,10 +21,10 @@ const { width } = useElementSize(el);
 
 const image = computed(() => {
   const nearestWidth = nearest(
-    images.map(({ width }) => width),
+    sizes.map(({ width }) => width),
     width.value,
   );
-  return images.filter((image) => image.width === nearestWidth)?.[0];
+  return sizes.filter((image) => image.width === nearestWidth)?.[0];
 });
 </script>
 
@@ -37,12 +37,12 @@ const image = computed(() => {
     :alt="alt"
     loading="lazy"
     decoding="async"
-    class="Image"
+    class="EImage"
   />
 </template>
 
 <style scoped>
-.Image {
+.EImage {
   display: block;
   width: 100%;
 }
