@@ -6,6 +6,7 @@ import EBox from "../../components/EBox.vue";
 import EDetailsList from "../../components/EDetailsList.vue";
 import EEventInstance from "../../components/EEventInstance.vue";
 import EPressItems from "../../components/EPressItems.vue";
+import EImageSlider from "../../components/EImageSlider.vue";
 
 const data = {
   title: "Hundid",
@@ -107,6 +108,63 @@ Kõik “Hundid” on kordumatud. Ühe piletiga pääsed kõikidele etendustele,
 “Hundid” on mõeldud vaatamiseks arvutist. Kasuta veebibrauseriks Firefox-i või Google Chrome-i. Vajad head internetiühendust ning soovitame kasutada kõrvaklappe.</p>`,
 };
 
+const image = {
+  large: {
+    ext: ".jpg",
+    url: "https://elektron.fra1.digitaloceanspaces.com/strapi/8c594b89a52fabe94d29ffd4f3647eb2.jpg",
+    hash: "8c594b89a52fabe94d29ffd4f3647eb2",
+    mime: "image/jpeg",
+    name: "large_plaadikaas(1).jpg",
+    path: null,
+    size: 139.64,
+    width: 1000,
+    height: 911,
+  },
+  small: {
+    ext: ".jpg",
+    url: "https://elektron.fra1.digitaloceanspaces.com/strapi/2483f5b1399359a4da6b5350c3b33ee8.jpg",
+    hash: "2483f5b1399359a4da6b5350c3b33ee8",
+    mime: "image/jpeg",
+    name: "small_plaadikaas(1).jpg",
+    path: null,
+    size: 46.37,
+    width: 500,
+    height: 456,
+  },
+  medium: {
+    ext: ".jpg",
+    url: "https://elektron.fra1.digitaloceanspaces.com/strapi/e471eca723cf4ebb8443bf333c2f6904.jpg",
+    hash: "e471eca723cf4ebb8443bf333c2f6904",
+    mime: "image/jpeg",
+    name: "medium_plaadikaas(1).jpg",
+    path: null,
+    size: 90.95,
+    width: 750,
+    height: 684,
+  },
+  thumbnail: {
+    ext: ".jpg",
+    url: "https://elektron.fra1.digitaloceanspaces.com/strapi/4600b99470fe300799fc1cce94ab104c.jpg",
+    hash: "4600b99470fe300799fc1cce94ab104c",
+    mime: "image/jpeg",
+    name: "thumbnail_plaadikaas(1).jpg",
+    path: null,
+    size: 7.91,
+    width: 171,
+    height: 156,
+  },
+};
+
+const caption =
+  "Caption Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
+const images = [
+  { sizes: Object.values(image), caption },
+  { sizes: Object.values(image), caption },
+  { sizes: Object.values(image), caption },
+  { sizes: Object.values(image), caption },
+];
+
 const {
   title,
   producer,
@@ -128,6 +186,7 @@ const {
       <EContent class="Description" size="lg" :content="description" />
     </header>
     <!-- Gallery block -->
+    <EImageSlider :images="images" />
     <main>
       <EBox class="MainContent">
         <EDetailsList :details="details" />
