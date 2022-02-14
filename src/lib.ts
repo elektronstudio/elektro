@@ -22,6 +22,7 @@ export { default as ENavButton } from "./components/ENavButton.vue";
 export { default as EPressItems } from "./components/EPressItems.vue";
 export { default as EProductionCard } from "./components/EProductionCard.vue";
 export { default as EScheduleEvent } from "./components/EScheduleEvent.vue";
+export { default as EWindowBorder } from "./components/EWindowBorder.vue";
 export { default as ETeamCard } from "./components/ETeamCard.vue";
 export { default as ETitle } from "./components/ETitle.vue";
 
