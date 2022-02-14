@@ -11,15 +11,16 @@ type Props = {
     | "1 / 2"
     | "2 / 1"
     | "auto";
+  layout?: "columns1" | "columns2" | "columns3" | "columns4";
   // @TODO: Rethink how to pass colors to components
   color?: "accent" | "gray";
 };
 
-const { el = "div", color, ratio = "auto" } = defineProps<Props>();
+const { el = "div", color, ratio = "auto", layout } = defineProps<Props>();
 </script>
 
 <template>
-  <component :is="el" :class="color" class="EBox">
+  <component :is="el" :class="[color, layout]" class="EBox">
     <slot />
   </component>
 </template>
@@ -37,9 +38,40 @@ const { el = "div", color, ratio = "auto" } = defineProps<Props>();
   border-color: var(--accent);
   color: var(--bg);
 }
+.EBox.accent :deep(*)::selection {
+  color: var(--bg);
+  text-shadow: 2px 1px 5px var(--bg);
+}
+
 .EBox.gray {
   background-color: var(--gray-300);
   border-color: var(--gray-300);
   color: var(--bg);
+}
+
+/* @TODO: Add breakpoints system */
+@media only screen and (min-width: 600px) {
+  .EBox.columns3,
+  .EBox.columns4 {
+    grid-column: span 2;
+  }
+}
+/* @TODO: Add breakpoints system */
+@media only screen and (min-width: 1240px) {
+  .EBox.columns2 {
+    grid-column: span 2;
+  }
+  .EBox.columns3 {
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+    grid-gap: var(--gap-5);
+    grid-column: span 3;
+  }
+  .EBox.columns4 {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: var(--gap-5);
+    grid-column: span 4;
+  }
 }
 </style>
