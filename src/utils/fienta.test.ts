@@ -10,7 +10,7 @@ import {
 } from "vitest";
 import { setupServer } from "msw/node";
 import { rest } from "msw";
-import { getTicketStatus, storeLocalTicket, getRemoteTicket } from "./fienta";
+import { getTicketableStatus, setLocalTicket, getRemoteTicket } from "./fienta";
 import { config } from "./config";
 
 // Deps mocks
@@ -25,7 +25,6 @@ vi.mock("./config", () => {
   return {
     config: {
       fientaUrl: "http://fienta.test/api/v1",
-      fientaToken: "tthaggaffsa",
     },
   };
 });
@@ -48,40 +47,48 @@ beforeAll(() => {
 afterAll(() => server.close());
 afterEach(() => server.resetHandlers());
 
-// Test getTicketStatus
+// Test getTicketableStatus
 
 test("ticketable does not require ticket", () => {
-  return assert.equal(getTicketStatus([{}]), "FREE");
+  return assert.equal(getTicketableStatus([{}]), "FREE");
 });
 
 test("ticketable requires ticket and user does not have ticket", () => {
   return assert.equal(
-    getTicketStatus([{ fienta_id: "foai" }]),
+    getTicketableStatus([{ fienta_id: "foai" }]),
     "REQUIRES_TICKET",
   );
 });
 
 test("ticketable requires ticket and user has ticket", () => {
-  return assert.equal(getTicketStatus([{ fienta_id: "fass" }]), "HAS_TICKET");
-});
-
-test("one of many ticketables requires ticket and user has ticket", () => {
   return assert.equal(
-    getTicketStatus([{ fienta_id: "fass" }, { fienta_id: "fyas" }]),
+    getTicketableStatus([{ fienta_id: "fass" }]),
     "HAS_TICKET",
   );
 });
 
-// Test storeLocalTicket
+test("one of many ticketables requires ticket and user has ticket", () => {
+  return assert.equal(
+    getTicketableStatus([{ fienta_id: "fass" }, { fienta_id: "fyas" }]),
+    "HAS_TICKET",
+  );
+});
+
+// Test setLocalTicket
 
 test("ticketable requires ticket and user stores and checks that it has ticket", () => {
-  storeLocalTicket("casd", "fasa");
-  return assert.equal(getTicketStatus([{ fienta_id: "fasa" }]), "HAS_TICKET");
+  setLocalTicket("casd", "fasa");
+  return assert.equal(
+    getTicketableStatus([{ fienta_id: "fasa" }]),
+    "HAS_TICKET",
+  );
 });
 
 //
 
-test("fetch", async () => {
-  const a = await getRemoteTicket("coad");
-  return assert.deepEqual(a, { fienta_id: "fass", fienta_status: "SASD" });
+test("get ticket data using Fienta API using ticket code", async () => {
+  return assert.deepEqual(await getRemoteTicket("coad"), {
+    fienta_id: "fass",
+    fienta_status: "SASD",
+  });
 });
