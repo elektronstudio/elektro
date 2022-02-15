@@ -21,27 +21,24 @@ vi.mock("@vueuse/core", () => {
   };
 });
 
-// vi.mock("./config", () => {
-//   return {
-//     config: {
-//       fientaUrl: "http://fienta.test/api/v1/tickets/coad",
-//       fientaToken: "tthaggaffsa",
-//     },
-//   };
-// });
+vi.mock("./config", () => {
+  return {
+    config: {
+      fientaUrl: "http://fienta.test/api/v1",
+      fientaToken: "tthaggaffsa",
+    },
+  };
+});
 
 // API mocks
 
 export const handlers = [
-  rest.get(
-    "http://fienta.test/api/v1/tickets/coad" as string,
-    (_req, res, ctx) => {
-      return res(
-        ctx.status(200),
-        ctx.json({ ticket: { status: "SASD", event_id: "fass" } }),
-      );
-    },
-  ),
+  rest.get(`${config.fientaUrl}/tickets/coad` as string, (_req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({ ticket: { status: "SASD", event_id: "fass" } }),
+    );
+  }),
 ];
 
 const server = setupServer(...handlers);

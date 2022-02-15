@@ -61,7 +61,7 @@ export function storeLocalTicket(code: string, fientaId: string): any {
 }
 
 const fienta = ky.create({
-  prefixUrl: "/api/v1" as string,
+  prefixUrl: config.fientaUrl as string,
   hooks: {
     beforeRequest: [
       (request) => {
@@ -74,8 +74,8 @@ const fienta = ky.create({
 export function getRemoteTicket(
   code: string,
 ): Promise<{ fienta_status: string; fienta_id: string }> {
-  return ky
-    .get(`http://fienta.test/api/v1/tickets/${code}`)
+  return fienta
+    .get(`tickets/${code}`)
     .json()
     .then((res: any) => {
       return {
