@@ -1,11 +1,12 @@
 import { useStorage } from "@vueuse/core";
+import { uniqueCollection } from "./array";
 
 type TicketStatus = "FREE" | "REQUIRES_TICKET" | "HAS_TICKET";
 
 // We do not have proper types for events yet
 // so we accept any object with "fienta_id" key
 type Ticketable = {
-  fienta_id: string;
+  fienta_id?: string;
   [key: string]: any;
 };
 
@@ -17,7 +18,8 @@ type Ticket = {
 const tickets = useStorage<Ticket[]>("elektron_data", []);
 
 // We accept multiple fienta IDs (parent / child tickets etc)
-function getTicketStatus(ticketables: Ticketable[]) {
+
+export function getTicketStatus(ticketables: Ticketable[]) {
   let status: TicketStatus = "FREE";
 
   const ticketablesRequiringTickets = ticketables.filter(
@@ -36,7 +38,22 @@ function getTicketStatus(ticketables: Ticketable[]) {
   if (ticketsForTicketables.length) {
     status = "HAS_TICKET";
   }
-  // TODO: Should we return the tickets as well?
+  //TODO: Should we return the tickets as well?
 
   return status;
+}
+
+export function storeLocalTicket(code: string, fientaId: string): any {
+  console.log(tickets.value);
+  tickets.value = uniqueCollection(
+    [
+      ...tickets.value,
+      {
+        code: code,
+        fientaid: fientaId,
+      },
+    ],
+    "code",
+  );
+  return tickets.value;
 }
