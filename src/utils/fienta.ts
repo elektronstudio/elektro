@@ -47,7 +47,6 @@ export function getTicketStatus(ticketables: Ticketable[]) {
 }
 
 export function storeLocalTicket(code: string, fientaId: string): any {
-  console.log(tickets.value);
   tickets.value = uniqueCollection(
     [
       ...tickets.value,
@@ -61,8 +60,8 @@ export function storeLocalTicket(code: string, fientaId: string): any {
   return tickets.value;
 }
 
-const fienta = ky.extend({
-  prefixUrl: config.fientaUrl as string,
+const fienta = ky.create({
+  prefixUrl: "/api/v1" as string,
   hooks: {
     beforeRequest: [
       (request) => {
@@ -76,7 +75,7 @@ export function getRemoteTicket(
   code: string,
 ): Promise<{ fienta_status: string; fienta_id: string }> {
   return ky
-    .get(`https://fienta.com/api/v1/tickets/${code}`)
+    .get(`http://fienta.test/api/v1/tickets/${code}`)
     .json()
     .then((res: any) => {
       return {

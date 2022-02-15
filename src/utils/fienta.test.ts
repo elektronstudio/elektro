@@ -13,11 +13,28 @@ import { rest } from "msw";
 import { getTicketStatus, storeLocalTicket, getRemoteTicket } from "./fienta";
 import { config } from "./config";
 
-// Mock the Fienta API
+// Deps mocks
+
+vi.mock("@vueuse/core", () => {
+  return {
+    useStorage: () => ref([{ fientaid: "fass", code: "coad" }]),
+  };
+});
+
+// vi.mock("./config", () => {
+//   return {
+//     config: {
+//       fientaUrl: "http://fienta.test/api/v1/tickets/coad",
+//       fientaToken: "tthaggaffsa",
+//     },
+//   };
+// });
+
+// API mocks
 
 export const handlers = [
   rest.get(
-    `https://fienta.com/api/v1/tickets/coad` as string,
+    "http://fienta.test/api/v1/tickets/coad" as string,
     (_req, res, ctx) => {
       return res(
         ctx.status(200),
@@ -28,17 +45,11 @@ export const handlers = [
 ];
 
 const server = setupServer(...handlers);
-beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
+beforeAll(() => {
+  server.listen();
+});
 afterAll(() => server.close());
 afterEach(() => server.resetHandlers());
-
-// Mock the ticket localstore
-
-vi.mock("@vueuse/core", () => {
-  return {
-    useStorage: () => ref([{ fientaid: "fass", code: "coad" }]),
-  };
-});
 
 // Test getTicketStatus
 
