@@ -1,5 +1,8 @@
 import { useStorage } from "@vueuse/core";
+import { renameSync } from "fs";
 import { uniqueCollection } from "./array";
+import ky from "ky-universal";
+import { config } from "./config";
 
 type TicketStatus = "FREE" | "REQUIRES_TICKET" | "HAS_TICKET";
 
@@ -56,4 +59,29 @@ export function storeLocalTicket(code: string, fientaId: string): any {
     "code",
   );
   return tickets.value;
+}
+
+const fienta = ky.extend({
+  prefixUrl: config.fientaUrl as string,
+  hooks: {
+    beforeRequest: [
+      (request) => {
+        request.headers.set("Authorization", `Bearer ${config.fientaToken}`);
+      },
+    ],
+  },
+});
+
+export function getRemoteTicket(
+  code: string,
+): Promise<{ fienta_status: string; fienta_id: string }> {
+  return ky
+    .get(`https://fienta.com/api/v1/tickets/${code}`)
+    .json()
+    .then((res: any) => {
+      return {
+        fienta_status: res?.ticket?.status,
+        fienta_id: res?.ticket?.event_id,
+      };
+    });
 }
