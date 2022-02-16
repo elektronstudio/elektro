@@ -5,6 +5,10 @@ import ArtNav from "../components/ArtNav.vue";
 
 <template>
   <ArtNav />
+  <video
+    controls
+    src="https://pepe-dl.babahhcdn.com/bb1150/video/2021_11/2021_11_27_x_live_1_c1_5/640x360_318_1638020921.mp4"
+  />
   <div class="Index">
     <ETitle size="lg">Index page</ETitle>
   </div>
