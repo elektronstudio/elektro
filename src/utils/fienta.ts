@@ -1,6 +1,7 @@
 import { useStorage } from "@vueuse/core";
-import { uniqueCollection } from "./array";
 import ky from "ky-universal";
+
+import { uniqueCollection } from "./array";
 import { config } from "./config";
 import { strapi } from "./strapi";
 
@@ -42,7 +43,7 @@ function getLocalTicket(code: string): Ticket | undefined {
   return tickets.value?.find((ticket) => ticket.code == code);
 }
 
-function setLocalTicket(code: string, fienta_id: string): any {
+function setLocalTicket(code: string, fienta_id: string) {
   tickets.value = uniqueCollection(
     [
       ...tickets.value,
@@ -53,7 +54,6 @@ function setLocalTicket(code: string, fienta_id: string): any {
     ],
     "code",
   );
-  return tickets.value;
 }
 
 async function getRemoteTicket(
@@ -71,7 +71,7 @@ async function getRemoteTicket(
   } catch {
     return null;
   }
-  // TODO: return { status, ticketable }
+  // TODO: return { status: FientaStatus, ticketable: Ticketable }
 }
 
 async function getTicketable(fienta_id: string): Promise<Ticketable | null> {
@@ -89,7 +89,7 @@ async function getTicketable(fienta_id: string): Promise<Ticketable | null> {
     return null;
   }
   return null;
-  // TODO: return { status, ticketable }
+  // TODO: return { status: StapiStatus, ticketable: Ticketable }
 }
 
 // Exported API
@@ -117,7 +117,8 @@ export function getTicketableStatus(ticketables: Ticketable[]) {
     status = "HAS_TICKET";
   }
 
-  //TODO: Should we return the tickets as well?
+  // TODO: Return { status: TicketStatus, url } where
+  // url is link to Fienta ticket-purchasing page
   return status;
 }
 
@@ -142,6 +143,6 @@ export async function validateTicket(code: string): Promise<Ticketable | null> {
       // non-existing ticketable (event)
     }
   }
-  // TODO: Consider returning { status, ticktable }
+  // TODO: Return { status: TicketValidationStatus, ticktable: Ticketable }
   return null;
 }
