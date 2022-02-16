@@ -7,6 +7,7 @@ import "./styles/vars.css";
 import "./styles/reset.css";
 import "./styles/fonts.css";
 import "./styles/styles.css";
+import { config } from "./lib";
 
 const router = createRouter({
   history: createWebHistory(),

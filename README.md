@@ -38,3 +38,5 @@ node generateVars.js
 - Use "Squash and merge" for PR merging
 - For experiments create draft PRs
 - Use semantic commit messages with following prefixes: `feat:` for a feature, `bug:` for bugfixes and `chore:` for infrastructure changes.
+
+.
