@@ -129,8 +129,8 @@ export async function validateTicket(code: string): Promise<Ticketable | null> {
     if (ticketable) {
       return ticketable;
     }
-    // TODO: Handle the case when you have ticket to
-    // non-existing ticketable (event)
+    // TODO: Handle the case when you have validated ticket to
+    // non-existing ticketable (event), currently we just return null
   } else {
     const remoteTicket = await getRemoteTicket(code);
     if (remoteTicket) {
@@ -139,8 +139,8 @@ export async function validateTicket(code: string): Promise<Ticketable | null> {
         setLocalTicket(code, remoteTicket.fienta_id);
         return ticketable;
       }
-      // TODO: Handle the case when you have ticket to
-      // non-existing ticketable (event)
+      // TODO: Handle the case when you have nonvalidated ticket to
+      // non-existing ticketable (event), currently we just return null
     }
   }
   // TODO: Return {
