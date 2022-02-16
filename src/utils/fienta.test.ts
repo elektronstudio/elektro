@@ -59,7 +59,10 @@ export const handlers = [
       { title: "Event 2", fienta_id: "F2" },
       { title: "Event 3", fienta_id: "F3" },
     ].filter(
-      ({ fienta_id }) => req.url.searchParams.get("fienta_id") === fienta_id,
+      ({ fienta_id }) =>
+        req.url.searchParams.get("_where[_or][0][fienta_id]") === fienta_id ||
+        req.url.searchParams.get("_where[_or][1][festival.fienta_id]") ===
+          fienta_id,
     );
     return res(ctx.status(200), ctx.json(data));
   }),
