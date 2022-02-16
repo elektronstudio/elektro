@@ -40,6 +40,7 @@ const navState = ref(false);
     </div>
     <ENav :class="{ navActive: navState }" :nav-items="navItems" />
     <ELiveButton />
+    <!-- @TODO: Add proper icon you html hacker :) -->
     <button class="toggleNav" @click="navState = !navState">
       <span></span>
       <span></span>
