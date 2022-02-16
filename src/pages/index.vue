@@ -1,4 +1,5 @@
 <script setup lang="ts">
+//@ts-nocheck
 import { addMilliseconds, sub } from "date-fns";
 import { ETitle } from "../lib";
 import ArtNav from "../components/ArtNav.vue";
