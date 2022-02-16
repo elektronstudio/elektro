@@ -14,6 +14,7 @@ export { default as EFormText } from "./components/EFormText.vue";
 export { default as EFormTextArea } from "./components/EFormTextArea.vue";
 export { default as EImage } from "./components/EImage.vue";
 export { default as EImageSlider } from "./components/EImageSlider.vue";
+export { default as EImageCard } from "./components/EImageCard.vue";
 export { default as EInput } from "./components/EInput.vue";
 export { default as ELabel } from "./components/ELabel.vue";
 export { default as ELivePreview } from "./components/ELivePreview.vue";
