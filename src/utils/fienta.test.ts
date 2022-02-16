@@ -1,21 +1,8 @@
 import { ref } from "vue";
-import {
-  describe,
-  test,
-  assert,
-  vi,
-  beforeAll,
-  afterAll,
-  afterEach,
-} from "vitest";
+import { test, assert, vi, beforeAll, afterAll, afterEach } from "vitest";
 import { setupServer } from "msw/node";
 import { rest } from "msw";
-import {
-  getTicketableStatus,
-  setLocalTicket,
-  getRemoteTicket,
-  validateTicket,
-} from "./fienta";
+import { getTicketableStatus, validateTicket } from "./fienta";
 import { config } from "./config";
 
 // Deps mocks
@@ -25,6 +12,9 @@ vi.mock("@vueuse/core", () => {
     useStorage: () => ref([{ fientaid: "F1", code: "C1" }]),
   };
 });
+
+// TODO: Vitest does not expose import.meta.env
+// Find a way to inject env variables
 
 vi.mock("./config", () => {
   return {
@@ -60,7 +50,6 @@ export const handlers = [
   rest.get(`${config.fientaUrl}/tickets/C` as string, (_req, res, ctx) => {
     return res(ctx.status(404));
   }),
-  // TODO: Add Fienta 404 route for non-existing ticket
 
   // Strapi API
   rest.get(`${config.strapiUrl}/events` as string, (req, res, ctx) => {
@@ -107,22 +96,6 @@ test("one of two ticketables requires ticket and user has ticket", () => {
   );
 });
 
-// Test setLocalTicket
-
-test("ticketable requires ticket, we store it and then we have it", () => {
-  setLocalTicket("C2", "F2");
-  return assert.equal(getTicketableStatus([{ fienta_id: "F2" }]), "HAS_TICKET");
-});
-
-// Test getRemoteTicket
-
-test("get existing ticket data using ticket code", async () => {
-  return assert.deepEqual(await getRemoteTicket("C1"), {
-    fienta_id: "F1",
-    fienta_status: "UNUSED",
-  });
-});
-
 // Test validateTicket
 
 test("validate local ticket code that has event associated", async () => {
@@ -143,6 +116,6 @@ test("validate existing remote ticket code that does not have event associated",
   return assert.equal(await validateTicket("C4"), null);
 });
 
-test("validate nonexisting remote ticket code ", async () => {
+test("validate nonexisting remote ticket code", async () => {
   return assert.equal(await validateTicket("C"), null);
 });
