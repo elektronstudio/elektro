@@ -7,6 +7,7 @@ defineProps<Props>();
 </script>
 <template>
   <article class="ECard">
+    <!-- @TODO: Use image component -->
     <img v-if="thumbnail" class="thumbnail" :src="thumbnail" />
     <header v-if="$slots.header">
       <slot name="header" />

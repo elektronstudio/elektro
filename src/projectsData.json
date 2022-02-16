@@ -1,0 +1,120 @@
+{
+  "data": {
+    "id": 1,
+    "attributes": {
+      "createdAt": "2022-02-16T16:50:13.970Z",
+      "updatedAt": "2022-02-16T16:58:46.266Z",
+      "publishedAt": "2022-02-16T16:50:44.404Z",
+      "cards": [
+        {
+          "id": 12,
+          "__component": "content.about-card",
+          "title": "Krüptoart",
+          "content": "eˉlektron ja mitmed tema lähedased kunstnikud on sukeldunud krüptokunsti turule. eˉlektron usub, et digitaalne kunst saab seal lõpuks väljateenitud tähelepanu. Hetkel valitseb seal küll kauboikultuur, aga ootame paar aastat! Küll kõik korrastub! Nii ka krüptokunsti turg.",
+          "layout": "columns1"
+        },
+        {
+          "id": 11,
+          "__component": "content.about-card",
+          "title": "Residency Now",
+          "content": "eˉlektroni residentuuride katusprogramm on “Fruitful Misunderstandings”. Meie residentuuride eesmärgid, sisu ja näitamised on alati seotud käesolevate teemade või aktuaalsete ideedega. Vahel koondame open call formaadis üle maailma kunstnike looma (riigi)piirideüleseid online kunstiteoseid, siis jällegi koondame kohalike kunstnike tegelema ruumi ja antropoloogiaga. \nVaata käesolevaid residentuure siit. (link: projecs) Ja juba möödunud programme siit (link: go deeper)\nKeywords: Fruitful misunderstandings, elektron eksperiment jne",
+          "layout": "columns2"
+        },
+        {
+          "id": 13,
+          "__component": "content.about-card",
+          "title": "Go deeper",
+          "content": "Siit algab teekond, et tutvuda eˉlektroni varasemate projektitega. ",
+          "layout": "columns1"
+        },
+        {
+          "id": 1,
+          "__component": "content.image-card",
+          "image": {
+            "data": {
+              "id": 1,
+              "attributes": {
+                "name": "Hendrik-Kaljujärv-43.jpg",
+                "alternativeText": "Hendrik-Kaljujärv-43.jpg",
+                "caption": "Hendrik-Kaljujärv-43.jpg",
+                "width": 1056,
+                "height": 792,
+                "formats": {
+                  "large": {
+                    "ext": ".jpg",
+                    "url": "/images/hundid-screen.png",
+                    "hash": "large_Hendrik_Kaljujaerv_43_9a1766c541",
+                    "mime": "image/jpeg",
+                    "name": "large_Hendrik-Kaljujärv-43.jpg",
+                    "path": null,
+                    "size": 113.22,
+                    "width": 1000,
+                    "height": 750
+                  },
+                  "small": {
+                    "ext": ".jpg",
+                    "url": "/images/hundid-screen.png",
+                    "hash": "small_Hendrik_Kaljujaerv_43_9a1766c541",
+                    "mime": "image/jpeg",
+                    "name": "small_Hendrik-Kaljujärv-43.jpg",
+                    "path": null,
+                    "size": 29.06,
+                    "width": 500,
+                    "height": 375
+                  },
+                  "medium": {
+                    "ext": ".jpg",
+                    "url": "/images/hundid-screen.png",
+                    "hash": "medium_Hendrik_Kaljujaerv_43_9a1766c541",
+                    "mime": "image/jpeg",
+                    "name": "medium_Hendrik-Kaljujärv-43.jpg",
+                    "path": null,
+                    "size": 62.66,
+                    "width": 750,
+                    "height": 563
+                  },
+                  "thumbnail": {
+                    "ext": ".jpg",
+                    "url": "/images/hundid-screen.png",
+                    "hash": "thumbnail_Hendrik_Kaljujaerv_43_9a1766c541",
+                    "mime": "image/jpeg",
+                    "name": "thumbnail_Hendrik-Kaljujärv-43.jpg",
+                    "path": null,
+                    "size": 7.02,
+                    "width": 208,
+                    "height": 156
+                  }
+                },
+                "hash": "Hendrik_Kaljujaerv_43_9a1766c541",
+                "ext": ".jpg",
+                "mime": "image/jpeg",
+                "size": 131.28,
+                "url": "/images/hundid-screen.png",
+                "previewUrl": null,
+                "provider": "local",
+                "provider_metadata": null,
+                "createdAt": "2022-02-09T13:06:08.933Z",
+                "updatedAt": "2022-02-09T13:06:08.933Z"
+              }
+            }
+          }
+        },
+        {
+          "id": 14,
+          "__component": "content.about-card",
+          "title": "Hundid",
+          "content": "“Hundid” on Taavet Janseni ja Liis Varese lavastus, kus läbi eˉlektroni platvormi sulavad füüsiline, virtuaalne ja kujuteldav ruum kokku üheks interaktiivseks võsaks, mille seest otsib noor inimene enda teed välja. \nMärksõnad: eesti keel, improvisatsioon, kõhutunne, hundid, Topu, võõrad",
+          "layout": "columns1"
+        },
+        {
+          "id": 15,
+          "__component": "content.about-card",
+          "title": "Kõheda Vastasmõju Festival",
+          "content": "Kolmandal rahvusvahelisel Kõheda vastasmõju festivalil jätkab eˉlektron eelmise festivaliga alustatud otsinguid transdistsiplinaarse etenduskunsti radadel. \nFestivali ellukutsuja ja etenduskunstnik Maike Lond ütleb: “Sul on võimalik osa saada Tokyos, Amsterdamis, New Yorgis, Tallinnas või teistes geograafilistes punktides toimuvatest, omavahel seotud, samas eraldiseisvatest live-etendustest. Need on kontinentide ülesed kohtumised, kuid tunnetuslikult ühtses ajas ja ruumis, tekitades uusi emotsionaalseid ning füüsilisi aistinguid”. \nSee program\nSee previous festivals",
+          "layout": "columns2"
+        }
+      ]
+    }
+  },
+  "meta": {}
+}
