@@ -67,9 +67,7 @@ export const handlers = [
 ];
 
 const server = setupServer(...handlers);
-beforeAll(() => {
-  server.listen();
-});
+beforeAll(() => server.listen());
 afterAll(() => server.close());
 afterEach(() => server.resetHandlers());
 
