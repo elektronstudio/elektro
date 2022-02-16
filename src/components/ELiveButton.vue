@@ -38,13 +38,18 @@ const isLive = ref(true);
 @media only screen and (min-width: 600px) {
   .ELiveButton {
     margin-left: auto;
-    min-width: 20rem;
+    width: 20rem;
     padding: var(--p-1);
   }
 }
 @media only screen and (min-width: 1000px) {
   .ELiveButton {
-    min-width: 30rem;
+    margin-left: calc(var(--border-DEFAULT) * -1);
+  }
+}
+@media only screen and (min-width: 1240px) {
+  .ELiveButton {
+    width: 30rem;
   }
 }
 </style>

@@ -54,16 +54,15 @@ const navState = ref(false);
   top: 0;
   width: 100%;
   z-index: 100;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: var(--h-9);
-  /* padding: var(--p-1) var(--p-3); */
   border: var(--border-DEFAULT) solid var(--gray-500);
   background-color: var(--bg);
 }
 .homeButton {
+  display: inline-block;
   color: var(--gray-300);
   padding: var(--p-1) var(--p-3);
 }
@@ -95,6 +94,11 @@ const navState = ref(false);
     width: 100%;
     margin-top: calc(var(--border-DEFAULT) * -1);
     z-index: 100;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .homeButton {
+    min-width: 8rem;
   }
 }
 @media only screen and (min-width: 1000px) {
