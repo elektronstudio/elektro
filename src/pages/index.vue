@@ -82,8 +82,10 @@ onMounted(() => {
     <pre>End: {{ endDatetime }} (from webhook)</pre>
     <pre>Duration {{ data.duration }}s / {{ format(data.duration) }}</pre>
     <video controls :src="videoUrl" ref="video" />
-    <pre>Progress: {{ timestamp / 1000 }}s</pre>
-    <pre>Progress: {{ timestampDatetime }}</pre>
+    <pre style="color: orange">Relative progress: {{ timestamp / 1000 }}s</pre>
+    <pre style="color: orange">Absolute progress: {{ timestampDatetime }}</pre>
+    <ETitle size="lg">Webhook payload</ETitle>
+    <pre>{{ payload }}</pre>
   </div>
 </template>
 
