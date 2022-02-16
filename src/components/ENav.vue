@@ -22,9 +22,11 @@ const menuItemsLength = navItems ? navItems.length : 0;
 .ENav {
   display: flex;
   flex-direction: column;
+  background-color: var(--bg);
 }
 .ENav > :deep(*) {
   display: inline-flex;
+  height: var(--h-9);
   padding: var(--p-1) var(--p-3);
   border: var(--border-DEFAULT) solid var(--gray-500);
   font-family: var(--font-mono);
@@ -41,7 +43,7 @@ const menuItemsLength = navItems ? navItems.length : 0;
 @media only screen and (min-width: 600px) {
   .ENav {
     display: grid;
-    height: var(--h-9);
+
     --menu-items-count: v-bind(menuItemsLength);
     grid-template-columns: repeat(var(--menu-items-count), 1fr);
   }

@@ -3,6 +3,7 @@
 import { ref } from "vue";
 import ELogo from "./ELogo.vue";
 import ENav from "./ENav.vue";
+import ELiveButton from "./ELiveButton.vue";
 
 const navItems = [
   {
@@ -36,13 +37,14 @@ const navState = ref(false);
       <RouterLink to="/" class="homeButton">
         <ELogo el="span" />
       </RouterLink>
-      <button class="toggleNav" @click="navState = !navState">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
     <ENav :class="{ navActive: navState }" :nav-items="navItems" />
+    <ELiveButton />
+    <button class="toggleNav" @click="navState = !navState">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </header>
 </template>
 
@@ -52,38 +54,36 @@ const navState = ref(false);
   top: 0;
   width: 100%;
   z-index: 100;
-}
-.topBar {
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: var(--h-9);
-  padding: var(--p-1) var(--p-3);
+  /* padding: var(--p-1) var(--p-3); */
   border: var(--border-DEFAULT) solid var(--gray-500);
   background-color: var(--bg);
+}
+.homeButton {
+  color: var(--gray-300);
+  padding: var(--p-1) var(--p-3);
 }
 .toggleNav {
   display: grid;
   row-gap: 4px;
   width: var(--w-7);
+  margin: var(--p-1) var(--p-3);
 }
-
 .toggleNav span {
   width: 100%;
   height: 2px;
   background-color: var(--gray-300);
 }
-
-.ENav {
-  background-color: var(--bg);
-}
-
+/* @TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .ENav.navActive {
     display: flex;
   }
 }
-/* @TODO: Add breakpoints system */
 @media only screen and (max-width: 999px) {
   .ENav {
     display: none;
@@ -97,7 +97,6 @@ const navState = ref(false);
     z-index: 100;
   }
 }
-
 @media only screen and (min-width: 1000px) {
   .ArtNav {
     display: flex;
