@@ -9,6 +9,7 @@ import { config } from "./config";
 
 vi.mock("@vueuse/core", () => {
   return {
+    // TODO: Check for "elektron_data" argument
     useStorage: () => ref([{ fientaid: "F1", code: "C1" }]),
   };
 });
