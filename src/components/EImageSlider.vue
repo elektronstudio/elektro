@@ -55,7 +55,6 @@ const { images } = defineProps<Props>();
 }
 
 .EImageSlider .EImage {
-  /* @TODO: Add responsive breakpoints */
   height: 40rem;
   width: auto;
   border-radius: var(--rounded-4xl);
