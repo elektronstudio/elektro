@@ -1,8 +1,8 @@
 import { useStorage } from "@vueuse/core";
-import { renameSync } from "fs";
 import { uniqueCollection } from "./array";
 import ky from "ky-universal";
 import { config } from "./config";
+import { strapi } from "./strapi";
 
 type TicketStatus = "FREE" | "REQUIRES_TICKET" | "HAS_TICKET";
 
@@ -72,38 +72,59 @@ export function getRemoteTicket(
     });
 }
 
-export async function getTicketableRoute(
+export async function getTicketable(
   fienta_id: string,
-): Promise<string | null> {
-  return new Promise((resolve, reject) =>
-    fienta_id === "coad" ? resolve("/event/bla") : reject(null),
-  );
+): Promise<Ticketable | null> {
+  // TODO: Order by latest date?
+  const events: Ticketable[] = await strapi
+    .get(`events?fienta_id=${fienta_id}`)
+    .json();
+  if (events) {
+    // TODO: Is it a correct behaviour on multiple results?
+    return events[0];
+  } else {
+    const festivals: Ticketable[] = await strapi
+      .get(`festival?fienta_id=${fienta_id}`)
+      .json();
+    if (festivals) {
+      // TODO: Is it a correct behaviour on multiple results?
+      return festivals[0];
+    }
+  }
+  return null;
 }
 
 // Ticket validation
 
-export async function validateTicket(code: string): Promise<string | null> {
-  let route = null;
+export async function validateTicket(code: string): Promise<Ticketable | null> {
   const localTicket = getLocalTicket(code);
   if (localTicket) {
-    const ticketableRoute = await getTicketableRoute(localTicket.fientaid);
-    if (ticketableRoute) {
-      route = ticketableRoute;
+    const ticketable = await getTicketable(localTicket.fientaid);
+    if (ticketable) {
+      return ticketable;
     }
+    // TODO: Handle the case when you have ticket to
+    // non-existing ticketable (event)
   } else {
     const remoteTicket = await getRemoteTicket(code);
     if (remoteTicket) {
-      const ticketableRoute = await getTicketableRoute(remoteTicket.fienta_id);
-      if (ticketableRoute) {
+      const ticketable = await getTicketable(remoteTicket.fienta_id);
+      if (ticketable) {
         setLocalTicket(code, remoteTicket.fienta_id);
-        route = ticketableRoute;
+        return ticketable;
       }
+      // TODO: Handle the case when you have ticket to
+      // non-existing ticketable (event)
     }
   }
-  return route;
+  // TODO: Consider returning { status, ticktable }
+  return null;
 }
 
 // Ticketable status
+
+// We support multiple fienta IDs per content
+// for parent <> child tickets
 
 export function getTicketableStatus(ticketables: Ticketable[]) {
   let status: TicketStatus = "FREE";
