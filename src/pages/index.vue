@@ -1,6 +1,6 @@
 <script setup lang="ts">
 //@ts-nocheck
-import { addMilliseconds, sub } from "date-fns";
+import { add, sub } from "date-fns";
 import { ETitle } from "../lib";
 import ArtNav from "../components/ArtNav.vue";
 import { computed, onMounted, ref } from "vue";
@@ -52,7 +52,7 @@ const format = (seconds: number) => {
 const timestamp = ref(0);
 
 const timestampDatetime = computed(() =>
-  addMilliseconds(startDatetime, timestamp.value),
+  add(startDatetime, { seconds: timestamp.value }),
 );
 
 onMounted(() => {
@@ -64,7 +64,10 @@ onMounted(() => {
       data.value = { startTime, duration: d?.target?.duration };
     });
     video.value.addEventListener("timeupdate", (d) => {
-      timestamp.value = d.timeStamp;
+      timestamp.value = d?.target.currentTime;
+    });
+    video.value.addEventListener("seeked", (d) => {
+      timestamp.value = d?.target.currentTime;
     });
   }
 });
@@ -83,7 +86,8 @@ onMounted(() => {
     <pre>End: {{ endDatetime }} (from webhook)</pre>
     <pre>Duration {{ data.duration }}s / {{ format(data.duration) }}</pre>
     <video controls :src="videoUrl" ref="video" />
-    <pre style="color: orange">Relative progress: {{ timestamp / 1000 }}s</pre>
+    <pre style="color: orange">Relative progress: {{ timestamp }}s</pre>
+    <pre style="color: orange">Relative progress: {{ format(timestamp) }}s</pre>
     <pre style="color: orange">Absolute progress: {{ timestampDatetime }}</pre>
     <ETitle size="lg">Webhook payload</ETitle>
     <pre>{{ payload }}</pre>
