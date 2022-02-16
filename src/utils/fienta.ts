@@ -143,6 +143,11 @@ export async function validateTicket(code: string): Promise<Ticketable | null> {
       // non-existing ticketable (event)
     }
   }
-  // TODO: Return { status: TicketValidationStatus, ticktable: Ticketable }
+  // TODO: Return {
+  //  status: TicketValidationStatus,
+  //  ticktable: Ticketable,
+  //  url: string
+  // }
+  // where url is `https://live.elektron.art/${festivalslug}/${eventslug}?code=${code}&fienta_id=${fienta_id}`
   return null;
 }
