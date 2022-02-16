@@ -58,31 +58,37 @@ export function setLocalTicket(code: string, fienta_id: string): any {
 
 // Remote tickets API
 
-export function getRemoteTicket(
+export async function getRemoteTicket(
   code: string,
-): Promise<{ fienta_status: string; fienta_id: string }> {
-  return fienta
-    .get(`tickets/${code}`)
-    .json()
-    .then((res: any) => {
+): Promise<{ fienta_status: string; fienta_id: string } | null> {
+  try {
+    const res: any = await fienta.get(`tickets/${code}`).json();
+    if (res && res.ticket) {
       return {
-        fienta_status: res?.ticket?.status,
-        fienta_id: res?.ticket?.event_id,
+        fienta_status: res.ticket.status,
+        fienta_id: res.ticket.event_id,
       };
-    });
+    }
+    return null;
+  } catch {
+    return null;
+  }
 }
 
 export async function getTicketable(
   fienta_id: string,
 ): Promise<Ticketable | null> {
-  // TODO: Order by latest date?
-  const events: Ticketable[] = await strapi
-    .get(`events?fienta_id=${fienta_id}`)
-    .json();
-  if (events) {
-    // TODO: Is it a correct behaviour on multiple results?
-    return events[0];
-  } else {
+  /* try {
+    const events: Ticketable[] = await strapi
+      .get(`events?fienta_id=${fienta_id}`)
+      .json();
+    if (events.length) {
+      // TODO: Is it a correct behaviour on multiple results?
+      return events[0];
+    }
+  } catch {}
+
+  try {
     const festivals: Ticketable[] = await strapi
       .get(`festival?fienta_id=${fienta_id}`)
       .json();
@@ -90,7 +96,7 @@ export async function getTicketable(
       // TODO: Is it a correct behaviour on multiple results?
       return festivals[0];
     }
-  }
+  } catch {}*/
   return null;
 }
 
@@ -108,7 +114,9 @@ export async function validateTicket(code: string): Promise<Ticketable | null> {
   } else {
     const remoteTicket = await getRemoteTicket(code);
     if (remoteTicket) {
+      console.log("bbb", remoteTicket);
       const ticketable = await getTicketable(remoteTicket.fienta_id);
+      console.log("ccc", ticketable);
       if (ticketable) {
         setLocalTicket(code, remoteTicket.fienta_id);
         return ticketable;
