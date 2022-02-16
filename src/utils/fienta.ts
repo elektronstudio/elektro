@@ -9,7 +9,7 @@ type TicketStatus = "FREE" | "REQUIRES_TICKET" | "HAS_TICKET";
 
 // We do not have proper types for events yet
 // so we accept any object with "fienta_id" key
-type Ticketable = {
+export type Ticketable = {
   fienta_id?: string;
   [key: string]: any;
 };
@@ -75,10 +75,12 @@ async function getRemoteTicket(
 }
 
 async function getTicketable(fienta_id: string): Promise<Ticketable | null> {
-  // TODO: Order by latest date?
+  const fientaQuery = (fienta_id: string) =>
+    `_where[_or][0][fienta_id]=${fienta_id}&_where[_or][1][festival.fienta_id]=${fienta_id}`;
+
   try {
     const events: Ticketable[] = await strapi
-      .get(`events?fienta_id=${fienta_id}`)
+      .get(`events?${fientaQuery(fienta_id)}`)
       .json();
     if (events.length) {
       // TODO: What is the right thing to do

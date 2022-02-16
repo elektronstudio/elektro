@@ -17,5 +17,4 @@ const router = createRouter({
 const app = createApp(App);
 app.use(router);
 
-console.log(config);
 app.mount("#app");
