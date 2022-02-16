@@ -1,24 +1,17 @@
 <script setup lang="ts">
-import ELogo from "./ELogo.vue";
-
 type Props = {
   navItems: {
     name: string;
     path: string;
   }[];
-  showLogo?: boolean;
 };
 
-const { navItems, showLogo } = defineProps<Props>();
-const menuItemsLength =
-  navItems && showLogo ? navItems.length + 1 : navItems ? navItems.length : 0;
+const { navItems } = defineProps<Props>();
+const menuItemsLength = navItems ? navItems.length : 0;
 </script>
 
 <template>
   <nav class="ENav">
-    <RouterLink v-if="showLogo" to="/">
-      <ELogo el="span" />
-    </RouterLink>
     <RouterLink v-for="item in navItems" :key="item.name" :to="item.path">
       {{ item.name }}
     </RouterLink>
