@@ -78,26 +78,21 @@ export async function getRemoteTicket(
 export async function getTicketable(
   fienta_id: string,
 ): Promise<Ticketable | null> {
-  /* try {
+  // TODO: Order by latest date?
+  try {
     const events: Ticketable[] = await strapi
       .get(`events?fienta_id=${fienta_id}`)
       .json();
     if (events.length) {
-      // TODO: Is it a correct behaviour on multiple results?
+      // TODO: What is the right thing to do
+      // on multiple results?
       return events[0];
     }
-  } catch {}
-
-  try {
-    const festivals: Ticketable[] = await strapi
-      .get(`festival?fienta_id=${fienta_id}`)
-      .json();
-    if (festivals) {
-      // TODO: Is it a correct behaviour on multiple results?
-      return festivals[0];
-    }
-  } catch {}*/
+  } catch {
+    return null;
+  }
   return null;
+  // TODO: return { status, ticketable }
 }
 
 // Ticket validation
@@ -114,9 +109,7 @@ export async function validateTicket(code: string): Promise<Ticketable | null> {
   } else {
     const remoteTicket = await getRemoteTicket(code);
     if (remoteTicket) {
-      console.log("bbb", remoteTicket);
       const ticketable = await getTicketable(remoteTicket.fienta_id);
-      console.log("ccc", ticketable);
       if (ticketable) {
         setLocalTicket(code, remoteTicket.fienta_id);
         return ticketable;
