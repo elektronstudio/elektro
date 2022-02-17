@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useRouter } from "vue-router";
+
 type Props = {
   navItems: {
     name: string;
@@ -8,11 +10,18 @@ type Props = {
 
 const { navItems } = defineProps<Props>();
 const menuItemsLength = navItems ? navItems.length : 0;
+const router = useRouter();
+console.log(router.currentRoute.value.path);
 </script>
 
 <template>
   <nav class="ENav">
-    <RouterLink v-for="item in navItems" :key="item.name" :to="item.path">
+    <RouterLink
+      v-for="item in navItems"
+      :key="item.name"
+      :to="item.path"
+      :class="{ isActive: router.currentRoute.value.path === item.path }"
+    >
       {{ item.name }}
     </RouterLink>
   </nav>
@@ -54,6 +63,7 @@ const menuItemsLength = navItems ? navItems.length : 0;
     margin-top: 0;
     margin-left: calc(var(--border-DEFAULT) * -1);
   }
+  .ENav > .isActive,
   .ENav > :deep(*):hover {
     border-image: url("/images/bg-texture-xs.gif") 1;
     z-index: 2;
