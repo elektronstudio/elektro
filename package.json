@@ -1,6 +1,6 @@
 {
   "name": "elektro",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "engines": {
     "node": "^14.13.1 || >=16.0.0"
   },
@@ -28,7 +28,7 @@
   "scripts": {
     "dev": "vite -c vite.config.app.ts",
     "build": "vite build -c vite.config.app.ts && vite build -c vite.config.lib.ts --emptyOutDir=false && vue-tsc --declaration --emitDeclarationOnly",
-    "serve": "vite preview",
+    "preview": "vite preview",
     "check": "vue-tsc --noEmit",
     "bump": "bumpp --commit \"chore: v%s\"",
     "test": "vitest"
