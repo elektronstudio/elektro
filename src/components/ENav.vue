@@ -11,7 +11,6 @@ type Props = {
 const { navItems } = defineProps<Props>();
 const menuItemsLength = navItems ? navItems.length : 0;
 const router = useRouter();
-console.log(router.currentRoute.value.path);
 </script>
 
 <template>
