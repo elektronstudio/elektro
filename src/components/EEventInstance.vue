@@ -1,5 +1,6 @@
 <!-- @TODO consider renaming -->
 <script setup lang="ts">
+import { useRange } from "../utils";
 import EButton from "./EButton.vue";
 
 type Props = {
@@ -15,11 +16,13 @@ const {
   ticketUrl,
   layout = "horizontal",
 } = defineProps<Props>();
+
+const { formattedFromDatetime } = useRange(new Date(startAt), new Date(endAt));
 </script>
 
 <template>
   <div class="EEventInstance" :class="layout">
-    <time :datetime="startAt">{{ startAt }}</time>
+    <time :datetime="startAt">{{ formattedFromDatetime }}</time>
     <section>
       <!-- @TODO: Add system or component for arrows -->
       <!-- <EButton size="xs" el="a" color="transparent">+ Lisa kalendrisse</EButton> -->
