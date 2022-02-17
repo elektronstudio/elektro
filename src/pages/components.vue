@@ -57,6 +57,7 @@ const productions = [
 const scheduleEvents = [
   {
     title: "Hundid",
+    slug: "hundid",
     description:
       "<p>Lavastus “Hundid” on jätk Liis Varese ja Taavet Janseni koostööle “Kõik loeb/ The Reader”, mille soe vastuvõtt on julgustanud neid digitaalse formaadiga edasi töötama.</p>",
     events: [
@@ -388,6 +389,7 @@ const images = [
       :title="event.title"
       :description="event.description"
       :events="event.events"
+      :path="`/lavastused/${event.slug}`"
     >
       <EEventInstance
         v-if="event.events"
