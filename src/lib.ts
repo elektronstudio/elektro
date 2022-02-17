@@ -5,6 +5,7 @@ export { default as ECard } from "./components/ECard.vue";
 export { default as EContent } from "./components/EContent.vue";
 export { default as EDetailsList } from "./components/EDetailsList.vue";
 export { default as EEventInstance } from "./components/EEventInstance.vue";
+export { default as EExternallinkCard } from "./components/EExternal.vue";
 export { default as EFormCheckbox } from "./components/EFormCheckbox.vue";
 export { default as EFormEmail } from "./components/EFormEmail.vue";
 export { default as EFormNumber } from "./components/EFormNumber.vue";
