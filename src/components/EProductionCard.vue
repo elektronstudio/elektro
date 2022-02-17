@@ -1,5 +1,6 @@
 <!-- @TODO: Should this be added to components page -->
 <script setup lang="ts">
+import { useRange } from "../utils";
 import ECard from "./ECard.vue";
 import ETitle from "./ETitle.vue";
 type Props = {
@@ -14,6 +15,14 @@ type Props = {
 };
 
 const { title, author, thumbnail, nextEvent } = defineProps<Props>();
+let formatDate: string;
+if (nextEvent) {
+  const { formattedFromDatetime } = useRange(
+    new Date(nextEvent.startAt),
+    new Date(nextEvent.endAt),
+  );
+  formatDate = formattedFromDatetime;
+}
 </script>
 <template>
   <ECard :thumbnail="thumbnail">
@@ -24,9 +33,9 @@ const { title, author, thumbnail, nextEvent } = defineProps<Props>();
     <template #footer>
       <p v-if="nextEvent">Järgmine etendus:</p>
       <!-- @TODO: Format time -->
-      <time v-if="nextEvent" :datetime="nextEvent.startAt">{{
-        nextEvent.startAt
-      }}</time>
+      <time v-if="formatDate" :datetime="nextEvent?.startAt">
+        {{ formatDate }}
+      </time>
     </template>
   </ECard>
 </template>
@@ -42,5 +51,8 @@ const { title, author, thumbnail, nextEvent } = defineProps<Props>();
 }
 .ECard footer {
   justify-content: space-between;
+}
+.ECard footer time {
+  margin-left: 0.6em;
 }
 </style>
