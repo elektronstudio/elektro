@@ -18,6 +18,7 @@ export { default as EImageCard } from "./components/EImageCard.vue";
 export { default as EInput } from "./components/EInput.vue";
 export { default as ELabel } from "./components/ELabel.vue";
 export { default as ELivePreview } from "./components/ELivePreview.vue";
+export { default as ELiveButton } from "./components/ELiveButton.vue";
 export { default as ELogo } from "././components/ELogo.vue";
 export { default as ENav } from "././components/ENav.vue";
 export { default as ENavButton } from "./components/ENavButton.vue";
