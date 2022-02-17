@@ -1,6 +1,5 @@
 <!-- @TODO: Should this be added to components page -->
 <script setup lang="ts">
-import { useRange } from "../utils";
 import ECard from "./ECard.vue";
 import ETitle from "./ETitle.vue";
 type Props = {

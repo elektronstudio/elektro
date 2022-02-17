@@ -1,6 +1,5 @@
 <!-- @TODO consider renaming -->
 <script setup lang="ts">
-import { useRange } from "../utils";
 import EButton from "./EButton.vue";
 
 type Props = {
