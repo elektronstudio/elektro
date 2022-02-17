@@ -15,14 +15,6 @@ type Props = {
 };
 
 const { title, author, thumbnail, nextEvent } = defineProps<Props>();
-let formatDate: string;
-if (nextEvent) {
-  const { formattedFromDatetime } = useRange(
-    new Date(nextEvent.startAt),
-    new Date(nextEvent.endAt),
-  );
-  formatDate = formattedFromDatetime;
-}
 </script>
 <template>
   <ECard :thumbnail="thumbnail">
@@ -33,8 +25,8 @@ if (nextEvent) {
     <template #footer>
       <p v-if="nextEvent">Järgmine etendus:</p>
       <!-- @TODO: Format time -->
-      <time v-if="formatDate" :datetime="nextEvent?.startAt">
-        {{ formatDate }}
+      <time v-if="nextEvent" :datetime="nextEvent.startAt">
+        {{ nextEvent.startAt }}
       </time>
     </template>
   </ECard>
