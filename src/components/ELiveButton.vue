@@ -1,14 +1,31 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useRange } from "../utils/date";
 
-// @TODO: Compose this with real data
-const isUpcoming = ref("LIVE: Taavet Jansen – Hundid");
-const isLive = ref(true);
+type Props = {
+  nextEvent: any;
+};
+
+const { nextEvent } = defineProps<Props>();
+
+const { formattedDistance, urgency } = useRange(
+  new Date(nextEvent.start_at),
+  new Date(nextEvent.end_at),
+);
 </script>
 
 <template>
-  <RouterLink class="ELiveButton" :class="{ isLive: isLive }" to="/">
-    {{ isUpcoming }}
+  <RouterLink
+    v-if="nextEvent"
+    class="ELiveButton"
+    :class="{ isLive: urgency === 'now' }"
+    to="/"
+  >
+    {{
+      urgency === "now"
+        ? `LIVE: ${nextEvent.title}`
+        : `${formattedDistance}: ${nextEvent.title}`
+    }}
   </RouterLink>
 </template>
 
