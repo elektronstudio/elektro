@@ -17,6 +17,7 @@ const { size = "md", el = "button" } = defineProps<Props>();
 <style scoped>
 .EButton {
   background: none;
+  display: inline-flex;
   color: var(--fg);
   border: 2px solid var(--fg);
   cursor: pointer;
@@ -31,6 +32,12 @@ const { size = "md", el = "button" } = defineProps<Props>();
 .EButton.xs {
   font-size: var(--text-xs);
   padding: var(--p-1);
+}
+
+.EButton :deep(svg) {
+  margin-right: var(--m-1);
+  /* width: 1rem;
+  height: 1rem; */
 }
 .EButton.sm {
   font-size: var(--text-sm);
