@@ -5,6 +5,7 @@ import EAboutPageCard from "../components/EAboutPageCard.vue";
 import ETeamCard from "../components/ETeamCard.vue";
 import data from "../aboutData.json";
 import ERelatedPageCard from "../components/ERelatedPageCard.vue";
+import EExternallinkCard from "../components/EExternallinkCard.vue";
 
 type Card = {
   id: number;
@@ -12,11 +13,21 @@ type Card = {
     | "content.title"
     | "content.about-card"
     | "content.related-page"
-    | "content.person-card";
+    | "content.person-card"
+    | "content.external-link";
   title: string;
   content: string;
   name?: string;
+  url?: string;
   layout?: "columns1" | "columns2" | "columns3" | "columns4";
+  page?: {
+    data: {
+      attributes: {
+        title: string;
+        slug: string;
+      };
+    };
+  };
 };
 
 const cards = data.data.attributes.cards as Card[];
@@ -42,6 +53,12 @@ const cards = data.data.attributes.cards as Card[];
         v-else-if="item.__component === 'content.related-page'"
         :title="item.title"
         :content="item.content"
+        :slug="item.page?.data.attributes.slug"
+      />
+      <EExternallinkCard
+        v-else-if="item.__component === 'content.external-link'"
+        :title="item.title"
+        :url="item.url"
       />
       <ETeamCard
         v-else-if="item.__component === 'content.person-card'"
