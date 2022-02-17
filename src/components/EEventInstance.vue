@@ -61,9 +61,6 @@ const { formattedFromDatetime } = useRange(new Date(startAt), new Date(endAt));
   border-top: 1px solid var(--gray-500);
   flex-direction: column;
 }
-.EEventInstance.horizontal {
-  /* flex-direction: column; */
-}
 .EEventInstance.vertical {
   gap: var(--gap-3);
 }

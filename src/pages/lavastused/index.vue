@@ -48,12 +48,6 @@ const projects = {
       author: "Taavet Jansen",
       thumbnail:
         "https://lh4.googleusercontent.com/ef5PQ6ntI_2LMeudEAx8wqZE2D4HfccyItfRO3llMmkSiz7NX4FXJ8MfOMg1yyrS6yKjfDOYhTrhX03rN5pSlauAAO4hbIXmkCnF05PiEP68KoIS5fuews3mo-hEHUoLNg",
-      events: [
-        {
-          start_at: "2022-06-01T19:00:00.000Z",
-          end_at: "2022-06-01T19:00:00.000Z",
-        },
-      ],
     },
     {
       title: "Hundid",
@@ -106,10 +100,14 @@ const projects = {
         :title="project.title"
         :author="project.author"
         :thumbnail="project.thumbnail"
-        :next-event="{
-          startAt: project.events[0].start_at,
-          endAt: project.events[0].end_at,
-        }"
+        :next-event="
+          project.events && project.events[0]
+            ? {
+                startAt: project.events[0].start_at,
+                endAt: project.events[0].end_at,
+              }
+            : undefined
+        "
       />
     </section>
   </main>
