@@ -8,6 +8,7 @@ const scheduleEvents = [
     title: "Hundid",
     description:
       "<p>Lavastus “Hundid” on jätk Liis Varese ja Taavet Janseni koostööle “Kõik loeb/ The Reader”, mille soe vastuvõtt on julgustanud neid digitaalse formaadiga edasi töötama.</p>",
+    slug: "hundid",
     events: [
       {
         start_at: "2022-06-01T19:00:00.000Z",
@@ -28,6 +29,7 @@ const scheduleEvents = [
   },
   {
     title: "Nature as magic",
+    slug: "nature-as-magic",
     description:
       "<p>Lavastus “Hundid” on jätk Liis Varese ja Taavet Janseni koostööle “Kõik loeb/ The Reader”, mille soe vastuvõtt on julgustanud neid digitaalse formaadiga edasi töötama.</p>",
     events: [
@@ -50,6 +52,7 @@ const scheduleEvents = [
   },
   {
     title: "Sinust saab tantsija!",
+    slug: "sinust-saab-tantsija",
     description:
       "<p>Lavastus “Hundid” on jätk Liis Varese ja Taavet Janseni koostööle “Kõik loeb/ The Reader”, mille soe vastuvõtt on julgustanud neid digitaalse formaadiga edasi töötama.</p>",
     events: [
@@ -80,7 +83,7 @@ const scheduleEvents = [
       v-for="event in scheduleEvents"
       :title="event.title"
       :description="event.description"
-      :events="event.events"
+      :path="`/lavastused/${event.slug}`"
     >
       <EEventInstance
         v-if="event.events"

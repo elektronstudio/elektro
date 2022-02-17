@@ -4,6 +4,7 @@ import ETitle from "./ETitle.vue";
 
 type Props = {
   title: string;
+  path: string;
   description?: string;
 };
 
@@ -11,7 +12,9 @@ const { title, description } = defineProps<Props>();
 </script>
 <template>
   <section class="EscheduleEvent">
-    <ETitle size="lg" :title="title" />
+    <RouterLink :to="path">
+      <ETitle size="lg" :title="title" />
+    </RouterLink>
     <EContent v-if="description" :content="description" />
     <slot />
   </section>
@@ -21,6 +24,9 @@ const { title, description } = defineProps<Props>();
 .EscheduleEvent {
   display: flex;
   flex-direction: column;
+}
+.EscheduleEvent a:hover .ETitle {
+  color: var(--fg);
 }
 .EscheduleEvent .ETitle,
 .EscheduleEvent article {
