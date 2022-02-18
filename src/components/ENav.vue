@@ -15,14 +15,14 @@ const router = useRouter();
 
 <template>
   <nav class="ENav">
-    <RouterLink
+    <!-- <RouterLink
       v-for="item in navItems"
       :key="item.name"
       :to="item.path"
       :class="{ isActive: router.currentRoute.value.path === item.path }"
     >
       {{ item.name }}
-    </RouterLink>
+    </RouterLink> -->
   </nav>
 </template>
 
