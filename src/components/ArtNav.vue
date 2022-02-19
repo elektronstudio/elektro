@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import ELogo from "./ELogo.vue";
-import ENav from "./ENav.vue";
+//import ENav from "./ENav.vue";
 import ELiveButton from "./ELiveButton.vue";
 
 const navItems = [
@@ -34,9 +34,9 @@ const navState = ref(false);
 <template>
   <header class="ArtNav">
     <div class="topBar">
-      <RouterLink to="/" class="homeButton">
+      <!-- <RouterLink to="/" class="homeButton">
         <ELogo el="span" />
-      </RouterLink>
+      </RouterLink> -->
     </div>
     <ENav :class="{ navActive: navState }" :nav-items="navItems" />
     <!-- <ELiveButton v-if="nextEvent" :next-event="nextEvent" /> -->

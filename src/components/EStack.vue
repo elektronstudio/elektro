@@ -20,7 +20,7 @@ const { layout = "vertical", cols = 2 } = defineProps<Props>();
   width: 100%;
 }
 .EStack.vertical {
-  grid-auto-rows: auto;
+  grid-auto-rows: min-content;
 }
 .EStack.horizontal {
   grid-auto-columns: auto;

@@ -3,7 +3,7 @@ import {
   ETitle,
   EButton,
   ELogo,
-  ENav,
+  // ENav,
   ENavButton,
   EContent,
   ECard,
@@ -308,8 +308,8 @@ const images = [
     <ELogo size="lg" />
 
     <br />
-    <pre>ENav</pre>
-    <ENav :navItems="navItems" />
+    <!-- <pre>ENav</pre>
+    <ENav :navItems="navItems" /> -->
 
     <br />
     <pre>ENavButton</pre>

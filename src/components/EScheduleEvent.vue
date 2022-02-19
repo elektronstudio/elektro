@@ -12,9 +12,9 @@ const { title, description } = defineProps<Props>();
 </script>
 <template>
   <section class="EscheduleEvent">
-    <RouterLink :to="path">
+    <!-- <RouterLink :to="path">
       <ETitle size="lg" :title="title" />
-    </RouterLink>
+    </RouterLink> -->
     <EContent v-if="description" :content="description" />
     <slot />
   </section>

@@ -1,6 +1,6 @@
 {
   "name": "elektro",
-  "version": "0.0.30",
+  "version": "0.0.31-beta.3",
   "engines": {
     "node": "^14.13.1 || >=16.0.0"
   },
@@ -30,7 +30,7 @@
     "build": "vite build -c vite.config.app.ts && vite build -c vite.config.lib.ts --emptyOutDir=false && vue-tsc --declaration --emitDeclarationOnly",
     "preview": "vite preview",
     "check": "vue-tsc --noEmit",
-    "bump": "if test $(git rev-parse --abbrev-ref HEAD) == 'main'; then bumpp --commit \"chore: v%s\"; else echo \"main branch please\"; fi",
+    "bump": "bumpp --commit \"chore: v%s\"",
     "test": "vitest"
   },
   "dependencies": {

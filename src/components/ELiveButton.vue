@@ -15,7 +15,7 @@ const { formattedDistance, urgency } = useRange(
 </script>
 
 <template>
-  <RouterLink
+  <!-- <RouterLink
     v-if="nextEvent"
     class="ELiveButton"
     :class="{ isLive: urgency === 'now' }"
@@ -26,7 +26,7 @@ const { formattedDistance, urgency } = useRange(
         ? `LIVE: ${nextEvent.title}`
         : `${formattedDistance}: ${nextEvent.title}`
     }}
-  </RouterLink>
+  </RouterLink> -->
 </template>
 
 <style scoped>
