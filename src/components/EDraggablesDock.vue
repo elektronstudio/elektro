@@ -59,6 +59,10 @@ const emit = defineEmits<{
 .dock-leave-active {
   transition: width 0.2s ease-in-out;
 }
+
+.dock-enter-active {
+  transition-delay: 0.2s;
+}
 .dock-enter-from,
 .dock-leave-to {
   width: 0;

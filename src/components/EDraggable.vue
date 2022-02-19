@@ -132,15 +132,18 @@ function findCoordinates(el: Element, done: () => void) {
 
 <style scoped>
 @keyframes windowAnimation {
-  from {
+  0% {
     top: v-bind("`${y}px`");
     left: v-bind("`${x}px`");
     width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
     height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
   }
-  to {
+  75% {
+    opacity: 1;
+  }
+  100% {
     top: v-bind("`${finalAnimation?.y}px`");
-    left: v-bind("`${finalAnimation?.x}px`");
+    left: v-bind("`${finalAnimation?.x + finalAnimation?.width}px`");
     width: 0;
     height: var(--h-6);
     opacity: 0;

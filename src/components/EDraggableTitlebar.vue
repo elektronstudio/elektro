@@ -19,8 +19,7 @@ const { title } = defineProps<Props>();
   align-items: center;
   background-color: var(--bg);
   height: var(--h-6);
-  padding-left: var(--p-2);
-  padding-right: var(--p-6);
+  overflow: hidden;
 }
 .EDraggableTitlebar h6 {
   margin: 0;
@@ -31,6 +30,8 @@ const { title } = defineProps<Props>();
   text-overflow: ellipsis;
   overflow: hidden;
   width: 100%;
+  padding-left: var(--p-2);
+  padding-right: var(--p-6);
 }
 
 .EDraggableTitlebar:hover {
