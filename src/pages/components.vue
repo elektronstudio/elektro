@@ -361,7 +361,6 @@ const images = [
       :thumbnail="productions[0].thumbnail"
       :next-event="{
         startAt: productions[0].events[0].start_at,
-        endAt: productions[0].events[0].end_at,
       }"
     />
 

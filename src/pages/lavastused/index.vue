@@ -89,7 +89,6 @@ const projects = {
         :thumbnail="project.thumbnail"
         :next-event="{
           startAt: project.events[0].start_at,
-          endAt: project.events[0].end_at,
         }"
       />
     </section>
@@ -104,7 +103,6 @@ const projects = {
           project.events && project.events[0]
             ? {
                 startAt: project.events[0].start_at,
-                endAt: project.events[0].end_at,
               }
             : undefined
         "
