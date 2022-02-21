@@ -26,13 +26,10 @@ const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
 }>();
 
-const desktop = breakpoints.isGreater("desktop");
+const desktop = breakpoints.greater("large");
 const draggableRef = ref<HTMLElement | null>(null);
 const { width: windowWidth } = useWindow();
-const tileDivider = computed(() => {
-  console.log(desktop);
-  return desktop ? 20 : 10;
-});
+const tileDivider = computed(() => (desktop.value ? 20 : 10));
 const tileSize = ref(windowWidth.value / tileDivider.value);
 // @TODO: Why don't props trigger rerender?
 const gridPosX = ref<number>(props.gridPosX ? props.gridPosX : 0);
@@ -87,11 +84,16 @@ const calculateCoordinates = function () {
   y.value = snappedY >= 0 ? tileSize.value * snappedY : 0;
 };
 
+const handleResize = () => {
+  // tileDivider.value = desktop ? 20 : 10;
+  calculateCoordinates();
+};
+
 onMounted(() => {
   x.value = tileSize.value * gridPosX.value;
   y.value = tileSize.value * gridPosY.value;
 
-  // window.addEventListener("resize", calculateCoordinates);
+  window.addEventListener("resize", handleResize);
 });
 
 function findCoordinates(el: Element, done: () => void) {

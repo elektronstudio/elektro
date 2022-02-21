@@ -1,7 +1,7 @@
 import { useBreakpoints } from "@vueuse/core";
 
 export default useBreakpoints({
-  tablet: 600,
-  laptop: 1000,
-  desktop: 1440,
+  medium: 600,
+  large: 1000,
+  xlarge: 1440,
 });
