@@ -44,15 +44,12 @@ const emit = defineEmits<{
   bottom: 0;
   width: 100%;
   display: flex;
-  justify-content: flex-start;
-  padding-left: var(--breadboard-tile-size);
-  overflow-x: auto;
+  flex-flow: wrap;
+  align-items: flex-end;
 }
 
 .EDraggablesDock > * {
-  display: inline-block;
-  margin-right: var(--m-3);
-  width: 10rem;
+  flex: 0 0 50%;
 }
 
 .dock-enter-active,
@@ -66,5 +63,28 @@ const emit = defineEmits<{
 .dock-enter-from,
 .dock-leave-to {
   width: 0;
+}
+
+/* @TODO: Add breakpoints system */
+@media only screen and (min-width: 600px) {
+  .EDraggablesDock {
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  .EDraggablesDock > * {
+    display: inline-block;
+    margin-right: var(--m-3);
+    width: 6rem;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .EDraggablesDock {
+    padding-left: var(--breadboard-tile-size);
+  }
+  .EDraggablesDock > * {
+    width: 10rem;
+  }
 }
 </style>

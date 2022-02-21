@@ -10,7 +10,7 @@
   --gray-600: #333333;
   --gray-700: #121212;
   --accent:#7BEF87;
-  --breadboard-tile-size: calc(100vw / 20);
+  --breadboard-tile-size: calc(100vw / 4);
   --font-mono: 'Azeret Mono', monospace;
   --w-0: 0px;
   --w-1: 0.25rem;
@@ -45,6 +45,18 @@
   --line-height-sm: 1.375;
   --rounded-3xl: 1.25rem;
   --rounded-4xl: 2.5rem;
+}
+
+/* @TODO: Add breakpoints system */
+@media only screen and (min-width: 600px) {
+  :root {
+    --breadboard-tile-size: calc(100vw / 10);
+  }
+}
+@media only screen and (min-width: 1000px) {
+  :root {
+    --breadboard-tile-size: calc(100vw / 20);
+  }
 }
 * {
   -webkit-font-smoothing: antialiased;

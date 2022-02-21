@@ -3,6 +3,7 @@ import { ref, computed, onMounted, watch } from "vue";
 import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
+import breakpoints from "../utils/breakpoints";
 
 export type ContentType = "chat" | "text" | "image" | "video";
 
@@ -25,10 +26,14 @@ const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
 }>();
 
+const desktop = breakpoints.isGreater("desktop");
 const draggableRef = ref<HTMLElement | null>(null);
 const { width: windowWidth } = useWindow();
-const tileDivider = 20;
-const tileSize = ref(windowWidth.value / tileDivider);
+const tileDivider = computed(() => {
+  console.log(desktop);
+  return desktop ? 20 : 10;
+});
+const tileSize = ref(windowWidth.value / tileDivider.value);
 // @TODO: Why don't props trigger rerender?
 const gridPosX = ref<number>(props.gridPosX ? props.gridPosX : 0);
 const gridPosY = ref<number>(props.gridPosY ? props.gridPosY : 0);
@@ -69,13 +74,13 @@ watch(props, (newValue, oldValue) => {
 });
 
 const calculateCoordinates = function () {
-  tileSize.value = windowWidth.value / tileDivider;
+  tileSize.value = windowWidth.value / tileDivider.value;
   const snappedX = Math.round(x.value / tileSize.value);
   const snappedY = Math.round(y.value / tileSize.value);
 
   x.value =
-    snappedX + tilesWidth >= tileDivider
-      ? (tileDivider - tilesWidth) * tileSize.value
+    snappedX + tilesWidth >= tileDivider.value
+      ? (tileDivider.value - tilesWidth) * tileSize.value
       : snappedX >= 0
       ? tileSize.value * snappedX
       : 0;
@@ -132,29 +137,19 @@ function findCoordinates(el: Element, done: () => void) {
 
 <style scoped>
 @keyframes windowAnimation {
-  0% {
-    top: v-bind("`${y}px`");
-    left: v-bind("`${x}px`");
-    width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
-    height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
-  }
   75% {
     opacity: 1;
   }
   100% {
-    top: v-bind("`${finalAnimation?.y}px`");
-    left: v-bind("`${finalAnimation?.x + finalAnimation?.width}px`");
+    bottom: 0;
     width: 0;
     height: var(--h-6);
     opacity: 0;
   }
 }
 .EDraggable {
-  position: fixed;
-  width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
-  height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
+  position: relative;
   background-color: var(--bg);
-  touch-action: none;
   display: flex;
   flex-direction: column;
   z-index: calc(v-bind(order) + 1);
@@ -188,5 +183,47 @@ function findCoordinates(el: Element, done: () => void) {
 }
 .EDraggable button:hover {
   background-color: var(--gray-300);
+}
+
+/* @TODO: Add breakpoints system */
+@media only screen and (max-width: 599px) {
+  .EDraggable {
+    top: auto !important;
+    left: auto !important;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .EDraggable {
+    position: fixed;
+    width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
+    height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
+    touch-action: none;
+  }
+  @keyframes windowAnimation {
+    0% {
+      top: v-bind("`${y}px`");
+      left: v-bind("`${x}px`");
+      width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
+      height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
+    }
+    75% {
+      opacity: 1;
+    }
+    100% {
+      top: v-bind("`${finalAnimation?.y}px`");
+      left: v-bind("`${finalAnimation?.x + finalAnimation?.width}px`");
+      width: 0;
+      height: var(--h-6);
+      opacity: 0;
+    }
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .EDraggablesDock {
+    padding-left: var(--breadboard-tile-size);
+  }
+  .EDraggablesDock > * {
+    width: 10rem;
+  }
 }
 </style>
