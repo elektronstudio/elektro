@@ -12,9 +12,9 @@ const menuItemsLength = navItems ? navItems.length : 0;
 
 <template>
   <nav class="ENav">
-    <RouterLink v-for="item in navItems" :key="item.name" :to="item.path">
-      {{ item.name }}
-    </RouterLink>
+    <!-- <RouterLink v-for="item in navItems" :key="item.name" :to="item.path"> -->
+    <!-- {{ item.name }} -->
+    <!-- </RouterLink> -->
   </nav>
 </template>
 
