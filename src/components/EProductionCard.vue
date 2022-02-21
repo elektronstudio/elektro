@@ -8,7 +8,6 @@ type Props = {
   thumbnail?: string;
   nextEvent?: {
     startAt: string;
-    endAt: string;
     ticketUrl?: string;
   };
 };
