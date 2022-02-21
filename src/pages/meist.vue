@@ -50,10 +50,11 @@ const cards = data.data.attributes.cards as Card[];
         :content="item.content"
       />
       <ERelatedPageCard
-        v-else-if="item.__component === 'content.related-page'"
+        v-else-if="
+          item.__component === 'content.related-page' && item.page?.data
+        "
         :title="item.title"
         :content="item.content"
-        :slug="item.page?.data.attributes.slug"
       />
       <EExternallinkCard
         v-else-if="item.__component === 'content.external-link'"
