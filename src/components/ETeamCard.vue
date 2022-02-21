@@ -18,7 +18,7 @@ const { name, thumbnail, content } = defineProps<Props>();
     </template>
     <template #footer>
       <EContent>
-        <p>{{ content }}</p>
+        {{ content }}
       </EContent>
     </template>
   </ECard>
