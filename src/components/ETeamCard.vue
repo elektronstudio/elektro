@@ -13,7 +13,11 @@ const { name, thumbnail, content } = defineProps<Props>();
 
 <template>
   <ECard :thumbnail="thumbnail">
-    <ETitle v-if="name" el="h3" size="lg" :title="name" />
-    <EContent :content="content" />
+    <template #header>
+      <ETitle v-if="name" el="h3" size="lg" :title="name" />
+    </template>
+    <template #footer>
+      <EContent :content="content" />
+    </template>
   </ECard>
 </template>
