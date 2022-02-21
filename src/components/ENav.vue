@@ -4,7 +4,6 @@ type Props = {
     name: string;
     path: string;
   }[];
-  activePath?: string;
 };
 
 const { navItems } = defineProps<Props>();
@@ -13,12 +12,7 @@ const menuItemsLength = navItems ? navItems.length : 0;
 
 <template>
   <nav class="ENav">
-    <RouterLink
-      v-for="item in navItems"
-      :key="item.name"
-      :to="item.path"
-      :class="{ isActive: activePath === item.path }"
-    >
+    <RouterLink v-for="item in navItems" :key="item.name" :to="item.path">
       {{ item.name }}
     </RouterLink>
   </nav>
@@ -60,9 +54,9 @@ const menuItemsLength = navItems ? navItems.length : 0;
     margin-top: 0;
     margin-left: calc(var(--border-DEFAULT) * -1);
   }
-  .ENav > .isActive,
+  .ENav > .router-link-active,
   .ENav > :deep(*):hover {
-    border-image: url("/images/bg-texture-xs.gif") 1;
+    border-image: url("/images/bg-router-link-activeexture-xs.gif") 1;
     z-index: 2;
   }
 }
