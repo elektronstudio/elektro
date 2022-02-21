@@ -1,28 +1,26 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-
 type Props = {
   navItems: {
     name: string;
     path: string;
   }[];
+  activePath?: string;
 };
 
 const { navItems } = defineProps<Props>();
 const menuItemsLength = navItems ? navItems.length : 0;
-const router = useRouter();
 </script>
 
 <template>
   <nav class="ENav">
-    <!-- <RouterLink
+    <RouterLink
       v-for="item in navItems"
       :key="item.name"
       :to="item.path"
-      :class="{ isActive: router.currentRoute.value.path === item.path }"
+      :class="{ isActive: activePath === item.path }"
     >
       {{ item.name }}
-    </RouterLink> -->
+    </RouterLink>
   </nav>
 </template>
 
