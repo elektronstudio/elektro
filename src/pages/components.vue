@@ -343,7 +343,15 @@ const images = [
     <br />
     <pre>ECard</pre>
     <ECard
-      thumbnail="https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A"
+      :thumbnail="{
+        sizes: [
+          {
+            url: 'https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A',
+            width: 400,
+            height: 400,
+          },
+        ],
+      }"
     >
       <template #header>
         <ETitle el="h3" size="lg">Header</ETitle>
@@ -358,7 +366,9 @@ const images = [
     <EProductionCard
       :title="productions[0].title"
       :author="productions[0].author"
-      :thumbnail="productions[0].thumbnail"
+      :thumbnail="{
+        sizes: [{ url: productions[0].thumbnail, width: 400, height: 400 }],
+      }"
       :next-event="{
         startAt: productions[0].events[0].start_at,
       }"
@@ -377,7 +387,15 @@ const images = [
     <pre>ETeamCard</pre>
     <ETeamCard
       name="Jaanus Metsis"
-      thumbnail="https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A"
+      :thumbnail="{
+        sizes: [
+          {
+            url: 'https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A',
+            width: 400,
+            height: 400,
+          },
+        ],
+      }"
       content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur."
     />
 

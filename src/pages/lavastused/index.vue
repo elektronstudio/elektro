@@ -86,7 +86,9 @@ const projects = {
         v-for="project in projects.active"
         :title="project.title"
         :author="project.author"
-        :thumbnail="project.thumbnail"
+        :thumbnail="{
+          sizes: [{ url: project.thumbnail, width: 400, height: 400 }],
+        }"
         :next-event="{
           startAt: project.events[0].start_at,
         }"
@@ -98,7 +100,9 @@ const projects = {
         v-for="project in projects.archived"
         :title="project.title"
         :author="project.author"
-        :thumbnail="project.thumbnail"
+        :thumbnail="{
+          sizes: [{ url: project.thumbnail, width: 400, height: 400 }],
+        }"
         :next-event="
           project.events && project.events[0]
             ? {

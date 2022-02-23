@@ -2,10 +2,20 @@
 <script setup lang="ts">
 import ECard from "./ECard.vue";
 import ETitle from "./ETitle.vue";
+
+type Size = {
+  url: string;
+  width: number;
+  height: number;
+};
+
 type Props = {
   title: string;
   author?: string;
-  thumbnail?: string;
+  thumbnail?: {
+    sizes: Size[];
+    alt?: string;
+  };
   nextEvent?: {
     startAt: string;
     ticketUrl?: string;
