@@ -52,7 +52,7 @@ const { title, author, thumbnail, nextEvent } = defineProps<Props>();
 .ECard footer {
   justify-content: space-between;
 }
-.ECard footer time {
-  margin-left: 0.6em;
+.ECard footer p {
+  margin-right: 0.6em;
 }
 </style>
