@@ -393,6 +393,7 @@ const images = [
       <EEventInstance
         v-if="event.events"
         v-for="item in event.events"
+        title="Etenduse pealkiri"
         :start-at="item.start_at"
         :end-at="item.end_at"
         :ticket-url="item.ticketUrl"
@@ -403,6 +404,7 @@ const images = [
     <pre>EEventInstance</pre>
     <EEventInstance
       v-for="eventInstance in scheduleEvents[0].events"
+      title="Etenduse pealkiri"
       :start-at="eventInstance.start_at"
       :end-at="eventInstance.end_at"
       :ticketUrl="eventInstance.ticketUrl"

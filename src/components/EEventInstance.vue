@@ -3,23 +3,21 @@
 import EButton from "./EButton.vue";
 
 type Props = {
+  title?: string;
   startAt: string;
-  endAt: string;
   ticketUrl?: string;
   layout?: "vertical" | "horizontal";
 };
 
-const {
-  startAt,
-  endAt,
-  ticketUrl,
-  layout = "horizontal",
-} = defineProps<Props>();
+const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
 </script>
 
 <template>
   <div class="EEventInstance" :class="layout">
-    <time :datetime="startAt">{{ startAt }}</time>
+    <header>
+      <ETitle v-if="title" el="h4">{{ title }}</ETitle>
+      <time :datetime="startAt">{{ startAt }}</time>
+    </header>
     <section>
       <!-- @TODO: Add system for calendar buttons -->
       <!-- <EButton size="xs" el="a" color="transparent">+ Lisa kalendrisse</EButton> -->
@@ -56,6 +54,11 @@ const {
   display: flex;
   padding: var(--p-3) 0;
   border-top: 1px solid var(--gray-500);
+  flex-direction: column;
+  align-items: flex-start;
+}
+.EEventInstance header {
+  display: flex;
   flex-direction: column;
 }
 .EEventInstance.vertical {
