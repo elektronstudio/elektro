@@ -3,11 +3,24 @@
 import ECard from "./ECard.vue";
 import EContent from "./EContent.vue";
 import ETitle from "./ETitle.vue";
+
+type Size = {
+  url: string;
+  width: number;
+  height: number;
+};
+
+type Image = {
+  sizes: Size[];
+  alt?: string;
+};
+
 type Props = {
   name?: string;
-  thumbnail?: string;
+  thumbnail?: Image;
   content?: string;
 };
+
 const { name, thumbnail, content } = defineProps<Props>();
 </script>
 

@@ -3,7 +3,7 @@
     "id": 1,
     "attributes": {
       "createdAt": "2022-02-10T11:09:42.969Z",
-      "updatedAt": "2022-02-17T13:02:22.311Z",
+      "updatedAt": "2022-02-23T09:14:09.488Z",
       "publishedAt": "2022-02-10T11:25:04.708Z",
       "cards": [
         {
@@ -22,14 +22,14 @@
           "id": 2,
           "__component": "content.about-card",
           "title": "Arts",
-          "content": "eˉlektron esindab transdistsiplinaarset etenduskunsti, blackboxist virtuaallavadeni. Meil pole vahet, kas teoses kohtuvad ruum ja keha, neuroloog ja laulja, robot ja kass või kas vaataja istub toolil, on tal silmad kinni, vaatab ekraanilt, vaatab keha, vaatab teksti või kujutab kõike lihtsalt ette. Me toetame kunstniku vabadust töötada tundmatul alal, meile meeldib otsida kohast, kus kunagi varem pole käinud.\nKeywords: kõikloeb/thereader, ruumiantropoloogiad,romeo&julia#5, hiroakiumeda, saboliit, hundid\n",
+          "content": "eˉlektron esindab transdistsiplinaarset etenduskunsti, blackboxist virtuaallavadeni. Meil pole vahet, kas teoses kohtuvad ruum ja keha, neuroloog ja laulja, robot ja kass või kas vaataja istub toolil, on tal silmad kinni, vaatab ekraanilt, vaatab keha, vaatab teksti või kujutab kõike lihtsalt ette. Me toetame kunstniku vabadust töötada tundmatul alal, meile meeldib otsida kohast, kus kunagi varem pole käinud.",
           "layout": "columns1"
         },
         {
           "id": 3,
           "__component": "content.about-card",
           "title": "Development",
-          "content": "Me arendame tehnoloogiat, kui mängime neuroteatri ideedega, kui teeme visuaale ööklubidele ja kui maailm sulgub, ehitame koodist lava. Kui baarid sulguvad ehitame sellegi võrdse armastusega traditsioonilise teatri ja kaasaegse etenduskunsti vastu. Meie virtuaalne lava on tulevikulava. Kunsti ja tehnoloogia terra incognita. Kõik kunstnike soovid ja unistused kirjutame koodi. Kõik võimatu teeme võimalikuks. eˉlektroni vundamendiks on tugev teatrikogemus, tehnoloogilised oskused, digi-punk attitude, mis lubab teha asju teisiti, reegleid rikkudes ja uusi luues.  Me armastame seda kõike.\nKeywords: neuroexperimets, hackathon, MAX/MSP, hundid, fruitful misunderstandings, Start Up Wise Guys akseleraator\n",
+          "content": "Me arendame tehnoloogiat, kui mängime neuroteatri ideedega, kui teeme visuaale ööklubidele ja kui maailm sulgub, ehitame koodist lava. Kui baarid sulguvad ehitame sellegi võrdse armastusega traditsioonilise teatri ja kaasaegse etenduskunsti vastu. Meie virtuaalne lava on tulevikulava. Kunsti ja tehnoloogia terra incognita. Kõik kunstnike soovid ja unistused kirjutame koodi. Kõik võimatu teeme võimalikuks. eˉlektroni vundamendiks on tugev teatrikogemus, tehnoloogilised oskused, digi-punk attitude, mis lubab teha asju teisiti, reegleid rikkudes ja uusi luues.  Me armastame seda kõike.",
           "layout": "columns1"
         },
         {
@@ -43,7 +43,7 @@
           "id": 5,
           "__component": "content.about-card",
           "title": "Research",
-          "content": "eˉlektroni projektid ja platvormi arendus on pälvinud mitmete ülikoolide ja uurijate tähelepanu. Koostöös teadlastega uuritakse võimalusi publiku tagasisideks ja entusiastlikumad teadlased katsetavad isegi vaatajate emotsioonide kasutamist tõelise neuroteatri loomiseks. Päris mitme doktorandi doktoritöö on vähem või rohkem eˉlektroniga seotud. \nKeywords: neurotheater, taavetjansen\n",
+          "content": "eˉlektroni projektid ja platvormi arendus on pälvinud mitmete ülikoolide ja uurijate tähelepanu. Koostöös teadlastega uuritakse võimalusi publiku tagasisideks ja entusiastlikumad teadlased katsetavad isegi vaatajate emotsioonide kasutamist tõelise neuroteatri loomiseks. Päris mitme doktorandi doktoritöö on vähem või rohkem eˉlektroniga seotud.",
           "layout": "columns1"
         },
         {
@@ -55,7 +55,7 @@
           "id": 6,
           "__component": "content.about-card",
           "title": "Production",
-          "content": "Kõigepealt oli punk ja siis ballett. Siis elektrooniline muusika, millest sai ooper. Meie meeskonnal on pikk ajalugu etenduskunstide vallas heli-, video- ja valguskujundusest interaktiivsete installatsioonideni ning teadmised dramaturgiast, etendamisest ja lavastamisest. Black box on olnud meie kõigi teine kodu ja see on jätnud oma jälje.\nKeywords: Eesti ajalugu. Ehmatusest sündinud rahvas, MIMProjekt\n",
+          "content": "Kõigepealt oli punk ja siis ballett. Siis elektrooniline muusika, millest sai ooper. Meie meeskonnal on pikk ajalugu etenduskunstide vallas heli-, video- ja valguskujundusest interaktiivsete installatsioonideni ning teadmised dramaturgiast, etendamisest ja lavastamisest. Black box on olnud meie kõigi teine kodu ja see on jätnud oma jälje.",
           "layout": "columns1"
         },
         {
@@ -104,17 +104,17 @@
         {
           "id": 1,
           "__component": "content.related-page",
-          "title": "Manifest",
+          "title": "Uudiskiri",
           "page": {
             "data": {
               "id": 1,
               "attributes": {
-                "title": "Manifest",
+                "title": "Uudiskiri",
                 "createdAt": "2022-02-10T11:12:39.302Z",
-                "updatedAt": "2022-02-17T12:16:30.683Z",
+                "updatedAt": "2022-02-21T11:42:15.530Z",
                 "publishedAt": "2022-02-10T11:12:41.455Z",
-                "content": null,
-                "slug": "manifest"
+                "content": "[Uudiskiri #1]( https://mailchi.mp/7ed9e54b015f/uudiskiri-elektronilt-13670445)\n[Uudiskiri #2](https://mailchi.mp/7ed9e54b015f/uudiskiri-elektronilt-13670445)\n[Uudiskiri #3: Mõttepildid](https://mailchi.mp/5d34f0178db5/uudiskiri-elektronilt-15600273)",
+                "slug": "uudiskiri"
               }
             }
           }
@@ -122,17 +122,17 @@
         {
           "id": 2,
           "__component": "content.related-page",
-          "title": "Texts",
+          "title": "Tekstid",
           "page": {
             "data": {
-              "id": 1,
+              "id": 3,
               "attributes": {
-                "title": "Manifest",
-                "createdAt": "2022-02-10T11:12:39.302Z",
-                "updatedAt": "2022-02-17T12:16:30.683Z",
-                "publishedAt": "2022-02-10T11:12:41.455Z",
-                "content": null,
-                "slug": "manifest"
+                "title": "Tekstid",
+                "createdAt": "2022-02-21T11:09:24.362Z",
+                "updatedAt": "2022-02-21T11:29:19.996Z",
+                "publishedAt": "2022-02-21T11:29:19.917Z",
+                "content": "Taavet Jansen, Aleksander Väljamäe\n[“Exploring Physiology-Based Interactions in Performing Arts Using Artistic Interventions” lk 178-197 ](http://ojs.utlib.ee/index.php/methis/issue/view/1297)\n\nTaavet Jansen\n[“Pandeemia tiris veebisündmused interneti hallusest lagedale”](https://novaator.err.ee/1608489446/pandeemia-tiris-veebisundmused-interneti-hallusest-lagedale)",
+                "slug": "tekstid"
               }
             }
           }
@@ -140,17 +140,17 @@
         {
           "id": 3,
           "__component": "content.related-page",
-          "title": "Not to become",
+          "title": "Pressikajastus",
           "page": {
             "data": {
-              "id": 1,
+              "id": 4,
               "attributes": {
-                "title": "Manifest",
-                "createdAt": "2022-02-10T11:12:39.302Z",
-                "updatedAt": "2022-02-17T12:16:30.683Z",
-                "publishedAt": "2022-02-10T11:12:41.455Z",
-                "content": null,
-                "slug": "manifest"
+                "title": "Pressikajastus",
+                "createdAt": "2022-02-21T11:09:46.049Z",
+                "updatedAt": "2022-02-21T11:59:00.907Z",
+                "publishedAt": "2022-02-21T11:29:15.969Z",
+                "content": "Kaja Kann Teatriarvustus:\n[koroona mängis kaardid kätte. “Hundid”](https://edasi.org/102841/teatriarvustus-kaja-kann-koroona-mangis-kaardid-katte-hundid/)\n\n\nAndrus Laansalu\n[Diislidisko](https://www.sirp.ee/s1-artiklid/c6-kunst/diislidisko/?fbclid=IwAR39DzEgO3QO3B8T8f8egoAPIa7_QpJY9Hx1AgFkTt0hDrnfg14ajma5BO8)\n\nTaavet Jansen\n[Kas see maailm ongi enam s*****i väärt?](https://kultuur.postimees.ee/7387562/kas-see-maailm-ongi-enam-s-i-vaart)\n\n\nMarie Pullerits\n[Tantsukunst ja kehalisus keset uusi hübriidvorme](https://sirp.ee/s1-artiklid/teater/tantsukunst-ja-kehalisus-keset-uusi-hubriidvorme/\n)\n\nTõnis Jürgens\n[Suur lugu. Zettabaitide kõrb](https://cca.ee/ajakiri/suur-lugu-zettabaitide-korb)\n\nKarin Allik\n[Kaamerasse joostud maraton](https://sirp.ee/s1-artiklid/teater/kaamerasse-joostud-maraton/)\n\nKärt Kelder\n[Kui kõhedalt oleme üksteisega seotud](https://kultuur.postimees.ee/7217885/kui-kohedalt-oleme-uksteisega-seotud?_ga=2.178023461.1602931483.1617691274-1015818672.1589065120)\n\nKaspar Viilup\n[Maike Lond: suurele lavale loodud etendusi ja ideid on väga riskantne \"purki pista\"](https://kultuur.err.ee/1608161557/maike-lond-suurele-lavale-loodud-etendusi-ja-ideid-on-vaga-riskantne-purki-pista)\n\n\nAndrus Aaslaid saates\n[Helikaja. Dominant. Digikultuur ja digivõimekus](https://klassikaraadio.err.ee/1608141601/helikaja-27-martsil-digikultuur-ja-digivoimekus-meie-umber/1233373)\n\n\nTaaniel Raudsepp\n[Taaniel Raudsepp: kultuur saab aidata parandada viiruse löödud arme](https://kultuur.err.ee/1608151789/taaniel-raudsepp-kultuur-saab-aidata-parandada-viiruse-loodud-arme)\n\n\nJuhan Raud\n[SUUR INTERVJUU ⟩ Priit Raud: on tekkimas mingi täiesti uus kunstivorm](https://leht.postimees.ee/7133306/priit-raud-on-tekkimas-mingi-taiesti-uus-kunstivorm?_ga=2.15954550.1131313993.1608037468-1991985449.1607775026)\n\nOtt Karulin\n[ÜLEKANTUD TEATER](https://www.temuki.ee/archives/2790)\n\n[Lavastuse „Planet Alexithymia” etendusejärgne vestlus Kanuti Gildi SAALis lavastaja Karl Saksa, dramaturg Maike Londi ja filosoof Eik Hermanni vahel](http://www.temuki.ee/archives/2413)\n\nKadri Sirel\n[Virtuaalne sügisball](https://dea.digar.ee/cgi-bin/dea?a=d&d=AKtmk202006.2.6.2&e=-------et-25--1--txt-txIN%7ctxTI%7ctxAU%7ctxTA-------------)",
+                "slug": "pressikajastus"
               }
             }
           }
@@ -158,7 +158,7 @@
         {
           "id": 4,
           "__component": "content.title",
-          "title": "Inimesed"
+          "title": "Kontoris"
         },
         {
           "id": 1,
@@ -167,69 +167,47 @@
           "content": "Hendrik on väga sügav inimene. Ta loobib lolle nalju ja sügavaid mõtteid läbisegi ja neid on raske eristada. Vahel osutub loll nali hoopis mega sügavaks ja oluliseks mõtteks lähemalt vaadates. Hendriku tagasiside aitab kergel ja hüpleval mõttekesel rahuneda, enda sisse vaadata ja avada enda tõeline potensiaal. Hendriku silmist on tunda, milline on kuu ja tähtede olukord taevas. Loominguline plahvatus on sellest astroloogilisest seisust tihti sõltuv. Hendrik on eˉlektroni tegevjuht.",
           "image": {
             "data": {
-              "id": 1,
+              "id": 4,
               "attributes": {
-                "name": "Hendrik-Kaljujärv-43.jpg",
-                "alternativeText": "Hendrik-Kaljujärv-43.jpg",
-                "caption": "Hendrik-Kaljujärv-43.jpg",
-                "width": 1056,
-                "height": 792,
+                "name": "hendrik.png",
+                "alternativeText": "hendrik.png",
+                "caption": "hendrik.png",
+                "width": 504,
+                "height": 504,
                 "formats": {
-                  "large": {
-                    "ext": ".jpg",
-                    "url": "/uploads/large_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "large_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "large_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 113.22,
-                    "width": 1000,
-                    "height": 750
-                  },
                   "small": {
-                    "ext": ".jpg",
-                    "url": "/uploads/small_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "small_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "small_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/small_hendrik_0865ccdd49.png",
+                    "hash": "small_hendrik_0865ccdd49",
+                    "mime": "image/png",
+                    "name": "small_hendrik.png",
                     "path": null,
-                    "size": 29.06,
+                    "size": 113.25,
                     "width": 500,
-                    "height": 375
-                  },
-                  "medium": {
-                    "ext": ".jpg",
-                    "url": "/uploads/medium_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "medium_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "medium_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 62.66,
-                    "width": 750,
-                    "height": 563
+                    "height": 500
                   },
                   "thumbnail": {
-                    "ext": ".jpg",
-                    "url": "/uploads/thumbnail_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "thumbnail_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "thumbnail_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/thumbnail_hendrik_0865ccdd49.png",
+                    "hash": "thumbnail_hendrik_0865ccdd49",
+                    "mime": "image/png",
+                    "name": "thumbnail_hendrik.png",
                     "path": null,
-                    "size": 7.02,
-                    "width": 208,
+                    "size": 17.42,
+                    "width": 156,
                     "height": 156
                   }
                 },
-                "hash": "Hendrik_Kaljujaerv_43_9a1766c541",
-                "ext": ".jpg",
-                "mime": "image/jpeg",
-                "size": 131.28,
-                "url": "/uploads/Hendrik_Kaljujaerv_43_9a1766c541.jpg",
+                "hash": "hendrik_0865ccdd49",
+                "ext": ".png",
+                "mime": "image/png",
+                "size": 87.16,
+                "url": "/uploads/hendrik_0865ccdd49.png",
                 "previewUrl": null,
                 "provider": "local",
                 "provider_metadata": null,
-                "createdAt": "2022-02-09T13:06:08.933Z",
-                "updatedAt": "2022-02-09T13:06:08.933Z"
+                "createdAt": "2022-02-23T09:12:01.583Z",
+                "updatedAt": "2022-02-23T09:12:26.333Z"
               }
             }
           }
@@ -241,69 +219,47 @@
           "content": "Maike on selline kellega juttu ajades mõistad ühtäkki, et tema sõnad ja mõtted dekodeerivad sinu arusaamu. See on niisama palju hirmutav kui ka erutav. Maike on etenduskunstnik ja dramaturg. Elektonis korraldab ja korrastab kaost. Kui ta eˉlektronis on kõik inimesed ümber kodeerinud läheb ta bändikasse ja hakkab seal koos Zahiriga sepistama suuremat ümberkodeerimist kuid sageli juhtub, et nad iseendist kaugemale ei jõua. ",
           "image": {
             "data": {
-              "id": 1,
+              "id": 12,
               "attributes": {
-                "name": "Hendrik-Kaljujärv-43.jpg",
-                "alternativeText": "Hendrik-Kaljujärv-43.jpg",
-                "caption": "Hendrik-Kaljujärv-43.jpg",
-                "width": 1056,
-                "height": 792,
+                "name": "Maike.png",
+                "alternativeText": "Maike.png",
+                "caption": "Maike.png",
+                "width": 504,
+                "height": 504,
                 "formats": {
-                  "large": {
-                    "ext": ".jpg",
-                    "url": "/uploads/large_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "large_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "large_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 113.22,
-                    "width": 1000,
-                    "height": 750
-                  },
                   "small": {
-                    "ext": ".jpg",
-                    "url": "/uploads/small_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "small_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "small_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/small_Maike_eeb1c1ffd2.png",
+                    "hash": "small_Maike_eeb1c1ffd2",
+                    "mime": "image/png",
+                    "name": "small_Maike.png",
                     "path": null,
-                    "size": 29.06,
+                    "size": 175.66,
                     "width": 500,
-                    "height": 375
-                  },
-                  "medium": {
-                    "ext": ".jpg",
-                    "url": "/uploads/medium_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "medium_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "medium_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 62.66,
-                    "width": 750,
-                    "height": 563
+                    "height": 500
                   },
                   "thumbnail": {
-                    "ext": ".jpg",
-                    "url": "/uploads/thumbnail_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "thumbnail_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "thumbnail_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/thumbnail_Maike_eeb1c1ffd2.png",
+                    "hash": "thumbnail_Maike_eeb1c1ffd2",
+                    "mime": "image/png",
+                    "name": "thumbnail_Maike.png",
                     "path": null,
-                    "size": 7.02,
-                    "width": 208,
+                    "size": 29.57,
+                    "width": 156,
                     "height": 156
                   }
                 },
-                "hash": "Hendrik_Kaljujaerv_43_9a1766c541",
-                "ext": ".jpg",
-                "mime": "image/jpeg",
-                "size": 131.28,
-                "url": "/uploads/Hendrik_Kaljujaerv_43_9a1766c541.jpg",
+                "hash": "Maike_eeb1c1ffd2",
+                "ext": ".png",
+                "mime": "image/png",
+                "size": 125.51,
+                "url": "/uploads/Maike_eeb1c1ffd2.png",
                 "previewUrl": null,
                 "provider": "local",
                 "provider_metadata": null,
-                "createdAt": "2022-02-09T13:06:08.933Z",
-                "updatedAt": "2022-02-09T13:06:08.933Z"
+                "createdAt": "2022-02-23T09:12:02.183Z",
+                "updatedAt": "2022-02-23T09:12:02.183Z"
               }
             }
           }
@@ -315,69 +271,47 @@
           "content": "Kaie on kullakallis. Talle saab silma vaadata ja korraga hakkab kohe kergem, mured ja raskused justkui leiavad mänglevalt oma lahenduse. Ja vahel tundub, et polekski nagu midagi mida Kaie ei oska. Magical production manager Super Kaie. ",
           "image": {
             "data": {
-              "id": 1,
+              "id": 8,
               "attributes": {
-                "name": "Hendrik-Kaljujärv-43.jpg",
-                "alternativeText": "Hendrik-Kaljujärv-43.jpg",
-                "caption": "Hendrik-Kaljujärv-43.jpg",
-                "width": 1056,
-                "height": 792,
+                "name": "kaie.png",
+                "alternativeText": "kaie.png",
+                "caption": "kaie.png",
+                "width": 504,
+                "height": 504,
                 "formats": {
-                  "large": {
-                    "ext": ".jpg",
-                    "url": "/uploads/large_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "large_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "large_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 113.22,
-                    "width": 1000,
-                    "height": 750
-                  },
                   "small": {
-                    "ext": ".jpg",
-                    "url": "/uploads/small_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "small_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "small_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/small_kaie_2dabe19a0b.png",
+                    "hash": "small_kaie_2dabe19a0b",
+                    "mime": "image/png",
+                    "name": "small_kaie.png",
                     "path": null,
-                    "size": 29.06,
+                    "size": 160.63,
                     "width": 500,
-                    "height": 375
-                  },
-                  "medium": {
-                    "ext": ".jpg",
-                    "url": "/uploads/medium_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "medium_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "medium_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 62.66,
-                    "width": 750,
-                    "height": 563
+                    "height": 500
                   },
                   "thumbnail": {
-                    "ext": ".jpg",
-                    "url": "/uploads/thumbnail_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "thumbnail_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "thumbnail_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/thumbnail_kaie_2dabe19a0b.png",
+                    "hash": "thumbnail_kaie_2dabe19a0b",
+                    "mime": "image/png",
+                    "name": "thumbnail_kaie.png",
                     "path": null,
-                    "size": 7.02,
-                    "width": 208,
+                    "size": 20.71,
+                    "width": 156,
                     "height": 156
                   }
                 },
-                "hash": "Hendrik_Kaljujaerv_43_9a1766c541",
-                "ext": ".jpg",
-                "mime": "image/jpeg",
-                "size": 131.28,
-                "url": "/uploads/Hendrik_Kaljujaerv_43_9a1766c541.jpg",
+                "hash": "kaie_2dabe19a0b",
+                "ext": ".png",
+                "mime": "image/png",
+                "size": 110.66,
+                "url": "/uploads/kaie_2dabe19a0b.png",
                 "previewUrl": null,
                 "provider": "local",
                 "provider_metadata": null,
-                "createdAt": "2022-02-09T13:06:08.933Z",
-                "updatedAt": "2022-02-09T13:06:08.933Z"
+                "createdAt": "2022-02-23T09:12:01.628Z",
+                "updatedAt": "2022-02-23T09:12:01.628Z"
               }
             }
           }
@@ -389,69 +323,47 @@
           "content": "Taavet on mäd professor, kelle aju on modulaar-neuroloogiliste katsete keskus. Kord on ta doktorant mõnes ülikoolis, või siis kõikides ülikoolides korraga, siis on ta õppejõud, siis on ta kunstnik, lavastaja. Ei, ta on tegelikult tantsija. Jah, ta on helilooja ja disainer, programmeerija. Keegi ei tea. Selge on see, et ta on hea inimene ja kõigi sõber, umbes nagu Leopold. Taavet korraldab kõike ja kõiki, nagu oma peas nõnda ka maa peal.",
           "image": {
             "data": {
-              "id": 1,
+              "id": 17,
               "attributes": {
-                "name": "Hendrik-Kaljujärv-43.jpg",
-                "alternativeText": "Hendrik-Kaljujärv-43.jpg",
-                "caption": "Hendrik-Kaljujärv-43.jpg",
-                "width": 1056,
-                "height": 792,
+                "name": "taavet.png",
+                "alternativeText": "taavet.png",
+                "caption": "taavet.png",
+                "width": 504,
+                "height": 504,
                 "formats": {
-                  "large": {
-                    "ext": ".jpg",
-                    "url": "/uploads/large_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "large_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "large_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 113.22,
-                    "width": 1000,
-                    "height": 750
-                  },
                   "small": {
-                    "ext": ".jpg",
-                    "url": "/uploads/small_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "small_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "small_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/small_taavet_f0ce720e05.png",
+                    "hash": "small_taavet_f0ce720e05",
+                    "mime": "image/png",
+                    "name": "small_taavet.png",
                     "path": null,
-                    "size": 29.06,
+                    "size": 185.15,
                     "width": 500,
-                    "height": 375
-                  },
-                  "medium": {
-                    "ext": ".jpg",
-                    "url": "/uploads/medium_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "medium_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "medium_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 62.66,
-                    "width": 750,
-                    "height": 563
+                    "height": 500
                   },
                   "thumbnail": {
-                    "ext": ".jpg",
-                    "url": "/uploads/thumbnail_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "thumbnail_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "thumbnail_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/thumbnail_taavet_f0ce720e05.png",
+                    "hash": "thumbnail_taavet_f0ce720e05",
+                    "mime": "image/png",
+                    "name": "thumbnail_taavet.png",
                     "path": null,
-                    "size": 7.02,
-                    "width": 208,
+                    "size": 28.41,
+                    "width": 156,
                     "height": 156
                   }
                 },
-                "hash": "Hendrik_Kaljujaerv_43_9a1766c541",
-                "ext": ".jpg",
-                "mime": "image/jpeg",
-                "size": 131.28,
-                "url": "/uploads/Hendrik_Kaljujaerv_43_9a1766c541.jpg",
+                "hash": "taavet_f0ce720e05",
+                "ext": ".png",
+                "mime": "image/png",
+                "size": 142.64,
+                "url": "/uploads/taavet_f0ce720e05.png",
                 "previewUrl": null,
                 "provider": "local",
                 "provider_metadata": null,
-                "createdAt": "2022-02-09T13:06:08.933Z",
-                "updatedAt": "2022-02-09T13:06:08.933Z"
+                "createdAt": "2022-02-23T09:12:02.539Z",
+                "updatedAt": "2022-02-23T09:12:02.539Z"
               }
             }
           }
@@ -463,69 +375,47 @@
           "content": "Bohdana on selline kelle üle ei väsi imestamast. Kuidas ta nii tark on? Miks tal kõik asjad korraldatud on? Kust ta nii häid mõtteid saab? Kuidas ta nii palju raamatuid on jõudnud lugeda? Bohdana on andekas. Tee mis tahad, mõnele lihtsalt on antud. ",
           "image": {
             "data": {
-              "id": 1,
+              "id": 6,
               "attributes": {
-                "name": "Hendrik-Kaljujärv-43.jpg",
-                "alternativeText": "Hendrik-Kaljujärv-43.jpg",
-                "caption": "Hendrik-Kaljujärv-43.jpg",
-                "width": 1056,
-                "height": 792,
+                "name": "bogdana.png",
+                "alternativeText": "bogdana.png",
+                "caption": "bogdana.png",
+                "width": 504,
+                "height": 504,
                 "formats": {
-                  "large": {
-                    "ext": ".jpg",
-                    "url": "/uploads/large_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "large_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "large_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 113.22,
-                    "width": 1000,
-                    "height": 750
-                  },
                   "small": {
-                    "ext": ".jpg",
-                    "url": "/uploads/small_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "small_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "small_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/small_bogdana_4e53eee155.png",
+                    "hash": "small_bogdana_4e53eee155",
+                    "mime": "image/png",
+                    "name": "small_bogdana.png",
                     "path": null,
-                    "size": 29.06,
+                    "size": 132.94,
                     "width": 500,
-                    "height": 375
-                  },
-                  "medium": {
-                    "ext": ".jpg",
-                    "url": "/uploads/medium_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "medium_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "medium_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 62.66,
-                    "width": 750,
-                    "height": 563
+                    "height": 500
                   },
                   "thumbnail": {
-                    "ext": ".jpg",
-                    "url": "/uploads/thumbnail_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "thumbnail_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "thumbnail_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/thumbnail_bogdana_4e53eee155.png",
+                    "hash": "thumbnail_bogdana_4e53eee155",
+                    "mime": "image/png",
+                    "name": "thumbnail_bogdana.png",
                     "path": null,
-                    "size": 7.02,
-                    "width": 208,
+                    "size": 19.18,
+                    "width": 156,
                     "height": 156
                   }
                 },
-                "hash": "Hendrik_Kaljujaerv_43_9a1766c541",
-                "ext": ".jpg",
-                "mime": "image/jpeg",
-                "size": 131.28,
-                "url": "/uploads/Hendrik_Kaljujaerv_43_9a1766c541.jpg",
+                "hash": "bogdana_4e53eee155",
+                "ext": ".png",
+                "mime": "image/png",
+                "size": 93.34,
+                "url": "/uploads/bogdana_4e53eee155.png",
                 "previewUrl": null,
                 "provider": "local",
                 "provider_metadata": null,
-                "createdAt": "2022-02-09T13:06:08.933Z",
-                "updatedAt": "2022-02-09T13:06:08.933Z"
+                "createdAt": "2022-02-23T09:12:01.584Z",
+                "updatedAt": "2022-02-23T09:12:01.584Z"
               }
             }
           }
@@ -537,69 +427,47 @@
           "content": "Kika vaatab tähistaevast ja ütleb, et see kõik on üks struktuur, üks kood, maatriks, süsteem. Ja tal on õigus. Kuid siis selgub, et ta tunneb, tajub ja oskab selle süsteemi koodi ja struktuuriga ka ümber käia ning luua. Kui Kika õhtul peale suurt loomis palangut otsustab lõõgastuda, võtab ta kapist välja mõne sünteka ja hakkab nautima. Sageli räägib ta oma lastele unejuttu, usutavasti eˉlektronist või siis sellest kuidas nad võivad tähistaevast muuta täpselt selliseks nagu ise soovivad, olgu vaid idee hea. ",
           "image": {
             "data": {
-              "id": 1,
+              "id": 9,
               "attributes": {
-                "name": "Hendrik-Kaljujärv-43.jpg",
-                "alternativeText": "Hendrik-Kaljujärv-43.jpg",
-                "caption": "Hendrik-Kaljujärv-43.jpg",
-                "width": 1056,
-                "height": 792,
+                "name": "kristjan.png",
+                "alternativeText": "kristjan.png",
+                "caption": "kristjan.png",
+                "width": 504,
+                "height": 504,
                 "formats": {
-                  "large": {
-                    "ext": ".jpg",
-                    "url": "/uploads/large_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "large_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "large_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 113.22,
-                    "width": 1000,
-                    "height": 750
-                  },
                   "small": {
-                    "ext": ".jpg",
-                    "url": "/uploads/small_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "small_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "small_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/small_kristjan_babec01206.png",
+                    "hash": "small_kristjan_babec01206",
+                    "mime": "image/png",
+                    "name": "small_kristjan.png",
                     "path": null,
-                    "size": 29.06,
+                    "size": 98.92,
                     "width": 500,
-                    "height": 375
-                  },
-                  "medium": {
-                    "ext": ".jpg",
-                    "url": "/uploads/medium_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "medium_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "medium_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 62.66,
-                    "width": 750,
-                    "height": 563
+                    "height": 500
                   },
                   "thumbnail": {
-                    "ext": ".jpg",
-                    "url": "/uploads/thumbnail_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "thumbnail_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "thumbnail_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/thumbnail_kristjan_babec01206.png",
+                    "hash": "thumbnail_kristjan_babec01206",
+                    "mime": "image/png",
+                    "name": "thumbnail_kristjan.png",
                     "path": null,
-                    "size": 7.02,
-                    "width": 208,
+                    "size": 15.56,
+                    "width": 156,
                     "height": 156
                   }
                 },
-                "hash": "Hendrik_Kaljujaerv_43_9a1766c541",
-                "ext": ".jpg",
-                "mime": "image/jpeg",
-                "size": 131.28,
-                "url": "/uploads/Hendrik_Kaljujaerv_43_9a1766c541.jpg",
+                "hash": "kristjan_babec01206",
+                "ext": ".png",
+                "mime": "image/png",
+                "size": 75,
+                "url": "/uploads/kristjan_babec01206.png",
                 "previewUrl": null,
                 "provider": "local",
                 "provider_metadata": null,
-                "createdAt": "2022-02-09T13:06:08.933Z",
-                "updatedAt": "2022-02-09T13:06:08.933Z"
+                "createdAt": "2022-02-23T09:12:02.173Z",
+                "updatedAt": "2022-02-23T09:12:02.173Z"
               }
             }
           }
@@ -611,69 +479,47 @@
           "content": "Jaan on elav müsteerium kes mõtleb palju ja ütleb vähe. Täpselt sellist inimest on vaja igaühe ellu ja ollu. Aga Jaanil on ka loomulik anne.",
           "image": {
             "data": {
-              "id": 1,
+              "id": 7,
               "attributes": {
-                "name": "Hendrik-Kaljujärv-43.jpg",
-                "alternativeText": "Hendrik-Kaljujärv-43.jpg",
-                "caption": "Hendrik-Kaljujärv-43.jpg",
-                "width": 1056,
-                "height": 792,
+                "name": "jaan.png",
+                "alternativeText": "jaan.png",
+                "caption": "jaan.png",
+                "width": 504,
+                "height": 504,
                 "formats": {
-                  "large": {
-                    "ext": ".jpg",
-                    "url": "/uploads/large_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "large_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "large_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 113.22,
-                    "width": 1000,
-                    "height": 750
-                  },
                   "small": {
-                    "ext": ".jpg",
-                    "url": "/uploads/small_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "small_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "small_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/small_jaan_04bfb12186.png",
+                    "hash": "small_jaan_04bfb12186",
+                    "mime": "image/png",
+                    "name": "small_jaan.png",
                     "path": null,
-                    "size": 29.06,
+                    "size": 100.65,
                     "width": 500,
-                    "height": 375
-                  },
-                  "medium": {
-                    "ext": ".jpg",
-                    "url": "/uploads/medium_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "medium_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "medium_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 62.66,
-                    "width": 750,
-                    "height": 563
+                    "height": 500
                   },
                   "thumbnail": {
-                    "ext": ".jpg",
-                    "url": "/uploads/thumbnail_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "thumbnail_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "thumbnail_Hendrik-Kaljujärv-43.jpg",
+                    "ext": ".png",
+                    "url": "/uploads/thumbnail_jaan_04bfb12186.png",
+                    "hash": "thumbnail_jaan_04bfb12186",
+                    "mime": "image/png",
+                    "name": "thumbnail_jaan.png",
                     "path": null,
-                    "size": 7.02,
-                    "width": 208,
+                    "size": 16.77,
+                    "width": 156,
                     "height": 156
                   }
                 },
-                "hash": "Hendrik_Kaljujaerv_43_9a1766c541",
-                "ext": ".jpg",
-                "mime": "image/jpeg",
-                "size": 131.28,
-                "url": "/uploads/Hendrik_Kaljujaerv_43_9a1766c541.jpg",
+                "hash": "jaan_04bfb12186",
+                "ext": ".png",
+                "mime": "image/png",
+                "size": 73.94,
+                "url": "/uploads/jaan_04bfb12186.png",
                 "previewUrl": null,
                 "provider": "local",
                 "provider_metadata": null,
-                "createdAt": "2022-02-09T13:06:08.933Z",
-                "updatedAt": "2022-02-09T13:06:08.933Z"
+                "createdAt": "2022-02-23T09:12:01.626Z",
+                "updatedAt": "2022-02-23T09:12:01.626Z"
               }
             }
           }
@@ -684,72 +530,7 @@
           "name": "Krista Jakobson-Hadar",
           "content": "Lepingud, arved, numbrid. Mikro ja makro, bilansid-avansid. Raamatupidamine on Krista jaoks nagu luule luuletajale.",
           "image": {
-            "data": {
-              "id": 1,
-              "attributes": {
-                "name": "Hendrik-Kaljujärv-43.jpg",
-                "alternativeText": "Hendrik-Kaljujärv-43.jpg",
-                "caption": "Hendrik-Kaljujärv-43.jpg",
-                "width": 1056,
-                "height": 792,
-                "formats": {
-                  "large": {
-                    "ext": ".jpg",
-                    "url": "/uploads/large_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "large_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "large_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 113.22,
-                    "width": 1000,
-                    "height": 750
-                  },
-                  "small": {
-                    "ext": ".jpg",
-                    "url": "/uploads/small_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "small_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "small_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 29.06,
-                    "width": 500,
-                    "height": 375
-                  },
-                  "medium": {
-                    "ext": ".jpg",
-                    "url": "/uploads/medium_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "medium_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "medium_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 62.66,
-                    "width": 750,
-                    "height": 563
-                  },
-                  "thumbnail": {
-                    "ext": ".jpg",
-                    "url": "/uploads/thumbnail_Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                    "hash": "thumbnail_Hendrik_Kaljujaerv_43_9a1766c541",
-                    "mime": "image/jpeg",
-                    "name": "thumbnail_Hendrik-Kaljujärv-43.jpg",
-                    "path": null,
-                    "size": 7.02,
-                    "width": 208,
-                    "height": 156
-                  }
-                },
-                "hash": "Hendrik_Kaljujaerv_43_9a1766c541",
-                "ext": ".jpg",
-                "mime": "image/jpeg",
-                "size": 131.28,
-                "url": "/uploads/Hendrik_Kaljujaerv_43_9a1766c541.jpg",
-                "previewUrl": null,
-                "provider": "local",
-                "provider_metadata": null,
-                "createdAt": "2022-02-09T13:06:08.933Z",
-                "updatedAt": "2022-02-09T13:06:08.933Z"
-              }
-            }
+            "data": null
           }
         },
         {

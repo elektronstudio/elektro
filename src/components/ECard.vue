@@ -1,14 +1,31 @@
 <script setup lang="ts">
-type Props = {
-  thumbnail?: string;
+import EImage from "./EImage.vue";
+
+type Size = {
+  url: string;
+  width: number;
+  height: number;
 };
 
-defineProps<Props>();
+type Image = {
+  sizes: Size[];
+  alt?: string;
+};
+
+type Props = {
+  thumbnail?: Image;
+};
+
+const { thumbnail } = defineProps<Props>();
 </script>
 <template>
   <article class="ECard">
-    <!-- @TODO: Use image component -->
-    <img v-if="thumbnail" class="thumbnail" :src="thumbnail" />
+    <EImage
+      v-if="thumbnail"
+      :alt="thumbnail?.alt"
+      :sizes="thumbnail.sizes"
+      class="thumbnail"
+    />
     <header v-if="$slots.header">
       <slot name="header" />
     </header>
