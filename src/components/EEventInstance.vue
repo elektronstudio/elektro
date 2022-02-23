@@ -21,7 +21,7 @@ const {
   <div class="EEventInstance" :class="layout">
     <time :datetime="startAt">{{ startAt }}</time>
     <section>
-      <!-- @TODO: Add system or component for arrows -->
+      <!-- @TODO: Add system for calendar buttons -->
       <!-- <EButton size="xs" el="a" color="transparent">+ Lisa kalendrisse</EButton> -->
       <!-- @TODO: Add system or component for arrows -->
       <EButton
