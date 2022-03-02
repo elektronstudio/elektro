@@ -2,6 +2,7 @@
 import ArtNav from "../components/ArtNav.vue";
 import EScheduleEvent from "../components/EScheduleEvent.vue";
 import EEventInstance from "../components/EEventInstance.vue";
+import ETitle from "../components/ETitle.vue";
 
 const scheduleEvents = [
   {
@@ -91,7 +92,13 @@ const scheduleEvents = [
         :start-at="item.start_at"
         :end-at="item.end_at"
         :ticket-url="item.ticketUrl"
-      />
+      >
+        <template #title>
+          <ETitle el="h4" size="xs" class="eventTitle"
+            >Ukraine Solidarity Screening #1 / Freefilmers, Mariupol</ETitle
+          >
+        </template>
+      </EEventInstance>
     </EScheduleEvent>
   </main>
 </template>

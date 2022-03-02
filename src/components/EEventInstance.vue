@@ -62,6 +62,9 @@ const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
   display: flex;
   flex-direction: column;
 }
+.EEventInstance.horizontal header {
+  flex-direction: column-reverse;
+}
 .EEventInstance.vertical {
   gap: var(--gap-3);
 }
