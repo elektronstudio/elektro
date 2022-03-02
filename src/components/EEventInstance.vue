@@ -74,6 +74,7 @@ const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
 .EEventInstance section {
   display: flex;
   gap: var(--gap-3);
+  flex-shrink: 0;
 }
 .EEventInstance time {
   color: var(--fg);
