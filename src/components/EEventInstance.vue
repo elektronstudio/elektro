@@ -22,6 +22,7 @@ const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
       <!-- @TODO: Add system for calendar buttons -->
       <!-- <EButton size="xs" el="a" color="transparent">+ Lisa kalendrisse</EButton> -->
       <!-- @TODO: Add system or component for arrows -->
+      <slot name="buttons" />
       <EButton
         el="a"
         size="xs"
@@ -45,7 +46,6 @@ const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
         </svg>
         OSTA PILET
       </EButton>
-      <slot name="buttons" />
     </section>
   </div>
 </template>
@@ -86,6 +86,7 @@ const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
   .EEventInstance.horizontal {
     flex-direction: row;
     justify-content: space-between;
+    align-items: flex-start;
   }
 
   .EEventInstance section {
