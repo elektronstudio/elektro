@@ -31,7 +31,7 @@ const { title, description } = defineProps<Props>();
 .EscheduleEvent article {
   color: var(--gray-300);
   max-width: 60ch; /* TODO convert to var(--w-prose) */
-  margin-bottom: var(--m-3);
+  margin-bottom: var(--m-6);
 }
 
 .EscheduleEvent h3 {
