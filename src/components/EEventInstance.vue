@@ -86,11 +86,11 @@ const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
   .EEventInstance.horizontal {
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
   }
 
   .EEventInstance section {
     flex-direction: row;
+    align-items: flex-start;
   }
 }
 </style>
