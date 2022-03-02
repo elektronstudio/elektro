@@ -15,7 +15,7 @@ const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
 <template>
   <div class="EEventInstance" :class="layout">
     <header>
-      <ETitle v-if="title" el="h4">{{ title }}</ETitle>
+      <slot name="title" />
       <time :datetime="startAt">{{ startAt }}</time>
     </header>
     <section>
@@ -45,6 +45,7 @@ const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
         </svg>
         OSTA PILET
       </EButton>
+      <slot name="buttons" />
     </section>
   </div>
 </template>
