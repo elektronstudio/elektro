@@ -15,8 +15,8 @@ const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
 <template>
   <div class="EEventInstance" :class="layout">
     <header>
-      <slot name="title" />
       <time :datetime="startAt">{{ startAt }}</time>
+      <slot name="title" />
     </header>
     <section>
       <!-- @TODO: Add system for calendar buttons -->
@@ -61,9 +61,6 @@ const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
 .EEventInstance header {
   display: flex;
   flex-direction: column;
-}
-.EEventInstance.horizontal header {
-  flex-direction: column-reverse;
 }
 .EEventInstance.vertical {
   gap: var(--gap-3);
