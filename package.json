@@ -19,6 +19,10 @@
       "import": "./dist/elektro.mjs",
       "require": "./dist/elektro.cjs"
     },
+    "./nuxt": {
+      "import": "./nuxt/index.js",
+      "require": "./nuxt/index.js"
+    },
     "./style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"
