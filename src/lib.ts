@@ -31,6 +31,10 @@ export { default as EStack } from "./components/EStack.vue";
 export { default as ETeamCard } from "./components/ETeamCard.vue";
 export { default as ETitle } from "./components/ETitle.vue";
 export { default as EWindowBorder } from "./components/EWindowBorder.vue";
+export { default as EBreadBoard } from "./components/EBreadBoard.vue";
+export { default as EDraggable } from "./components/EDraggable.vue";
+export { default as EDraggablesDock } from "./components/EDraggablesDock.vue";
+export { default as EDraggableTitlebar } from "./components/EDraggableTitlebar.vue";
 
 import "./styles/vars.css";
 import "./styles/reset.css";
