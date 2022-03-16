@@ -36,8 +36,8 @@ const { size = "md", el = "button" } = defineProps<Props>();
 
 .EButton :deep(svg) {
   margin-right: var(--m-1);
-  /* width: 1rem;
-  height: 1rem; */
+  width: 1em;
+  height: 1em;
 }
 .EButton.sm {
   font-size: var(--text-sm);
