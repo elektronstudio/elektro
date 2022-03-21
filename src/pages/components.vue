@@ -343,7 +343,15 @@ const images = [
     <br />
     <pre>ECard</pre>
     <ECard
-      thumbnail="https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A"
+      :thumbnail="{
+        sizes: [
+          {
+            url: 'https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A',
+            width: 400,
+            height: 400,
+          },
+        ],
+      }"
     >
       <template #header>
         <ETitle el="h3" size="lg">Header</ETitle>
@@ -358,10 +366,11 @@ const images = [
     <EProductionCard
       :title="productions[0].title"
       :author="productions[0].author"
-      :thumbnail="productions[0].thumbnail"
+      :thumbnail="{
+        sizes: [{ url: productions[0].thumbnail, width: 400, height: 400 }],
+      }"
       :next-event="{
         startAt: productions[0].events[0].start_at,
-        endAt: productions[0].events[0].end_at,
       }"
     />
 
@@ -378,7 +387,15 @@ const images = [
     <pre>ETeamCard</pre>
     <ETeamCard
       name="Jaanus Metsis"
-      thumbnail="https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A"
+      :thumbnail="{
+        sizes: [
+          {
+            url: 'https://lh3.googleusercontent.com/cSKqVW2BtwWwHLSLTyACjPi8xbzaCroPndAPPzkwX1tY1A8KuUmImvqnFH7FxOoeVvKU5ZC8NzYqTE_C23xziWvSkclCqUPrzlmAWGfY_YsVKgqLpN-ireTOlk32XvcY7A',
+            width: 400,
+            height: 400,
+          },
+        ],
+      }"
       content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur."
     />
 
@@ -394,6 +411,7 @@ const images = [
       <EEventInstance
         v-if="event.events"
         v-for="item in event.events"
+        title="Etenduse pealkiri"
         :start-at="item.start_at"
         :end-at="item.end_at"
         :ticket-url="item.ticketUrl"
@@ -404,6 +422,7 @@ const images = [
     <pre>EEventInstance</pre>
     <EEventInstance
       v-for="eventInstance in scheduleEvents[0].events"
+      title="Etenduse pealkiri"
       :start-at="eventInstance.start_at"
       :end-at="eventInstance.end_at"
       :ticketUrl="eventInstance.ticketUrl"

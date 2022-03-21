@@ -5,7 +5,6 @@ import EContent from "../components/EContent.vue";
 
 type Props = {
   title?: string;
-  slug?: string;
 };
 
 const { title } = defineProps<Props>();
@@ -13,9 +12,7 @@ const { title } = defineProps<Props>();
 <template>
   <EBox color="accent" ratio="1 / 1" layout="columns1">
     <ETitle v-if="title" el="h3" size="lg" :title="title" />
-    <!-- <RouterLink :to="slug">
-      <EContent>Read more</EContent>
-    </RouterLink> -->
+    <EContent>Read more</EContent>
   </EBox>
 </template>
 

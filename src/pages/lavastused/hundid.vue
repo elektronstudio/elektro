@@ -156,7 +156,7 @@ const image = {
 };
 
 const caption =
-  "Caption Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+  "Caption Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.";
 
 const images = [
   { sizes: Object.values(image), caption },

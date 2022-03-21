@@ -3,7 +3,7 @@ import EContent from "./EContent.vue";
 import ETitle from "./ETitle.vue";
 
 type Props = {
-  title: string;
+  title?: string;
   path: string;
   description?: string;
 };
@@ -12,9 +12,8 @@ const { title, description } = defineProps<Props>();
 </script>
 <template>
   <section class="EscheduleEvent">
-    <!-- <RouterLink :to="path">
-      <ETitle size="lg" :title="title" />
-    </RouterLink> -->
+    <ETitle v-if="title" size="lg" :title="title" />
+    <slot v-else name="title" />
     <EContent v-if="description" :content="description" />
     <slot />
   </section>
@@ -32,7 +31,7 @@ const { title, description } = defineProps<Props>();
 .EscheduleEvent article {
   color: var(--gray-300);
   max-width: 60ch; /* TODO convert to var(--w-prose) */
-  margin-bottom: var(--m-3);
+  margin-bottom: var(--m-6);
 }
 
 .EscheduleEvent h3 {

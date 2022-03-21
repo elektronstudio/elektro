@@ -20,6 +20,7 @@ type Card = {
   name?: string;
   url?: string;
   layout?: "columns1" | "columns2" | "columns3" | "columns4";
+  image: any;
   page?: {
     data: {
       attributes: {
@@ -50,10 +51,11 @@ const cards = data.data.attributes.cards as Card[];
         :content="item.content"
       />
       <ERelatedPageCard
-        v-else-if="item.__component === 'content.related-page'"
+        v-else-if="
+          item.__component === 'content.related-page' && item.page?.data
+        "
         :title="item.title"
         :content="item.content"
-        :slug="item.page?.data.attributes.slug"
       />
       <EExternallinkCard
         v-else-if="item.__component === 'content.external-link'"
@@ -62,6 +64,14 @@ const cards = data.data.attributes.cards as Card[];
       />
       <ETeamCard
         v-else-if="item.__component === 'content.person-card'"
+        :thumbnail="
+          item.image.data
+            ? {
+                sizes: Object.values(item.image.data.attributes.formats),
+                alt: item.image.data.attributes.alternativeText,
+              }
+            : undefined
+        "
         :name="item.name"
         :content="item.content"
       />

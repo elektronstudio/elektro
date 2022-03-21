@@ -3,27 +3,26 @@
 import EButton from "./EButton.vue";
 
 type Props = {
+  title?: string;
   startAt: string;
-  endAt: string;
   ticketUrl?: string;
   layout?: "vertical" | "horizontal";
 };
 
-const {
-  startAt,
-  endAt,
-  ticketUrl,
-  layout = "horizontal",
-} = defineProps<Props>();
+const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
 </script>
 
 <template>
   <div class="EEventInstance" :class="layout">
-    <time :datetime="startAt">{{ startAt }}</time>
+    <header>
+      <time :datetime="startAt">{{ startAt }}</time>
+      <slot name="title" />
+    </header>
     <section>
-      <!-- @TODO: Add system or component for arrows -->
+      <!-- @TODO: Add system for calendar buttons -->
       <!-- <EButton size="xs" el="a" color="transparent">+ Lisa kalendrisse</EButton> -->
       <!-- @TODO: Add system or component for arrows -->
+      <slot name="buttons" />
       <EButton
         el="a"
         size="xs"
@@ -57,6 +56,11 @@ const {
   padding: var(--p-3) 0;
   border-top: 1px solid var(--gray-500);
   flex-direction: column;
+  align-items: flex-start;
+}
+.EEventInstance header {
+  display: flex;
+  flex-direction: column;
 }
 .EEventInstance.vertical {
   gap: var(--gap-3);
@@ -67,6 +71,7 @@ const {
 .EEventInstance section {
   display: flex;
   gap: var(--gap-3);
+  flex-shrink: 0;
 }
 .EEventInstance time {
   color: var(--fg);
@@ -86,6 +91,7 @@ const {
 
   .EEventInstance section {
     flex-direction: row;
+    align-items: flex-start;
   }
 }
 </style>

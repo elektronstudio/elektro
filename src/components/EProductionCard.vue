@@ -2,13 +2,22 @@
 <script setup lang="ts">
 import ECard from "./ECard.vue";
 import ETitle from "./ETitle.vue";
+
+type Size = {
+  url: string;
+  width: number;
+  height: number;
+};
+
 type Props = {
   title: string;
   author?: string;
-  thumbnail?: string;
+  thumbnail?: {
+    sizes: Size[];
+    alt?: string;
+  };
   nextEvent?: {
     startAt: string;
-    endAt: string;
     ticketUrl?: string;
   };
 };
@@ -43,7 +52,7 @@ const { title, author, thumbnail, nextEvent } = defineProps<Props>();
 .ECard footer {
   justify-content: space-between;
 }
-.ECard footer time {
-  margin-left: 0.6em;
+.ECard footer p {
+  margin-right: 0.6em;
 }
 </style>
