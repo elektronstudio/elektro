@@ -51,19 +51,19 @@ const draggablesData = [
 const { draggablesState, minimisedDraggables, updateDraggablesState } =
   useDraggable(draggablesData);
 
-const findComponent = (contentType: ContentType) => {
-  let componentName;
-  switch (contentType) {
-    case "chat":
-      componentName = "e-chat";
-      break;
+// const findComponent = (contentType: ContentType) => {
+//   let componentName;
+//   switch (contentType) {
+//     case "chat":
+//       componentName = "e-chat";
+//       break;
 
-    default:
-      break;
-  }
+//     default:
+//       break;
+//   }
 
-  return componentName;
-};
+//   return componentName;
+// };
 </script>
 
 <template>
