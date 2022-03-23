@@ -44,12 +44,8 @@ const emit = defineEmits<{
   bottom: 0;
   width: 100%;
   display: flex;
-  flex-flow: wrap;
-  align-items: flex-end;
-}
-
-.EDraggablesDock > * {
-  flex: 0 0 50%;
+  flex-direction: column-reverse;
+  z-index: 1000;
 }
 
 .dock-enter-active,
@@ -66,24 +62,28 @@ const emit = defineEmits<{
 }
 
 /* @TODO: Add breakpoints system */
-@media only screen and (min-width: 600px) {
+@media only screen and (max-width: 599px) {
+  .EDraggablesDock > * {
+    flex: 0 0 100%;
+    padding: 4px 0;
+    /* @TODO: add two column layout */
+    /* flex: 0 0 50%; */
+    /* border: 1px solid var(--gray-500); */
+  }
+}
+@media only screen and (min-width: 900px) {
   .EDraggablesDock {
     display: flex;
+    flex-flow: nowrap;
     justify-content: flex-start;
     overflow-x: auto;
   }
-
-  .EDraggablesDock > * {
-    display: inline-block;
-    margin-right: var(--m-3);
-    width: 6rem;
-  }
-}
-@media only screen and (min-width: 1000px) {
   .EDraggablesDock {
     padding-left: var(--breadboard-tile-size);
   }
   .EDraggablesDock > * {
+    display: inline-block;
+    margin-right: var(--m-3);
     width: 10rem;
   }
 }

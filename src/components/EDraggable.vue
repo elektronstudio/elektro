@@ -3,7 +3,7 @@ import { ref, computed, onMounted, watch } from "vue";
 import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
-import breakpoints from "../utils/breakpoints";
+import { breakpoints } from "../utils";
 
 export type ContentType = "chat" | "text" | "image" | "video";
 
@@ -188,13 +188,13 @@ function findCoordinates(el: Element, done: () => void) {
 }
 
 /* @TODO: Add breakpoints system */
-@media only screen and (max-width: 599px) {
+@media only screen and (max-width: 899px) {
   .EDraggable {
     top: auto !important;
     left: auto !important;
   }
 }
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 900px) {
   .EDraggable {
     position: fixed;
     width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
@@ -218,14 +218,6 @@ function findCoordinates(el: Element, done: () => void) {
       height: var(--h-6);
       opacity: 0;
     }
-  }
-}
-@media only screen and (min-width: 1000px) {
-  .EDraggablesDock {
-    padding-left: var(--breadboard-tile-size);
-  }
-  .EDraggablesDock > * {
-    width: 10rem;
   }
 }
 </style>

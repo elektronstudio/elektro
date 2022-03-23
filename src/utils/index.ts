@@ -1,4 +1,5 @@
 export * from "./array";
+export * from "./breakpoints";
 export * from "./chat";
 export * from "./config";
 export * from "./date";

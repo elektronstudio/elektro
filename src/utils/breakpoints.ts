@@ -1,7 +1,9 @@
 import { useBreakpoints } from "@vueuse/core";
 
-export default useBreakpoints({
+export const breakpoints = useBreakpoints({
   medium: 600,
-  large: 1000,
+  large: 900,
   xlarge: 1440,
 });
+
+export const mobile = breakpoints.isSmaller("large");

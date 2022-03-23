@@ -1,4 +1,5 @@
 import { onMounted, ref, watch } from "vue";
+import { mobile, breakpoints } from "../utils";
 
 export type ContentType = "chat" | "text" | "image" | "video";
 
@@ -23,6 +24,39 @@ export function useDraggable(draggablesData: Draggable[]) {
       return;
     }
     const { draggableId, order } = draggable;
+
+    if (mobile) {
+      console.log("MOBLA");
+      if (draggable.isMinimised) {
+        minimisedDraggables.value = draggablesState.value.map((item) => {
+          return {
+            ...item,
+            isMinimised: true,
+          };
+        });
+        draggablesState.value = draggablesState.value.map((item) => {
+          return {
+            ...item,
+            isMinimised: true,
+          };
+        });
+      } else {
+        draggablesState.value = draggablesState.value.map((item) => {
+          return {
+            ...item,
+            isMinimised: item.draggableId === draggableId ? false : true,
+          };
+        });
+
+        minimisedDraggables.value = draggablesState.value.filter(
+          (item) => item.draggableId !== draggableId,
+        );
+      }
+
+      return;
+    }
+
+    // Iterate through draggables and set the current draggable last
     draggablesState.value = draggablesState.value.map((item) => {
       if (item.draggableId === draggableId) {
         return { ...draggable, order: draggablesState.value.length };
@@ -38,6 +72,7 @@ export function useDraggable(draggablesData: Draggable[]) {
         };
       }
     });
+
     if (draggable.isMinimised) {
       minimisedDraggables.value = [...minimisedDraggables.value, draggable];
     } else {
