@@ -52,7 +52,7 @@
 @media only screen and (min-width: 900px) {
   :root {
     --breadboard-tile-size: calc(100vw / 20);
-    --dock-item-size: 6rem;
+    --dock-item-size: 8rem;
   }
 }
 @media only screen and (min-width: 1000px) {

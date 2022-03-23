@@ -3,7 +3,7 @@ import { ref, computed, onMounted, watch } from "vue";
 import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
-import { breakpoints } from "../utils";
+import { desktop } from "../utils";
 
 export type ContentType = "chat" | "text" | "image" | "video";
 
@@ -26,10 +26,10 @@ const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
 }>();
 
-const desktop = breakpoints.greater("large");
 const draggableRef = ref<HTMLElement | null>(null);
 const { width: windowWidth } = useWindow();
-const tileDivider = computed(() => (desktop.value ? 20 : 10));
+const tileDivider = computed(() => (desktop ? 20 : 10));
+console.log(tileDivider.value);
 const tileSize = ref(windowWidth.value / tileDivider.value);
 // @TODO: Why don't props trigger rerender?
 const gridPosX = ref<number>(props.gridPosX ? props.gridPosX : 0);
@@ -71,6 +71,7 @@ watch(props, (newValue, oldValue) => {
 });
 
 const calculateCoordinates = function () {
+  console.log("calculateCoordinates");
   tileSize.value = windowWidth.value / tileDivider.value;
   const snappedX = Math.round(x.value / tileSize.value);
   const snappedY = Math.round(y.value / tileSize.value);
