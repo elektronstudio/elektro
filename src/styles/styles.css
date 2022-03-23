@@ -45,17 +45,19 @@
   --line-height-sm: 1.375;
   --rounded-3xl: 1.25rem;
   --rounded-4xl: 2.5rem;
+  --dock-item-size: 6rem;
 }
 
 /* @TODO: Add breakpoints system */
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 900px) {
   :root {
-    --breadboard-tile-size: calc(100vw / 10);
+    --breadboard-tile-size: calc(100vw / 20);
+    --dock-item-size: 6rem;
   }
 }
 @media only screen and (min-width: 1000px) {
   :root {
-    --breadboard-tile-size: calc(100vw / 20);
+    --dock-item-size: 10rem;
   }
 }
 * {

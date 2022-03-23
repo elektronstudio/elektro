@@ -44,21 +44,9 @@ const emit = defineEmits<{
   bottom: 0;
   width: 100%;
   display: flex;
+  flex-flow: wrap;
   flex-direction: column-reverse;
   z-index: 1000;
-}
-
-.dock-enter-active,
-.dock-leave-active {
-  transition: width 0.2s ease-in-out;
-}
-
-.dock-enter-active {
-  transition-delay: 0.2s;
-}
-.dock-enter-from,
-.dock-leave-to {
-  width: 0;
 }
 
 /* @TODO: Add breakpoints system */
@@ -81,10 +69,29 @@ const emit = defineEmits<{
   .EDraggablesDock {
     padding-left: var(--breadboard-tile-size);
   }
+
   .EDraggablesDock > * {
     display: inline-block;
     margin-right: var(--m-3);
-    width: 10rem;
+    width: var(--dock-item-size);
   }
+}
+@media only screen and (min-width: 1000px) {
+  .EDraggablesDock {
+    padding-left: var(--breadboard-tile-size);
+  }
+}
+
+.dock-enter-active,
+.dock-leave-active {
+  transition: width 0.2s ease-in-out;
+}
+
+.dock-enter-active {
+  transition-delay: 0.2s;
+}
+.dock-enter-from,
+.dock-leave-to {
+  width: 0;
 }
 </style>

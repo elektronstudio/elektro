@@ -213,7 +213,9 @@ function findCoordinates(el: Element, done: () => void) {
     }
     100% {
       top: v-bind("`${finalAnimation?.y}px`");
-      left: v-bind("`${finalAnimation?.x + finalAnimation?.width}px`");
+      left: v-bind(
+        "`calc(${finalAnimation?.x}px + var(--dock-item-size) / 2)`"
+      );
       width: 0;
       height: var(--h-6);
       opacity: 0;
