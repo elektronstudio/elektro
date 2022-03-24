@@ -3,11 +3,9 @@ import { ref, computed, onMounted, watch } from "vue";
 import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
-import { desktop } from "../utils";
+import { ContentType, desktop } from "../utils";
 
-export type ContentType = "chat" | "text" | "image" | "video";
-
-export type Draggable = {
+type Draggable = {
   draggableId: string;
   title?: string;
   gridPosX?: number;
@@ -15,8 +13,8 @@ export type Draggable = {
   tilesWidth?: number;
   tilesHeight?: number;
   isMinimised?: boolean;
-  contentType?: ContentType;
   order: number;
+  contentType?: ContentType;
 };
 
 const props = defineProps<Draggable>();
@@ -29,7 +27,6 @@ const emit = defineEmits<{
 const draggableRef = ref<HTMLElement | null>(null);
 const { width: windowWidth } = useWindow();
 const tileDivider = computed(() => (desktop ? 20 : 10));
-console.log(tileDivider.value);
 const tileSize = ref(windowWidth.value / tileDivider.value);
 // @TODO: Why don't props trigger rerender?
 const gridPosX = ref<number>(props.gridPosX ? props.gridPosX : 0);
@@ -71,7 +68,6 @@ watch(props, (newValue, oldValue) => {
 });
 
 const calculateCoordinates = function () {
-  console.log("calculateCoordinates");
   tileSize.value = windowWidth.value / tileDivider.value;
   const snappedX = Math.round(x.value / tileSize.value);
   const snappedY = Math.round(y.value / tileSize.value);
@@ -118,7 +114,7 @@ function findCoordinates(el: Element, done: () => void) {
       :style="style"
       style="touch-action: none"
       :class="{ isDragging: isDragging }"
-      v-show="!isMinimised"
+      v-show="!props.isMinimised"
     >
       <button
         @click.stop="emit('update-draggables', { ...props, isMinimised: true })"

@@ -6,5 +6,5 @@ export const breakpoints = useBreakpoints({
   xlarge: 1440,
 });
 
-export const mobile = breakpoints.isSmaller("large");
-export const desktop = breakpoints.isGreater("large");
+export const mobile = breakpoints.smaller("large");
+export const desktop = breakpoints.greater("large");

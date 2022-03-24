@@ -1,5 +1,7 @@
 import { onMounted, ref, watch } from "vue";
-import { mobile, breakpoints } from "../utils";
+import { mobile, breakpoints } from ".";
+// import liveData from "./public/liveData.json";
+import { useStorage } from "@vueuse/core";
 
 export type ContentType = "chat" | "text" | "image" | "video";
 
@@ -15,46 +17,55 @@ export type Draggable = {
   contentType?: ContentType;
 };
 
-export function useDraggable(draggablesData: Draggable[]) {
-  const draggablesState = ref<Draggable[]>([]);
-  const minimisedDraggables = ref<Draggable[]>([]);
+export const draggablesState = useStorage<Draggable[]>("draggable_state", []);
+// Minimised draggables need separate state
+// If they are filtered from the draggablesState, are not in correct order
+// since draggablesState order never changes
+// this is to reduce unnecessary rerenders and calculations
+export const minimisedDraggables = useStorage<Draggable[]>(
+  "minimised_draggable_state",
+  [],
+);
 
-  const updateDraggablesState = (draggable: Draggable) => {
+export function useLive(draggablesData: Draggable[]) {
+  const updateDraggablesMobile = (draggable: Draggable) => {
     if (!draggable) {
       return;
     }
-    const { draggableId, order } = draggable;
+    const { draggableId } = draggable;
 
-    if (mobile) {
-      console.log("MOBLA");
-      if (draggable.isMinimised) {
-        minimisedDraggables.value = draggablesState.value.map((item) => {
-          return {
-            ...item,
-            isMinimised: true,
-          };
-        });
-        draggablesState.value = draggablesState.value.map((item) => {
-          return {
-            ...item,
-            isMinimised: true,
-          };
-        });
-      } else {
-        draggablesState.value = draggablesState.value.map((item) => {
-          return {
-            ...item,
-            isMinimised: item.draggableId === draggableId ? false : true,
-          };
-        });
+    // When minimising draggable
+    if (draggable.isMinimised) {
+      draggablesState.value = draggablesState.value.map((item) => {
+        return {
+          ...item,
+          isMinimised: true,
+        };
+      });
+      minimisedDraggables.value = [...minimisedDraggables.value, draggable];
+    } else {
+      // When maximising draggable
+      draggablesState.value = draggablesState.value.map((item) => {
+        return {
+          ...item,
+          // Minimise all other draggables
+          isMinimised: item.draggableId === draggableId ? false : true,
+        };
+      });
 
-        minimisedDraggables.value = draggablesState.value.filter(
-          (item) => item.draggableId !== draggableId,
-        );
-      }
+      minimisedDraggables.value = draggablesState.value.filter(
+        (item) => item.draggableId !== draggableId,
+      );
+    }
 
+    return;
+  };
+
+  const updateDraggablesDesktop = (draggable: Draggable) => {
+    if (!draggable) {
       return;
     }
+    const { draggableId, order, title } = draggable;
 
     // Iterate through draggables and set the current draggable last
     draggablesState.value = draggablesState.value.map((item) => {
@@ -120,5 +131,8 @@ export function useDraggable(draggablesData: Draggable[]) {
     draggablesState.value = initialStates;
   });
 
-  return { draggablesState, minimisedDraggables, updateDraggablesState };
+  return {
+    updateDraggablesMobile,
+    updateDraggablesDesktop,
+  };
 }

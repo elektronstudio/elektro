@@ -1,25 +1,8 @@
 <script setup lang="ts">
-import EBreadBoard from "../components/EBreadBoard.vue";
-import EDraggable from "../components/EDraggable.vue";
-import EDraggablesDock from "../components/EDraggablesDock.vue";
-import EChat from "../components/EChat.vue";
-import { useDraggable } from "../utils/draggables";
+import { Draggable } from "../utils";
+import ELiveView from "../components/ELiveView.vue";
 
-type ContentType = "chat" | "text" | "image" | "video";
-
-type Draggable = {
-  draggableId: string;
-  title?: string;
-  gridPosX?: number;
-  gridPosY?: number;
-  tilesWidth?: number;
-  tilesHeight?: number;
-  isMinimised?: boolean;
-  order: number;
-  contentType?: ContentType;
-};
-
-const draggablesData = [
+const data = [
   {
     title: "Electron 1",
     draggableId: "draggable-electron-1",
@@ -48,50 +31,8 @@ const draggablesData = [
     tilesHeight: 6,
   },
 ] as Draggable[];
-const { draggablesState, minimisedDraggables, updateDraggablesState } =
-  useDraggable(draggablesData);
-
-// const findComponent = (contentType: ContentType) => {
-//   let componentName;
-//   switch (contentType) {
-//     case "chat":
-//       componentName = "e-chat";
-//       break;
-
-//     default:
-//       break;
-//   }
-
-//   return componentName;
-// };
 </script>
 
 <template>
-  <EBreadBoard>
-    <template v-for="draggable in draggablesState" :key="draggable.draggableId">
-      <EDraggable
-        :title="draggable.title"
-        :draggable-id="draggable.draggableId"
-        :tiles-width="draggable.tilesWidth"
-        :tiles-height="draggable.tilesHeight"
-        :grid-pos-x="draggable.gridPosX"
-        :grid-pos-y="draggable.gridPosY"
-        :is-minimised="draggable.isMinimised"
-        :content-type="draggable.contentType"
-        :order="draggable.order"
-        @update-draggables="updateDraggablesState"
-      >
-        <!-- @TODO: How to make dynamic components work -->
-        <!-- <component
-          v-if="draggable.contentType"
-          :is="findComponent(draggable.contentType)"
-        /> -->
-        <EChat v-if="draggable.contentType === 'chat'" />
-      </EDraggable>
-    </template>
-    <EDraggablesDock
-      :draggables="minimisedDraggables"
-      @update-draggables="updateDraggablesState"
-    />
-  </EBreadBoard>
+  <ELiveView :data="data" />
 </template>
