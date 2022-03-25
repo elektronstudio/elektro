@@ -1,21 +1,13 @@
 <script setup lang="ts">
-import { ContentType } from "../utils";
+import { Draggable } from "../utils";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 
-type Draggable = {
-  draggableId: string;
-  title?: string;
-  gridPosX?: number;
-  gridPosY?: number;
-  tilesWidth?: number;
-  tilesHeight?: number;
-  isMinimised?: boolean;
-  order: number;
-  contentType?: ContentType;
-  data?: any;
+type Props = {
+  draggable: Draggable;
 };
 
-const props = defineProps<Draggable>();
+const { draggable } = defineProps<Props>();
+const { tilesHeight, order } = draggable;
 
 const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
@@ -24,14 +16,16 @@ const emit = defineEmits<{
 
 <template>
   <Transition>
-    <div class="EDraggableMobile" v-show="!props.isMinimised">
+    <div class="EDraggableMobile" v-show="!draggable.isMinimised">
       <button
-        @click.stop="emit('update-draggables', { ...props, isMinimised: true })"
+        @click.stop="
+          emit('update-draggables', { ...draggable, isMinimised: true })
+        "
       >
         ⅹ
       </button>
       <div ref="draggableRef">
-        <EDraggableTitlebar :title="props.title" />
+        <EDraggableTitlebar :title="draggable.title" />
       </div>
       <article>
         <slot />

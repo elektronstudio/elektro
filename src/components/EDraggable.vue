@@ -3,23 +3,14 @@ import { ref, computed, onMounted, watch } from "vue";
 import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
-import { ContentType, desktop } from "../utils";
+import { desktop, Draggable } from "../utils";
 
-type Draggable = {
-  draggableId: string;
-  title?: string;
-  gridPosX?: number;
-  gridPosY?: number;
-  tilesWidth?: number;
-  tilesHeight?: number;
-  isMinimised?: boolean;
-  order: number;
-  contentType?: ContentType;
-  data?: any;
+type Props = {
+  draggable: Draggable;
 };
 
-const props = defineProps<Draggable>();
-const { draggableId, title, tilesWidth = 1, tilesHeight = 1 } = props;
+const { draggable } = defineProps<Props>();
+const { draggableId, title, tilesWidth = 1, tilesHeight = 1 } = draggable;
 
 const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
@@ -30,10 +21,12 @@ const { width: windowWidth } = useWindow();
 const tileDivider = computed(() => (desktop ? 20 : 10));
 const tileSize = ref(windowWidth.value / tileDivider.value);
 // @TODO: Why don't props trigger rerender?
-const gridPosX = ref<number>(props.gridPosX ? props.gridPosX : 0);
-const gridPosY = ref<number>(props.gridPosY ? props.gridPosY : 0);
-const isMinimised = ref<boolean>(props.isMinimised ? props.isMinimised : false);
-const order = ref<number>(props.order);
+const gridPosX = ref<number>(draggable.gridPosX ? draggable.gridPosX : 0);
+const gridPosY = ref<number>(draggable.gridPosY ? draggable.gridPosY : 0);
+const isMinimised = ref<boolean>(
+  draggable.isMinimised ? draggable.isMinimised : false,
+);
+const order = ref<number>(draggable.order);
 const finalAnimation = ref<DOMRect | undefined>();
 
 const { x, y, style, isDragging } = useDraggable(draggableRef, {
@@ -46,7 +39,7 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
       gridPosY.value !== snappedY.value
     ) {
       emit("update-draggables", {
-        ...props,
+        ...draggable,
         gridPosX: snappedX.value,
         gridPosY: snappedY.value,
       });
@@ -57,7 +50,7 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
 const snappedX = computed(() => Math.round(x.value / tileSize.value));
 const snappedY = computed(() => Math.round(y.value / tileSize.value));
 
-watch(props, (newValue, oldValue) => {
+watch(draggable, (newValue, oldValue) => {
   isMinimised.value = newValue.isMinimised ? newValue.isMinimised : false;
   order.value = newValue.order;
   gridPosX.value = newValue.gridPosX ? newValue.gridPosX : 0;
@@ -115,10 +108,12 @@ function findCoordinates(el: Element, done: () => void) {
       :style="style"
       style="touch-action: none"
       :class="{ isDragging: isDragging }"
-      v-show="!props.isMinimised"
+      v-show="!draggable.isMinimised"
     >
       <button
-        @click.stop="emit('update-draggables', { ...props, isMinimised: true })"
+        @click.stop="
+          emit('update-draggables', { ...draggable, isMinimised: true })
+        "
       >
         ⅹ
       </button>
