@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Draggable } from "../utils";
+import { Draggable, useLive } from "../utils";
 import ELiveView from "../components/ELiveView.vue";
+import { ref } from "vue";
 
 const data = [
   {
@@ -31,8 +32,23 @@ const data = [
     tilesHeight: 6,
   },
 ] as Draggable[];
+
+const draggablesState = ref<Draggable[]>(data);
+const minimisedDraggables = ref<Draggable[]>([]);
+
+const { updateDraggablesDesktop, updateDraggablesMobile } = useLive({
+  data,
+  draggablesState,
+  minimisedDraggables,
+});
 </script>
 
 <template>
-  <ELiveView :data="data" />
+  <ELiveView
+    :data="data"
+    :update-draggables-desktop="updateDraggablesDesktop"
+    :update-draggables-mobile="updateDraggablesMobile"
+    :draggables-state="draggablesState"
+    :minimised-draggables="minimisedDraggables"
+  />
 </template>

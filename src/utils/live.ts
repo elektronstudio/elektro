@@ -128,8 +128,6 @@ export function useLive({
   });
 
   return {
-    draggablesState,
-    minimisedDraggables,
     updateDraggablesMobile,
     updateDraggablesDesktop,
   };
