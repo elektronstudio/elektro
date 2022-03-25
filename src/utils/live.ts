@@ -1,4 +1,7 @@
 import { onMounted, ref, watch } from "vue";
+import { mobile, breakpoints } from ".";
+// import liveData from "./public/liveData.json";
+import { useStorage } from "@vueuse/core";
 
 export type ContentType = "chat" | "text" | "image" | "video";
 
@@ -14,15 +17,58 @@ export type Draggable = {
   contentType?: ContentType;
 };
 
-export function useDraggable(draggablesData: Draggable[]) {
-  const draggablesState = ref<Draggable[]>([]);
-  const minimisedDraggables = ref<Draggable[]>([]);
+export const draggablesState = useStorage<Draggable[]>("draggable_state", []);
+// Minimised draggables need separate state
+// If they are filtered from the draggablesState, are not in correct order
+// since draggablesState order never changes
+// this is to reduce unnecessary rerenders and calculations
+export const minimisedDraggables = useStorage<Draggable[]>(
+  "minimised_draggable_state",
+  [],
+);
 
-  const updateDraggablesState = (draggable: Draggable) => {
+export function useLive(draggablesData: Draggable[]) {
+  const updateDraggablesMobile = (draggable: Draggable) => {
     if (!draggable) {
       return;
     }
+    const { draggableId } = draggable;
+
+    // When minimising draggable
+    if (draggable.isMinimised) {
+      draggablesState.value = draggablesState.value.map((item) => {
+        return {
+          ...item,
+          isMinimised: true,
+        };
+      });
+      minimisedDraggables.value = [...minimisedDraggables.value, draggable];
+    } else {
+      // When maximising draggable
+      draggablesState.value = draggablesState.value.map((item) => {
+        return {
+          ...item,
+          // Minimise all other draggables
+          isMinimised: item.draggableId === draggableId ? false : true,
+        };
+      });
+
+      minimisedDraggables.value = draggablesState.value.filter(
+        (item) => item.draggableId !== draggableId,
+      );
+    }
+
+    return;
+  };
+
+  const updateDraggablesDesktop = (draggable: Draggable) => {
+    if (!draggable) {
+      return;
+    }
+
     const { draggableId, order } = draggable;
+
+    // Iterate through draggables and set the active draggable last in order
     draggablesState.value = draggablesState.value.map((item) => {
       if (item.draggableId === draggableId) {
         return { ...draggable, order: draggablesState.value.length };
@@ -30,6 +76,7 @@ export function useDraggable(draggablesData: Draggable[]) {
         return {
           ...item,
           order:
+            // If other draggable was ahead in the order, decrement it
             item.order === 1
               ? 1
               : item.order > order
@@ -38,6 +85,7 @@ export function useDraggable(draggablesData: Draggable[]) {
         };
       }
     });
+
     if (draggable.isMinimised) {
       minimisedDraggables.value = [...minimisedDraggables.value, draggable];
     } else {
@@ -47,23 +95,12 @@ export function useDraggable(draggablesData: Draggable[]) {
     }
   };
 
-  watch(draggablesState, () => {
-    if (draggablesState.value.length > 0) {
-      localStorage.setItem(
-        "windowsState",
-        JSON.stringify(draggablesState.value),
-      );
-    }
-  });
-
   onMounted(() => {
     const initialStates = [] as Draggable[];
-    const localData = localStorage.getItem(`windowsState`);
-    const localDataParsed = localData ? JSON.parse(localData) : undefined;
 
     draggablesData.forEach((draggable) => {
       const { draggableId } = draggable;
-      const localDraggable = localDataParsed?.find(
+      const localDraggable = draggablesState.value?.find(
         (m: Draggable) => m.draggableId === draggableId,
       );
       const mergedDraggable = localDraggable
@@ -85,5 +122,8 @@ export function useDraggable(draggablesData: Draggable[]) {
     draggablesState.value = initialStates;
   });
 
-  return { draggablesState, minimisedDraggables, updateDraggablesState };
+  return {
+    updateDraggablesMobile,
+    updateDraggablesDesktop,
+  };
 }
