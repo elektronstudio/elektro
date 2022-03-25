@@ -65,9 +65,10 @@ export function useLive(draggablesData: Draggable[]) {
     if (!draggable) {
       return;
     }
-    const { draggableId, order, title } = draggable;
 
-    // Iterate through draggables and set the current draggable last
+    const { draggableId, order } = draggable;
+
+    // Iterate through draggables and set the active draggable last in order
     draggablesState.value = draggablesState.value.map((item) => {
       if (item.draggableId === draggableId) {
         return { ...draggable, order: draggablesState.value.length };
@@ -75,6 +76,7 @@ export function useLive(draggablesData: Draggable[]) {
         return {
           ...item,
           order:
+            // If other draggable was ahead in the order, decrement it
             item.order === 1
               ? 1
               : item.order > order
