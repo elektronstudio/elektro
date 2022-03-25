@@ -33,6 +33,7 @@ export { default as ETitle } from "./components/ETitle.vue";
 export { default as EWindowBorder } from "./components/EWindowBorder.vue";
 export { default as EBreadBoard } from "./components/EBreadBoard.vue";
 export { default as EDraggable } from "./components/EDraggable.vue";
+export { default as EDraggableMobile } from "./components/EDraggableMobile.vue";
 export { default as EDraggablesDock } from "./components/EDraggablesDock.vue";
 export { default as EDraggableTitlebar } from "./components/EDraggableTitlebar.vue";
 export { default as ELiveView } from "./components/ELiveView.vue";
