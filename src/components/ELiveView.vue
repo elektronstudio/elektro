@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { breakpoints, minimisedDraggables, draggablesState } from "../utils";
+import { breakpoints } from "../utils";
 import { useLive, Draggable } from "../utils";
 import EBreadBoard from "./EBreadBoard.vue";
 import EDraggablesDock from "./EDraggablesDock.vue";
 import EDraggableMobile from "./EDraggableMobile.vue";
 import DraggableContent from "./DraggableContent.vue";
 import EDraggable from "./EDraggable.vue";
+import { ref } from "vue";
 
 type Props = {
   data: Draggable[];
@@ -13,8 +14,14 @@ type Props = {
 
 const mobile = breakpoints.smaller("large");
 const { data } = defineProps<Props>();
+const draggablesState = ref<Draggable[]>(data);
+const minimisedDraggables = ref<Draggable[]>(data);
 
-const { updateDraggablesDesktop, updateDraggablesMobile } = useLive(data);
+const { updateDraggablesDesktop, updateDraggablesMobile } = useLive({
+  data,
+  draggablesState,
+  minimisedDraggables,
+});
 </script>
 
 <template>

@@ -1,7 +1,4 @@
-import { onMounted, ref, watch } from "vue";
-import { mobile, breakpoints } from ".";
-// import liveData from "./public/liveData.json";
-import { useStorage } from "@vueuse/core";
+import { onMounted, Ref } from "vue";
 
 export type ContentType = "chat" | "text" | "image" | "video";
 
@@ -17,17 +14,25 @@ export type Draggable = {
   contentType?: ContentType;
 };
 
-export const draggablesState = useStorage<Draggable[]>("draggable_state", []);
-// Minimised draggables need separate state
-// If they are filtered from the draggablesState, are not in correct order
-// since draggablesState order never changes
-// this is to reduce unnecessary rerenders and calculations
-export const minimisedDraggables = useStorage<Draggable[]>(
-  "minimised_draggable_state",
-  [],
-);
+// export const draggablesState = useStorage<Draggable[]>("draggable_state", []);
+// // Minimised draggables need separate state
+// // If they are filtered from the draggablesState, are not in correct order
+// // since draggablesState order never changes
+// // this is to reduce unnecessary rerenders and calculations
+// export const minimisedDraggables = useStorage<Draggable[]>(
+//   "minimised_draggable_state",
+//   [],
+// );
 
-export function useLive(draggablesData: Draggable[]) {
+export function useLive({
+  data,
+  draggablesState,
+  minimisedDraggables,
+}: {
+  data: Draggable[];
+  draggablesState: Ref<Draggable[]>;
+  minimisedDraggables: Ref<Draggable[]>;
+}) {
   const updateDraggablesMobile = (draggable: Draggable) => {
     if (!draggable) {
       return;
@@ -98,7 +103,7 @@ export function useLive(draggablesData: Draggable[]) {
   onMounted(() => {
     const initialStates = [] as Draggable[];
 
-    draggablesData.forEach((draggable) => {
+    data.forEach((draggable) => {
       const { draggableId } = draggable;
       const localDraggable = draggablesState.value?.find(
         (m: Draggable) => m.draggableId === draggableId,
@@ -123,6 +128,8 @@ export function useLive(draggablesData: Draggable[]) {
   });
 
   return {
+    draggablesState,
+    minimisedDraggables,
     updateDraggablesMobile,
     updateDraggablesDesktop,
   };

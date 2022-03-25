@@ -35,6 +35,7 @@ export { default as EBreadBoard } from "./components/EBreadBoard.vue";
 export { default as EDraggable } from "./components/EDraggable.vue";
 export { default as EDraggablesDock } from "./components/EDraggablesDock.vue";
 export { default as EDraggableTitlebar } from "./components/EDraggableTitlebar.vue";
+export { default as ELiveView } from "./components/ELiveView.vue";
 
 import "./styles/vars.css";
 import "./styles/reset.css";
