@@ -93,23 +93,12 @@ export function useLive(draggablesData: Draggable[]) {
     }
   };
 
-  watch(draggablesState, () => {
-    if (draggablesState.value.length > 0) {
-      localStorage.setItem(
-        "windowsState",
-        JSON.stringify(draggablesState.value),
-      );
-    }
-  });
-
   onMounted(() => {
     const initialStates = [] as Draggable[];
-    const localData = localStorage.getItem(`windowsState`);
-    const localDataParsed = localData ? JSON.parse(localData) : undefined;
 
     draggablesData.forEach((draggable) => {
       const { draggableId } = draggable;
-      const localDraggable = localDataParsed?.find(
+      const localDraggable = draggablesState.value?.find(
         (m: Draggable) => m.draggableId === draggableId,
       );
       const mergedDraggable = localDraggable
