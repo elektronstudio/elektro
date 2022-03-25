@@ -15,6 +15,7 @@ type Draggable = {
   isMinimised?: boolean;
   order: number;
   contentType?: ContentType;
+  data?: any;
 };
 
 const props = defineProps<Draggable>();

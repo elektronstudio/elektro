@@ -1,6 +1,6 @@
 import { onMounted, Ref } from "vue";
 
-export type ContentType = "chat" | "text" | "image" | "video";
+export type ContentType = "chat" | "text" | "image" | "video" | "event";
 
 export type Draggable = {
   draggableId: string;
@@ -12,6 +12,7 @@ export type Draggable = {
   isMinimised?: boolean;
   order: number;
   contentType?: ContentType;
+  data?: any;
 };
 
 // export const draggablesState = useStorage<Draggable[]>("draggable_state", []);

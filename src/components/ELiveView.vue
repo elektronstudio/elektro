@@ -48,6 +48,7 @@ console.log(draggablesState);
           <DraggableContent
             v-if="draggable.contentType"
             :content-type="draggable.contentType"
+            :data="draggable.data"
           />
         </EDraggableMobile>
       </template>
@@ -72,6 +73,7 @@ console.log(draggablesState);
           <DraggableContent
             v-if="draggable.contentType"
             :content-type="draggable.contentType"
+            :data="draggable.data"
           />
         </EDraggable>
       </template>
