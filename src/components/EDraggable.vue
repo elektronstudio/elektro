@@ -171,6 +171,7 @@ function findCoordinates(el: Element, done: () => void) {
 .EDraggable article {
   flex-grow: 1;
   height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size) - var(--h-6));
+  overflow-y: auto;
 }
 
 .EDraggable button {

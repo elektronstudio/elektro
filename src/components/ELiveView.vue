@@ -43,6 +43,7 @@ console.log(draggablesState);
           :is-minimised="draggable.isMinimised"
           :content-type="draggable.contentType"
           :order="draggable.order"
+          :data="draggable.data"
           @update-draggables="updateDraggablesMobile"
         >
           <DraggableContent
@@ -68,6 +69,7 @@ console.log(draggablesState);
           :is-minimised="draggable.isMinimised"
           :content-type="draggable.contentType"
           :order="draggable.order"
+          :data="draggable.data"
           @update-draggables="updateDraggablesDesktop"
         >
           <DraggableContent

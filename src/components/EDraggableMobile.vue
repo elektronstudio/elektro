@@ -85,6 +85,7 @@ const emit = defineEmits<{
 .EDraggableMobile article {
   flex-grow: 1;
   height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size) - var(--h-6));
+  overflow-y: auto;
 }
 
 .EDraggableMobile button {
