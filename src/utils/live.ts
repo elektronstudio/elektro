@@ -103,7 +103,10 @@ export function useLive({
   };
 
   const handleResize = () => {
-    if (mobile) {
+    if (
+      mobile &&
+      minimisedDraggables.value.length !== draggablesState.value.length - 1
+    ) {
       draggablesState.value = draggablesState.value.map((item, index) => {
         return {
           ...item,
@@ -111,7 +114,7 @@ export function useLive({
         };
       });
       minimisedDraggables.value = draggablesState.value.filter(
-        (item, index) => index === 0,
+        (item, index) => index !== 0,
       );
     }
   };
