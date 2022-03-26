@@ -1,4 +1,5 @@
-import { onMounted, Ref } from "vue";
+import { onMounted, onUnmounted, Ref } from "vue";
+import { mobile } from "../utils";
 
 export type ContentType = "chat" | "text" | "image" | "video" | "event";
 
@@ -101,6 +102,20 @@ export function useLive({
     }
   };
 
+  const handleResize = () => {
+    if (mobile) {
+      draggablesState.value = draggablesState.value.map((item, index) => {
+        return {
+          ...item,
+          isMinimised: index === 0 ? false : true,
+        };
+      });
+      minimisedDraggables.value = draggablesState.value.filter(
+        (item, index) => index === 0,
+      );
+    }
+  };
+
   onMounted(() => {
     const initialStates = [] as Draggable[];
 
@@ -126,6 +141,12 @@ export function useLive({
     const minimised = initialStates.filter((item) => item.isMinimised);
     minimisedDraggables.value = minimised;
     draggablesState.value = initialStates;
+
+    window.addEventListener("resize", handleResize);
+  });
+
+  onUnmounted(() => {
+    window.removeEventListener("resize", handleResize);
   });
 
   return {
