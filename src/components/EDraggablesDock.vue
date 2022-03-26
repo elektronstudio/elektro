@@ -47,6 +47,11 @@ const emit = defineEmits<{
     /* border: 1px solid var(--gray-500); */
   }
 }
+@media only screen and (max-width: 899px) {
+  .EDraggableTitlebar {
+    border-top: 1px solid var(--gray-500);
+  }
+}
 @media only screen and (min-width: 900px) {
   .EDraggablesDock {
     display: flex;
