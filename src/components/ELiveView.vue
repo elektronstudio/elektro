@@ -6,6 +6,7 @@ import EDraggablesDock from "./EDraggablesDock.vue";
 import EDraggableMobile from "./EDraggableMobile.vue";
 import DraggableContent from "./DraggableContent.vue";
 import EDraggable from "./EDraggable.vue";
+import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 
 type Props = {
   draggablesState: Draggable[];
@@ -28,6 +29,7 @@ console.log(draggablesState);
 <template>
   <!-- <SmallDock :draggables="draggablesState" v-if="mobile" /> -->
   <EBreadBoard>
+    <EDraggableTitlebar>Poop</EDraggableTitlebar>
     <template v-if="mobile">
       <template
         v-for="draggable in draggablesState"
@@ -62,16 +64,16 @@ console.log(draggablesState);
         </EDraggable>
       </template>
     </template>
-  </EBreadBoard>
 
-  <EDraggablesDock
-    v-if="mobile"
-    :draggables="minimisedDraggables"
-    @update-draggables="updateDraggablesMobile"
-  />
-  <EDraggablesDock
-    v-else
-    :draggables="minimisedDraggables"
-    @update-draggables="updateDraggablesDesktop"
-  />
+    <EDraggablesDock
+      v-if="mobile"
+      :draggables="minimisedDraggables"
+      @update-draggables="updateDraggablesMobile"
+    />
+    <EDraggablesDock
+      v-else
+      :draggables="minimisedDraggables"
+      @update-draggables="updateDraggablesDesktop"
+    />
+  </EBreadBoard>
 </template>

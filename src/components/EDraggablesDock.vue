@@ -27,12 +27,10 @@ const emit = defineEmits<{
 
 <style scoped>
 .EDraggablesDock {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
   display: flex;
   flex-flow: wrap;
   flex-direction: column-reverse;
+  width: 100%;
   z-index: 1000;
 }
 
@@ -54,10 +52,11 @@ const emit = defineEmits<{
 }
 @media only screen and (min-width: 900px) {
   .EDraggablesDock {
-    display: flex;
     flex-flow: nowrap;
     justify-content: flex-start;
     overflow-x: auto;
+    position: fixed;
+    bottom: 0;
   }
   .EDraggablesDock {
     padding-left: var(--breadboard-tile-size);

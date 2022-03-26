@@ -61,8 +61,7 @@ const emit = defineEmits<{
   background-color: var(--bg);
   display: flex;
   flex-direction: column;
-  top: 0;
-  left: 0;
+  flex-grow: 1;
   z-index: calc(v-bind(order) + 1);
 }
 .EDraggableMobile.v-enter-active {

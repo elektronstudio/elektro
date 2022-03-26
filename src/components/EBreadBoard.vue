@@ -8,6 +8,8 @@
 .EBreadBoard {
   --pin-size: 1px;
   position: fixed;
+  display: flex;
+  flex-direction: column;
   top: 0;
   left: 0;
   width: 100%;
@@ -29,5 +31,8 @@
       transparent calc(var(--breadboard-tile-size) + var(--pin-size))
     ),
     repeating-linear-gradient(var(--gray-500), var(--gray-500));
+}
+
+@media only screen and (min-width: 900px) {
 }
 </style>
