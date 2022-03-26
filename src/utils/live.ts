@@ -93,18 +93,22 @@ export function useLive({
       }
     });
 
-    if (draggable.isMinimised) {
-      minimisedDraggables.value = [...minimisedDraggables.value, draggable];
-    } else {
-      minimisedDraggables.value = minimisedDraggables.value.filter(
-        (item) => item.draggableId !== draggableId,
-      );
-    }
+    minimisedDraggables.value = draggablesState.value.filter(
+      (item) => item.isMinimised,
+    );
+
+    // if (draggable.isMinimised) {
+    //   minimisedDraggables.value = [...minimisedDraggables.value, draggable];
+    // } else {
+    //   minimisedDraggables.value = minimisedDraggables.value.filter(
+    //     (item) => item.draggableId !== draggableId,
+    //   );
+    // }
   };
 
   const handleResize = () => {
     if (
-      mobile &&
+      mobile.value &&
       minimisedDraggables.value.length !== draggablesState.value.length - 1
     ) {
       draggablesState.value = draggablesState.value.map((item, index) => {
@@ -145,6 +149,7 @@ export function useLive({
     minimisedDraggables.value = minimised;
     draggablesState.value = initialStates;
 
+    handleResize();
     window.addEventListener("resize", handleResize);
   });
 

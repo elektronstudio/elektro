@@ -10,10 +10,11 @@
   position: fixed;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 
   background: repeating-linear-gradient(
       0.25turn,
@@ -34,5 +35,8 @@
 }
 
 @media only screen and (min-width: 900px) {
+  .EBreadBoard {
+    height: 100%;
+  }
 }
 </style>

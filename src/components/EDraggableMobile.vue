@@ -24,7 +24,7 @@ const emit = defineEmits<{
       >
         ⅹ
       </button>
-      <div ref="draggableRef">
+      <div class="titleBar" ref="draggableRef">
         <EDraggableTitlebar :title="draggable.title" />
       </div>
       <article>
@@ -55,7 +55,6 @@ const emit = defineEmits<{
     opacity: 0;
   }
 }
-
 .EDraggableMobile {
   position: relative;
   background-color: var(--bg);
@@ -63,6 +62,9 @@ const emit = defineEmits<{
   flex-direction: column;
   flex-grow: 1;
   z-index: calc(v-bind(order) + 1);
+}
+.titleBar {
+  z-index: 1;
 }
 .EDraggableMobile.v-enter-active {
   animation: windowAnimation 0.5s ease-in-out reverse;
@@ -76,8 +78,11 @@ const emit = defineEmits<{
   display: none;
 }
 .EDraggableMobile article {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding-top: var(--h-6);
   flex-grow: 1;
-  height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size) - var(--h-6));
   overflow-y: auto;
 }
 
