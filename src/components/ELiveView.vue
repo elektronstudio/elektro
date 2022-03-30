@@ -6,7 +6,7 @@ import EDraggablesDock from "./EDraggablesDock.vue";
 import EDraggableMobile from "./EDraggableMobile.vue";
 import DraggableContent from "./DraggableContent.vue";
 import EDraggable from "./EDraggable.vue";
-import EDraggableTitlebar from "./EDraggableTitlebar.vue";
+import EButtonBackToEvent from "./EButtonBackToEvent.vue";
 
 type Props = {
   draggablesState: Draggable[];
@@ -22,14 +22,12 @@ const {
   updateDraggablesDesktop,
   updateDraggablesMobile,
 } = defineProps<Props>();
-
-console.log(draggablesState);
 </script>
 
 <template>
   <!-- <SmallDock :draggables="draggablesState" v-if="mobile" /> -->
   <EBreadBoard>
-    <EDraggableTitlebar>Poop</EDraggableTitlebar>
+    <EButtonBackToEvent>Back to event</EButtonBackToEvent>
     <template v-if="mobile">
       <template
         v-for="draggable in draggablesState"
