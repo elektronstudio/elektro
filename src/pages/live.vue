@@ -4,20 +4,22 @@ import ELiveView from "../components/ELiveView.vue";
 import { ref } from "vue";
 
 const data = [
-  // {
-  //   title: "Stream",
-  //   draggableId: "videosteam",
-  //   contentType: "video",
-  //   gridPosX: 4,
-  //   gridPosY: 2,
-  //   tilesWidth: 6,
-  //   tilesHeight: 4,
-  //   isMinimised: false,
-  //   order: 0,
-  //   data: {
-  //     src: "",
-  //   },
-  // },
+  {
+    title: "Stream",
+    draggableId: "videosteam",
+    contentType: "text",
+    gridPosX: 2,
+    gridPosY: 2,
+    tilesWidth: 10,
+    tilesHeight: 4,
+    isMinimised: false,
+    isMaximised: false,
+    isMaximisable: true,
+    order: 0,
+    data: {
+      src: "",
+    },
+  },
   {
     title: "Chat",
     draggableId: "chat",
@@ -27,32 +29,6 @@ const data = [
     tilesWidth: 4,
     tilesHeight: 8,
     order: 1,
-  },
-  {
-    title: "Draggable 1",
-    draggableId: "d-1",
-    contentType: "event",
-    tilesWidth: 4,
-    tilesHeight: 3,
-    gridPosX: 4,
-    gridPosY: 2,
-    order: 2,
-    data: {
-      src: "",
-    },
-  },
-  {
-    title: "Draggable 2",
-    draggableId: "d-2",
-    contentType: "event",
-    tilesWidth: 4,
-    tilesHeight: 5,
-    gridPosX: 6,
-    gridPosY: 2,
-    order: 2,
-    data: {
-      src: "",
-    },
   },
   {
     title: "About",

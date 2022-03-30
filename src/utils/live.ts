@@ -11,20 +11,12 @@ export type Draggable = {
   tilesWidth?: number;
   tilesHeight?: number;
   isMinimised?: boolean;
+  isMaximised?: boolean;
+  isMaximisable?: boolean;
   order: number;
   contentType?: ContentType;
   data?: any;
 };
-
-// export const draggablesState = useStorage<Draggable[]>("draggable_state", []);
-// // Minimised draggables need separate state
-// // If they are filtered from the draggablesState, are not in correct order
-// // since draggablesState order never changes
-// // this is to reduce unnecessary rerenders and calculations
-// export const minimisedDraggables = useStorage<Draggable[]>(
-//   "minimised_draggable_state",
-//   [],
-// );
 
 export function useLive({
   data,
@@ -61,7 +53,7 @@ export function useLive({
       });
 
       minimisedDraggables.value = draggablesState.value.filter(
-        (item) => item.draggableId !== draggableId,
+        (item) => item.isMinimised,
       );
     }
 
@@ -78,6 +70,7 @@ export function useLive({
     // Iterate through draggables and set the active draggable last in order
     draggablesState.value = draggablesState.value.map((item) => {
       if (item.draggableId === draggableId) {
+        console.log(draggable);
         return { ...draggable, order: draggablesState.value.length };
       } else {
         return {
@@ -97,6 +90,8 @@ export function useLive({
       (item) => item.isMinimised,
     );
 
+    // @TODO: Re-enable draggables dock order
+    // This is to ensure that draggables are always in the correct order
     // if (draggable.isMinimised) {
     //   minimisedDraggables.value = [...minimisedDraggables.value, draggable];
     // } else {

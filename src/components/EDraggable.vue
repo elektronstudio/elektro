@@ -9,8 +9,9 @@ type Props = {
   draggable: Draggable;
 };
 
-const { draggable } = defineProps<Props>();
-const { draggableId, title, tilesWidth = 1, tilesHeight = 1 } = draggable;
+const props = defineProps<Props>();
+// Note, following values are not reactive
+const { tilesWidth = 1, tilesHeight, isMaximisable } = props.draggable;
 
 const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
@@ -20,13 +21,15 @@ const draggableRef = ref<HTMLElement | null>(null);
 const { width: windowWidth } = useWindow();
 const tileDivider = computed(() => (desktop ? 20 : 10));
 const tileSize = ref(windowWidth.value / tileDivider.value);
+
 // @TODO: Why don't props trigger rerender?
-const gridPosX = ref<number>(draggable.gridPosX ? draggable.gridPosX : 0);
-const gridPosY = ref<number>(draggable.gridPosY ? draggable.gridPosY : 0);
-const isMinimised = ref<boolean>(
-  draggable.isMinimised ? draggable.isMinimised : false,
+const gridPosX = computed(() =>
+  props.draggable.gridPosX ? props.draggable.gridPosX : 0,
 );
-const order = ref<number>(draggable.order);
+const gridPosY = computed(() =>
+  props.draggable.gridPosY ? props.draggable.gridPosY : 0,
+);
+const order = computed(() => props.draggable.order);
 const finalAnimation = ref<DOMRect | undefined>();
 
 const { x, y, style, isDragging } = useDraggable(draggableRef, {
@@ -39,7 +42,7 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
       gridPosY.value !== snappedY.value
     ) {
       emit("update-draggables", {
-        ...draggable,
+        ...props.draggable,
         gridPosX: snappedX.value,
         gridPosY: snappedY.value,
       });
@@ -50,22 +53,10 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
 const snappedX = computed(() => Math.round(x.value / tileSize.value));
 const snappedY = computed(() => Math.round(y.value / tileSize.value));
 
-watch(draggable, (newValue, oldValue) => {
-  isMinimised.value = newValue.isMinimised ? newValue.isMinimised : false;
-  order.value = newValue.order;
-  gridPosX.value = newValue.gridPosX ? newValue.gridPosX : 0;
-  gridPosY.value = newValue.gridPosY ? newValue.gridPosY : 0;
-  // @TODO: Why does dis not work?
-  // if (newValue.isMinimised !== oldValue.isMinimised) {
-  // isMinimised.value = newValue.isMinimised;
-  // }
-});
-
 const calculateCoordinates = function () {
   tileSize.value = windowWidth.value / tileDivider.value;
   const snappedX = Math.round(x.value / tileSize.value);
   const snappedY = Math.round(y.value / tileSize.value);
-
   x.value =
     snappedX + tilesWidth >= tileDivider.value
       ? (tileDivider.value - tilesWidth) * tileSize.value
@@ -94,7 +85,7 @@ onUnmounted(() => {
 function findCoordinates(el: Element, done: () => void) {
   // @TODO: Find a better solution for this
   const $draggableDocked = document.querySelector(
-    `.EDraggablesDock .EDraggableTitlebar[data-id="${draggableId}"]`,
+    `.EDraggablesDock .EDraggableTitlebar[data-id="${props.draggable.draggableId}"]`,
   );
   const draggableDockedRect = $draggableDocked?.getBoundingClientRect();
   finalAnimation.value = draggableDockedRect;
@@ -111,23 +102,48 @@ function findCoordinates(el: Element, done: () => void) {
       class="EDraggable"
       :style="style"
       style="touch-action: none"
-      :class="{ isDragging: isDragging }"
+      :class="{
+        isDragging: isDragging,
+        noHeight: tilesHeight,
+        isVideo: draggable.contentType === 'video',
+        isMaximised: props.draggable.isMaximised,
+      }"
       v-show="!draggable.isMinimised"
     >
-      <button
-        @click.stop="
-          emit('update-draggables', { ...draggable, isMinimised: true })
-        "
-      >
-        ⅹ
-      </button>
-      <div ref="draggableRef">
+      <nav class="topBarNav">
+        <button
+          v-if="isMaximisable"
+          @click.stop="
+            emit('update-draggables', {
+              ...draggable,
+              isMaximised: !draggable.isMaximised,
+            })
+          "
+        >
+          M
+        </button>
+        <button
+          @click.stop="
+            emit('update-draggables', { ...draggable, isMinimised: true })
+          "
+        >
+          ⅹ
+        </button>
+      </nav>
+      <div class="titleBar" ref="draggableRef">
         <EDraggableTitlebar
-          :title="title"
+          :title="props.draggable.title"
           :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
         />
       </div>
-      <article>
+      <article
+        :style="{
+          height: tilesHeight
+            ? `calc(${tilesHeight} * var(--breadboard-tile-size) - var(--h-6))`
+            : 'auto',
+        }"
+      >
+        {{ draggable.isMaximised }}
         <slot />
       </article>
     </div>
@@ -156,6 +172,23 @@ function findCoordinates(el: Element, done: () => void) {
 .EDraggable.isDragging {
   z-index: 100;
 }
+.EDraggable.isVideo .titleBar {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+.EDraggable.isVideo .titleBar,
+.EDraggable.isVideo .topBarNav {
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+}
+.EDraggable.isVideo:hover .titleBar,
+.EDraggable.isVideo:hover .topBarNav {
+  opacity: 1;
+}
+.EDraggable.isVideo article {
+  padding-top: 0;
+}
 .EDraggable.v-enter-active {
   animation: windowAnimation 0.5s ease-in-out reverse;
 }
@@ -169,19 +202,22 @@ function findCoordinates(el: Element, done: () => void) {
 }
 .EDraggable article {
   flex-grow: 1;
-  height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size) - var(--h-6));
+
   overflow-y: auto;
 }
 
-.EDraggable button {
+.topBarNav {
   z-index: 2;
-  height: var(--h-6);
-  width: var(--w-6);
   position: absolute;
   top: 0;
   right: 0;
 }
-.EDraggable button:hover {
+
+.topBarNav button {
+  height: var(--h-6);
+  width: var(--w-6);
+}
+.topBarNav button:hover {
   background-color: var(--gray-300);
 }
 
@@ -198,6 +234,13 @@ function findCoordinates(el: Element, done: () => void) {
     width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
     height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
     touch-action: none;
+  }
+  .EDraggable.noHeight {
+    height: auto;
+  }
+  .EDraggable.isMaximised {
+    width: 100%;
+    height: 100%;
   }
   @keyframes windowAnimation {
     0% {
