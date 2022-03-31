@@ -4,9 +4,11 @@ import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 
 type Props = {
   draggables: Draggable[];
+  draggableMaximised: boolean;
+  userActive: boolean;
 };
 
-const { draggables } = defineProps<Props>();
+const { draggables, draggableMaximised, userActive } = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
@@ -14,7 +16,12 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <TransitionGroup class="EDraggablesDock" name="dock" tag="nav">
+  <TransitionGroup
+    class="EDraggablesDock"
+    :class="{ draggableMaximised: draggableMaximised, userActive: userActive }"
+    name="dock"
+    tag="nav"
+  >
     <EDraggableTitlebar
       v-for="draggable in draggables"
       :title="draggable.title"
@@ -33,7 +40,13 @@ const emit = defineEmits<{
   width: 100%;
   z-index: 1000;
 }
-
+.EDraggablesDock.draggableMaximised {
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+}
+.EDraggablesDock.draggableMaximised.userActive {
+  transform: translateY(0%);
+}
 /* @TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .EDraggablesDock > * {
@@ -66,6 +79,8 @@ const emit = defineEmits<{
     display: inline-block;
     margin-right: var(--m-3);
     width: var(--dock-item-size);
+    border: 1px solid var(--gray-500);
+    border-bottom: 0;
   }
 }
 .dock-enter-active,

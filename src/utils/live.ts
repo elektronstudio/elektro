@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, Ref } from "vue";
+import { onMounted, onUnmounted, ref, Ref, watch } from "vue";
 import { mobile } from "../utils";
 
 export type ContentType = "chat" | "text" | "image" | "video" | "event";
@@ -53,7 +53,7 @@ export function useLive({
       });
 
       minimisedDraggables.value = draggablesState.value.filter(
-        (item) => item.isMinimised,
+        (item) => item.draggableId !== draggableId,
       );
     }
 
@@ -65,12 +65,11 @@ export function useLive({
       return;
     }
 
-    const { draggableId, order } = draggable;
+    const { draggableId, order, isMaximised } = draggable;
 
-    // Iterate through draggables and set the active draggable last in order
+    // Iterate through draggables and set the active draggable top in order
     draggablesState.value = draggablesState.value.map((item) => {
       if (item.draggableId === draggableId) {
-        console.log(draggable);
         return { ...draggable, order: draggablesState.value.length };
       } else {
         return {
@@ -86,9 +85,20 @@ export function useLive({
       }
     });
 
-    minimisedDraggables.value = draggablesState.value.filter(
-      (item) => item.isMinimised,
-    );
+    if (isMaximised) {
+      minimisedDraggables.value = draggablesState.value.filter(
+        (item) => item.draggableId !== draggableId,
+      );
+      draggablesState.value = draggablesState.value.map((item) =>
+        item.draggableId === draggableId
+          ? item
+          : { ...item, isMinimised: true },
+      );
+    } else {
+      minimisedDraggables.value = draggablesState.value.filter(
+        (item) => item.isMinimised,
+      );
+    }
 
     // @TODO: Re-enable draggables dock order
     // This is to ensure that draggables are always in the correct order
@@ -118,6 +128,22 @@ export function useLive({
     }
   };
 
+  const userActive = ref(true);
+  const handleMouseMove = () => {
+    userActive.value = true;
+  };
+
+  watch(userActive, () => {
+    let timeOut;
+    if (userActive.value) {
+      timeOut = setTimeout(() => {
+        userActive.value = false;
+      }, 3000);
+    } else {
+      clearTimeout(timeOut);
+    }
+  });
+
   onMounted(() => {
     const initialStates = [] as Draggable[];
 
@@ -146,14 +172,17 @@ export function useLive({
 
     handleResize();
     window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", handleMouseMove);
   });
 
   onUnmounted(() => {
     window.removeEventListener("resize", handleResize);
+    window.removeEventListener("mousemove", handleMouseMove);
   });
 
   return {
     updateDraggablesMobile,
     updateDraggablesDesktop,
+    userActive,
   };
 }

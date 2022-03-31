@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { breakpoints } from "../utils";
-import { Draggable } from "../utils";
+import { Draggable, breakpoints, useUserActive } from "../utils";
 import EBreadBoard from "./EBreadBoard.vue";
 import EDraggablesDock from "./EDraggablesDock.vue";
 import EDraggableMobile from "./EDraggableMobile.vue";
 import DraggableContent from "./DraggableContent.vue";
 import EDraggable from "./EDraggable.vue";
 import EButtonBackToEvent from "./EButtonBackToEvent.vue";
+import { computed } from "vue";
 
 type Props = {
   draggablesState: Draggable[];
@@ -22,12 +22,19 @@ const {
   updateDraggablesDesktop,
   updateDraggablesMobile,
 } = defineProps<Props>();
+
+const draggableMaximised = computed(
+  () => !!draggablesState.find((draggable) => draggable.isMaximised),
+);
+const { userActive } = useUserActive();
 </script>
 
 <template>
   <!-- <SmallDock :draggables="draggablesState" v-if="mobile" /> -->
   <EBreadBoard>
-    <EButtonBackToEvent>Back to event</EButtonBackToEvent>
+    <EButtonBackToEvent :user-active="userActive"
+      >Back to event</EButtonBackToEvent
+    >
     <template v-if="mobile">
       <template
         v-for="draggable in draggablesState"
@@ -65,11 +72,15 @@ const {
 
     <EDraggablesDock
       v-if="mobile"
+      :user-active="userActive"
+      :draggable-maximised="draggableMaximised"
       :draggables="minimisedDraggables"
       @update-draggables="updateDraggablesMobile"
     />
     <EDraggablesDock
       v-else
+      :user-active="userActive"
+      :draggable-maximised="draggableMaximised"
       :draggables="minimisedDraggables"
       @update-draggables="updateDraggablesDesktop"
     />

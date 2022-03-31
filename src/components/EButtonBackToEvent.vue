@@ -1,8 +1,20 @@
 <script setup lang="ts">
 import EButton from "./EButton.vue";
+
+type Props = {
+  userActive: boolean;
+};
+
+const { userActive } = defineProps<Props>();
 </script>
 <template>
-  <EButton class="EButtonBackToEvent" size="xs" color="transparent" el="a">
+  <EButton
+    class="EButtonBackToEvent"
+    :class="{ userActive: userActive }"
+    size="xs"
+    color="transparent"
+    el="a"
+  >
     <!-- @TODO: Implement proper icon system to Elektro -->
     <svg
       width="1em"
@@ -38,6 +50,11 @@ import EButton from "./EButton.vue";
     position: fixed;
     top: var(--p-2);
     left: var(--p-2);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .EButtonBackToEvent.userActive {
+    opacity: 1;
   }
 }
 </style>

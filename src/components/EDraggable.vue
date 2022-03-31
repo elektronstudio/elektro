@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
@@ -67,7 +67,6 @@ const calculateCoordinates = function () {
 };
 
 const handleResize = () => {
-  // tileDivider.value = desktop ? 20 : 10;
   calculateCoordinates();
 };
 
@@ -124,13 +123,17 @@ function findCoordinates(el: Element, done: () => void) {
         </button>
         <button
           @click.stop="
-            emit('update-draggables', { ...draggable, isMinimised: true })
+            emit('update-draggables', {
+              ...draggable,
+              isMinimised: true,
+              isMaximised: false,
+            })
           "
         >
           ⅹ
         </button>
       </nav>
-      <div class="titleBar" ref="draggableRef">
+      <div v-if="!draggable.isMaximised" class="titleBar" ref="draggableRef">
         <EDraggableTitlebar
           :title="props.draggable.title"
           :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
@@ -143,7 +146,6 @@ function findCoordinates(el: Element, done: () => void) {
             : 'auto',
         }"
       >
-        {{ draggable.isMaximised }}
         <slot />
       </article>
     </div>
@@ -241,6 +243,8 @@ function findCoordinates(el: Element, done: () => void) {
   .EDraggable.isMaximised {
     width: 100%;
     height: 100%;
+    top: 0 !important;
+    left: 0 !important;
   }
   @keyframes windowAnimation {
     0% {

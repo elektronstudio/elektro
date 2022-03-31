@@ -10,4 +10,5 @@ export * from "./message";
 export * from "./strapi";
 export * from "./string";
 export * from "./timezone";
+export * from "./userActive";
 export * from "./videostream";
