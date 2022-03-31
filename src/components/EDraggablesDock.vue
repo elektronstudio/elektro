@@ -82,6 +82,7 @@ const emit = defineEmits<{
   .EDraggablesDock > .EDraggableTitlebar[data-id="chat"] {
     position: fixed;
     right: var(--gap-3);
+    bottom: 0;
   }
 
   .EDraggablesDock > * {
