@@ -13,9 +13,11 @@ export type Draggable = {
   isMinimised?: boolean;
   isMaximised?: boolean;
   isMaximisable?: boolean;
+  isAnchored?: boolean;
   order: number;
   contentType?: ContentType;
   data?: any;
+  userCount?: number;
 };
 
 export function useLive({

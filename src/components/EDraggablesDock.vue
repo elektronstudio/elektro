@@ -28,6 +28,8 @@ const emit = defineEmits<{
       @click="emit('update-draggables', { ...draggable, isMinimised: false })"
       :data-id="draggable.draggableId"
       :key="draggable.draggableId"
+      :user-count="draggable.userCount"
+      :is-minimised="draggable.isMinimised"
     />
   </TransitionGroup>
 </template>
@@ -39,6 +41,9 @@ const emit = defineEmits<{
   flex-direction: column-reverse;
   width: 100%;
   z-index: 1000;
+}
+.EDraggablesDock > .EDraggableTitlebar[data-id="chat"] {
+  order: -1;
 }
 .EDraggablesDock.draggableMaximised {
   transform: translateY(100%);
@@ -70,15 +75,20 @@ const emit = defineEmits<{
     overflow-x: auto;
     position: fixed;
     bottom: 0;
-  }
-  .EDraggablesDock {
+    width: 100%;
     padding-left: var(--breadboard-tile-size);
+    padding-right: var(--gap-3);
+  }
+  .EDraggablesDock > .EDraggableTitlebar[data-id="chat"] {
+    position: fixed;
+    right: var(--gap-3);
   }
 
   .EDraggablesDock > * {
     display: inline-block;
     margin-right: var(--m-3);
     width: var(--dock-item-size);
+    flex-shrink: 0;
     border: 1px solid var(--gray-500);
     border-bottom: 0;
   }

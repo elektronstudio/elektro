@@ -29,6 +29,8 @@ const data = [
     tilesWidth: 4,
     tilesHeight: 8,
     order: 1,
+    userCount: 12,
+    isAnchored: true,
   },
   {
     title: "About",
