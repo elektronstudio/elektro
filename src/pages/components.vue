@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IconArrowRight from "~icons/radix-icons/arrow-right";
 import {
   ETitle,
   EButton,
@@ -213,6 +214,7 @@ const images = [
   <div class="Components">
     <ETitle size="lg">Components</ETitle>
 
+    <IconArrowRight />
     <br />
     <pre>ETitle</pre>
     <ETitle size="lg">Title lg</ETitle>
