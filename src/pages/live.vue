@@ -15,6 +15,7 @@ const data = [
     isMinimised: false,
     isMaximised: false,
     isMaximisable: true,
+    hideTitleBarOnIdle: true,
     order: 0,
     data: {
       src: "",

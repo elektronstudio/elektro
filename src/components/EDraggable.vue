@@ -11,7 +11,12 @@ type Props = {
 
 const props = defineProps<Props>();
 // Note, following values are not reactive
-const { tilesWidth = 1, tilesHeight, isMaximisable } = props.draggable;
+const {
+  tilesWidth = 1,
+  tilesHeight,
+  isMaximisable,
+  hideTitleBarOnIdle,
+} = props.draggable;
 
 const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
@@ -22,14 +27,15 @@ const { width: windowWidth } = useWindow();
 const tileDivider = computed(() => (desktop ? 20 : 10));
 const tileSize = ref(windowWidth.value / tileDivider.value);
 
-// @TODO: Why don't props trigger rerender?
+// @TODO: Simplify this
+// how to set default value 0 to nested prop
 const gridPosX = computed(() =>
   props.draggable.gridPosX ? props.draggable.gridPosX : 0,
 );
 const gridPosY = computed(() =>
   props.draggable.gridPosY ? props.draggable.gridPosY : 0,
 );
-const order = computed(() => props.draggable.order);
+
 const finalAnimation = ref<DOMRect | undefined>();
 
 const { x, y, style, isDragging } = useDraggable(draggableRef, {
@@ -83,6 +89,7 @@ onUnmounted(() => {
 
 function findCoordinates(el: Element, done: () => void) {
   // @TODO: Find a better solution for this
+  // Consider using refs for selectors
   const $draggableDocked = document.querySelector(
     `.EDraggablesDock .EDraggableTitlebar[data-id="${props.draggable.draggableId}"]`,
   );
@@ -104,8 +111,8 @@ function findCoordinates(el: Element, done: () => void) {
       :class="{
         isDragging: isDragging,
         noHeight: tilesHeight,
-        isVideo: draggable.contentType === 'video',
         isMaximised: props.draggable.isMaximised,
+        hideTitleBarOnIdle: hideTitleBarOnIdle,
       }"
       v-show="!draggable.isMinimised"
     >
@@ -198,26 +205,26 @@ function findCoordinates(el: Element, done: () => void) {
   background-color: var(--bg);
   display: flex;
   flex-direction: column;
-  z-index: calc(v-bind(order) + 1);
+  z-index: calc(v-bind("props.draggable.order") + 1);
 }
 .EDraggable.isDragging {
   z-index: 100;
 }
-.EDraggable.isVideo .titleBar {
+.EDraggable.hideTitleBarOnIdle .titleBar {
   position: absolute;
   z-index: 1;
   width: 100%;
 }
-.EDraggable.isVideo .titleBar,
-.EDraggable.isVideo .topBarNav {
+.EDraggable.hideTitleBarOnIdle .titleBar,
+.EDraggable.hideTitleBarOnIdle .topBarNav {
   opacity: 0;
   transition: 0.3s ease-in-out;
 }
-.EDraggable.isVideo:hover .titleBar,
-.EDraggable.isVideo:hover .topBarNav {
+.EDraggable.hideTitleBarOnIdle:hover .titleBar,
+.EDraggable.hideTitleBarOnIdle:hover .topBarNav {
   opacity: 1;
 }
-.EDraggable.isVideo article {
+.EDraggable.hideTitleBarOnIdle article {
   padding-top: 0;
 }
 .EDraggable.v-enter-active {

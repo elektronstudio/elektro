@@ -18,6 +18,7 @@ export type Draggable = {
   contentType?: ContentType;
   data?: any;
   userCount?: number;
+  hideTitleBarOnIdle?: boolean;
 };
 
 export function useLive({
