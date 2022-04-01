@@ -94,14 +94,14 @@ const { idle } = useIdle(3000); // 3 seconds idle
 
     <EDraggablesDock
       v-if="mobile"
-      :user-active="idle"
+      :idle="idle"
       :draggable-maximised="draggableMaximised"
       :draggables="minimisedDraggables"
       @update-draggables="updateDraggablesMobile"
     />
     <EDraggablesDock
       v-else
-      :user-active="idle"
+      :idle="idle"
       :draggable-maximised="draggableMaximised"
       :draggables="minimisedDraggables"
       @update-draggables="updateDraggablesDesktop"

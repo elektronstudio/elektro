@@ -49,7 +49,7 @@ const emit = defineEmits<{
   transform: translateY(0%);
   transition: transform 0.3s ease-in-out;
 }
-.EDraggablesDock.draggableMaximised.idle {
+.EDraggablesDock.idle {
   transform: translateY(100%);
 }
 /* @TODO: Add breakpoints system */
