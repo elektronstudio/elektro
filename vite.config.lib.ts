@@ -1,12 +1,14 @@
 import { defineConfig } from "vite";
 import path from "path";
 import Vue from "@vitejs/plugin-vue";
+import ViteIcons from "unplugin-icons/vite";
 
 export default defineConfig({
   plugins: [
     Vue({
       reactivityTransform: true,
     }),
+    ViteIcons({ autoInstall: true }),
   ],
   build: {
     lib: {
