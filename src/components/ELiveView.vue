@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { Draggable, breakpoints, useUserActive } from "../utils";
+import { Draggable, breakpoints } from "../utils";
+import { useIdle } from "@vueuse/core";
+import { computed } from "vue";
 import EBreadBoard from "./EBreadBoard.vue";
 import EDraggablesDock from "./EDraggablesDock.vue";
 import EDraggableMobile from "./EDraggableMobile.vue";
 import DraggableContent from "./DraggableContent.vue";
 import EDraggable from "./EDraggable.vue";
 import EButton from "./EButton.vue";
-
-import { computed } from "vue";
 
 type Props = {
   draggablesState: Draggable[];
@@ -27,7 +27,7 @@ const {
 const draggableMaximised = computed(
   () => !!draggablesState.find((draggable) => draggable.isMaximised),
 );
-const { userActive } = useUserActive();
+const { idle } = useIdle(3000); // 3 seconds idle
 </script>
 
 <template>
@@ -35,7 +35,7 @@ const { userActive } = useUserActive();
   <EBreadBoard>
     <EButton
       class="backToEvent"
-      :class="{ userActive: userActive }"
+      :class="{ idle: idle }"
       size="xs"
       color="transparent"
       el="a"
@@ -94,14 +94,14 @@ const { userActive } = useUserActive();
 
     <EDraggablesDock
       v-if="mobile"
-      :user-active="userActive"
+      :user-active="idle"
       :draggable-maximised="draggableMaximised"
       :draggables="minimisedDraggables"
       @update-draggables="updateDraggablesMobile"
     />
     <EDraggablesDock
       v-else
-      :user-active="userActive"
+      :user-active="idle"
       :draggable-maximised="draggableMaximised"
       :draggables="minimisedDraggables"
       @update-draggables="updateDraggablesDesktop"
@@ -126,11 +126,11 @@ const { userActive } = useUserActive();
     position: fixed;
     top: var(--p-2);
     left: var(--p-2);
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.3s ease-in-out;
   }
-  .backToEvent.userActive {
-    opacity: 1;
+  .backToEvent.idle {
+    opacity: 0;
   }
 }
 </style>

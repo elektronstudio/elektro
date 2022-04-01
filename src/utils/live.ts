@@ -130,22 +130,6 @@ export function useLive({
     }
   };
 
-  const userActive = ref(true);
-  const handleMouseMove = () => {
-    userActive.value = true;
-  };
-
-  watch(userActive, () => {
-    let timeOut;
-    if (userActive.value) {
-      timeOut = setTimeout(() => {
-        userActive.value = false;
-      }, 3000);
-    } else {
-      clearTimeout(timeOut);
-    }
-  });
-
   onMounted(() => {
     const initialStates = [] as Draggable[];
 
@@ -174,17 +158,14 @@ export function useLive({
 
     handleResize();
     window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
   });
 
   onUnmounted(() => {
     window.removeEventListener("resize", handleResize);
-    window.removeEventListener("mousemove", handleMouseMove);
   });
 
   return {
     updateDraggablesMobile,
     updateDraggablesDesktop,
-    userActive,
   };
 }
