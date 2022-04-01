@@ -1,4 +1,6 @@
 /// <reference types="vite/client" />
+/// <reference types="unplugin-icons/types/vue" />
+
 declare module "virtual:generated-pages" {
   import type { RouteRecordRaw } from "vue-router";
   const routes: RouteRecordRaw[];
