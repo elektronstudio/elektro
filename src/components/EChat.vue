@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { EButton } from "../lib";
 import { useChat } from "../utils";
+
+const userId = ref("");
+const userName = ref("");
 
 const {
   chatMessages,
@@ -8,7 +12,7 @@ const {
   onNewChatMessage,
   scrollRef,
   textareaRef,
-} = useChat("test");
+} = useChat("test", userId, userName);
 </script>
 
 <template>
