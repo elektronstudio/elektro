@@ -32,7 +32,6 @@ const { idle } = useIdle(3000); // 3 seconds idle
 </script>
 
 <template>
-  <!-- <SmallDock :draggables="draggablesState" v-if="mobile" /> -->
   <EBreadBoard>
     <EButton
       class="backToEvent"
@@ -41,7 +40,6 @@ const { idle } = useIdle(3000); // 3 seconds idle
       color="transparent"
       el="a"
     >
-      <!-- @TODO: Implement proper icon system to Elektro -->
       <IconArrowLeft />
       Back to event
     </EButton>
