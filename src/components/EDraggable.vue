@@ -139,7 +139,6 @@ function findCoordinates(el: Element, done: () => void) {
             })
           "
         >
-          <!-- @TODO: add icons system to Elektro -->
           <IconBorderSolid />
         </button>
       </nav>
