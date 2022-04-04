@@ -45,11 +45,11 @@ const emit = defineEmits<{
 .EDraggablesDock > .EDraggableTitlebar[data-id="chat"] {
   order: -1;
 }
-.EDraggablesDock.draggableMaximised {
+.EDraggablesDock {
   transform: translateY(0%);
   transition: transform 0.3s ease-in-out;
 }
-.EDraggablesDock.idle {
+.EDraggablesDock.draggableMaximised.idle {
   transform: translateY(100%);
 }
 /* @TODO: Add breakpoints system */

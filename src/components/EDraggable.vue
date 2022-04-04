@@ -198,6 +198,7 @@ function findCoordinates(el: Element, done: () => void) {
   opacity: 1;
 }
 .EDraggable.hideTitleBarOnIdle article {
+  background-color: wheat;
   padding-top: 0;
 }
 .EDraggable.v-enter-active {
@@ -260,6 +261,13 @@ function findCoordinates(el: Element, done: () => void) {
     height: 100%;
     top: 0 !important;
     left: 0 !important;
+  }
+  .EDraggable.isMaximised article,
+  .EDraggable.isMaximised video {
+    height: 100%;
+  }
+  .EDraggable.isMaximised video {
+    object-fit: contain;
   }
   @keyframes windowAnimation {
     0% {
