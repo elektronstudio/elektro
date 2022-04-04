@@ -262,7 +262,8 @@ function findCoordinates(el: Element, done: () => void) {
     left: 0 !important;
   }
   .EDraggable.isMaximised article,
-  .EDraggable.isMaximised article > div,
+  /* @TODO: How to select an Art only component */
+  .EDraggable.isMaximised article :deep(.videoStream),
   .EDraggable.isMaximised video {
     height: 100%;
   }
