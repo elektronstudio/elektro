@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import { EBox, EButton, EFormTextArea } from "../lib";
+import { useSessionStorage } from "@vueuse/core";
+import { EBox, EButton, EFormTextArea, EFormText } from "../lib";
 import { useChat } from "../utils";
+
+const userId = useSessionStorage("elektron_user_id", "1234");
+const userName = useSessionStorage("elektron_user_name", "Somebody");
 
 const {
   chatMessages,
@@ -9,7 +12,7 @@ const {
   onNewChatMessage,
   scrollRef,
   textareaRef,
-} = useChat("test");
+} = useChat("test", userId, userName);
 </script>
 
 <template>
@@ -23,6 +26,8 @@ const {
       <br />
       <!-- TODO: Make it work with ref -->
       <EFormTextArea v-model="newChatMessage" />
+      <EFormText v-model="userId" />
+      <EFormText v-model="userName" />
       <br />
       <EButton size="xs" @click="onNewChatMessage">Submit</EButton>
     </div>

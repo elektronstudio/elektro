@@ -1,10 +1,12 @@
-import { computed, ref } from "vue";
+import { computed, Ref, ref } from "vue";
 import { useMessage } from "./message";
 import type { MessageType } from "./message";
 import { useScrollToBottom, useTextarea } from "./dom";
 
 export function useChat(
   channel: string,
+  userId: Ref<string>,
+  userName: Ref<string>,
   sentMessageType: MessageType = "CHAT",
   receiveMessageType: MessageType = "CHAT",
 ) {
@@ -20,6 +22,8 @@ export function useChat(
   const onNewChatMessage = () => {
     if (newChatMessage.value) {
       sendMessage({
+        userId: userId.value,
+        userName: userName.value,
         type: sentMessageType || "CHAT",
         channel: channel,
         value: newChatMessage.value,
