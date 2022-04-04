@@ -11,6 +11,7 @@ const { title } = defineProps<Props>();
 <template>
   <div class="EDraggableTitlebar">
     <h6 v-if="title">{{ title }}</h6>
+    <!-- @TODO: Abstract userCount to badge or something in the lines of that -->
     <span v-if="userCount && isMinimised" class="userCount">{{
       userCount
     }}</span>
