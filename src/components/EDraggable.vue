@@ -112,7 +112,7 @@ function findCoordinates(el: Element, done: () => void) {
       style="touch-action: none"
       :class="{
         isDragging: isDragging,
-        noHeight: tilesHeight,
+        noHeight: !tilesHeight,
         isMaximised: props.draggable.isMaximised,
         hideTitleBarOnIdle: hideTitleBarOnIdle,
       }"
