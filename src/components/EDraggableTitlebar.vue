@@ -1,6 +1,8 @@
 <script setup lang="ts">
 type Props = {
   title?: string;
+  userCount?: number;
+  isMinimised?: boolean;
 };
 
 const { title } = defineProps<Props>();
@@ -9,11 +11,16 @@ const { title } = defineProps<Props>();
 <template>
   <div class="EDraggableTitlebar">
     <h6 v-if="title">{{ title }}</h6>
+    <!-- @TODO: Abstract userCount to badge or something in the lines of that -->
+    <span v-if="userCount && isMinimised" class="userCount">{{
+      userCount
+    }}</span>
   </div>
 </template>
 
 <style scoped>
 .EDraggableTitlebar {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,9 +30,6 @@ const { title } = defineProps<Props>();
 }
 .EDraggableTitlebar h6 {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  text-transform: uppercase;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -33,8 +37,26 @@ const { title } = defineProps<Props>();
   padding-left: var(--p-2);
   padding-right: var(--p-6);
 }
+.EDraggableTitlebar h6,
+.userCount {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+}
 
 .EDraggableTitlebar:hover {
   background-color: var(--gray-600);
+}
+
+.userCount {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  background-color: var(--accent);
+  color: var(--bg);
 }
 </style>

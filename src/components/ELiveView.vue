@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { breakpoints } from "../utils";
-import { Draggable } from "../utils";
+import { Draggable, breakpoints } from "../utils";
+import { useIdle } from "@vueuse/core";
+import { computed } from "vue";
 import EBreadBoard from "./EBreadBoard.vue";
 import EDraggablesDock from "./EDraggablesDock.vue";
 import EDraggableMobile from "./EDraggableMobile.vue";
 import DraggableContent from "./DraggableContent.vue";
 import EDraggable from "./EDraggable.vue";
-import EDraggableTitlebar from "./EDraggableTitlebar.vue";
+import EButton from "./EButton.vue";
+import IconArrowLeft from "~icons/radix-icons/arrow-left";
 
 type Props = {
   draggablesState: Draggable[];
@@ -23,13 +25,24 @@ const {
   updateDraggablesMobile,
 } = defineProps<Props>();
 
-console.log(draggablesState);
+const draggableMaximised = computed(
+  () => !!draggablesState.find((draggable) => draggable.isMaximised),
+);
+const { idle } = useIdle(3000); // 3 seconds idle
 </script>
 
 <template>
-  <!-- <SmallDock :draggables="draggablesState" v-if="mobile" /> -->
   <EBreadBoard>
-    <EDraggableTitlebar>Poop</EDraggableTitlebar>
+    <EButton
+      class="backToEvent"
+      :class="{ idle: idle }"
+      size="xs"
+      color="transparent"
+      el="a"
+    >
+      <IconArrowLeft />
+      Back to event
+    </EButton>
     <template v-if="mobile">
       <template
         v-for="draggable in draggablesState"
@@ -67,13 +80,43 @@ console.log(draggablesState);
 
     <EDraggablesDock
       v-if="mobile"
+      :idle="idle"
+      :draggable-maximised="draggableMaximised"
       :draggables="minimisedDraggables"
       @update-draggables="updateDraggablesMobile"
     />
     <EDraggablesDock
       v-else
+      :idle="idle"
+      :draggable-maximised="draggableMaximised"
       :draggables="minimisedDraggables"
       @update-draggables="updateDraggablesDesktop"
     />
   </EBreadBoard>
 </template>
+
+<style scoped>
+.backToEvent {
+  z-index: 1000;
+}
+@media only screen and (max-width: 899px) {
+  .backToEvent {
+    width: 100%;
+    height: var(--h-6);
+    background-color: var(--bg);
+    border-bottom: 1px solid var(--gray-500);
+  }
+}
+@media only screen and (min-width: 900px) {
+  .backToEvent {
+    position: fixed;
+    top: var(--p-2);
+    left: var(--p-2);
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .backToEvent.idle {
+    opacity: 0;
+  }
+}
+</style>

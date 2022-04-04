@@ -4,9 +4,11 @@ import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 
 type Props = {
   draggables: Draggable[];
+  draggableMaximised: boolean;
+  idle?: boolean;
 };
 
-const { draggables } = defineProps<Props>();
+const { draggables, draggableMaximised, idle } = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
@@ -14,13 +16,20 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <TransitionGroup class="EDraggablesDock" name="dock" tag="nav">
+  <TransitionGroup
+    class="EDraggablesDock"
+    :class="{ draggableMaximised: draggableMaximised, idle: idle }"
+    name="dock"
+    tag="nav"
+  >
     <EDraggableTitlebar
       v-for="draggable in draggables"
       :title="draggable.title"
       @click="emit('update-draggables', { ...draggable, isMinimised: false })"
       :data-id="draggable.draggableId"
       :key="draggable.draggableId"
+      :user-count="draggable.userCount"
+      :is-minimised="draggable.isMinimised"
     />
   </TransitionGroup>
 </template>
@@ -33,14 +42,23 @@ const emit = defineEmits<{
   width: 100%;
   z-index: 1000;
 }
-
+.EDraggablesDock > .EDraggableTitlebar[data-id="chat"] {
+  order: -1;
+}
+.EDraggablesDock.draggableMaximised {
+  transform: translateY(0%);
+  transition: transform 0.3s ease-in-out;
+}
+.EDraggablesDock.idle {
+  transform: translateY(100%);
+}
 /* @TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .EDraggablesDock > * {
     width: 100%;
-    /* flex: 0 0 100%; */
     padding: 4px 0;
     /* @TODO: add two column layout */
+    /* flex: 0 0 100%; */
     /* flex: 0 0 50%; */
     /* border: 1px solid var(--gray-500); */
   }
@@ -57,15 +75,23 @@ const emit = defineEmits<{
     overflow-x: auto;
     position: fixed;
     bottom: 0;
-  }
-  .EDraggablesDock {
+    width: 100%;
     padding-left: var(--breadboard-tile-size);
+    padding-right: var(--gap-3);
+  }
+  .EDraggablesDock > .EDraggableTitlebar[data-id="chat"] {
+    position: fixed;
+    right: var(--gap-3);
+    bottom: 0;
   }
 
   .EDraggablesDock > * {
     display: inline-block;
     margin-right: var(--m-3);
     width: var(--dock-item-size);
+    flex-shrink: 0;
+    border: 1px solid var(--gray-500);
+    border-bottom: 0;
   }
 }
 .dock-enter-active,

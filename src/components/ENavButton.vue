@@ -28,6 +28,8 @@ const { variant = "transparent" } = defineProps<Props>();
 }
 .ENavButton :deep(svg) {
   margin-right: var(--m-1);
+  width: 1em;
+  height: 1em;
 }
 .ENavButton:not(:first-child) {
   margin-left: calc(var(--border-DEFAULT) * -1);

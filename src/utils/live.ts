@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, Ref } from "vue";
+import { onMounted, onUnmounted, ref, Ref, watch } from "vue";
 import { mobile } from "../utils";
 
 export type ContentType = "chat" | "text" | "image" | "video" | "event";
@@ -11,20 +11,15 @@ export type Draggable = {
   tilesWidth?: number;
   tilesHeight?: number;
   isMinimised?: boolean;
+  isMaximised?: boolean;
+  isMaximisable?: boolean;
+  isAnchored?: boolean;
   order: number;
   contentType?: ContentType;
   data?: any;
+  userCount?: number;
+  hideTitleBarOnIdle?: boolean;
 };
-
-// export const draggablesState = useStorage<Draggable[]>("draggable_state", []);
-// // Minimised draggables need separate state
-// // If they are filtered from the draggablesState, are not in correct order
-// // since draggablesState order never changes
-// // this is to reduce unnecessary rerenders and calculations
-// export const minimisedDraggables = useStorage<Draggable[]>(
-//   "minimised_draggable_state",
-//   [],
-// );
 
 export function useLive({
   data,
@@ -73,9 +68,9 @@ export function useLive({
       return;
     }
 
-    const { draggableId, order } = draggable;
+    const { draggableId, order, isMaximised } = draggable;
 
-    // Iterate through draggables and set the active draggable last in order
+    // Iterate through draggables and set the active draggable top in order
     draggablesState.value = draggablesState.value.map((item) => {
       if (item.draggableId === draggableId) {
         return { ...draggable, order: draggablesState.value.length };
@@ -93,10 +88,23 @@ export function useLive({
       }
     });
 
-    minimisedDraggables.value = draggablesState.value.filter(
-      (item) => item.isMinimised,
-    );
+    if (isMaximised) {
+      minimisedDraggables.value = draggablesState.value.filter(
+        (item) => item.draggableId !== draggableId,
+      );
+      draggablesState.value = draggablesState.value.map((item) =>
+        item.draggableId === draggableId
+          ? item
+          : { ...item, isMinimised: true },
+      );
+    } else {
+      minimisedDraggables.value = draggablesState.value.filter(
+        (item) => item.isMinimised,
+      );
+    }
 
+    // @TODO: Re-enable draggables dock order
+    // This is to ensure that draggables are always in the correct order
     // if (draggable.isMinimised) {
     //   minimisedDraggables.value = [...minimisedDraggables.value, draggable];
     // } else {

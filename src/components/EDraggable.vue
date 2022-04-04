@@ -1,16 +1,24 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 import { desktop, Draggable } from "../utils";
+import IconSize from "~icons/radix-icons/size";
+import IconBorderSolid from "~icons/radix-icons/border-solid";
 
 type Props = {
   draggable: Draggable;
 };
 
-const { draggable } = defineProps<Props>();
-const { draggableId, title, tilesWidth = 1, tilesHeight = 1 } = draggable;
+const props = defineProps<Props>();
+// Note, following values are not reactive
+const {
+  tilesWidth = 1,
+  tilesHeight,
+  isMaximisable,
+  hideTitleBarOnIdle,
+} = props.draggable;
 
 const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
@@ -20,13 +28,16 @@ const draggableRef = ref<HTMLElement | null>(null);
 const { width: windowWidth } = useWindow();
 const tileDivider = computed(() => (desktop ? 20 : 10));
 const tileSize = ref(windowWidth.value / tileDivider.value);
-// @TODO: Why don't props trigger rerender?
-const gridPosX = ref<number>(draggable.gridPosX ? draggable.gridPosX : 0);
-const gridPosY = ref<number>(draggable.gridPosY ? draggable.gridPosY : 0);
-const isMinimised = ref<boolean>(
-  draggable.isMinimised ? draggable.isMinimised : false,
+
+// @TODO: Simplify this
+// how to set default value 0 to nested prop
+const gridPosX = computed(() =>
+  props.draggable.gridPosX ? props.draggable.gridPosX : 0,
 );
-const order = ref<number>(draggable.order);
+const gridPosY = computed(() =>
+  props.draggable.gridPosY ? props.draggable.gridPosY : 0,
+);
+
 const finalAnimation = ref<DOMRect | undefined>();
 
 const { x, y, style, isDragging } = useDraggable(draggableRef, {
@@ -39,7 +50,7 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
       gridPosY.value !== snappedY.value
     ) {
       emit("update-draggables", {
-        ...draggable,
+        ...props.draggable,
         gridPosX: snappedX.value,
         gridPosY: snappedY.value,
       });
@@ -50,22 +61,10 @@ const { x, y, style, isDragging } = useDraggable(draggableRef, {
 const snappedX = computed(() => Math.round(x.value / tileSize.value));
 const snappedY = computed(() => Math.round(y.value / tileSize.value));
 
-watch(draggable, (newValue, oldValue) => {
-  isMinimised.value = newValue.isMinimised ? newValue.isMinimised : false;
-  order.value = newValue.order;
-  gridPosX.value = newValue.gridPosX ? newValue.gridPosX : 0;
-  gridPosY.value = newValue.gridPosY ? newValue.gridPosY : 0;
-  // @TODO: Why does dis not work?
-  // if (newValue.isMinimised !== oldValue.isMinimised) {
-  // isMinimised.value = newValue.isMinimised;
-  // }
-});
-
 const calculateCoordinates = function () {
   tileSize.value = windowWidth.value / tileDivider.value;
   const snappedX = Math.round(x.value / tileSize.value);
   const snappedY = Math.round(y.value / tileSize.value);
-
   x.value =
     snappedX + tilesWidth >= tileDivider.value
       ? (tileDivider.value - tilesWidth) * tileSize.value
@@ -76,7 +75,6 @@ const calculateCoordinates = function () {
 };
 
 const handleResize = () => {
-  // tileDivider.value = desktop ? 20 : 10;
   calculateCoordinates();
 };
 
@@ -93,8 +91,9 @@ onUnmounted(() => {
 
 function findCoordinates(el: Element, done: () => void) {
   // @TODO: Find a better solution for this
+  // Consider using refs for selectors
   const $draggableDocked = document.querySelector(
-    `.EDraggablesDock .EDraggableTitlebar[data-id="${draggableId}"]`,
+    `.EDraggablesDock .EDraggableTitlebar[data-id="${props.draggable.draggableId}"]`,
   );
   const draggableDockedRect = $draggableDocked?.getBoundingClientRect();
   finalAnimation.value = draggableDockedRect;
@@ -111,23 +110,51 @@ function findCoordinates(el: Element, done: () => void) {
       class="EDraggable"
       :style="style"
       style="touch-action: none"
-      :class="{ isDragging: isDragging }"
+      :class="{
+        isDragging: isDragging,
+        noHeight: !tilesHeight,
+        isMaximised: props.draggable.isMaximised,
+        hideTitleBarOnIdle: hideTitleBarOnIdle,
+      }"
       v-show="!draggable.isMinimised"
     >
-      <button
-        @click.stop="
-          emit('update-draggables', { ...draggable, isMinimised: true })
-        "
-      >
-        ⅹ
-      </button>
-      <div ref="draggableRef">
+      <nav class="topBarNav">
+        <button
+          v-if="isMaximisable"
+          @click.stop="
+            emit('update-draggables', {
+              ...draggable,
+              isMaximised: !draggable.isMaximised,
+            })
+          "
+        >
+          <IconSize />
+        </button>
+        <button
+          @click.stop="
+            emit('update-draggables', {
+              ...draggable,
+              isMinimised: true,
+              isMaximised: false,
+            })
+          "
+        >
+          <IconBorderSolid />
+        </button>
+      </nav>
+      <div v-if="!draggable.isMaximised" class="titleBar" ref="draggableRef">
         <EDraggableTitlebar
-          :title="title"
+          :title="props.draggable.title"
           :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
         />
       </div>
-      <article>
+      <article
+        :style="{
+          height: tilesHeight
+            ? `calc(${tilesHeight} * var(--breadboard-tile-size) - var(--h-6))`
+            : 'auto',
+        }"
+      >
         <slot />
       </article>
     </div>
@@ -151,10 +178,27 @@ function findCoordinates(el: Element, done: () => void) {
   background-color: var(--bg);
   display: flex;
   flex-direction: column;
-  z-index: calc(v-bind(order) + 1);
+  z-index: calc(v-bind("props.draggable.order") + 1);
 }
 .EDraggable.isDragging {
   z-index: 100;
+}
+.EDraggable.hideTitleBarOnIdle .titleBar {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+.EDraggable.hideTitleBarOnIdle .titleBar,
+.EDraggable.hideTitleBarOnIdle .topBarNav {
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+}
+.EDraggable.hideTitleBarOnIdle:hover .titleBar,
+.EDraggable.hideTitleBarOnIdle:hover .topBarNav {
+  opacity: 1;
+}
+.EDraggable.hideTitleBarOnIdle article {
+  padding-top: 0;
 }
 .EDraggable.v-enter-active {
   animation: windowAnimation 0.5s ease-in-out reverse;
@@ -169,19 +213,28 @@ function findCoordinates(el: Element, done: () => void) {
 }
 .EDraggable article {
   flex-grow: 1;
-  height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size) - var(--h-6));
+
   overflow-y: auto;
 }
 
-.EDraggable button {
+.topBarNav {
   z-index: 2;
-  height: var(--h-6);
-  width: var(--w-6);
   position: absolute;
   top: 0;
   right: 0;
+  display: flex;
 }
-.EDraggable button:hover {
+.topBarNav button {
+  height: var(--h-6);
+  width: var(--w-6);
+  display: grid;
+  place-content: center;
+}
+.topBarNav button svg {
+  width: 1em;
+  height: 1em;
+}
+.topBarNav button:hover {
   background-color: var(--gray-300);
 }
 
@@ -198,6 +251,15 @@ function findCoordinates(el: Element, done: () => void) {
     width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
     height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
     touch-action: none;
+  }
+  .EDraggable.noHeight {
+    height: auto;
+  }
+  .EDraggable.isMaximised {
+    width: 100%;
+    height: 100%;
+    top: 0 !important;
+    left: 0 !important;
   }
   @keyframes windowAnimation {
     0% {
