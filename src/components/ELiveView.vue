@@ -62,6 +62,7 @@ const { idle } = useIdle(3000); // 3 seconds idle
       >
         <EDraggable
           :draggable="draggable"
+          :idle="idle"
           @update-draggables="updateDraggablesDesktop"
         >
           <DraggableContent

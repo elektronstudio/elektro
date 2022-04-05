@@ -7,6 +7,7 @@ import { desktop, Draggable } from "../utils";
 import ETitlebarButton from "./ETitlebarButton.vue";
 
 type Props = {
+  idle?: boolean;
   draggable: Draggable;
 };
 
@@ -114,6 +115,7 @@ function findCoordinates(el: Element, done: () => void) {
         noHeight: !tilesHeight,
         isMaximised: props.draggable.isMaximised,
         hideTitleBarOnIdle: hideTitleBarOnIdle,
+        idle: idle,
       }"
       v-show="!draggable.isMinimised"
     >
@@ -139,7 +141,7 @@ function findCoordinates(el: Element, done: () => void) {
           "
         />
       </nav>
-      <div v-if="!draggable.isMaximised" class="titleBar" ref="draggableRef">
+      <div class="titleBar" ref="draggableRef">
         <EDraggableTitlebar
           :title="props.draggable.title"
           :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
@@ -185,13 +187,12 @@ function findCoordinates(el: Element, done: () => void) {
   z-index: 1;
   width: 100%;
 }
-.EDraggable.hideTitleBarOnIdle .titleBar,
-.EDraggable.hideTitleBarOnIdle .topBarNav {
+.EDraggable.hideTitleBarOnIdle :is(.titleBar, .topBarNav),
+.EDraggable.idle :is(.titleBar, .topBarNav) {
   opacity: 0;
   transition: 0.3s ease-in-out;
 }
-.EDraggable.hideTitleBarOnIdle:hover .titleBar,
-.EDraggable.hideTitleBarOnIdle:hover .topBarNav {
+.EDraggable.hideTitleBarOnIdle:not(.idle):hover :is(.titleBar, .topBarNav) {
   opacity: 1;
 }
 .EDraggable.hideTitleBarOnIdle article {
