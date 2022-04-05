@@ -64,35 +64,26 @@ export function useLive({
     const { draggableId, order, isMaximised, isMinimised } = draggable;
 
     // Iterate through draggables and set the active draggable top in order
-    if (isMinimised) {
-      draggablesState.value = draggablesState.value.map((item) => {
-        if (item.draggableId === draggableId) {
-          return { ...draggable, order: 0 };
-        } else {
-          return {
-            ...item,
-            order: item.order + 1,
-          };
-        }
-      });
-    } else {
-      draggablesState.value = draggablesState.value.map((item) => {
-        if (item.draggableId === draggableId) {
-          return { ...draggable, order: draggablesState.value.length };
-        } else {
-          return {
-            ...item,
-            order:
-              // If other draggable was ahead in the order, decrement it
-              item.order === 1
-                ? 1
-                : item.order > order
-                ? item.order - 1
-                : item.order,
-          };
-        }
-      });
-    }
+    draggablesState.value = draggablesState.value.map((item) => {
+      let newOrder;
+      if (isMinimised) {
+        newOrder = item.order < order ? item.order + 1 : item.order;
+      } else {
+        newOrder = item.order > order ? item.order - 1 : item.order;
+      }
+
+      if (item.draggableId === draggableId) {
+        return {
+          ...draggable,
+          order: isMinimised ? 0 : draggablesState.value.length,
+        };
+      } else {
+        return {
+          ...item,
+          order: newOrder,
+        };
+      }
+    });
 
     if (isMaximised) {
       draggablesState.value = draggablesState.value.map((item) =>
