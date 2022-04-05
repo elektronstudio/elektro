@@ -79,6 +79,7 @@ const { idle } = useIdle(3000); // 3 seconds idle
       :idle="idle"
       :draggable-maximised="draggableMaximised"
       :draggables="draggablesState"
+      :mobile="mobile"
       @update-draggables="updateDraggablesMobile"
     />
     <EDraggablesDock

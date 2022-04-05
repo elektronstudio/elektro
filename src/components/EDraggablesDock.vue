@@ -8,14 +8,24 @@ import { computed } from "vue";
 type Props = {
   draggables: Draggable[];
   draggableMaximised: boolean;
+  mobile?: boolean;
   idle?: boolean;
 };
 
-const { draggables, draggableMaximised, idle } = defineProps<Props>();
+const { draggables, draggableMaximised, mobile, idle } = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
 }>();
+
+const dockItems = computed(() => {
+  if (mobile) {
+    console.log("mobile");
+    return draggables.filter((draggable) => draggable.isMinimised);
+  } else {
+    return draggables;
+  }
+});
 
 const topOrder = computed(() => {
   return draggables.reduce((n, b) => (n.order > b.order ? n : b));
@@ -30,7 +40,7 @@ const topOrder = computed(() => {
     tag="nav"
   >
     <EDraggableTitlebar
-      v-for="draggable in draggables"
+      v-for="draggable in dockItems"
       :title="draggable.title"
       @click="
         emit('update-draggables', {
