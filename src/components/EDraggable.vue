@@ -4,8 +4,7 @@ import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 import { desktop, Draggable } from "../utils";
-import IconSize from "~icons/radix-icons/size";
-import IconBorderSolid from "~icons/radix-icons/border-solid";
+import ETitlebarButton from "./ETitlebarButton.vue";
 
 type Props = {
   draggable: Draggable;
@@ -119,18 +118,18 @@ function findCoordinates(el: Element, done: () => void) {
       v-show="!draggable.isMinimised"
     >
       <nav class="topBarNav">
-        <button
+        <ETitlebarButton
           v-if="isMaximisable"
+          icon="size"
           @click.stop="
             emit('update-draggables', {
               ...draggable,
               isMaximised: !draggable.isMaximised,
             })
           "
-        >
-          <IconSize />
-        </button>
-        <button
+        />
+        <ETitlebarButton
+          icon="minus"
           @click.stop="
             emit('update-draggables', {
               ...draggable,
@@ -138,9 +137,7 @@ function findCoordinates(el: Element, done: () => void) {
               isMaximised: false,
             })
           "
-        >
-          <IconBorderSolid />
-        </button>
+        />
       </nav>
       <div v-if="!draggable.isMaximised" class="titleBar" ref="draggableRef">
         <EDraggableTitlebar
@@ -223,19 +220,6 @@ function findCoordinates(el: Element, done: () => void) {
   top: 0;
   right: 0;
   display: flex;
-}
-.topBarNav button {
-  height: var(--h-6);
-  width: var(--w-6);
-  display: grid;
-  place-content: center;
-}
-.topBarNav button svg {
-  width: 1em;
-  height: 1em;
-}
-.topBarNav button:hover {
-  background-color: var(--gray-300);
 }
 
 /* @TODO: Add breakpoints system */

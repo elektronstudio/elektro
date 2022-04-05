@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// TODO: Move to elektro
 import { useVideostream } from "../utils";
 
 type Props = {
@@ -10,7 +9,7 @@ const { videoRef, width, height, status } = useVideostream(src);
 </script>
 
 <template>
-  <div style="position: relative">
+  <div style="position: relative" class="EVideoStream">
     <video
       ref="videoRef"
       muted
@@ -33,3 +32,9 @@ const { videoRef, width, height, status } = useVideostream(src);
     </div>
   </div>
 </template>
+
+<style scoped>
+.EVideoStream {
+  background-color: beige;
+}
+</style>

@@ -12,18 +12,13 @@ import IconArrowLeft from "~icons/radix-icons/arrow-left";
 
 type Props = {
   draggablesState: Draggable[];
-  minimisedDraggables: Draggable[];
   updateDraggablesDesktop: (draggable: Draggable) => void;
   updateDraggablesMobile: (draggable: Draggable) => void;
 };
 
 const mobile = breakpoints.smaller("large");
-const {
-  draggablesState,
-  minimisedDraggables,
-  updateDraggablesDesktop,
-  updateDraggablesMobile,
-} = defineProps<Props>();
+const { draggablesState, updateDraggablesDesktop, updateDraggablesMobile } =
+  defineProps<Props>();
 
 const draggableMaximised = computed(
   () => !!draggablesState.find((draggable) => draggable.isMaximised),
@@ -82,14 +77,14 @@ const { idle } = useIdle(3000); // 3 seconds idle
       v-if="mobile"
       :idle="idle"
       :draggable-maximised="draggableMaximised"
-      :draggables="minimisedDraggables"
+      :draggables="draggablesState"
       @update-draggables="updateDraggablesMobile"
     />
     <EDraggablesDock
       v-else
       :idle="idle"
       :draggable-maximised="draggableMaximised"
-      :draggables="minimisedDraggables"
+      :draggables="draggablesState"
       @update-draggables="updateDraggablesDesktop"
     />
   </EBreadBoard>
@@ -97,7 +92,7 @@ const { idle } = useIdle(3000); // 3 seconds idle
 
 <style scoped>
 .backToEvent {
-  z-index: 1000;
+  z-index: 1;
 }
 @media only screen and (max-width: 899px) {
   .backToEvent {
