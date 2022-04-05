@@ -122,6 +122,7 @@ const topOrder = computed(() => {
     flex-shrink: 0;
     border: 1px solid var(--gray-500);
     border-bottom: 0;
+    cursor: pointer;
   }
   .EDraggablesDock .isTop {
     background-color: var(--gray-600);
