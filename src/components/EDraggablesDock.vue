@@ -87,7 +87,6 @@ const topOrder = computed(() => {
 @media only screen and (max-width: 599px) {
   .EDraggablesDock > * {
     width: 100%;
-    padding: 4px 0;
     /* @TODO: add two column layout */
     /* flex: 0 0 100%; */
     /* flex: 0 0 50%; */
@@ -130,13 +129,14 @@ const topOrder = computed(() => {
 }
 .dock-enter-active,
 .dock-leave-active {
-  transform: scale(1);
+  /* transform: scale(1); */
   transition: 0.2s ease-in-out;
 }
 
 .dock-enter-from,
 .dock-leave-to {
-  transform: scale(0);
+  /* transform: scale(0); */
+  height: 0;
 }
 
 .dock-enter-active {

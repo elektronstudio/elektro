@@ -257,13 +257,10 @@ function findCoordinates(el: Element, done: () => void) {
   }
   @keyframes windowAnimation {
     0% {
-      top: v-bind("`${y}px`");
-      left: v-bind("`${x}px`");
+      /* top: v-bind("`${y}px`");
+      left: v-bind("`${x}px`"); */
       width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
       height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
-    }
-    75% {
-      opacity: 1;
     }
     100% {
       top: v-bind("`${finalAnimation?.y ? finalAnimation.y : 0}px`");

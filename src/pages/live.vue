@@ -54,7 +54,7 @@ const data = [
     tilesHeight: 3,
     gridPosX: 5,
     gridPosY: 8,
-    order: 2,
+    order: 3,
     data: {
       src: "",
     },
