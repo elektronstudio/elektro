@@ -4,10 +4,10 @@ import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 import { desktop, Draggable } from "../utils";
-import IconSize from "~icons/radix-icons/size";
-import IconBorderSolid from "~icons/radix-icons/border-solid";
+import ETitlebarButton from "./ETitlebarButton.vue";
 
 type Props = {
+  idle?: boolean;
   draggable: Draggable;
 };
 
@@ -115,22 +115,23 @@ function findCoordinates(el: Element, done: () => void) {
         noHeight: !tilesHeight,
         isMaximised: props.draggable.isMaximised,
         hideTitleBarOnIdle: hideTitleBarOnIdle,
+        idle: idle,
       }"
       v-show="!draggable.isMinimised"
     >
       <nav class="topBarNav">
-        <button
+        <ETitlebarButton
           v-if="isMaximisable"
+          icon="size"
           @click.stop="
             emit('update-draggables', {
               ...draggable,
               isMaximised: !draggable.isMaximised,
             })
           "
-        >
-          <IconSize />
-        </button>
-        <button
+        />
+        <ETitlebarButton
+          icon="minus"
           @click.stop="
             emit('update-draggables', {
               ...draggable,
@@ -138,11 +139,9 @@ function findCoordinates(el: Element, done: () => void) {
               isMaximised: false,
             })
           "
-        >
-          <IconBorderSolid />
-        </button>
+        />
       </nav>
-      <div v-if="!draggable.isMaximised" class="titleBar" ref="draggableRef">
+      <div class="titleBar" ref="draggableRef">
         <EDraggableTitlebar
           :title="props.draggable.title"
           :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
@@ -188,13 +187,12 @@ function findCoordinates(el: Element, done: () => void) {
   z-index: 1;
   width: 100%;
 }
-.EDraggable.hideTitleBarOnIdle .titleBar,
-.EDraggable.hideTitleBarOnIdle .topBarNav {
+.EDraggable.hideTitleBarOnIdle :is(.titleBar, .topBarNav),
+.EDraggable.idle :is(.titleBar, .topBarNav) {
   opacity: 0;
   transition: 0.3s ease-in-out;
 }
-.EDraggable.hideTitleBarOnIdle:hover .titleBar,
-.EDraggable.hideTitleBarOnIdle:hover .topBarNav {
+.EDraggable.hideTitleBarOnIdle:not(.idle):hover :is(.titleBar, .topBarNav) {
   opacity: 1;
 }
 .EDraggable.hideTitleBarOnIdle article {
@@ -223,19 +221,6 @@ function findCoordinates(el: Element, done: () => void) {
   top: 0;
   right: 0;
   display: flex;
-}
-.topBarNav button {
-  height: var(--h-6);
-  width: var(--w-6);
-  display: grid;
-  place-content: center;
-}
-.topBarNav button svg {
-  width: 1em;
-  height: 1em;
-}
-.topBarNav button:hover {
-  background-color: var(--gray-300);
 }
 
 /* @TODO: Add breakpoints system */
@@ -272,13 +257,10 @@ function findCoordinates(el: Element, done: () => void) {
   }
   @keyframes windowAnimation {
     0% {
-      top: v-bind("`${y}px`");
-      left: v-bind("`${x}px`");
+      /* top: v-bind("`${y}px`");
+      left: v-bind("`${x}px`"); */
       width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
       height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
-    }
-    75% {
-      opacity: 1;
     }
     100% {
       top: v-bind("`${finalAnimation?.y ? finalAnimation.y : 0}px`");

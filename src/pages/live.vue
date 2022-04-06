@@ -8,10 +8,10 @@ const data = [
     title: "Stream",
     draggableId: "videosteam",
     contentType: "text",
-    gridPosX: 2,
-    gridPosY: 2,
-    tilesWidth: 10,
-    tilesHeight: 4,
+    gridPosX: 0,
+    gridPosY: 1,
+    tilesWidth: 15,
+    tilesHeight: 7,
     isMinimised: false,
     isMaximised: false,
     isMaximisable: true,
@@ -25,12 +25,12 @@ const data = [
     title: "Chat",
     draggableId: "chat",
     contentType: "chat",
-    gridPosX: 15,
+    gridPosX: 16,
     gridPosY: 1,
     tilesWidth: 4,
     tilesHeight: 8,
     order: 1,
-    userCount: 12,
+    chatMessages: 12,
     isAnchored: true,
   },
   {
@@ -38,10 +38,23 @@ const data = [
     draggableId: "about",
     contentType: "event",
     tilesWidth: 8,
-    tilesHeight: 5,
+    tilesHeight: 3,
     gridPosX: 1,
-    gridPosY: 4,
+    gridPosY: 7,
     order: 2,
+    data: {
+      src: "",
+    },
+  },
+  {
+    title: "About",
+    draggableId: "about-2",
+    contentType: "event",
+    tilesWidth: 8,
+    tilesHeight: 3,
+    gridPosX: 5,
+    gridPosY: 8,
+    order: 3,
     data: {
       src: "",
     },
@@ -49,12 +62,10 @@ const data = [
 ] as Draggable[];
 
 const draggablesState = ref<Draggable[]>(data);
-const minimisedDraggables = ref<Draggable[]>([]);
 
 const { updateDraggablesDesktop, updateDraggablesMobile } = useLive({
   data,
   draggablesState,
-  minimisedDraggables,
 });
 </script>
 
@@ -64,6 +75,5 @@ const { updateDraggablesDesktop, updateDraggablesMobile } = useLive({
     :update-draggables-desktop="updateDraggablesDesktop"
     :update-draggables-mobile="updateDraggablesMobile"
     :draggables-state="draggablesState"
-    :minimised-draggables="minimisedDraggables"
   />
 </template>

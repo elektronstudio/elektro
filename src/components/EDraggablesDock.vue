@@ -1,18 +1,35 @@
 <script setup lang="ts">
 import { Draggable } from "../utils";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
+import ETitlebarButton from "./ETitlebarButton.vue";
+import EChatBadge from "./EChatBadge.vue";
+import { computed } from "vue";
 
 type Props = {
   draggables: Draggable[];
   draggableMaximised: boolean;
+  mobile?: boolean;
   idle?: boolean;
 };
 
-const { draggables, draggableMaximised, idle } = defineProps<Props>();
+const { draggables, draggableMaximised, mobile, idle } = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
 }>();
+
+const dockItems = computed(() => {
+  if (mobile) {
+    console.log("mobile");
+    return draggables.filter((draggable) => draggable.isMinimised);
+  } else {
+    return draggables;
+  }
+});
+
+const topOrder = computed(() => {
+  return draggables.reduce((n, b) => (n.order > b.order ? n : b));
+});
 </script>
 
 <template>
@@ -23,14 +40,27 @@ const emit = defineEmits<{
     tag="nav"
   >
     <EDraggableTitlebar
-      v-for="draggable in draggables"
+      v-for="draggable in dockItems"
       :title="draggable.title"
-      @click="emit('update-draggables', { ...draggable, isMinimised: false })"
+      @click="
+        emit('update-draggables', {
+          ...draggable,
+          isMinimised: false,
+        })
+      "
       :data-id="draggable.draggableId"
       :key="draggable.draggableId"
-      :user-count="draggable.userCount"
       :is-minimised="draggable.isMinimised"
-    />
+      :class="{ isTop: draggable.draggableId === topOrder.draggableId }"
+    >
+      <Transition name="fade">
+        <EChatBadge
+          v-if="draggable.contentType === 'chat'"
+          :new-messages="draggable.chatMessages"
+        />
+        <ETitlebarButton v-else-if="draggable.isMinimised" icon="plus" />
+      </Transition>
+    </EDraggableTitlebar>
   </TransitionGroup>
 </template>
 
@@ -52,11 +82,11 @@ const emit = defineEmits<{
 .EDraggablesDock.draggableMaximised.idle {
   transform: translateY(100%);
 }
+
 /* @TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .EDraggablesDock > * {
     width: 100%;
-    padding: 4px 0;
     /* @TODO: add two column layout */
     /* flex: 0 0 100%; */
     /* flex: 0 0 50%; */
@@ -86,23 +116,28 @@ const emit = defineEmits<{
   }
 
   .EDraggablesDock > * {
-    display: inline-block;
+    display: inline-flex;
     margin-right: var(--m-3);
     width: var(--dock-item-size);
     flex-shrink: 0;
     border: 1px solid var(--gray-500);
     border-bottom: 0;
+    cursor: pointer;
+  }
+  .EDraggablesDock .isTop {
+    background-color: var(--gray-600);
   }
 }
 .dock-enter-active,
 .dock-leave-active {
-  transform: scale(1);
+  /* transform: scale(1); */
   transition: 0.2s ease-in-out;
 }
 
 .dock-enter-from,
 .dock-leave-to {
-  transform: scale(0);
+  /* transform: scale(0); */
+  height: 0;
 }
 
 .dock-enter-active {

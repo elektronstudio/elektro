@@ -37,6 +37,7 @@ export { default as EDraggableMobile } from "./components/EDraggableMobile.vue";
 export { default as EDraggablesDock } from "./components/EDraggablesDock.vue";
 export { default as EDraggableTitlebar } from "./components/EDraggableTitlebar.vue";
 export { default as ELiveView } from "./components/ELiveView.vue";
+export { default as ETitlebarButton } from "./components/ETitlebarButton.vue";
 
 import "./styles/vars.css";
 import "./styles/reset.css";

@@ -1,20 +1,18 @@
 <script setup lang="ts">
 type Props = {
   title?: string;
-  userCount?: number;
   isMinimised?: boolean;
 };
 
-const { title } = defineProps<Props>();
+const { title, isMinimised } = defineProps<Props>();
 </script>
 
 <template>
-  <div class="EDraggableTitlebar">
+  <div class="EDraggableTitlebar" :class="{ isMinimised: isMinimised }">
     <h6 v-if="title">{{ title }}</h6>
-    <!-- @TODO: Abstract userCount to badge or something in the lines of that -->
-    <span v-if="userCount && isMinimised" class="userCount">{{
-      userCount
-    }}</span>
+    <nav class="badgeSlot">
+      <slot />
+    </nav>
   </div>
 </template>
 
@@ -37,8 +35,7 @@ const { title } = defineProps<Props>();
   padding-left: var(--p-2);
   padding-right: var(--p-6);
 }
-.EDraggableTitlebar h6,
-.userCount {
+.EDraggableTitlebar h6 {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   text-transform: uppercase;
@@ -48,15 +45,10 @@ const { title } = defineProps<Props>();
   background-color: var(--gray-600);
 }
 
-.userCount {
+.badgeSlot {
   position: absolute;
   top: 0;
   right: 0;
   height: 100%;
-  aspect-ratio: 1;
-  display: grid;
-  place-content: center;
-  background-color: var(--accent);
-  color: var(--bg);
 }
 </style>

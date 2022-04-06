@@ -17,18 +17,16 @@ export type Draggable = {
   order: number;
   contentType?: ContentType;
   data?: any;
-  userCount?: number;
+  chatMessages?: number;
   hideTitleBarOnIdle?: boolean;
 };
 
 export function useLive({
   data,
   draggablesState,
-  minimisedDraggables,
 }: {
   data: Draggable[];
   draggablesState: Ref<Draggable[]>;
-  minimisedDraggables: Ref<Draggable[]>;
 }) {
   const updateDraggablesMobile = (draggable: Draggable) => {
     if (!draggable) {
@@ -44,7 +42,6 @@ export function useLive({
           isMinimised: true,
         };
       });
-      minimisedDraggables.value = [...minimisedDraggables.value, draggable];
     } else {
       // When maximising draggable
       draggablesState.value = draggablesState.value.map((item) => {
@@ -54,10 +51,6 @@ export function useLive({
           isMinimised: item.draggableId === draggableId ? false : true,
         };
       });
-
-      minimisedDraggables.value = draggablesState.value.filter(
-        (item) => item.draggableId !== draggableId,
-      );
     }
 
     return;
@@ -68,66 +61,47 @@ export function useLive({
       return;
     }
 
-    const { draggableId, order, isMaximised } = draggable;
+    const { draggableId, order, isMaximised, isMinimised } = draggable;
 
     // Iterate through draggables and set the active draggable top in order
     draggablesState.value = draggablesState.value.map((item) => {
+      let newOrder;
+      if (isMinimised) {
+        newOrder = item.order < order ? item.order + 1 : item.order;
+      } else {
+        newOrder = item.order > order ? item.order - 1 : item.order;
+      }
+
       if (item.draggableId === draggableId) {
-        return { ...draggable, order: draggablesState.value.length };
+        return {
+          ...draggable,
+          order: isMinimised ? 0 : draggablesState.value.length,
+        };
       } else {
         return {
           ...item,
-          order:
-            // If other draggable was ahead in the order, decrement it
-            item.order === 1
-              ? 1
-              : item.order > order
-              ? item.order - 1
-              : item.order,
+          order: newOrder,
         };
       }
     });
 
     if (isMaximised) {
-      minimisedDraggables.value = draggablesState.value.filter(
-        (item) => item.draggableId !== draggableId,
-      );
       draggablesState.value = draggablesState.value.map((item) =>
         item.draggableId === draggableId
           ? item
           : { ...item, isMinimised: true },
       );
-    } else {
-      minimisedDraggables.value = draggablesState.value.filter(
-        (item) => item.isMinimised,
-      );
     }
-
-    // @TODO: Re-enable draggables dock order
-    // This is to ensure that draggables are always in the correct order
-    // if (draggable.isMinimised) {
-    //   minimisedDraggables.value = [...minimisedDraggables.value, draggable];
-    // } else {
-    //   minimisedDraggables.value = minimisedDraggables.value.filter(
-    //     (item) => item.draggableId !== draggableId,
-    //   );
-    // }
   };
 
   const handleResize = () => {
-    if (
-      mobile.value &&
-      minimisedDraggables.value.length !== draggablesState.value.length - 1
-    ) {
+    if (mobile.value) {
       draggablesState.value = draggablesState.value.map((item, index) => {
         return {
           ...item,
           isMinimised: index === 0 ? false : true,
         };
       });
-      minimisedDraggables.value = draggablesState.value.filter(
-        (item, index) => index !== 0,
-      );
     }
   };
 
@@ -153,8 +127,6 @@ export function useLive({
       }
       initialStates.push(mergedDraggable);
     });
-    const minimised = initialStates.filter((item) => item.isMinimised);
-    minimisedDraggables.value = minimised;
     draggablesState.value = initialStates;
 
     handleResize();
