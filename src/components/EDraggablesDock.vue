@@ -72,9 +72,6 @@ const topOrder = computed(() => {
   width: 100%;
   z-index: 1000;
 }
-.EDraggablesDock > .EDraggableTitlebar[data-id="chat"] {
-  order: -1;
-}
 .EDraggablesDock {
   transform: translateY(0%);
   transition: transform 0.3s ease-in-out;
@@ -109,12 +106,6 @@ const topOrder = computed(() => {
     padding-left: var(--breadboard-tile-size);
     padding-right: var(--gap-3);
   }
-  .EDraggablesDock > .EDraggableTitlebar[data-id="chat"] {
-    position: fixed;
-    right: var(--gap-3);
-    bottom: 0;
-  }
-
   .EDraggablesDock > * {
     display: inline-flex;
     margin-right: var(--m-3);

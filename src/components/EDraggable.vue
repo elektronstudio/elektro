@@ -178,6 +178,10 @@ function findCoordinates(el: Element, done: () => void) {
   display: flex;
   flex-direction: column;
   z-index: calc(v-bind("props.draggable.order") + 1);
+  border: 1px solid transparent;
+}
+.EDraggable:hover {
+  border: 1px solid var(--gray-500);
 }
 .EDraggable.isDragging {
   z-index: 100;
