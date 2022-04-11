@@ -58,7 +58,6 @@ const topOrder = computed(() => {
           v-if="draggable.contentType === 'chat'"
           :new-messages="draggable.chatMessages"
         />
-        <ETitlebarButton v-else-if="draggable.isMinimised" icon="plus" />
       </Transition>
     </EDraggableTitlebar>
   </TransitionGroup>

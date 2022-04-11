@@ -118,6 +118,11 @@ function findCoordinates(el: Element, done: () => void) {
         idle: idle,
       }"
       v-show="!draggable.isMinimised"
+      @click.stop="
+        emit('update-draggables', {
+          ...draggable,
+        })
+      "
     >
       <nav class="topBarNav">
         <ETitlebarButton
