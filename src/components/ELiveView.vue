@@ -27,14 +27,8 @@ const { idle } = useIdle(3000); // 3 seconds idle
 </script>
 
 <template>
-  <EBreadBoard>
-    <EButton
-      class="backToEvent"
-      :class="{ idle: idle }"
-      size="xs"
-      color="transparent"
-      el="a"
-    >
+  <EBreadBoard :class="{ idle: idle }">
+    <EButton class="backToEvent" size="xs" color="transparent" el="a">
       <IconArrowLeft />
       Back to event
     </EButton>
@@ -62,7 +56,6 @@ const { idle } = useIdle(3000); // 3 seconds idle
       >
         <EDraggable
           :draggable="draggable"
-          :idle="idle"
           @update-draggables="updateDraggablesDesktop"
         >
           <DraggableContent
@@ -76,7 +69,6 @@ const { idle } = useIdle(3000); // 3 seconds idle
 
     <EDraggablesDock
       v-if="mobile"
-      :idle="idle"
       :draggable-maximised="draggableMaximised"
       :draggables="draggablesState"
       :mobile="mobile"
@@ -84,7 +76,6 @@ const { idle } = useIdle(3000); // 3 seconds idle
     />
     <EDraggablesDock
       v-else
-      :idle="idle"
       :draggable-maximised="draggableMaximised"
       :draggables="draggablesState"
       @update-draggables="updateDraggablesDesktop"
@@ -112,7 +103,7 @@ const { idle } = useIdle(3000); // 3 seconds idle
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
   }
-  .backToEvent.idle {
+  .idle .backToEvent {
     opacity: 0;
   }
 }
