@@ -84,14 +84,6 @@ export function useLive({
         };
       }
     });
-
-    if (isMaximised) {
-      draggablesState.value = draggablesState.value.map((item) =>
-        item.draggableId === draggableId
-          ? item
-          : { ...item, isMinimised: true },
-      );
-    }
   };
 
   const handleResize = () => {
@@ -107,7 +99,7 @@ export function useLive({
 
   onMounted(() => {
     const initialStates = [] as Draggable[];
-
+    // @TODO: Decide if to keep local stage or not
     data.forEach((draggable) => {
       const { draggableId } = draggable;
       const localDraggable = draggablesState.value?.find(

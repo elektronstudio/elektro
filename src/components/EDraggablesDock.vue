@@ -9,10 +9,9 @@ type Props = {
   draggables: Draggable[];
   draggableMaximised: boolean;
   mobile?: boolean;
-  idle?: boolean;
 };
 
-const { draggables, draggableMaximised, mobile, idle } = defineProps<Props>();
+const { draggables, draggableMaximised, mobile } = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
@@ -35,7 +34,7 @@ const topOrder = computed(() => {
 <template>
   <TransitionGroup
     class="EDraggablesDock"
-    :class="{ draggableMaximised: draggableMaximised, idle: idle }"
+    :class="{ draggableMaximised: draggableMaximised }"
     name="dock"
     tag="nav"
   >
@@ -58,7 +57,6 @@ const topOrder = computed(() => {
           v-if="draggable.contentType === 'chat'"
           :new-messages="draggable.chatMessages"
         />
-        <ETitlebarButton v-else-if="draggable.isMinimised" icon="plus" />
       </Transition>
     </EDraggableTitlebar>
   </TransitionGroup>
@@ -75,9 +73,6 @@ const topOrder = computed(() => {
 .EDraggablesDock {
   transform: translateY(0%);
   transition: transform 0.3s ease-in-out;
-}
-.EDraggablesDock.draggableMaximised.idle {
-  transform: translateY(100%);
 }
 
 /* @TODO: Add breakpoints system */
@@ -117,6 +112,9 @@ const topOrder = computed(() => {
   }
   .EDraggablesDock .isTop {
     background-color: var(--gray-600);
+  }
+  .idle .EDraggablesDock {
+    transform: translateY(100%);
   }
 }
 .dock-enter-active,
