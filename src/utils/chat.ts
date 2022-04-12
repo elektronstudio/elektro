@@ -3,7 +3,7 @@ import { useMessage } from "./message";
 import type { MessageType } from "./message";
 import { scrollToBottom, useTextarea } from "./dom";
 import { useScroll } from "@vueuse/core";
-import { chatStore } from "./store";
+import { newMessages } from "./store";
 
 export function useChat(
   channel: string,
@@ -68,10 +68,7 @@ export function useChat(
   watch(
     newMessagesCount,
     (newValue) => {
-      chatStore.value = {
-        channel,
-        newMessagesCount: newValue,
-      };
+      newMessages.value = newValue;
     },
     { immediate: true },
   );

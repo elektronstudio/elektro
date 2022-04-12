@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Draggable, chatStore } from "../utils";
+import { Draggable, newMessages } from "../utils";
 import EDraggableTitlebar from "./EDraggableTitlebar.vue";
 import EChatBadge from "./EChatBadge.vue";
 import { computed } from "vue";
@@ -53,10 +53,8 @@ const topOrder = computed(() => {
     >
       <Transition name="fade">
         <EChatBadge
-          v-if="
-            draggable.contentType === 'chat' && chatStore.newMessagesCount > 0
-          "
-          :new-messages="chatStore.newMessagesCount"
+          v-if="draggable.contentType === 'chat' && newMessages > 0"
+          :new-messages="newMessages"
         />
       </Transition>
     </EDraggableTitlebar>
