@@ -17,12 +17,13 @@ const channel = "test";
 ws.addEventListener("message", ({ data }) => {
   const message = safeJsonParse(data);
   if (message.channel === channel && message.type === "USER") {
+    // Upsert the user to users
     const user = {
       userId: message.userId,
+      userName: message.userName,
       x: message.value.x,
       y: message.value.y,
     };
-    console.log(user);
     const existingUserIndex = users.value?.findIndex((u) => {
       return u.userId === user.userId;
     });
