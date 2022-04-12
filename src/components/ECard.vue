@@ -76,7 +76,7 @@ const { thumbnail } = defineProps<Props>();
     padding: var(--p-7);
     border-radius: var(--rounded-xl);
     overflow: hidden;
-    background-color: white;
+    background-color: black;
   }
   .thumbnail {
     position: absolute;
@@ -85,8 +85,9 @@ const { thumbnail } = defineProps<Props>();
     top: 0;
     left: 0;
     object-fit: cover;
+    transform: scale(1);
     /* @TODO: Add transitions vars */
-    transition: opacity 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
   .ECard .content {
     display: flex;
@@ -98,7 +99,7 @@ const { thumbnail } = defineProps<Props>();
   .ECard footer {
     display: flex;
     opacity: var(--opacity-0);
-    color: black;
+    color: var(--fg);
     z-index: 1;
     /* @TODO: Add transitions vars */
     transition: opacity 0.2s ease-in-out;
@@ -108,8 +109,9 @@ const { thumbnail } = defineProps<Props>();
     opacity: var(--opacity-100);
   }
   .ECard:hover .thumbnail {
-    mix-blend-mode: difference;
+    /* mix-blend-mode: difference; */
     filter: blur(10px);
+    transform: scale(1.06);
     opacity: var(--opacity-60);
   }
 }
