@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useStorage } from "@vueuse/core";
-import { ref } from "vue";
 import { EButton } from "../lib";
 import { useChat, scrollToBottom, randomString } from "../utils";
 
@@ -124,18 +123,6 @@ const {
 }
 .chatTextarea:not(:disabled):hover {
   background-color: rgba(250, 250, 250, 0.1);
-}
-
-/* .chatTextarea:hover {
-  outline: 1px solid var(--gray-500);
-}
-.chatTextarea:focus {
-  outline: none;
-  background-color: var(--gray-500);
-} */
-
-.EButton {
-  /* margin-bottom: var(--m-2); */
 }
 
 .newMessages {
