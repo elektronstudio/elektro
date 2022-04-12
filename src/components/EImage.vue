@@ -20,9 +20,10 @@ const el = ref(null);
 const { width } = useElementSize(el);
 
 const image = computed(() => {
+  const devicePixelRatio = window.devicePixelRatio || 1;
   const nearestWidth = nearest(
     sizes.map(({ width }) => width),
-    width.value,
+    width.value * devicePixelRatio,
   );
   return sizes.filter((image) => image.width === nearestWidth)?.[0];
 });
