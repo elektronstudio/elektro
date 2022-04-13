@@ -1,5 +1,5 @@
 import { computed, Ref, ref } from "vue";
-import { debouncedWatch, useDraggable } from "@vueuse/core";
+import { debouncedWatch, useDraggable, useWindowSize } from "@vueuse/core";
 import { useMessage, safeJsonParse } from "../utils";
 import type { Message } from "../utils";
 
@@ -54,9 +54,10 @@ export function useDraggableChat(
     initialValue: { x: 100, y: 100 },
   });
 
-  const otherUsers = computed(() =>
-    users.value.filter((u) => u.userId !== userId.value),
-  );
+  const { width, height } = useWindowSize();
+  const centerXY = computed(() => {
+    return { x: x.value - width.value / 2, y: y.value - height.value / 2 };
+  });
 
   debouncedWatch(
     [x, y],
@@ -72,12 +73,17 @@ export function useDraggableChat(
         },
       };
       sendMessage(message);
+      console.log(centerXY.value);
       // TODO: Store user locaction locally?
     },
     {
       immediate: true,
       debounce: UPDATE_RATE,
     },
+  );
+
+  const otherUsers = computed(() =>
+    users.value.filter((u) => u.userId !== userId.value),
   );
 
   const otherUserStyle = (user: DraggableChatUser) => {

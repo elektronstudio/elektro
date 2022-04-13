@@ -2,7 +2,7 @@
 import { useDraggableChat, userId, userName } from "../utils";
 
 const { userRef, userStyle, otherUsers, otherUserStyle, _users } =
-  useDraggableChat(userId, userName);
+  useDraggableChat("draggablechat", userId, userName);
 </script>
 
 <template>
