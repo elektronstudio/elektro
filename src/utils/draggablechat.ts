@@ -11,18 +11,21 @@ type DraggableChatUser = {
   y: number;
 };
 
-const CHANNEL = "draggablechat";
-const UPDATE_RATE = 600;
+const UPDATE_RATE = 600; // TODO: Make it a function of user count
 const ANIMATION_RATE = 300;
 // https://cubic-bezier.com/#.48,.76,.78,.95
 const ANIMATION_EASING = "cubic-bezier(.48,.76,.78,.95)";
 
-export function useDraggableChat(userId: Ref<string>, userName: Ref<string>) {
+export function useDraggableChat(
+  channel: string,
+  userId: Ref<string>,
+  userName: Ref<string>,
+) {
   const users = ref<DraggableChatUser[]>([]);
 
   ws.addEventListener("message", ({ data }) => {
     const message = safeJsonParse(data);
-    if (message.channel === CHANNEL && message.type === "USER") {
+    if (message.channel === channel && message.type === "USER") {
       const user = {
         userId: message.userId,
         userName: message.userName,
@@ -59,8 +62,8 @@ export function useDraggableChat(userId: Ref<string>, userName: Ref<string>) {
     [x, y],
     () => {
       const message: Message = {
+        channel,
         type: "USER",
-        channel: CHANNEL,
         userId: userId.value,
         userName: userName.value,
         value: {
