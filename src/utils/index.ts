@@ -12,3 +12,4 @@ export * from "./strapi";
 export * from "./string";
 export * from "./timezone";
 export * from "./videostream";
+export * from "./draggablechat";
