@@ -29,7 +29,6 @@ export function formatMessage(message: Object): string {
 export function useMessage() {
   const ws = new ReconnectingWebsocket(config.wsUrl as UrlProvider);
   const messages = ref<Message[]>([]);
-  const newMessage = ref<Message | null>(null);
 
   fetch(config.messagesUrl as RequestInfo)
     .then((res) => res.json())
@@ -53,5 +52,5 @@ export function useMessage() {
 
   const sendMessage = (message: Message) => ws.send(formatMessage(message));
 
-  return { ws, messages, newMessage, sendMessage };
+  return { ws, messages, sendMessage };
 }
