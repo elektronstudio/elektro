@@ -1,7 +1,9 @@
-import { computed, Ref, ref } from "vue";
+import { computed, Ref, ref, watch } from "vue";
 import { useMessage } from "./message";
 import type { MessageType } from "./message";
-import { useScrollToBottom, useTextarea } from "./dom";
+import { scrollToBottom, useTextarea } from "./dom";
+import { useScroll } from "@vueuse/core";
+import { newMessages } from "./store";
 
 export function useChat(
   channel: string,
@@ -11,6 +13,9 @@ export function useChat(
   receiveMessageType: MessageType = "CHAT",
 ) {
   const { messages, sendMessage } = useMessage();
+
+  // @TODO: Could this be done on fetch?
+  // We only show one channel per page
   const chatMessages = computed(() => {
     return messages.value.filter(
       (m) => m.type === receiveMessageType && m.channel === channel,
@@ -34,7 +39,39 @@ export function useChat(
   };
 
   const textareaRef = useTextarea(onNewChatMessage);
-  const scrollRef = useScrollToBottom();
+  const scrollRef = ref<HTMLElement | null>(null);
+
+  const lastMessagesCount = ref<number>(0);
+  const newMessagesCount = computed(
+    () => chatMessages.value.length - lastMessagesCount.value,
+  );
+  const { arrivedState } = useScroll(scrollRef);
+  const userScrolled = computed(() => !arrivedState.bottom);
+
+  watch(arrivedState, (newValue) => {
+    if (newValue.bottom) {
+      lastMessagesCount.value = chatMessages.value.length;
+    }
+  });
+
+  watch([userScrolled, chatMessages], (newValue, oldValue) => {
+    if (
+      !newValue[0] ||
+      newValue[1][newValue[1].length - 1].userId === userId.value ||
+      oldValue[1].length === 0
+    ) {
+      scrollToBottom(scrollRef.value);
+      lastMessagesCount.value = chatMessages.value.length;
+    }
+  });
+
+  watch(
+    newMessagesCount,
+    (newValue) => {
+      newMessages.value = newValue;
+    },
+    { immediate: true },
+  );
 
   return {
     chatMessages,
@@ -42,5 +79,6 @@ export function useChat(
     onNewChatMessage,
     scrollRef,
     textareaRef,
+    newMessagesCount,
   };
 }
