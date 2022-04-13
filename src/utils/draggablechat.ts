@@ -84,6 +84,6 @@ export function useDraggableChat(userId: Ref<string>, userName: Ref<string>) {
       transition: `all ${ANIMATION_RATE}ms ${ANIMATION_EASING}`,
     };
   };
-  // Remove _users when done debugging
+  // TODO: Remove _users when done debugging
   return { userRef, userStyle, otherUsers, otherUserStyle, _users: users };
 }
