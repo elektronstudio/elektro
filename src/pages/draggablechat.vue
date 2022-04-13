@@ -11,9 +11,10 @@ type DraggableChatUser = {
   x: number;
   y: number;
 };
+
 const users = ref<DraggableChatUser[]>([]);
 
-const channel = "test";
+const channel = "draggablechat";
 
 ws.addEventListener("message", ({ data }) => {
   const message = safeJsonParse(data);
@@ -42,7 +43,10 @@ const { x, y, style } = useDraggable(el, {
   initialValue: { x: 100, y: 100 },
 });
 
-const USER_UPDATE_RATE = 50; // ms
+const USER_UPDATE_RATE = 600;
+const USER_ANIMATION_RATE = 300;
+// https://cubic-bezier.com/#.48,.76,.78,.95
+const USER_ANIMATION_EASING = "cubic-bezier(.48,.76,.78,.95)";
 
 const otherUsers = computed(() =>
   users.value.filter((u) => u.userId !== userId.value),
@@ -69,29 +73,24 @@ debouncedWatch(
   },
 );
 
-const onDrag = () => {
-  const message: Message = {
-    type: "USER",
-    channel,
-    userId: userId.value,
-    userName: userName.value,
-    value: {
-      x: Math.random(),
-      y: Math.random(),
-    },
+const otherUserStyle = (user: DraggableChatUser) => {
+  return {
+    top: `${user.y}px`,
+    left: `${user.x}px`,
+    transition: `all ${USER_ANIMATION_RATE}ms ${USER_ANIMATION_EASING}`,
   };
-  sendMessage(message);
 };
 </script>
 
 <template>
   <div style="padding: var(--gap-4)">
-    <button @click="onDrag">Drag</button>
-    <pre style="pointer-events: none">{{ users }}</pre>
+    <pre style="opacity: 0.3; pointer-events: none; user-select: none">{{
+      users
+    }}</pre>
   </div>
   <div
     v-for="user in otherUsers"
-    :style="{ top: user.y + 'px', left: user.x + 'px' }"
+    :style="otherUserStyle(user)"
     style="
       position: fixed;
       width: 25px;
