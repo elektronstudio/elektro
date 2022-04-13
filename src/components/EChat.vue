@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { useStorage } from "@vueuse/core";
 import { EButton } from "../lib";
-import { useChat, scrollToBottom, randomString } from "../utils";
+import { useChat, scrollToBottom } from "../utils";
 
-const userId = useStorage("elektron_user_id", randomString());
-const userName = useStorage("elektron_user_name", "User");
-const channel = "test";
+type Props = {
+  userId: string;
+  userName: string;
+  channel: string;
+};
+
+const { userId, userName, channel } = defineProps<Props>();
 
 const {
   chatMessages,
