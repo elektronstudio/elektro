@@ -55,8 +55,8 @@ export function useDraggableChat(
   });
 
   const { width, height } = useWindowSize();
-  const centerXY = computed(() => {
-    return { x: x.value - width.value / 2, y: y.value - height.value / 2 };
+  const center = computed(() => {
+    return { x: width.value / 2, y: height.value / 2 };
   });
 
   debouncedWatch(
@@ -73,7 +73,6 @@ export function useDraggableChat(
         },
       };
       sendMessage(message);
-      console.log(centerXY.value);
       // TODO: Store user locaction locally?
     },
     {
@@ -94,5 +93,12 @@ export function useDraggableChat(
     };
   };
   // TODO: Remove _users when done debugging
-  return { userRef, userStyle, otherUsers, otherUserStyle, _users: users };
+  return {
+    center,
+    userRef,
+    userStyle,
+    otherUsers,
+    otherUserStyle,
+    _users: users,
+  };
 }
