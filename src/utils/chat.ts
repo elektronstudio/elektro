@@ -59,7 +59,9 @@ export function useChat(
   watch([userScrolled, chatMessages], (newValue, oldValue) => {
     if (
       !newValue[0] ||
-      newValue[1][newValue[1].length - 1].userId === userId ||
+      (newValue[1].length > 1 &&
+        newValue[1][newValue[1].length - 1] &&
+        newValue[1][newValue[1].length - 1].userId === userId) ||
       oldValue[1].length === 0
     ) {
       scrollToBottom(scrollRef.value);

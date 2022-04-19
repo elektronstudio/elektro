@@ -15,7 +15,7 @@ type Props = {
 
 const userId = useStorage("elektron_user_id", randomString());
 const userName = useStorage("elektron_user_name", "User");
-const channel = "test";
+const channel = "hrytsyna";
 
 const { contentType } = defineProps<Props>();
 </script>
