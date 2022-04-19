@@ -1,4 +1,4 @@
-import { computed, Ref, ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { useMessage } from "./message";
 import type { MessageType } from "./message";
 import { scrollToBottom, useTextarea } from "./dom";
@@ -7,8 +7,8 @@ import { newMessages } from "./store";
 
 export function useChat(
   channel: string,
-  userId: Ref<string>,
-  userName: Ref<string>,
+  userId: string,
+  userName: string,
   sentMessageType: MessageType = "CHAT",
   receiveMessageType: MessageType = "CHAT",
 ) {
@@ -27,8 +27,8 @@ export function useChat(
   const onNewChatMessage = () => {
     if (newChatMessage.value) {
       sendMessage({
-        userId: userId.value,
-        userName: userName.value,
+        userId: userId,
+        userName: userName,
         type: sentMessageType || "CHAT",
         channel: channel,
         value: newChatMessage.value,
@@ -57,7 +57,7 @@ export function useChat(
   watch([userScrolled, chatMessages], (newValue, oldValue) => {
     if (
       !newValue[0] ||
-      newValue[1][newValue[1].length - 1].userId === userId.value ||
+      newValue[1][newValue[1].length - 1].userId === userId ||
       oldValue[1].length === 0
     ) {
       scrollToBottom(scrollRef.value);
