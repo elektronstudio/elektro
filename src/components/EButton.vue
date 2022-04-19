@@ -18,8 +18,8 @@ const { size = "md", el = "button" } = defineProps<Props>();
 .EButton {
   background: none;
   display: inline-flex;
-  color: var(--fg);
-  border: 2px solid var(--fg);
+  color: var(--gray-300);
+  border: 1px solid var(--gray-300);
   cursor: pointer;
   font-family: var(--font-mono);
   text-transform: uppercase;
