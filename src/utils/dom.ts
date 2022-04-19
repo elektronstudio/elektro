@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref } from "vue";
+import { nextTick, onMounted, onUnmounted, ref } from "vue";
 
 export function useTextarea(callback = () => {}) {
   // TODO: What is the template refs naming convention?
@@ -41,24 +41,11 @@ export function useTextarea(callback = () => {}) {
 
 // TODO: Replace with https://vueuse.org/core/usemutationobserver ?
 
-export function useScrollToBottom() {
-  const scrollRef = ref<HTMLElement | null>(null);
-  let observer: MutationObserver | null = null;
-  onMounted(() => {
-    observer = new MutationObserver(() => {
-      if (scrollRef.value) {
-        scrollRef.value.scrollTop = scrollRef.value.scrollHeight;
-      }
-    });
-    if (scrollRef.value) {
-      observer.observe(scrollRef.value, { childList: true });
-    }
-  });
-  onUnmounted(() => {
-    if (observer) {
-      observer.disconnect();
-    }
-  });
+export async function scrollToBottom(scrollRef: HTMLElement | null) {
+  if (!scrollRef) {
+    return;
+  }
 
-  return scrollRef;
+  await nextTick();
+  scrollRef.scrollTop = scrollRef.scrollHeight;
 }

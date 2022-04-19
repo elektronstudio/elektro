@@ -32,6 +32,9 @@ const data = [
     order: 1,
     chatMessages: 12,
     isAnchored: true,
+    data: {
+      channel: "test",
+    },
   },
   {
     title: "About",

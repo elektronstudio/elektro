@@ -7,6 +7,7 @@ export * from "./dom";
 export * from "./live";
 export * from "./fienta";
 export * from "./message";
+export * from "./store";
 export * from "./strapi";
 export * from "./string";
 export * from "./timezone";
