@@ -26,7 +26,9 @@ const {
       <div class="messages" ref="scrollRef">
         <template v-for="message in chatMessages">
           <div v-if="message.value" class="message">
-            <p class="username">Username</p>
+            <p v-if="message.userName" class="username">
+              {{ message.userName }}
+            </p>
             <p>{{ message.value }}</p>
           </div>
         </template>
