@@ -2,13 +2,15 @@ import { computed, ref, watch } from "vue";
 import { useMessage } from "./message";
 import type { MessageType } from "./message";
 import { scrollToBottom, useTextarea } from "./dom";
-import { useScroll } from "@vueuse/core";
+import { RemovableRef, useScroll } from "@vueuse/core";
 import { newMessages } from "./store";
+
+type UserId = RemovableRef<string> | string;
 
 export function useChat(
   channel: string,
-  userId: string,
-  userName: string,
+  userId: UserId,
+  userName: UserId,
   sentMessageType: MessageType = "CHAT",
   receiveMessageType: MessageType = "CHAT",
 ) {

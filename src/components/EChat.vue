@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import { RemovableRef } from "@vueuse/core";
 import { EButton } from "../lib";
 import { useChat, scrollToBottom } from "../utils";
 
 type Props = {
-  userId: string;
-  userName: string;
+  userId: RemovableRef<string> | string;
+  userName: RemovableRef<string> | string;
   channel: string;
 };
 
