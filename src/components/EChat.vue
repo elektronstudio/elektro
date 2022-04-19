@@ -94,16 +94,12 @@ const {
 }
 
 /* TODO: add admin message class modifier */
-.message:nth-child(4) {
+/* .message:nth-child(4) {
   background-color: var(--accent);
 }
 .message:nth-child(4) p {
   color: var(--bg);
-}
-.message:nth-child(4) {
-  background-color: var(--accent);
-}
-
+} */
 .messageBox {
   flex-shrink: 0;
   margin-bottom: 0;
