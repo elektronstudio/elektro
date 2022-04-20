@@ -15,7 +15,7 @@ type Props = {
 
 const userId = useStorage("elektron_user_id", randomString());
 const userName = useStorage("elektron_user_name", "User");
-const channel = "hrytsyna";
+const channel = "test2";
 
 const { contentType } = defineProps<Props>();
 </script>
@@ -23,8 +23,9 @@ const { contentType } = defineProps<Props>();
   <EChat
     v-if="contentType === 'chat'"
     :channel="channel"
-    :userId="userId"
-    :userName="userName"
+    :user-id="userId"
+    :user-name="userName"
+    new-messages-string="New messages"
   />
   <EVideoStream v-else-if="contentType === 'video'" :src="data.src" />
   <EStack v-else-if="contentType === 'event'" style="padding: var(--p-5)">

@@ -7,9 +7,15 @@ type Props = {
   userId: RemovableRef<string> | string;
   userName: RemovableRef<string> | string;
   channel: string;
+  newMessagesString: string;
 };
 
-const { userId, userName, channel } = defineProps<Props>();
+const {
+  userId,
+  userName,
+  channel,
+  newMessagesString = "new message",
+} = defineProps<Props>();
 
 const {
   chatMessages,
@@ -41,7 +47,7 @@ const {
         color="accent"
         @click="scrollToBottom(scrollRef)"
       >
-        {{ newMessagesCount }} new message
+        {{ newMessagesCount }} {{ newMessagesString }}
       </EButton>
     </div>
     <div class="messageBox">
