@@ -2,6 +2,7 @@ export { default as EAboutPageCard } from "./components/EAboutPageCard.vue";
 export { default as EBox } from "./components/EBox.vue";
 export { default as EButton } from "./components/EButton.vue";
 export { default as ECard } from "./components/ECard.vue";
+export { default as EChat } from "./components/EChat.vue";
 export { default as EContent } from "./components/EContent.vue";
 export { default as EDetailsList } from "./components/EDetailsList.vue";
 export { default as EEventInstance } from "./components/EEventInstance.vue";

@@ -14,7 +14,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: var(--app-height, 100vh);
 
   background: repeating-linear-gradient(
       0.25turn,
