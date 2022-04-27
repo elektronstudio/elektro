@@ -3,7 +3,6 @@
 import { ref } from "vue";
 import ELogo from "./ELogo.vue";
 //import ENav from "./ENav.vue";
-import ELiveButton from "./ELiveButton.vue";
 import { useRouter } from "vue-router";
 
 const navItems = [
@@ -45,7 +44,6 @@ const router = useRouter();
       :nav-items="navItems"
       :active-path="router.currentRoute.value.path"
     />
-    <!-- <ELiveButton v-if="nextEvent" :next-event="nextEvent" /> -->
     <!-- @TODO: Add proper icon you html hacker :) -->
     <button class="toggleNav" @click="navState = !navState">
       <span></span>
