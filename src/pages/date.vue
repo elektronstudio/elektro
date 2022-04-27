@@ -19,7 +19,7 @@ const ranges = [
   },
 ].map((range) => ({
   ...range,
-  ...useRange(range.start_at, range.end_at),
+  ...useRange(range.start_at, range.end_at, "et"),
 }));
 </script>
 
