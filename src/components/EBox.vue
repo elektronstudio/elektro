@@ -45,7 +45,7 @@ const { el = "div", color, ratio = "auto", layout } = defineProps<Props>();
 
 .EBox.gray {
   background-color: var(--gray-300);
-  border-color: var(--gray-300);
+  border-color: var(--gray-500);
   color: var(--bg);
 }
 
