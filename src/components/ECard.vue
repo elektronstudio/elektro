@@ -46,7 +46,7 @@ const { thumbnail } = defineProps<Props>();
 @media only screen and (max-width: 599px) {
   .ECard {
     display: grid;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: minmax(0px, 2fr) minmax(0px, 3fr);
     grid-template-areas: "thumbnail content";
     align-content: start;
     column-gap: var(--gap-5);
