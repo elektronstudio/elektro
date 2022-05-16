@@ -1,10 +1,21 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { RemovableRef } from "@vueuse/core";
 import { EButton } from "../lib";
-import { useChat } from "../utils";
+import { useChat, scrollToBottom } from "../utils";
 
-const userId = ref("");
-const userName = ref("");
+type Props = {
+  userId: RemovableRef<string> | string;
+  userName: RemovableRef<string> | string;
+  channel: string;
+  newMessagesString: string;
+};
+
+const {
+  userId,
+  userName,
+  channel,
+  newMessagesString = "new message",
+} = defineProps<Props>();
 
 const {
   chatMessages,
@@ -12,18 +23,32 @@ const {
   onNewChatMessage,
   scrollRef,
   textareaRef,
-} = useChat("test", userId, userName);
+  newMessagesCount,
+} = useChat(channel, userId, userName);
 </script>
 
 <template>
   <div class="EChat">
-    <div class="messages" ref="scrollRef">
-      <template v-for="message in chatMessages">
-        <div v-if="message.value" class="message">
-          <p class="username">Username</p>
-          <p>{{ message.value }}</p>
-        </div>
-      </template>
+    <div class="messagesWrapper">
+      <div class="messages" ref="scrollRef">
+        <template v-for="message in chatMessages">
+          <div v-if="message.value" class="message">
+            <p v-if="message.userName" class="username">
+              {{ message.userName }}
+            </p>
+            <p>{{ message.value }}</p>
+          </div>
+        </template>
+      </div>
+      <EButton
+        class="newMessages"
+        v-if="newMessagesCount > 0"
+        size="xs"
+        color="accent"
+        @click="scrollToBottom(scrollRef)"
+      >
+        {{ newMessagesCount }} {{ newMessagesString }}
+      </EButton>
     </div>
     <div class="messageBox">
       <!-- TODO: Make it work with ref -->
@@ -33,9 +58,9 @@ const {
         ref="textareaRef"
         resize="none"
       />
-      <EButton size="xs" color="accent" @click="onNewChatMessage"
-        >Saada</EButton
-      >
+      <EButton size="xs" color="accent" @click="onNewChatMessage">
+        Saada
+      </EButton>
     </div>
   </div>
 </template>
@@ -51,8 +76,16 @@ const {
   height: 100%;
 }
 
-.messages {
+.messagesWrapper {
   flex-grow: 1;
+  position: relative;
+}
+.messages {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   overflow-y: scroll;
 }
 
@@ -67,16 +100,12 @@ const {
 }
 
 /* TODO: add admin message class modifier */
-.message:nth-child(4) {
+/* .message:nth-child(4) {
   background-color: var(--accent);
 }
 .message:nth-child(4) p {
   color: var(--bg);
-}
-.message:nth-child(4) {
-  background-color: var(--accent);
-}
-
+} */
 .messageBox {
   flex-shrink: 0;
   margin-bottom: 0;
@@ -104,15 +133,10 @@ const {
   background-color: rgba(250, 250, 250, 0.1);
 }
 
-/* .chatTextarea:hover {
-  outline: 1px solid var(--gray-500);
-}
-.chatTextarea:focus {
-  outline: none;
-  background-color: var(--gray-500);
-} */
-
-.EButton {
-  /* margin-bottom: var(--m-2); */
+.newMessages {
+  position: absolute;
+  bottom: var(--p-2);
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>

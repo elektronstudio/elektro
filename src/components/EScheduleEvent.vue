@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import EContent from "./EContent.vue";
 import ETitle from "./ETitle.vue";
+import EBox from "./EBox.vue";
 
 type Props = {
   title?: string;
@@ -11,12 +12,12 @@ type Props = {
 const { title, description } = defineProps<Props>();
 </script>
 <template>
-  <section class="EscheduleEvent">
+  <EBox class="EscheduleEvent">
     <ETitle v-if="title" size="lg" :title="title" />
     <slot v-else name="title" />
     <EContent v-if="description" :content="description" />
     <slot />
-  </section>
+  </EBox>
 </template>
 
 <style scoped>

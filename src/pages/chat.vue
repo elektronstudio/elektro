@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { useSessionStorage } from "@vueuse/core";
+import { useStorage } from "@vueuse/core";
 import { EBox, EButton, EFormTextArea, EFormText } from "../lib";
-import { useChat, userId, userName } from "../utils";
+import { useChat, randomString } from "../utils";
+
+const userId = useStorage("elektron_user_id", randomString());
+const userName = useStorage("elektron_user_name", "User");
 
 const {
   chatMessages,

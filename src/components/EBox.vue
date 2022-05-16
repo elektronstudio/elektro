@@ -28,7 +28,7 @@ const { el = "div", color, ratio = "auto", layout } = defineProps<Props>();
 <style scoped>
 .EBox {
   padding: var(--p-4);
-  border: 1px solid var(--gray-300);
+  border: 1px solid var(--gray-500);
   border-radius: var(--rounded-3xl);
   aspect-ratio: v-bind(ratio);
   color: var(--gray-300);
@@ -45,7 +45,7 @@ const { el = "div", color, ratio = "auto", layout } = defineProps<Props>();
 
 .EBox.gray {
   background-color: var(--gray-300);
-  border-color: var(--gray-300);
+  border-color: var(--gray-500);
   color: var(--bg);
 }
 

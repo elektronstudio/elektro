@@ -79,7 +79,7 @@ const scheduleEvents = [
 
 <template>
   <ArtNav />
-  <main class="Page Projects">
+  <main class="Page Schedule">
     <EScheduleEvent
       v-for="event in scheduleEvents"
       :title="event.title"
@@ -104,22 +104,22 @@ const scheduleEvents = [
 </template>
 
 <style scoped>
-.Page.Projects {
+.Page.Schedule {
   display: grid;
   grid-template-columns: 1fr;
   padding: var(--p-5);
 }
-.Page.Projects > section {
+.Page.Schedule > * {
   margin-bottom: var(--m-12);
 }
 /* @TODO: Add breakpoints system */
 @media only screen and (min-width: 1240px) {
-  .Page.Projects {
+  .Page.Schedule {
     grid-template-columns: repeat(8, 1fr);
   }
-  .Page.Projects > section {
+  .Page.Schedule > * {
     grid-column: 4 / -1;
-    margin-bottom: var(--m-24);
+    margin-bottom: var(--m-20);
   }
 }
 </style>
