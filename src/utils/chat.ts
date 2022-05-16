@@ -29,8 +29,8 @@ export function useChat(
   const onNewChatMessage = () => {
     if (newChatMessage.value) {
       sendMessage({
-        userId: userId,
-        userName: userName,
+        userId,
+        userName,
         type: sentMessageType || "CHAT",
         channel: channel,
         value: newChatMessage.value,
