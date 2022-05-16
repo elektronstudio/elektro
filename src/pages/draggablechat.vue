@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { useDraggableChat, userId, userName } from "../utils";
+import { useStorage } from "@vueuse/core";
+import { randomString, useDraggableChat } from "../utils";
+
+const userId = useStorage("elektron_user_id", randomString());
+const userName = useStorage("elektron_user_name", randomString());
 
 const { center, userRef, userStyle, otherUsers, otherUserStyle, _users } =
   useDraggableChat("draggablechat", userId, userName);
@@ -17,9 +21,9 @@ const { center, userRef, userStyle, otherUsers, otherUserStyle, _users } =
       pointer-events: none;
       user-select: none;
       position: fixed;
-      width: 25px;
-      height: 25px;
-      background: rgba(0, 0, 255);
+      width: 5px;
+      height: 5px;
+      background: rgba(0, 128, 255);
       border-radius: 10000px;
     "
   />
