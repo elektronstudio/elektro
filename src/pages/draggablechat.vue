@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { debouncedWatch, useStorage } from "@vueuse/core";
-import { randomString, useChat, useDraggableChat } from "../utils";
-import EFormText from "../components/EFormText.vue";
-import { ref } from "vue";
+import { useStorage } from "@vueuse/core";
+import { randomString, useDraggableChat } from "../utils";
 import EFormTextArea from "../components/EFormTextArea.vue";
 
 const userId = useStorage("elektron_user_id", randomString());
 const userName = useStorage("elektron_user_name", randomString());
 
-const { center, userRef, userStyle, otherUsers, otherUserStyle, chat, _users } =
+const { userRef, userStyle, otherUsers, otherUserStyle, chat, _users } =
   useDraggableChat("draggablechat", userId, userName);
 </script>
 
