@@ -9,6 +9,7 @@ type DraggableChatUser = {
   userId: string;
   x: number;
   y: number;
+  chat: string;
 };
 
 const UPDATE_RATE = 600; // TODO: Make it a function of user count
@@ -25,12 +26,13 @@ export function useDraggableChat(
 
   ws.addEventListener("message", ({ data }) => {
     const message = safeJsonParse(data);
-    if (message.channel === channel && message.type === "USER") {
+    if (message.channel === channel && message.type === "DRAGGABLECHAT") {
       const user = {
         userId: message.userId,
         userName: message.userName,
         x: message.value.x,
         y: message.value.y,
+        chat: message.value.chat,
       };
       const existingUserIndex = users.value?.findIndex((u) => {
         return u.userId === user.userId;
@@ -59,17 +61,20 @@ export function useDraggableChat(
     return { x: width.value / 2, y: height.value / 2 };
   });
 
+  const chat = ref("");
+
   debouncedWatch(
-    [x, y],
+    [x, y, chat],
     () => {
       const message: Message = {
         channel,
-        type: "USER",
+        type: "DRAGGABLECHAT",
         userId: userId.value,
         userName: userName.value,
         value: {
-          x: x.value,
-          y: y.value,
+          x: x.value - center.value.x,
+          y: y.value - center.value.y,
+          chat: chat.value,
         },
       };
       sendMessage(message);
@@ -86,9 +91,11 @@ export function useDraggableChat(
   );
 
   const otherUserStyle = (user: DraggableChatUser) => {
+    const x = user.x + center.value.x;
+    const y = user.y + center.value.y;
     return {
-      top: `${user.y}px`,
-      left: `${user.x}px`,
+      top: `${y}px`,
+      left: `${x}px`,
       transition: `all ${ANIMATION_RATE}ms ${ANIMATION_EASING}`,
     };
   };
@@ -99,6 +106,7 @@ export function useDraggableChat(
     userStyle,
     otherUsers,
     otherUserStyle,
+    chat,
     _users: users,
   };
 }
